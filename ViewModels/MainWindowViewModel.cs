@@ -1,88 +1,61 @@
-﻿using MusicPlayerProject.Core.Helpers;
-using MusicPlayerProject.Core.Interfaces;
+﻿using MusicPlayerProject.Core.Commands;
+using MusicPlayerProject.Core.Enums;
+using MusicPlayerProject.Core.Helpers;
+using MusicPlayerProject.Core.Managers.Navigators;
 using MusicPlayerProject.ViewModels.Base;
+using MusicPlayerProject.ViewModels.Factories;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MusicPlayerProject.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase, IWindowApp
+    public class MainWindowViewModel : ViewModelBase
     {
         #region private fields
-        private static Window _window;
+        private readonly IViewModelFactory _viewModelFactory;
+
+        private readonly INavigator _navigator;
 
         private int _outerMarginSize = 0;
 
         private int _windowRadius = 10;
 
-        private ViewModelBase _selectedViewModel = new HomeViewModel();
         #endregion
 
         #region Properties
-        
-        public ViewModelBase SelectedViewModel
-        {
-            get { return _selectedViewModel; }
-            set 
-            { 
-                _selectedViewModel = value;
-                OnPropertyChanged(nameof(SelectedViewModel));
-            }
-        }
+        public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
+
+        public ICommand UpdateCurrentViewModelCommand { get; }
 
         public double WindowMinimumHeight { get; set; } = 720;
         public double WindowMinimumWidth { get; set; } = 1280;
-
-        public int ResizeBorder { get { return Bordless ? 0 : 6; } }
-
-        public int WindowRadius { get => Bordless ? 0 : _windowRadius; set => _windowRadius = value; }
-        public int OuterMarginSize { get => Bordless ? 0 : _outerMarginSize; set => _outerMarginSize = value; }
-        public int TitleHeight { get; set; } = 42;
-
-        public bool Bordless { get { return (_window.WindowState == WindowState.Maximized || DockPosition != WindowDockPosition.Undocked); } }
-
-        public Thickness InnerContentPadding { get { return new Thickness(0); } }
-
-        public Thickness ResizeBorderThickness { get { return new Thickness(ResizeBorder + OuterMarginSize); } }
-
-        public Thickness OuterMarginSizeThickness { get { return new Thickness(_outerMarginSize); } }
-
-        public CornerRadius WindowCornerRadius { get { return new CornerRadius(WindowRadius); } }
-
-        public GridLength TitleHeightGridLenght { get { return new GridLength(TitleHeight + ResizeBorder); } }
-
-        public ICommand MaximizeCommand { get; set; } = new RelayCommand(o => { _window.WindowState ^= WindowState.Maximized; });
-        public ICommand MinimizeCommand { get; set; } = new RelayCommand(o => { _window.WindowState = WindowState.Minimized; });
-        public ICommand CloseCommand { get; set; } = new RelayCommand(o => { _window.Close(); });
 
         public WindowDockPosition DockPosition { get; set; } = WindowDockPosition.Undocked;
 
         #endregion
 
-        public MainWindowViewModel(Window window)
+        public MainWindowViewModel(INavigator navigator, IViewModelFactory viewModelFactory)
         {
-            _window = window;
+            _navigator = navigator;
+            _viewModelFactory = viewModelFactory;
 
-            WindowResized();
+            _navigator.StateChanged += Navigator_StateChanged;
 
-            var resizer = new WindowResizer(window);
-
-            resizer.WindowDockChanged += (dock) =>
-            {
-                DockPosition = dock;
-
-                WindowResized();
-            };
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, _viewModelFactory);
+            UpdateCurrentViewModelCommand.Execute(ViewType.Home);
         }
 
-        public void WindowResized()
+        private void Navigator_StateChanged()
         {
-            OnPropertyChanged(nameof(ResizeBorderThickness));
-            OnPropertyChanged(nameof(OuterMarginSize));
-            OnPropertyChanged(nameof(OuterMarginSizeThickness));
-            OnPropertyChanged(nameof(WindowRadius));
-            OnPropertyChanged(nameof(WindowCornerRadius));
+            OnPropertyChanged(nameof(CurrentViewModel));
+        }
+
+        public override void Dispose()
+        {
+            _navigator.StateChanged -= Navigator_StateChanged;
+
+            base.Dispose();
         }
     }
 }

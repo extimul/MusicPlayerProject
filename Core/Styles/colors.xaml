@@ -1,14 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Color x:Key="BackgroundLightBlue">#0B5FA5</Color>
+    <Color x:Key="BackgroundLightBlue">#51aec8</Color>
     <SolidColorBrush x:Key="AppBackgroundMainBrush" Color="{StaticResource BackgroundLightBlue}"/>
 
-    <Color x:Key="BackgroundDarkBlue">#66A1D2</Color>
+    <Color x:Key="BackgroundDarkBlue">#347ca3</Color>
     <SolidColorBrush x:Key="AppBackgroundSecondaryBrush" Color="{StaticResource BackgroundDarkBlue}"/>
 
-    <Color x:Key="BackgroundLightGreen">#35D4A0</Color>
+    <Color x:Key="BackgroundLightGreen">#51aec8</Color>
     <SolidColorBrush x:Key="AppElementBackgroundBrush" Color="{StaticResource BackgroundLightGreen}"/>
 
-    <Color x:Key="ForegroundWhite">#ffff</Color>
+    <Color x:Key="ForegroundWhite">#54c49f</Color>
     <SolidColorBrush x:Key="AppForegroundBrush" Color="{StaticResource ForegroundWhite}"/>
 </ResourceDictionary>

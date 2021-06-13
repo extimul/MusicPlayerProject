@@ -2,14 +2,16 @@
 
 namespace MusicPlayerProject.ViewModels.Base
 {
+    public delegate TViewModel CreateViewModel<TViewModel>() where TViewModel : ViewModelBase;
     public class ViewModelBase : INotifyPropertyChanged
     {
+        public virtual void Dispose() { }
 
-        public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string name)
+        protected void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

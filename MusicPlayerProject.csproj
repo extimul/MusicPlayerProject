@@ -7,9 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Core\Models\" />
-    <Folder Include="Core\Enums\" />
-    <Folder Include="Core\Managers\" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Core\Helpers\" />
   </ItemGroup>
 
 </Project>
