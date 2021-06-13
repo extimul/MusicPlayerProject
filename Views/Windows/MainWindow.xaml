@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MusicPlayerProject.Views.Windows"
         xmlns:controls="clr-namespace:MusicPlayerProject.Views.Controls"
         mc:Ignorable="d"
-        Title="Music Player" 
+        Title="Music Player"
         MinHeight="{Binding WindowMinimumHeight}"
         MinWidth="{Binding WindowMinimumWidth}"
         MaxWidth="1600"
@@ -16,11 +16,11 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="224"/>
             <ColumnDefinition Width="11*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Background="Yellow"
+        <Grid Background="{StaticResource AppBackgroundSecondaryBrush}"
               Panel.ZIndex="1"
               Grid.Column="0">
             <controls:NavigationPanel/>

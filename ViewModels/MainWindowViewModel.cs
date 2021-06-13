@@ -1,6 +1,5 @@
 ﻿using MusicPlayerProject.Core.Commands;
 using MusicPlayerProject.Core.Enums;
-using MusicPlayerProject.Core.Helpers;
 using MusicPlayerProject.Core.Managers.Navigators;
 using MusicPlayerProject.ViewModels.Base;
 using MusicPlayerProject.ViewModels.Factories;
@@ -17,10 +16,6 @@ namespace MusicPlayerProject.ViewModels
 
         private readonly INavigator _navigator;
 
-        private int _outerMarginSize = 0;
-
-        private int _windowRadius = 10;
-
         #endregion
 
         #region Properties
@@ -30,8 +25,6 @@ namespace MusicPlayerProject.ViewModels
 
         public double WindowMinimumHeight { get; set; } = 720;
         public double WindowMinimumWidth { get; set; } = 1280;
-
-        public WindowDockPosition DockPosition { get; set; } = WindowDockPosition.Undocked;
 
         #endregion
 

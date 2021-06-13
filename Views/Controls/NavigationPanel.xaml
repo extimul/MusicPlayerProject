@@ -3,16 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:local="clr-namespace:MusicPlayerProject.Views.Controls"
              xmlns:navType="clr-namespace:MusicPlayerProject.Core.Enums"
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="200">
-    <StackPanel>
-        <Button Content="HomeView"
-                Command="{Binding UpdateCurrentViewModelCommand}"
-                CommandParameter="{x:Static navType:ViewType.Home}"/>
-        <Button Content="LibraryView"
-                Command="{Binding UpdateCurrentViewModelCommand}"
-                CommandParameter="{x:Static navType:ViewType.Library}"/>
-    </StackPanel>
+
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="11*"/>
+            </Grid.RowDefinitions>
+
+            <ListView Grid.Row="1" Background="Transparent"
+                      BorderBrush="{x:Null}"
+                      BorderThickness="0"
+                      Margin="-1,0,-1,0"
+                      ItemContainerStyle="{DynamicResource NavListViewItemStyle}">
+                <ListViewItem Padding="0,15,0,15">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Selected">
+                            <i:InvokeCommandAction Command="{Binding UpdateCurrentViewModelCommand}"
+                                               CommandParameter="{x:Static navType:ViewType.Home}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                        <ContentControl Content="{StaticResource Store}" Width="25" Margin="10,0,0,0"/>
+                        <TextBlock Margin="10,0,0,0"
+                                   Text="Home"
+                                   HorizontalAlignment="Stretch"
+                                   FontSize="{StaticResource FontSizeLarge}"
+                                   Foreground="{StaticResource AppForegroundBrush}"/>
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Padding="0,15,0,15">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Selected">
+                            <i:InvokeCommandAction Command="{Binding UpdateCurrentViewModelCommand}"
+                                               CommandParameter="{x:Static navType:ViewType.Library}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                        <ContentControl Content="{StaticResource Store}" Width="25" Margin="10,0,0,0"/>
+                        <TextBlock Margin="10,0,0,0"
+                                   Text="My Library"
+                                   HorizontalAlignment="Stretch"
+                                   FontSize="{StaticResource FontSizeLarge}"
+                                   Foreground="{StaticResource AppForegroundBrush}"/>
+                    </StackPanel>
+                </ListViewItem>
+            </ListView>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280">
 
-    <Grid>
-        <Grid Background="Red"/>
+    <Grid Background="{StaticResource AppBackgroundMainBrush}">
+        <TextBlock Text="Home" FontSize="{StaticResource FontSizeXXLarge}"/>
     </Grid>
 </UserControl>

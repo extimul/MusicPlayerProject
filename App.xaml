@@ -12,9 +12,10 @@
                 <views:LibraryPage/>
             </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Core/Styles/fonts.xaml"/>
-                <ResourceDictionary Source="Core/Styles/colors.xaml"/>
-                <ResourceDictionary Source="Core/Styles/elementstyle.xaml"/>
+                <ResourceDictionary Source="Core/WindowResources/Styles/fonts.xaml"/>
+                <ResourceDictionary Source="Core/WindowResources/Styles/colors.xaml"/>
+                <ResourceDictionary Source="Core/WindowResources/Styles/elementstyle.xaml"/>
+                <ResourceDictionary Source="Core/WindowResources/Resources/iconsData.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
