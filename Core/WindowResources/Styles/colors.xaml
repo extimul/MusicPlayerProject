@@ -4,19 +4,22 @@
     <Color x:Key="BackgroundLightBlue">#42afcf</Color>
     <SolidColorBrush x:Key="AppBackgroundMainBrush" Color="{StaticResource BackgroundLightBlue}"/>
 
-    <Color x:Key="BackgroundDarkBlue">#347ca3</Color>
+    <Color x:Key="BackgroundDarkBlue">#3d94ba</Color>
     <SolidColorBrush x:Key="AppBackgroundSecondaryBrush" Color="{StaticResource BackgroundDarkBlue}"/>
 
-    <Color x:Key="BackgroundLightGreen">#54c49f</Color>
+    <Color x:Key="BackgroundLightGreen">#34c686</Color>
     <SolidColorBrush x:Key="AppElementBackgroundBrush" Color="{StaticResource BackgroundLightGreen}"/>
+
+    <Color x:Key="BackgroundDarBlue2">#166192</Color>
+    <SolidColorBrush x:Key="MusicBarBackground" Color="{StaticResource BackgroundDarBlue2}"/>
 
     <Color x:Key="ForegroundWhite">#ffff</Color>
     <SolidColorBrush x:Key="AppForegroundBrush" Color="{StaticResource ForegroundWhite}"/>
 
     <SolidColorBrush x:Key="Item.MouseOver.Background" Color="{StaticResource BackgroundLightGreen}"/>
     <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
-    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="Red"/>
-    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="Red"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#abdbe3"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#abdbe3"/>
     <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="{StaticResource BackgroundLightBlue}"/>
     <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
 </ResourceDictionary>

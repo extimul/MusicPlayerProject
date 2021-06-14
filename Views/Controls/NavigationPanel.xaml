@@ -33,7 +33,7 @@
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch">
-                        <ContentControl Content="{StaticResource Store}" Width="25" Margin="10,0,0,0"/>
+                        <ContentControl Content="{StaticResource HomeIcon}" Width="25" Margin="10,0,0,0"/>
                         <TextBlock Margin="10,0,0,0"
                                    Text="Home"
                                    HorizontalAlignment="Stretch"
@@ -51,7 +51,7 @@
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch">
-                        <ContentControl Content="{StaticResource Store}" Width="25" Margin="10,0,0,0"/>
+                        <ContentControl Content="{StaticResource LibraryIcon}" Width="25" Margin="10,0,0,0"/>
                         <TextBlock Margin="10,0,0,0"
                                    Text="My Library"
                                    HorizontalAlignment="Stretch"
