@@ -16,6 +16,12 @@
     <Color x:Key="ForegroundWhite">#ffff</Color>
     <SolidColorBrush x:Key="AppForegroundBrush" Color="{StaticResource ForegroundWhite}"/>
 
+    <Color x:Key="ForegroundGray">Gray</Color>
+    <SolidColorBrush x:Key="AppForegroundGreyBrush" Color="{StaticResource ForegroundGray}"/>
+    
+    <Color x:Key="ForegroundLightGray">LightGray</Color>
+    <SolidColorBrush x:Key="AppForegroundLightGreyBrush" Color="{StaticResource ForegroundLightGray}"/>
+
     <SolidColorBrush x:Key="Item.MouseOver.Background" Color="{StaticResource BackgroundLightGreen}"/>
     <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
     <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#abdbe3"/>

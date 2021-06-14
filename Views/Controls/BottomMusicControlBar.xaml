@@ -13,6 +13,13 @@
             <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}"/>
         </Style>
 
+        <Style x:Key="MusicInfoLabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="{StaticResource AppForegroundBrush}"/>
+            <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+        
         <Style x:Key="MusicStateButtonStyle" TargetType="Button">
             <Setter Property="Template" Value="{DynamicResource BubbleButtonTemp}"/>
             <Setter Property="Height" Value="40"/>
@@ -31,6 +38,14 @@
             <Setter Property="Margin" Value="10"/>
         </Style>
 
+        <Style x:Key="MusicControlsStyle2" TargetType="Button">
+            <Setter Property="Template" Value="{DynamicResource BubbleButtonTemp}"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="{Binding ElementName=grid, Path=Background}"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
     </UserControl.Resources>
     
     <Border BorderThickness="0,1,0,0"
@@ -46,7 +61,39 @@
             
             <!--Music information-->
             <Grid Grid.Column="0" Background="{x:Null}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
                 
+                <!--Image-->
+                <Border BorderThickness="1" Margin="8" Padding="5"
+                        BorderBrush="Gray" Grid.Column="0">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="0"/>
+                    </Border.Effect>
+                    <Image Source="/ApplicationResources/DefaultSongImg.png" Stretch="Uniform"/>
+                </Border>
+                <Grid Grid.Column="1" Margin="10,20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1.5*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!--Track name-->
+                    <Label Content="Monday" 
+                           Style="{StaticResource MusicInfoLabelStyle}" 
+                           Grid.Row="0"
+                           FontWeight="Medium"/>
+                    <!--Author name-->
+                    <Label Content="Rocket" 
+                           Style="{StaticResource MusicInfoLabelStyle}" 
+                           Grid.Row="1"
+                           Foreground="{StaticResource AppForegroundLightGreyBrush}"
+                           FontFamily="{StaticResource LatoRegular}"
+                           FontWeight="Light"
+                           FontSize="{StaticResource FontSizeMedium}"/>
+                </Grid>
             </Grid>
             
             <!--Slider and control buttons-->
@@ -79,7 +126,6 @@
                         <Button Style="{StaticResource MusicControlsStyle}"
                                 Content="{StaticResource NextIcon}"
                                 Foreground="{StaticResource AppForegroundBrush}"/>
-
                     </StackPanel>
                 </Grid>
                 
@@ -110,7 +156,22 @@
 
             <!--Over buttons-->
             <Grid Grid.Column="4" Background="{x:Null}">
-
+                <StackPanel VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            Margin="20,0,0,0">
+                    <Button Style="{StaticResource MusicControlsStyle2}"
+                            Content="{StaticResource QueueIcon}"
+                            Foreground="{StaticResource AppForegroundBrush}"/>
+                    <Button Style="{StaticResource MusicControlsStyle2}"
+                            Content="{StaticResource FavouriteIcon}"
+                            Foreground="{StaticResource AppForegroundBrush}"/>
+                    <Slider Grid.Column="1" 
+                            HorizontalAlignment="Stretch" 
+                            VerticalAlignment="Center"
+                            MaxWidth="100" MinWidth="100"
+                            Margin="10,0,0,0"
+                            Style="{StaticResource Horizontal_Slider}" />
+                </StackPanel>
             </Grid>
         </Grid>
     </Border>
