@@ -51,17 +51,9 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <!-- Window Close Button -->
-    <Style TargetType="{x:Type Button}" x:Key="WindowCloseButton" BasedOn="{StaticResource WindowControlButton}">
 
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="Red" />
-                <Setter Property="Foreground" Value="{StaticResource AppForegroundBrush}" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
+    <!--ListView style-->
+    
     <Style x:Key="NavListViewItemStyle" TargetType="{x:Type ListViewItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="4,0"/>
@@ -109,7 +101,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    
+    <!--Music player button style-->
     <ControlTemplate x:Key="BubbleButtonTemp" TargetType="{x:Type Button}">
         <ControlTemplate.Resources>
             <c:ContentConverter x:Key="ContentConverter" />
@@ -138,7 +131,8 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-
+    
+    <!--Slider style-->
     <Style x:Key="SliderThumb" TargetType="Thumb">
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -215,4 +209,38 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
+    <!--ToggleButton style-->
+    <ControlTemplate x:Key="ToggleButtonTemp" TargetType="{x:Type ToggleButton}">
+        <ControlTemplate.Resources>
+            <c:ContentConverter x:Key="ContentConverter" />
+            <c:ScaleConverter x:Key="ScaleConverter" Scale="65"  />
+        </ControlTemplate.Resources>
+        <Grid x:Name="grid">
+            <Path x:Name="ellipse"
+                    Stretch="Uniform"
+                    StrokeThickness="0"
+                    Stroke="Transparent"
+                    Fill="Transparent" >
+                <Path.Data>
+                    <EllipseGeometry RadiusX="50" RadiusY="50" />
+                </Path.Data>
+            </Path>
+            <Path x:Name="shape" 
+                    Stretch="Uniform" 
+                    Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
+                    Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
+                    Fill="{TemplateBinding Foreground}" 
+                    Data="{TemplateBinding Content, Converter={StaticResource ContentConverter}}"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="shape" Property="Fill" Value="{StaticResource AppElementBackgroundBrush}"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="shape" Property="Fill" Value="{StaticResource AppForegroundGreyBrush}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
 </ResourceDictionary>

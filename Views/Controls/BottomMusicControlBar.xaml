@@ -25,7 +25,7 @@
             <Setter Property="Height" Value="40"/>
             <Setter Property="Width" Value="40"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="{Binding ElementName=grid, Path=Background}"/>
+            <Setter Property="Background" Value="{x:Null}"/>
             <Setter Property="Margin" Value="10"/>
         </Style>
 
@@ -33,8 +33,8 @@
             <Setter Property="Template" Value="{DynamicResource BubbleButtonTemp}"/>
             <Setter Property="Height" Value="20"/>
             <Setter Property="Width" Value="20"/>
+            <Setter Property="Background" Value="{x:Null}"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="{Binding ElementName=grid, Path=Background}"/>
             <Setter Property="Margin" Value="10"/>
         </Style>
 
@@ -42,9 +42,18 @@
             <Setter Property="Template" Value="{DynamicResource BubbleButtonTemp}"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="30"/>
+            <Setter Property="Background" Value="{x:Null}"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="{Binding ElementName=grid, Path=Background}"/>
             <Setter Property="Margin" Value="10"/>
+        </Style>
+
+        <Style x:Key="ToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Template" Value="{DynamicResource ToggleButtonTemp}"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="Margin" Value="5"/>
         </Style>
     </UserControl.Resources>
     
@@ -114,6 +123,9 @@
                     <StackPanel Grid.Column="1" VerticalAlignment="Stretch" 
                                 HorizontalAlignment="Center"
                                 Orientation="Horizontal">
+                        <ToggleButton Style="{StaticResource ToggleButtonStyle}"
+                                      Content="{StaticResource ShuffleIcon}"
+                                      Foreground="{StaticResource AppForegroundBrush}"/>
 
                         <Button Style="{StaticResource MusicControlsStyle}"
                                 Content="{StaticResource PreviousIcon}"
@@ -126,6 +138,10 @@
                         <Button Style="{StaticResource MusicControlsStyle}"
                                 Content="{StaticResource NextIcon}"
                                 Foreground="{StaticResource AppForegroundBrush}"/>
+
+                        <ToggleButton Style="{StaticResource ToggleButtonStyle}"
+                                      Content="{StaticResource RepeatIcon}"
+                                      Foreground="{StaticResource AppForegroundBrush}"/>
                     </StackPanel>
                 </Grid>
                 
@@ -158,18 +174,22 @@
             <Grid Grid.Column="4" Background="{x:Null}">
                 <StackPanel VerticalAlignment="Center"
                             Orientation="Horizontal"
-                            Margin="20,0,0,0">
+                            Margin="5,0,0,0">
                     <Button Style="{StaticResource MusicControlsStyle2}"
                             Content="{StaticResource QueueIcon}"
                             Foreground="{StaticResource AppForegroundBrush}"/>
-                    <Button Style="{StaticResource MusicControlsStyle2}"
-                            Content="{StaticResource FavouriteIcon}"
-                            Foreground="{StaticResource AppForegroundBrush}"/>
+                    <ToggleButton Style="{StaticResource ToggleButtonStyle}"
+                                  Content="{StaticResource FavouriteIcon}"
+                                  Foreground="{StaticResource AppForegroundBrush}"/>
+                    <ToggleButton Style="{StaticResource ToggleButtonStyle}"
+                                  Content="{StaticResource VolumeHighIcon}"
+                                  Foreground="{StaticResource AppForegroundBrush}"
+                                  Margin="10,0,5,0"/>
                     <Slider Grid.Column="1" 
                             HorizontalAlignment="Stretch" 
                             VerticalAlignment="Center"
-                            MaxWidth="100" MinWidth="100"
-                            Margin="10,0,0,0"
+                            MaxWidth="90" MinWidth="90"
+                            Margin="0,0,0,0"
                             Style="{StaticResource Horizontal_Slider}" />
                 </StackPanel>
             </Grid>
