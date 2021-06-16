@@ -8,6 +8,6 @@ namespace MusicPlayerProject.Core.Enums
 {
     public enum ViewType
     {
-        Home, Library
+        Home, Library, Queue
     }
 }

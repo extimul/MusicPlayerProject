@@ -130,10 +130,12 @@
 
                         <Button Style="{StaticResource MusicControlsStyle}"
                                 Content="{StaticResource PreviousIcon}"
-                                Foreground="{StaticResource AppForegroundBrush}"/>
+                                Foreground="{StaticResource AppForegroundBrush}"
+                                Command="{Binding AudioPlayerControlCommand}"
+                                CommandParameter="{x:Static type:AudioPlayerControlType.Previous}"/>
 
                         <Button Foreground="{StaticResource AppForegroundBrush}"
-                                Command="{Binding MusicPlayerControlCommand}"
+                                Command="{Binding AudioPlayerControlCommand}"
                                 CommandParameter="{x:Static type:AudioPlayerControlType.StartPause}">
                             <Button.Style>
                                 <Style TargetType="Button">
@@ -159,7 +161,7 @@
                                                             Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
                                                             Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
                                                             Fill="{TemplateBinding Foreground}" 
-                                                            Data="{Binding PlayPauseIconSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ContentConverter}}"/>
+                                                            Data="{Binding PlayPauseIcon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ContentConverter}}"/>
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
@@ -175,7 +177,9 @@
 
                         <Button Style="{StaticResource MusicControlsStyle}"
                                 Content="{StaticResource NextIcon}"
-                                Foreground="{StaticResource AppForegroundBrush}"/>
+                                Foreground="{StaticResource AppForegroundBrush}"
+                                Command="{Binding AudioPlayerControlCommand}"
+                                CommandParameter="{x:Static type:AudioPlayerControlType.Next}"/>
 
                         <ToggleButton Style="{StaticResource ToggleButtonStyle}"
                                       Content="{StaticResource RepeatIcon}"
@@ -212,22 +216,59 @@
             <Grid Grid.Column="4" Background="{x:Null}">
                 <StackPanel VerticalAlignment="Center"
                             Orientation="Horizontal"
-                            Margin="5,0,0,0">
-                    <Button Style="{StaticResource MusicControlsStyle2}"
-                            Content="{StaticResource QueueIcon}"
-                            Foreground="{StaticResource AppForegroundBrush}"/>
+                            Margin="50,0,0,0">
                     <ToggleButton Style="{StaticResource ToggleButtonStyle}"
                                   Content="{StaticResource FavouriteIcon}"
                                   Foreground="{StaticResource AppForegroundBrush}"/>
-                    <ToggleButton Style="{StaticResource ToggleButtonStyle}"
-                                  Content="{StaticResource VolumeHighIcon}"
-                                  Foreground="{StaticResource AppForegroundBrush}"
-                                  Margin="10,0,5,0"/>
+
+                    <Button Foreground="{StaticResource AppForegroundBrush}"
+                            Margin="10,0,5,0"
+                            Command="{Binding AudioPlayerControlCommand}"
+                            CommandParameter="{x:Static type:AudioPlayerControlType.VolumeOff}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Height" Value="30"/>
+                                <Setter Property="Width" Value="30"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Background" Value="{x:Null}"/>
+                                <Setter Property="Margin" Value="10"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Grid x:Name="grid">
+                                                <Path x:Name="ellipse" Stretch="Uniform"
+                                                            StrokeThickness="0"
+                                                            Stroke="Transparent"
+                                                            Fill="Transparent" >
+                                                    <Path.Data>
+                                                        <EllipseGeometry RadiusX="50" RadiusY="50" />
+                                                    </Path.Data>
+                                                </Path>
+                                                <Path x:Name="shape" 
+                                                        Stretch="Uniform" 
+                                                        Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
+                                                        Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
+                                                        Fill="{TemplateBinding Foreground}" 
+                                                        Data="{Binding VolumeIcon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ContentConverter}}"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="shape" Property="Fill" Value="{StaticResource AppElementBackgroundBrush}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                     <Slider Grid.Column="1" 
                             HorizontalAlignment="Stretch" 
                             VerticalAlignment="Center"
                             MaxWidth="90" MinWidth="90"
                             Margin="0,0,0,0"
+                            Value="{Binding CurrentVolumeValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Minimum="0" Maximum="100"
                             Style="{StaticResource Horizontal_Slider}" />
                 </StackPanel>
             </Grid>

@@ -28,5 +28,15 @@
         {
             throw new System.NotImplementedException();
         }
+
+        public void Mute()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool HasTracksInPlayList()
+        {
+            return true;
+        }
     }
 }

@@ -1,11 +1,7 @@
 ﻿using MusicPlayerProject.Core.Commands;
+using MusicPlayerProject.Core.Enums;
 using MusicPlayerProject.Core.Managers.Audio;
 using MusicPlayerProject.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -17,6 +13,8 @@ namespace MusicPlayerProject.ViewModels
         private readonly IAudioManager _audioManager;
 
         #region Properties
+
+        public bool CanPlay => _audioManager.HasTracksInPlayList();
 
         private bool _isPlaying = true;
 
@@ -30,41 +28,79 @@ namespace MusicPlayerProject.ViewModels
             }
         }
 
+        #region AdditionalButtonsData
+
+        private int _previousVolumeValue;
+        public int PreviousVolumeValue
+        {
+            get { return _previousVolumeValue; }
+            set
+            {
+                _previousVolumeValue = value;
+                OnPropertyChanged(nameof(PreviousVolumeValue));
+            }
+        }
+
+        private int _currentVolumeValue;
+
+        public int CurrentVolumeValue
+        {
+            get { return _currentVolumeValue; }
+            set 
+            {
+                if (_currentVolumeValue != value)
+                {
+                    _currentVolumeValue = value;
+                    AudioPlayerControlCommand?.Execute(AudioPlayerControlType.Volume);
+                }
+                
+                OnPropertyChanged(nameof(CurrentVolumeValue));
+            }
+        }
+
+        #endregion
+
+        #region IconSources
+
         private DrawingBrush _playPauseIconSource;
 
-        public DrawingBrush PlayPauseIconSource
+        public DrawingBrush PlayPauseIcon
         {
             get { return _playPauseIconSource; }
             set
             {
                 _playPauseIconSource = value;
-                OnPropertyChanged(nameof(PlayPauseIconSource));
+                OnPropertyChanged(nameof(PlayPauseIcon));
             }
         }
 
-        private string _name;
+        private DrawingBrush _volumeIcon;
 
-        public string Name
+        public DrawingBrush VolumeIcon
         {
-            get { return _name; }
+            get { return _volumeIcon; }
             set
-            { 
-                _name = value;
-                OnPropertyChanged(nameof(Name));
+            {
+                _volumeIcon = value;
+                OnPropertyChanged(nameof(VolumeIcon));
             }
         }
 
-        public ICommand MusicPlayerControlCommand { get; }
+        #endregion
+
+        public ICommand AudioPlayerControlCommand { get; }
 
         #endregion
 
         public AudioPlayerBarViewModel(IAudioManager audioManager)
         {
-            PlayPauseIconSource = (DrawingBrush)Application.Current.Resources["PlayIcon"];
+            AudioPlayerControlCommand = new PlayerControlsCommand(audioManager, this);
+
+            CurrentVolumeValue = 50;
+
+            PlayPauseIcon = (DrawingBrush)Application.Current.Resources[Icon.PlayIcon.ToString()];
 
             _audioManager = audioManager;
-
-            MusicPlayerControlCommand = new PlayerControlsCommand(audioManager, this);
         }
 
         public static AudioPlayerBarViewModel LoadMusicControlBarViewModel(IAudioManager audioManager)

@@ -7,5 +7,7 @@
         void PreviousTrack();
         void DecreaseVolume();
         void IncreaseVolume();
+        bool HasTracksInPlayList();
+        void Mute();
     }
 }

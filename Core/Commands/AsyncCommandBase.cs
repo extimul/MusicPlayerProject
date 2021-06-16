@@ -21,7 +21,7 @@ namespace MusicPlayerProject.Core.Commands
 
         public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(object parameter)
+        public virtual bool CanExecute(object parameter)
         {
             return !IsExecuting;
         }

@@ -59,6 +59,24 @@
                                    Foreground="{StaticResource AppForegroundBrush}"/>
                     </StackPanel>
                 </ListViewItem>
+                <ListViewItem Padding="0,15,0,15">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Selected">
+                            <i:InvokeCommandAction Command="{Binding UpdateCurrentViewModelCommand}"
+                                               CommandParameter="{x:Static navType:ViewType.Queue}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                        <ContentControl Content="{StaticResource NQueueIcon}" Width="25" Margin="10,0,0,0"/>
+                        <TextBlock Margin="10,0,0,0"
+                                   Text="Queue"
+                                   HorizontalAlignment="Stretch"
+                                   FontSize="{StaticResource FontSizeLarge}"
+                                   Foreground="{StaticResource AppForegroundBrush}"/>
+                    </StackPanel>
+                </ListViewItem>
             </ListView>
         </Grid>
     </ScrollViewer>

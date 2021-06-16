@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MusicPlayerProject.Core.Enums
+﻿namespace MusicPlayerProject.Core.Enums
 {
     public enum AudioPlayerControlType
     {
-        StartPause, Next, Previous
+        StartPause, 
+        Next,
+        Previous, 
+        Shuffle, 
+        Repeat, 
+        Volume,
+        VolumeOff,
+        Favourite
     }
 }
