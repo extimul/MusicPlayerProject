@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MusicPlayerProject.Core.Managers.Audio;
 using MusicPlayerProject.Core.Managers.Navigators;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace MusicPlayerProject.Core.HostBuilders
             host.ConfigureServices(services =>
             {
                 services.AddSingleton<INavigator, Navigator>();
+                services.AddSingleton<IAudioManager, AudioManager>();
             });
 
             return host;

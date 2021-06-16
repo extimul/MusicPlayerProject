@@ -1,13 +1,13 @@
-﻿using MusicPlayerProject.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MusicPlayerProject.Core.Managers.Audio;
+using MusicPlayerProject.ViewModels.Base;
 
 namespace MusicPlayerProject.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
+        public HomeViewModel()
+        {
+                
+        }
     }
 }

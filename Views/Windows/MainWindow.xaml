@@ -27,15 +27,14 @@
             <controls:NavigationPanel/>
         </Grid>
 
-        <ContentControl Content="{Binding CurrentViewModel}"
-                        Grid.Column="1"/>
+        <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </ScrollViewer>
         <controls:BottomMusicControlBar VerticalAlignment="Bottom"
                                         Grid.ColumnSpan="2"
                                         Height="100"
-                                        Panel.ZIndex="2">
-            <controls:BottomMusicControlBar.DataContext>
-                <ViewModels:MusicControlBarViewModel />
-            </controls:BottomMusicControlBar.DataContext>
+                                        Panel.ZIndex="2"
+                                        DataContext="{Binding AudioPlayerBarViewModel}">
         </controls:BottomMusicControlBar>
     </Grid>
 </Window>

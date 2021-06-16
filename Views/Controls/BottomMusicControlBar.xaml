@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MusicPlayerProject.Views.Controls"
+             xmlns:type="clr-namespace:MusicPlayerProject.Core.Enums"
              mc:Ignorable="d"
              MaxWidth="1600"
              d:DesignHeight="100" d:DesignWidth="1600">
@@ -90,12 +91,12 @@
                     </Grid.RowDefinitions>
                     
                     <!--Track name-->
-                    <Label Content="Monday" 
+                    <Label Content="Track" 
                            Style="{StaticResource MusicInfoLabelStyle}" 
                            Grid.Row="0"
                            FontWeight="Medium"/>
                     <!--Author name-->
-                    <Label Content="Rocket" 
+                    <Label Content="Author" 
                            Style="{StaticResource MusicInfoLabelStyle}" 
                            Grid.Row="1"
                            Foreground="{StaticResource AppForegroundLightGreyBrush}"
@@ -131,9 +132,46 @@
                                 Content="{StaticResource PreviousIcon}"
                                 Foreground="{StaticResource AppForegroundBrush}"/>
 
-                        <Button Style="{StaticResource MusicStateButtonStyle}"
-                                Content="{StaticResource PlayIcon}"
-                                Foreground="{StaticResource AppForegroundBrush}"/>
+                        <Button Foreground="{StaticResource AppForegroundBrush}"
+                                Command="{Binding MusicPlayerControlCommand}"
+                                CommandParameter="{x:Static type:AudioPlayerControlType.StartPause}">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Height" Value="40"/>
+                                    <Setter Property="Width" Value="40"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Background" Value="{x:Null}"/>
+                                    <Setter Property="Margin" Value="10"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Grid x:Name="grid">
+                                                    <Path x:Name="ellipse" Stretch="Uniform"
+                                                             StrokeThickness="0"
+                                                             Stroke="Transparent"
+                                                             Fill="Transparent" >
+                                                        <Path.Data>
+                                                            <EllipseGeometry RadiusX="50" RadiusY="50" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path x:Name="shape" 
+                                                            Stretch="Uniform" 
+                                                            Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
+                                                            Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
+                                                            Fill="{TemplateBinding Foreground}" 
+                                                            Data="{Binding PlayPauseIconSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ContentConverter}}"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="shape" Property="Fill" Value="{StaticResource AppElementBackgroundBrush}"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
 
                         <Button Style="{StaticResource MusicControlsStyle}"
                                 Content="{StaticResource NextIcon}"

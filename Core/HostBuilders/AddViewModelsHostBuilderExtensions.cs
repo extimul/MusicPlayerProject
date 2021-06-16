@@ -1,13 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MusicPlayerProject.Core.Managers.Audio;
+using MusicPlayerProject.Core.Managers.Navigators;
 using MusicPlayerProject.ViewModels;
 using MusicPlayerProject.ViewModels.Base;
 using MusicPlayerProject.ViewModels.Factories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicPlayerProject.Core.HostBuilders
 {
@@ -17,22 +15,27 @@ namespace MusicPlayerProject.Core.HostBuilders
         {
             host.ConfigureServices(services =>
             {
-                services.AddTransient(CreateHomeViewModel);
+                services.AddTransient<HomeViewModel>();
                 services.AddTransient<LibraryViewModel>();
                 services.AddTransient<MainWindowViewModel>();
+                services.AddTransient<AudioPlayerBarViewModel>();
 
                 services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
                 services.AddSingleton<CreateViewModel<LibraryViewModel>>(services => () => services.GetRequiredService<LibraryViewModel>());
+                services.AddSingleton<CreateViewModel<MainWindowViewModel>>(services => () => CreateMainViewModel(services));
 
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
             });
-
+             
             return host;
         }
 
-        private static HomeViewModel CreateHomeViewModel(IServiceProvider services)
+        private static MainWindowViewModel CreateMainViewModel(IServiceProvider services)
         {
-            return new HomeViewModel();
+            return new MainWindowViewModel(
+                services.GetRequiredService<INavigator>(),
+                services.GetRequiredService<IViewModelFactory>(),
+                AudioPlayerBarViewModel.LoadMusicControlBarViewModel(services.GetRequiredService<IAudioManager>()));
         }
     }
 }

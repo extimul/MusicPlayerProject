@@ -19,7 +19,10 @@ namespace MusicPlayerProject.ViewModels
         #endregion
 
         #region Properties
+
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
+
+        public AudioPlayerBarViewModel AudioPlayerBarViewModel { get; }
 
         public ICommand UpdateCurrentViewModelCommand { get; }
 
@@ -28,10 +31,12 @@ namespace MusicPlayerProject.ViewModels
 
         #endregion
 
-        public MainWindowViewModel(INavigator navigator, IViewModelFactory viewModelFactory)
+        public MainWindowViewModel(INavigator navigator, IViewModelFactory viewModelFactory, AudioPlayerBarViewModel audioPlayerBarViewModel)
         {
             _navigator = navigator;
             _viewModelFactory = viewModelFactory;
+
+            AudioPlayerBarViewModel = audioPlayerBarViewModel;
 
             _navigator.StateChanged += Navigator_StateChanged;
 
@@ -46,6 +51,8 @@ namespace MusicPlayerProject.ViewModels
 
         public override void Dispose()
         {
+            AudioPlayerBarViewModel.Dispose();
+
             _navigator.StateChanged -= Navigator_StateChanged;
 
             base.Dispose();
