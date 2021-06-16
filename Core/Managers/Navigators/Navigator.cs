@@ -15,7 +15,7 @@ namespace MusicPlayerProject.Core.Managers.Navigators
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
         {
-            get { return _currentViewModel; }
+            get => _currentViewModel;
             set
             {
                 _currentViewModel?.Dispose();

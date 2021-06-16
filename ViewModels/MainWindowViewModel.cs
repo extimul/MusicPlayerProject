@@ -12,7 +12,6 @@ namespace MusicPlayerProject.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         #region private fields
-        private readonly IViewModelFactory _viewModelFactory;
 
         private readonly INavigator _navigator;
 
@@ -34,13 +33,12 @@ namespace MusicPlayerProject.ViewModels
         public MainWindowViewModel(INavigator navigator, IViewModelFactory viewModelFactory, AudioPlayerBarViewModel audioPlayerBarViewModel)
         {
             _navigator = navigator;
-            _viewModelFactory = viewModelFactory;
 
             AudioPlayerBarViewModel = audioPlayerBarViewModel;
 
             _navigator.StateChanged += Navigator_StateChanged;
 
-            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, _viewModelFactory);
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, viewModelFactory);
             UpdateCurrentViewModelCommand.Execute(ViewType.Home);
         }
 

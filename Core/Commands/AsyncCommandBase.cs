@@ -10,7 +10,7 @@ namespace MusicPlayerProject.Core.Commands
 
         public bool IsExecuting
         {
-            get { return _isExecuting; }
+            get => _isExecuting;
             set 
             { 
                 _isExecuting = value;

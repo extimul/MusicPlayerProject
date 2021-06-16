@@ -9,7 +9,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="200">
 
-
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <Grid>
             <Grid.RowDefinitions>

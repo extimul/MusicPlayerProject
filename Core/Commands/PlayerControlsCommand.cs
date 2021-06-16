@@ -73,8 +73,6 @@ namespace MusicPlayerProject.Core.Commands
                     case AudioPlayerControlType.Favourite:
                         SetInFavouriteTrack();
                         break;
-                    default:
-                        break;
                 }
             }
         }
@@ -139,15 +137,15 @@ namespace MusicPlayerProject.Core.Commands
             {
                 ChangeVolumeIcon(VolumeLevel.Mute);
             }
-            else if (_viewModel.CurrentVolumeValue > 0 && _viewModel.CurrentVolumeValue <= 30)
+            else if (_viewModel.CurrentVolumeValue is > 0 and <= 30)
             {
                 ChangeVolumeIcon(VolumeLevel.Low);
             }
-            else if (_viewModel.CurrentVolumeValue > 30 && _viewModel.CurrentVolumeValue <= 65)
+            else if (_viewModel.CurrentVolumeValue is > 30 and <= 65)
             {
                 ChangeVolumeIcon(VolumeLevel.Medium);
             }
-            else if (_viewModel.CurrentVolumeValue > 65 && _viewModel.CurrentVolumeValue <= 100)
+            else if (_viewModel.CurrentVolumeValue is > 65 and <= 100)
             {
                 ChangeVolumeIcon(VolumeLevel.High);
             }
@@ -155,21 +153,14 @@ namespace MusicPlayerProject.Core.Commands
 
         private void ChangeVolumeIcon(VolumeLevel volumeLevel)
         {
-            switch (volumeLevel)
+            _viewModel.VolumeIcon = volumeLevel switch
             {
-                case VolumeLevel.Mute:
-                    _viewModel.VolumeIcon = (DrawingBrush)Application.Current.Resources[Icon.VolumeOffIcon.ToString()];
-                    break;
-                case VolumeLevel.Low:
-                    _viewModel.VolumeIcon = (DrawingBrush)Application.Current.Resources[Icon.VolumeLowIcon.ToString()];
-                    break;
-                case VolumeLevel.Medium:
-                    _viewModel.VolumeIcon = (DrawingBrush)Application.Current.Resources[Icon.VolumeMediumIcon.ToString()];
-                    break;
-                case VolumeLevel.High:
-                    _viewModel.VolumeIcon = (DrawingBrush)Application.Current.Resources[Icon.VolumeHighIcon.ToString()];
-                    break;
-            }
+                VolumeLevel.Mute => (DrawingBrush) Application.Current.Resources[Icon.VolumeOffIcon.ToString()],
+                VolumeLevel.Low => (DrawingBrush) Application.Current.Resources[Icon.VolumeLowIcon.ToString()],
+                VolumeLevel.Medium => (DrawingBrush) Application.Current.Resources[Icon.VolumeMediumIcon.ToString()],
+                VolumeLevel.High => (DrawingBrush) Application.Current.Resources[Icon.VolumeHighIcon.ToString()],
+                _ => _viewModel.VolumeIcon
+            };
         }
 
         #endregion

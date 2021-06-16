@@ -68,7 +68,7 @@ namespace MusicPlayerProject.ViewModels
 
         public DrawingBrush PlayPauseIcon
         {
-            get { return _playPauseIconSource; }
+            get => _playPauseIconSource;
             set
             {
                 _playPauseIconSource = value;
@@ -78,7 +78,7 @@ namespace MusicPlayerProject.ViewModels
 
         public DrawingBrush VolumeIcon
         {
-            get { return _volumeIcon; }
+            get => _volumeIcon;
             set
             {
                 _volumeIcon = value;
