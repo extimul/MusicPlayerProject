@@ -13,10 +13,13 @@ namespace MusicPlayerProject.ViewModels
         private readonly IAudioManager _audioManager;
 
         #region Properties
-
         public bool CanPlay => _audioManager.HasTracksInPlayList();
 
-        private bool _isPlaying = true;
+        private bool _isPlaying = false;
+
+        private int _previousVolumeValue;
+
+        private int _currentVolumeValue;
 
         public bool IsPlaying
         {
@@ -30,7 +33,6 @@ namespace MusicPlayerProject.ViewModels
 
         #region AdditionalButtonsData
 
-        private int _previousVolumeValue;
         public int PreviousVolumeValue
         {
             get { return _previousVolumeValue; }
@@ -40,8 +42,6 @@ namespace MusicPlayerProject.ViewModels
                 OnPropertyChanged(nameof(PreviousVolumeValue));
             }
         }
-
-        private int _currentVolumeValue;
 
         public int CurrentVolumeValue
         {
@@ -64,6 +64,8 @@ namespace MusicPlayerProject.ViewModels
 
         private DrawingBrush _playPauseIconSource;
 
+        private DrawingBrush _volumeIcon;
+
         public DrawingBrush PlayPauseIcon
         {
             get { return _playPauseIconSource; }
@@ -73,8 +75,6 @@ namespace MusicPlayerProject.ViewModels
                 OnPropertyChanged(nameof(PlayPauseIcon));
             }
         }
-
-        private DrawingBrush _volumeIcon;
 
         public DrawingBrush VolumeIcon
         {

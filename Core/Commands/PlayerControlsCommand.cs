@@ -41,7 +41,7 @@ namespace MusicPlayerProject.Core.Commands
                 switch (control)
                 {
                     case AudioPlayerControlType.StartPause:
-                        await Task.Run(() => StartPauseTrack());
+                        StartPauseTrack();
                         break;
                     case AudioPlayerControlType.Next:
                         NextTrack();
@@ -81,25 +81,22 @@ namespace MusicPlayerProject.Core.Commands
 
         #region MainButtons
         #region StartPauseButton
-        private async Task StartPauseTrack()
+        private void StartPauseTrack()
         {
-            if (_viewModel.IsPlaying is true)
+            if (_viewModel.IsPlaying is false)
             {
-                ChangePlayPauseIcon(false, Icon.PauseIcon);
+                ChangePlayPauseIcon(true, Icon.PauseIcon);
             }
             else
             {
-                ChangePlayPauseIcon(true, Icon.PlayIcon);
+                ChangePlayPauseIcon(false, Icon.PlayIcon);
             }
         }
 
         private void ChangePlayPauseIcon(bool musicState, Icon iconKey)
         {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                _viewModel.IsPlaying = musicState;
-                _viewModel.PlayPauseIcon = (DrawingBrush)Application.Current.Resources[iconKey.ToString()];
-            });
+            _viewModel.IsPlaying = musicState;
+            _viewModel.PlayPauseIcon = (DrawingBrush)Application.Current.Resources[iconKey.ToString()];
         }
 
         #endregion
