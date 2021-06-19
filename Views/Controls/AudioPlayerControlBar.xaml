@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MusicPlayerProject.Views.Controls.BottomMusicControlBar"
+﻿<UserControl x:Class="MusicPlayerProject.Views.Controls.AudioPlayerControlBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -83,7 +83,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="0"/>
                     </Border.Effect>
-                    <Image Source="/ApplicationResources/DefaultSongImg.png" Stretch="Uniform"/>
+                    <Image Source="{Binding CurrentTrack.TrackImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Stretch="Uniform"/>
                 </Border>
                 <Grid Grid.Column="1" Margin="10,20">
                     <Grid.RowDefinitions>
@@ -92,12 +92,12 @@
                     </Grid.RowDefinitions>
                     
                     <!--Track name-->
-                    <Label Content="Track" 
+                    <Label Content="{Binding CurrentTrack.TrackTitle, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                            Style="{StaticResource MusicInfoLabelStyle}" 
                            Grid.Row="0"
                            FontWeight="Medium"/>
                     <!--Author name-->
-                    <Label Content="Author" 
+                    <Label Content="{Binding CurrentTrack.Author, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                            Style="{StaticResource MusicInfoLabelStyle}" 
                            Grid.Row="1"
                            Foreground="{StaticResource AppForegroundLightGreyBrush}"
@@ -201,8 +201,8 @@
                            HorizontalAlignment="Center"
                            Style="{StaticResource TimerLableStyle}"/>
                     <Slider Minimum="0" 
-                            Maximum="{Binding CurrentTrackLenght, Mode=OneWay}"
-                            Value="{Binding CurrentTrackPosition, Mode=TwoWay}"
+                            Maximum="{Binding CurrentTrackLenght, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                            Value="{Binding CurrentTrackPosition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             Grid.Column="1" 
                             HorizontalAlignment="Stretch" 
                             VerticalAlignment="Center"
@@ -224,7 +224,8 @@
                             Margin="50,0,0,0">
                     <ToggleButton Style="{StaticResource ToggleButtonStyle}"
                                   Content="{StaticResource FavouriteIcon}"
-                                  Foreground="{StaticResource AppForegroundBrush}"/>
+                                  Foreground="{StaticResource AppForegroundBrush}"
+                                  IsChecked="{Binding CurrentTrack.IsLiked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <Button Foreground="{StaticResource AppForegroundBrush}"
                             Margin="10,0,5,0"

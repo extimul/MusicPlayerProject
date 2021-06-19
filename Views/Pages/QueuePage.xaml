@@ -84,7 +84,7 @@
                         </Grid.ColumnDefinitions>
                         
                         <!--Track number-->
-                        <Label  Content="{Binding SelectedTrack.Id, Mode=OneWay}"
+                        <Label  Content="{Binding Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                 Grid.Column="0"
                                 VerticalAlignment="Center"
                                 HorizontalContentAlignment="Center"/>
@@ -93,7 +93,7 @@
                         <Image Grid.Column="1"
                                Width="50"
                                Height="50"
-                               Source="{Binding SelectedTrack.TrackImage, Mode=OneWay}"
+                               Source="{Binding TrackImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                Stretch="Fill"
                                Margin="0"/>
                         <!--Track name, author-->
@@ -113,7 +113,7 @@
                         </Grid>
                         <!--Album-->
                         <Grid Grid.Column="4">
-                            <Label Content="{Binding SelectedTrack.TrackAlbum, Mode=OneWay}"
+                            <Label Content="{Binding TrackAlbum, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                    VerticalAlignment="Center"
                                    HorizontalContentAlignment="Center"
                                    Foreground="{StaticResource AppForegroundLightGreyBrush}"/>
@@ -124,10 +124,10 @@
                             <StackPanel Orientation="Horizontal"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Right">
-                                <CheckBox IsChecked="{Binding SelectedTrack.IsLiked, Mode=OneWay}"
+                                <CheckBox IsChecked="{Binding IsLiked, Mode=OneWay}"
                                           VerticalAlignment="Center"
                                           Margin="0,0,50,0"/>
-                                <Label Content="{Binding SelectedTrack.Duration, Mode=OneWay}"
+                                <Label Content="{Binding Duration, Mode=OneWay}"
                                        Margin="0,0,20,0"
                                        Foreground="{StaticResource AppForegroundLightGreyBrush}"/>
                             </StackPanel>

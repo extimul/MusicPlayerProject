@@ -5,6 +5,7 @@ using System.Windows.Media;
 using MusicPlayerProject.Core.Commands;
 using MusicPlayerProject.Core.Enums;
 using MusicPlayerProject.Core.Managers.Audio;
+using MusicPlayerProject.Core.Models;
 using MusicPlayerProject.ViewModels.Base;
 using NAudio.Wave;
 
@@ -13,21 +14,16 @@ namespace MusicPlayerProject.ViewModels
     public class AudioPlayerBarViewModel : ViewModelBase
     {
         private readonly IAudioManager _audioManager;
-        public bool CanPlay => _audioManager.HasTracksInPlaylist;
 
         private double _previousVolumeValue;
 
         #region Properties
 
-        public double CurrentTrackLenght
-        {
-            get { return _audioManager.TrackLenght; }
-            set
-            {
-                if (value.Equals(_audioManager.TrackLenght)) return;
-                OnPropertyChanged(nameof(CurrentTrackLenght));
-            }
-        }
+        public Track CurrentTrack => _audioManager.CurrentlySelectedTrack;
+
+        public bool CanPlay => _audioManager.HasTracksInPlaylist;
+
+        public double CurrentTrackLenght => _audioManager.TrackLenght;
 
         public double CurrentTrackPosition
         {
@@ -102,17 +98,17 @@ namespace MusicPlayerProject.ViewModels
 
         public ICommand AudioPlayerControlCommand { get; }
 
-        public ICommand SliderControlCommand { get; }
-
         #endregion
 
         public AudioPlayerBarViewModel(IAudioManager audioManager)
         {
             _audioManager = audioManager;
+            _audioManager.StateChanged += OnStateChanged;
             AudioPlayerControlCommand = new PlayerControlsCommand(audioManager, this);
-            SliderControlCommand = new PlayerSliderControlCommand(audioManager, this);
 
             CurrentVolumeValue = 0.5;
+
+            _audioManager.CurrentlyPlaybackState = PlaybackState.Stopped;
 
             PlayPauseIcon = (DrawingBrush)Application.Current.Resources[Icons.PlayIcon.ToString()];
 
@@ -120,6 +116,12 @@ namespace MusicPlayerProject.ViewModels
             timer.Interval = 300;
             timer.Elapsed += Timer_Elapsed;
             timer.Start();
+        }
+
+        private void OnStateChanged()
+        {
+            OnPropertyChanged(nameof(CurrentTrack));
+            OnPropertyChanged(nameof(CurrentTrackLenght));
         }
 
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -139,6 +141,7 @@ namespace MusicPlayerProject.ViewModels
 
         public override void Dispose()
         {
+            _audioManager.StateChanged -= OnStateChanged;
             base.Dispose();
         }
     }

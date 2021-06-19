@@ -83,47 +83,7 @@ namespace MusicPlayerProject.Core.Commands
         #region StartPauseButton
         private void StartPauseTrack()
         {
-            if (_audioManager.CurrentlyPlaybackState is PlaybackState.Stopped || _audioManager.CurrentlyPlaybackState is PlaybackState.Paused)
-            {
-                _audioManager.TogglePlayPauseTrack();
-                _audioManager.PlaybackStopType = PlaybackStopTypes.ReachingEndOfFile;
-                _viewModel.CurrentTrackLenght = _audioManager.TrackLenght;
-                _audioManager.PlaybackPaused += AudioManager_PlaybackPaused;
-                _audioManager.PlaybackResumed += AudioManager_PlaybackResumed;
-                _audioManager.PlaybackStopped += AudioManager_PlaybackStopped;
-            }
-            else
-            {
-                _audioManager.PauseTrack();
-                _audioManager.PlaybackStopType = PlaybackStopTypes.StoppedByUser;
-                ChangePlayPauseIcon(PlaybackState.Paused, Icons.PlayIcon);
-            }
-        }
-
-        private void AudioManager_PlaybackStopped()
-        {
-            ChangePlayPauseIcon(PlaybackState.Stopped, Icons.PlayIcon);
-            _viewModel.CurrentTrackPosition = 0;
-
-            if (_audioManager.PlaybackStopType is PlaybackStopTypes.ReachingEndOfFile)
-            {
-                _audioManager.NextTrack();
-                StartPauseTrack();
-            }
-            else if (_audioManager.PlaybackStopType is PlaybackStopTypes.StoppedByUser)
-            {
-                StartPauseTrack();
-            }
-        }
-
-        private void AudioManager_PlaybackResumed()
-        {
-            ChangePlayPauseIcon(PlaybackState.Playing, Icons.PauseIcon);
-        }
-
-        private void AudioManager_PlaybackPaused()
-        {
-            ChangePlayPauseIcon(PlaybackState.Paused, Icons.PlayIcon);
+            throw new NotImplementedException();
         }
 
         private void ChangePlayPauseIcon(PlaybackState musicState, Icons iconKey)
@@ -151,17 +111,17 @@ namespace MusicPlayerProject.Core.Commands
 
         private void ShuffleTracks()
         {
-
+            throw new NotImplementedException();
         }
 
         private void RepeatTrack()
         {
-
+            throw new NotImplementedException();
         }
 
         private void SetInFavouriteTrack()
         {
-
+            throw new NotImplementedException();
         }
 
         #region Volume

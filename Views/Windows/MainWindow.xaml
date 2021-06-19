@@ -27,11 +27,11 @@
         <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
             <ContentControl Content="{Binding CurrentViewModel}"/>
         </ScrollViewer>
-        <controls:BottomMusicControlBar VerticalAlignment="Bottom"
+        <controls:AudioPlayerControlBar VerticalAlignment="Bottom"
                                         Grid.ColumnSpan="2" Grid.Column="0"
                                         Height="100"
                                         Panel.ZIndex="2"
                                         DataContext="{Binding AudioPlayerBarViewModel}">
-        </controls:BottomMusicControlBar>
+        </controls:AudioPlayerControlBar>
     </Grid>
 </Window>

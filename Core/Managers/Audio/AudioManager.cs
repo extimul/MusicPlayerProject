@@ -10,11 +10,22 @@ namespace MusicPlayerProject.Core.Managers.Audio
     {
         #region Fields
 
+        private AudioFileReader _audioFileReader;
+
         private Track _currentlyPlayingTrack;
 
         private Track _currentlySelectedTrack;
 
+        private PlaybackState _currentlyPlaybackState;
+
+        private PlaybackStopTypes _playbackStopType;
+
         private ObservableCollection<Track> _loadedPlaylist;
+
+        public event Action StateChanged;
+        public event Action PlaybackResumed;
+        public event Action PlaybackPaused;
+        public event Action PlaybackStopped;
 
         #endregion
 
@@ -62,44 +73,72 @@ namespace MusicPlayerProject.Core.Managers.Audio
             }
         }
 
-        //public double TrackVolume
-        //{
-        //    get { return (_audioFileReader != null) ? _audioFileReader.Volume : 0; }
-        //    set
-        //    {
-        //        if (_audioFileReader != null)
-        //        {
-        //            if (value.Equals(_audioFileReader.Volume)) return;
-        //            else
-        //            {
-        //                _audioFileReader.Volume = (float)value;
-        //                StateChanged?.Invoke();
-        //            }
-        //        }
-
-        //    }
-        //}
-
-        //public double TrackLenght => (_audioFileReader != null) ? _audioFileReader.TotalTime.TotalSeconds : 0;
-
-        //public double TrackPosition
-        //{
-        //    get { return (_audioFileReader != null) ? _audioFileReader.CurrentTime.TotalSeconds : 0; }
-        //    set
-        //    {
-        //        if (_audioFileReader != null)
-        //        {
-        //            if (value.Equals(_audioFileReader.CurrentTime.TotalSeconds)) return;
-        //            else
-        //            {
-        //                _audioFileReader.CurrentTime = TimeSpan.FromSeconds(value);
-        //                StateChanged?.Invoke();
-        //            }
-        //        }
-        //    }
-        //}
-
         public bool HasTracksInPlaylist => LoadedPlaylist.Count > 0;
+
+        public PlaybackState CurrentlyPlaybackState
+        {
+            get => _currentlyPlaybackState;
+            set
+            {
+                if (value.Equals(_currentlyPlaybackState)) return;
+                else
+                {
+                    _currentlyPlaybackState = value;
+                    StateChanged?.Invoke();
+                }
+            }
+        }
+
+        public PlaybackStopTypes PlaybackStopType
+        {
+            get => _playbackStopType;
+            set
+            {
+                if (value.Equals(_playbackStopType)) return;
+                else
+                {
+                    _playbackStopType = value;
+                    StateChanged?.Invoke();
+                }
+            }
+        }
+
+        public double TrackVolume
+        {
+            get { return (_audioFileReader != null) ? _audioFileReader.Volume : 0; }
+            set
+            {
+                if (_audioFileReader != null)
+                {
+                    if (value.Equals(_audioFileReader.Volume)) return;
+                    else
+                    {
+                        _audioFileReader.Volume = (float)value;
+                        StateChanged?.Invoke();
+                    }
+                }
+
+            }
+        }
+
+        public double TrackLenght => (_audioFileReader != null) ? _audioFileReader.TotalTime.TotalSeconds : 0;
+
+        public double TrackPosition
+        {
+            get { return (_audioFileReader != null) ? _audioFileReader.CurrentTime.TotalSeconds : 0; }
+            set
+            {
+                if (_audioFileReader != null)
+                {
+                    if (value.Equals(_audioFileReader.CurrentTime.TotalSeconds)) return;
+                    else
+                    {
+                        _audioFileReader.CurrentTime = TimeSpan.FromSeconds(value);
+                        StateChanged?.Invoke();
+                    }
+                }
+            }
+        }
 
         #endregion
 
@@ -152,6 +191,36 @@ namespace MusicPlayerProject.Core.Managers.Audio
                     Duration = TimeSpan.FromSeconds(300)
                 }
             };
+        }
+
+        public void TogglePlayPauseTrack()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PauseTrack()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StopTrack()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NextTrack()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PreviousTrack()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LoadAudioFile()
+        {
+            throw new NotImplementedException();
         }
 
         #region Methods
