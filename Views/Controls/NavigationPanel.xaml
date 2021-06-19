@@ -26,7 +26,7 @@
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Selected">
                             <i:InvokeCommandAction Command="{Binding UpdateCurrentViewModelCommand}"
-                                               CommandParameter="{x:Static navType:ViewType.Home}"/>
+                                               CommandParameter="{x:Static navType:ViewTypes.Home}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <StackPanel Orientation="Horizontal"
@@ -44,7 +44,7 @@
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Selected">
                             <i:InvokeCommandAction Command="{Binding UpdateCurrentViewModelCommand}"
-                                               CommandParameter="{x:Static navType:ViewType.Library}"/>
+                                               CommandParameter="{x:Static navType:ViewTypes.Library}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <StackPanel Orientation="Horizontal"
@@ -62,7 +62,7 @@
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Selected">
                             <i:InvokeCommandAction Command="{Binding UpdateCurrentViewModelCommand}"
-                                               CommandParameter="{x:Static navType:ViewType.Queue}"/>
+                                               CommandParameter="{x:Static navType:ViewTypes.Queue}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <StackPanel Orientation="Horizontal"

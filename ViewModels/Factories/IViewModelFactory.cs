@@ -5,6 +5,6 @@ namespace MusicPlayerProject.ViewModels.Factories
 {
     public interface IViewModelFactory
     {
-        ViewModelBase CreateViewModel(ViewType viewType);
+        ViewModelBase CreateViewModel(ViewTypes viewType);
     }
 }

@@ -39,7 +39,7 @@ namespace MusicPlayerProject.ViewModels
             _navigator.StateChanged += Navigator_StateChanged;
 
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, viewModelFactory);
-            UpdateCurrentViewModelCommand.Execute(ViewType.Home);
+            UpdateCurrentViewModelCommand.Execute(ViewTypes.Home);
         }
 
         private void Navigator_StateChanged()

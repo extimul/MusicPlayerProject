@@ -18,15 +18,15 @@ namespace MusicPlayerProject.ViewModels.Factories
             _createQueueViewModel = createQueueViewModel;
         }
 
-        public ViewModelBase CreateViewModel(ViewType viewType)
+        public ViewModelBase CreateViewModel(ViewTypes viewType)
         {
             switch (viewType)
             {
-                case ViewType.Home:
+                case ViewTypes.Home:
                     return _createHomeViewModel();
-                case ViewType.Library:
+                case ViewTypes.Library:
                     return _createMusicLibraryViewModel();
-                case ViewType.Queue:
+                case ViewTypes.Queue:
                     return _createQueueViewModel();
                 default:
                     throw new ArgumentException("ViewType does not have a ViewModel", "viewType");

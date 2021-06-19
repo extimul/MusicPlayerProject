@@ -1,6 +1,8 @@
 ﻿using MusicPlayerProject.Core.Enums;
 using MusicPlayerProject.Core.Managers.Audio;
 using MusicPlayerProject.ViewModels;
+using NAudio.Wave;
+using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -36,29 +38,29 @@ namespace MusicPlayerProject.Core.Commands
         {
             if (parameter is not null)
             {
-                AudioPlayerControlType control = (AudioPlayerControlType)parameter;
+                AudioPlayerControlTypes control = (AudioPlayerControlTypes)parameter;
 
                 switch (control)
                 {
-                    case AudioPlayerControlType.StartPause:
+                    case AudioPlayerControlTypes.StartPause:
                         StartPauseTrack();
                         break;
-                    case AudioPlayerControlType.Next:
+                    case AudioPlayerControlTypes.Next:
                         NextTrack();
                         break;
-                    case AudioPlayerControlType.Previous:
+                    case AudioPlayerControlTypes.Previous:
                         PreviousTrack();
                         break;
-                    case AudioPlayerControlType.Shuffle:
+                    case AudioPlayerControlTypes.Shuffle:
                         ShuffleTracks();
                         break;
-                    case AudioPlayerControlType.Repeat:
+                    case AudioPlayerControlTypes.Repeat:
                         RepeatTrack();
                         break;
-                    case AudioPlayerControlType.Volume:
+                    case AudioPlayerControlTypes.Volume:
                         ChangeVolumeLevel();
                         break;
-                    case AudioPlayerControlType.VolumeOff:
+                    case AudioPlayerControlTypes.VolumeOff:
                         if (_viewModel.CurrentVolumeValue == 0)
                         {
                             _viewModel.CurrentVolumeValue = _viewModel.PreviousVolumeValue;
@@ -70,7 +72,7 @@ namespace MusicPlayerProject.Core.Commands
                         }
                         ChangeVolumeLevel();
                         break;
-                    case AudioPlayerControlType.Favourite:
+                    case AudioPlayerControlTypes.Favourite:
                         SetInFavouriteTrack();
                         break;
                 }
@@ -81,19 +83,52 @@ namespace MusicPlayerProject.Core.Commands
         #region StartPauseButton
         private void StartPauseTrack()
         {
-            if (_viewModel.IsPlaying is false)
+            if (_audioManager.CurrentlyPlaybackState is PlaybackState.Stopped || _audioManager.CurrentlyPlaybackState is PlaybackState.Paused)
             {
-                ChangePlayPauseIcon(true, Icon.PauseIcon);
+                _audioManager.TogglePlayPauseTrack();
+                _audioManager.PlaybackStopType = PlaybackStopTypes.ReachingEndOfFile;
+                _viewModel.CurrentTrackLenght = _audioManager.TrackLenght;
+                _audioManager.PlaybackPaused += AudioManager_PlaybackPaused;
+                _audioManager.PlaybackResumed += AudioManager_PlaybackResumed;
+                _audioManager.PlaybackStopped += AudioManager_PlaybackStopped;
             }
             else
             {
-                ChangePlayPauseIcon(false, Icon.PlayIcon);
+                _audioManager.PauseTrack();
+                _audioManager.PlaybackStopType = PlaybackStopTypes.StoppedByUser;
+                ChangePlayPauseIcon(PlaybackState.Paused, Icons.PlayIcon);
             }
         }
 
-        private void ChangePlayPauseIcon(bool musicState, Icon iconKey)
+        private void AudioManager_PlaybackStopped()
         {
-            _viewModel.IsPlaying = musicState;
+            ChangePlayPauseIcon(PlaybackState.Stopped, Icons.PlayIcon);
+            _viewModel.CurrentTrackPosition = 0;
+
+            if (_audioManager.PlaybackStopType is PlaybackStopTypes.ReachingEndOfFile)
+            {
+                _audioManager.NextTrack();
+                StartPauseTrack();
+            }
+            else if (_audioManager.PlaybackStopType is PlaybackStopTypes.StoppedByUser)
+            {
+                StartPauseTrack();
+            }
+        }
+
+        private void AudioManager_PlaybackResumed()
+        {
+            ChangePlayPauseIcon(PlaybackState.Playing, Icons.PauseIcon);
+        }
+
+        private void AudioManager_PlaybackPaused()
+        {
+            ChangePlayPauseIcon(PlaybackState.Paused, Icons.PlayIcon);
+        }
+
+        private void ChangePlayPauseIcon(PlaybackState musicState, Icons iconKey)
+        {
+            _audioManager.CurrentlyPlaybackState = musicState;
             _viewModel.PlayPauseIcon = (DrawingBrush)Application.Current.Resources[iconKey.ToString()];
         }
 
@@ -102,14 +137,13 @@ namespace MusicPlayerProject.Core.Commands
         #region NextPreviousTrackButtons
         private void NextTrack()
         {
-            MessageBox.Show("NextTrack");
+            _audioManager.NextTrack();
         }
 
         private void PreviousTrack()
         {
-            MessageBox.Show("PreviousTrack");
+            _audioManager.PreviousTrack();
         }
-
         #endregion
         #endregion
 
@@ -133,32 +167,32 @@ namespace MusicPlayerProject.Core.Commands
         #region Volume
         private void ChangeVolumeLevel()
         {
-            if (_viewModel.CurrentVolumeValue == 0)
+            if (_viewModel.CurrentVolumeValue == 0.0)
             {
-                ChangeVolumeIcon(VolumeLevel.Mute);
+                ChangeVolumeIcon(VolumeLevels.Mute);
             }
-            else if (_viewModel.CurrentVolumeValue is > 0 and <= 30)
+            else if (_viewModel.CurrentVolumeValue is > 0.0 and <= 0.3)
             {
-                ChangeVolumeIcon(VolumeLevel.Low);
+                ChangeVolumeIcon(VolumeLevels.Low);
             }
-            else if (_viewModel.CurrentVolumeValue is > 30 and <= 65)
+            else if (_viewModel.CurrentVolumeValue is > 0.3 and <= 0.65)
             {
-                ChangeVolumeIcon(VolumeLevel.Medium);
+                ChangeVolumeIcon(VolumeLevels.Medium);
             }
-            else if (_viewModel.CurrentVolumeValue is > 65 and <= 100)
+            else if (_viewModel.CurrentVolumeValue is > 0.65 and <= 1)
             {
-                ChangeVolumeIcon(VolumeLevel.High);
+                ChangeVolumeIcon(VolumeLevels.High);
             }
         }
 
-        private void ChangeVolumeIcon(VolumeLevel volumeLevel)
+        private void ChangeVolumeIcon(VolumeLevels volumeLevel)
         {
             _viewModel.VolumeIcon = volumeLevel switch
             {
-                VolumeLevel.Mute => (DrawingBrush) Application.Current.Resources[Icon.VolumeOffIcon.ToString()],
-                VolumeLevel.Low => (DrawingBrush) Application.Current.Resources[Icon.VolumeLowIcon.ToString()],
-                VolumeLevel.Medium => (DrawingBrush) Application.Current.Resources[Icon.VolumeMediumIcon.ToString()],
-                VolumeLevel.High => (DrawingBrush) Application.Current.Resources[Icon.VolumeHighIcon.ToString()],
+                VolumeLevels.Mute => (DrawingBrush) Application.Current.Resources[Icons.VolumeOffIcon.ToString()],
+                VolumeLevels.Low => (DrawingBrush) Application.Current.Resources[Icons.VolumeLowIcon.ToString()],
+                VolumeLevels.Medium => (DrawingBrush) Application.Current.Resources[Icons.VolumeMediumIcon.ToString()],
+                VolumeLevels.High => (DrawingBrush) Application.Current.Resources[Icons.VolumeHighIcon.ToString()],
                 _ => _viewModel.VolumeIcon
             };
         }

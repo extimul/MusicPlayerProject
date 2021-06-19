@@ -1,6 +1,6 @@
 ﻿namespace MusicPlayerProject.Core.Enums
 {
-    public enum AudioPlayerControlType
+    public enum AudioPlayerControlTypes
     {
         StartPause, 
         Next,

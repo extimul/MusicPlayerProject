@@ -1,6 +1,6 @@
 ﻿namespace MusicPlayerProject.Core.Enums
 {
-    public enum VolumeLevel
+    public enum VolumeLevels
     {
         Mute, Low, Medium, High
     }

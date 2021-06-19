@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:local="clr-namespace:MusicPlayerProject.Views.Controls"
              xmlns:type="clr-namespace:MusicPlayerProject.Core.Enums"
              mc:Ignorable="d"
@@ -132,11 +133,11 @@
                                 Content="{StaticResource PreviousIcon}"
                                 Foreground="{StaticResource AppForegroundBrush}"
                                 Command="{Binding AudioPlayerControlCommand}"
-                                CommandParameter="{x:Static type:AudioPlayerControlType.Previous}"/>
+                                CommandParameter="{x:Static type:AudioPlayerControlTypes.Previous}"/>
 
                         <Button Foreground="{StaticResource AppForegroundBrush}"
                                 Command="{Binding AudioPlayerControlCommand}"
-                                CommandParameter="{x:Static type:AudioPlayerControlType.StartPause}">
+                                CommandParameter="{x:Static type:AudioPlayerControlTypes.StartPause}">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Height" Value="40"/>
@@ -179,7 +180,7 @@
                                 Content="{StaticResource NextIcon}"
                                 Foreground="{StaticResource AppForegroundBrush}"
                                 Command="{Binding AudioPlayerControlCommand}"
-                                CommandParameter="{x:Static type:AudioPlayerControlType.Next}"/>
+                                CommandParameter="{x:Static type:AudioPlayerControlTypes.Next}"/>
 
                         <ToggleButton Style="{StaticResource ToggleButtonStyle}"
                                       Content="{StaticResource RepeatIcon}"
@@ -199,12 +200,16 @@
                            Content="0:00" 
                            HorizontalAlignment="Center"
                            Style="{StaticResource TimerLableStyle}"/>
-                    <Slider Grid.Column="1" 
+                    <Slider Minimum="0" 
+                            Maximum="{Binding CurrentTrackLenght, Mode=OneWay}"
+                            Value="{Binding CurrentTrackPosition, Mode=TwoWay}"
+                            Grid.Column="1" 
                             HorizontalAlignment="Stretch" 
                             VerticalAlignment="Center"
                             MaxWidth="500" 
                             MinWidth="300"
-                            Style="{StaticResource Horizontal_Slider}" />
+                            Style="{StaticResource Horizontal_Slider}" >
+                    </Slider>
                     <Label Grid.Column="2"
                            Content="0:00"
                            HorizontalAlignment="Center"
@@ -224,7 +229,7 @@
                     <Button Foreground="{StaticResource AppForegroundBrush}"
                             Margin="10,0,5,0"
                             Command="{Binding AudioPlayerControlCommand}"
-                            CommandParameter="{x:Static type:AudioPlayerControlType.VolumeOff}">
+                            CommandParameter="{x:Static type:AudioPlayerControlTypes.VolumeOff}">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Height" Value="30"/>
@@ -268,7 +273,7 @@
                             MaxWidth="90" MinWidth="90"
                             Margin="0,0,0,0"
                             Value="{Binding CurrentVolumeValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            Minimum="0" Maximum="100"
+                            Minimum="0" Maximum="1"
                             Style="{StaticResource Horizontal_Slider}" />
                 </StackPanel>
             </Grid>

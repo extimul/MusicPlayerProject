@@ -27,7 +27,7 @@ namespace MusicPlayerProject.Core.Commands
 
         public void Execute(object parameter)
         {
-            if (parameter is ViewType viewType)
+            if (parameter is ViewTypes viewType)
             {
                 _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewType);
             }
