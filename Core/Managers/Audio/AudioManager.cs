@@ -12,6 +12,8 @@ namespace MusicPlayerProject.Core.Managers.Audio
 
         private AudioFileReader _audioFileReader;
 
+        private DirectSoundOut _outputDevice;
+
         private Track _currentlyPlayingTrack;
 
         private Track _currentlySelectedTrack;
@@ -47,7 +49,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
 
         public Track CurrentlySelectedTrack
         {
-            get => _currentlySelectedTrack; 
+            get => _currentlySelectedTrack;
             set
             {
                 if (value.Equals(_currentlySelectedTrack)) return;
@@ -105,7 +107,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
 
         public double TrackVolume
         {
-            get { return (_audioFileReader != null) ? _audioFileReader.Volume : 0; }
+            get { return (_audioFileReader != null) ? _audioFileReader.Volume * 100.0f : 50.0f; }
             set
             {
                 if (_audioFileReader != null)
@@ -113,7 +115,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
                     if (value.Equals(_audioFileReader.Volume)) return;
                     else
                     {
-                        _audioFileReader.Volume = (float)value;
+                        _audioFileReader.Volume = (float)value / 100.0f;
                         StateChanged?.Invoke();
                     }
                 }
@@ -140,6 +142,23 @@ namespace MusicPlayerProject.Core.Managers.Audio
             }
         }
 
+        public TimeSpan TrackDuration
+        {
+            get => (_audioFileReader != null) ? _audioFileReader.TotalTime : TimeSpan.FromSeconds(0);
+            set
+            {
+                StateChanged?.Invoke();
+            }
+        }
+        public TimeSpan TrackTimePosition
+        {
+            get => (_audioFileReader != null) ? _audioFileReader.CurrentTime : TimeSpan.FromSeconds(0);
+            set
+            {
+                StateChanged.Invoke();
+            }
+        }
+ 
         #endregion
 
         public AudioManager()
@@ -193,6 +212,21 @@ namespace MusicPlayerProject.Core.Managers.Audio
             };
         }
 
+        public void LoadAudioFile()
+        {
+            _audioFileReader = new AudioFileReader(CurrentlySelectedTrack.TrackSource)
+            {
+                Volume = (float)TrackVolume
+            };
+
+            _outputDevice = new DirectSoundOut(200);
+
+            WaveChannel32 waveChannel = new WaveChannel32(_audioFileReader);
+            waveChannel.PadWithZeroes = false;
+
+            _outputDevice.Init(waveChannel);
+        }
+
         public void TogglePlayPauseTrack()
         {
             throw new NotImplementedException();
@@ -218,10 +252,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
             throw new NotImplementedException();
         }
 
-        public void LoadAudioFile()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         #region Methods
 

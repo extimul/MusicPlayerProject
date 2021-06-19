@@ -127,19 +127,19 @@ namespace MusicPlayerProject.Core.Commands
         #region Volume
         private void ChangeVolumeLevel()
         {
-            if (_viewModel.CurrentVolumeValue == 0.0)
+            if (_viewModel.CurrentVolumeValue == 0)
             {
                 ChangeVolumeIcon(VolumeLevels.Mute);
             }
-            else if (_viewModel.CurrentVolumeValue is > 0.0 and <= 0.3)
+            else if (_viewModel.CurrentVolumeValue is > 0 and <= 30.0)
             {
                 ChangeVolumeIcon(VolumeLevels.Low);
             }
-            else if (_viewModel.CurrentVolumeValue is > 0.3 and <= 0.65)
+            else if (_viewModel.CurrentVolumeValue is > 30.0 and <= 65.0)
             {
                 ChangeVolumeIcon(VolumeLevels.Medium);
             }
-            else if (_viewModel.CurrentVolumeValue is > 0.65 and <= 1)
+            else if (_viewModel.CurrentVolumeValue is > 65.0 and <= 100.0)
             {
                 ChangeVolumeIcon(VolumeLevels.High);
             }

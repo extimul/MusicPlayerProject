@@ -195,9 +195,10 @@
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <Label Grid.Column="0"
-                           Content="0:00" 
+                           Content="{Binding CurrentTrackTimePosition, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                           ContentStringFormat="{}{0:mm}:{0:ss}"
                            HorizontalAlignment="Center"
                            Style="{StaticResource TimerLableStyle}"/>
                     <Slider Minimum="0" 
@@ -211,7 +212,8 @@
                             Style="{StaticResource Horizontal_Slider}" >
                     </Slider>
                     <Label Grid.Column="2"
-                           Content="0:00"
+                           Content="{Binding CurrentTrackDuration, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                           ContentStringFormat="{}{0:mm}:{0:ss}"
                            HorizontalAlignment="Center"
                            Style="{StaticResource TimerLableStyle}"/>
                 </Grid>
@@ -274,7 +276,7 @@
                             MaxWidth="90" MinWidth="90"
                             Margin="0,0,0,0"
                             Value="{Binding CurrentVolumeValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            Minimum="0" Maximum="1"
+                            Minimum="0" Maximum="100"
                             Style="{StaticResource Horizontal_Slider}" />
                 </StackPanel>
             </Grid>

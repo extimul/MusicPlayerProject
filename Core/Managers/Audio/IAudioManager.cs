@@ -25,6 +25,8 @@ namespace MusicPlayerProject.Core.Managers.Audio
         public double TrackVolume { get; set; }
         public double TrackLenght { get; }
         public double TrackPosition { get; set; }
+        public TimeSpan TrackDuration { get; }
+        public TimeSpan TrackTimePosition { get; }
         public bool HasTracksInPlaylist { get; }
         public Track CurrentlyPlayingTrack { get; set; }
         public Track CurrentlySelectedTrack { get; set; }
