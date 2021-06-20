@@ -9,6 +9,7 @@
   <ItemGroup>
     <None Remove="ApplicationResources\DefaultSongImg.png" />
     <None Remove="ApplicationResources\track.mp3" />
+    <None Remove="ApplicationResources\track2.mp3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="ApplicationResources\track.mp3">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ApplicationResources\track2.mp3">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

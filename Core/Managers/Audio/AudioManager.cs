@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Windows.Threading;
 using MusicPlayerProject.Core.Enums;
 using MusicPlayerProject.Core.Models;
 using NAudio.Wave;
@@ -9,10 +10,11 @@ namespace MusicPlayerProject.Core.Managers.Audio
     public class AudioManager : IAudioManager
     {
         #region Fields
+        private DispatcherTimer _timer;
 
         private AudioFileReader _audioFileReader;
 
-        private DirectSoundOut _outputDevice;
+        private WaveOutEvent _outputDevice;
 
         private Track _currentlyPlayingTrack;
 
@@ -24,10 +26,14 @@ namespace MusicPlayerProject.Core.Managers.Audio
 
         private ObservableCollection<Track> _loadedPlaylist;
 
+        #region Events
+
         public event Action StateChanged;
         public event Action PlaybackResumed;
         public event Action PlaybackPaused;
         public event Action PlaybackStopped;
+
+        #endregion
 
         #endregion
 
@@ -184,7 +190,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
                     Author = "Kabes",
                     IsLiked = true,
                     TrackImage = "E:\\Projects\\VisualStudioProjects\\MusicPlayerProject\\ApplicationResources\\DefaultSongImg.png",
-                    TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayerProject\\ApplicationResources\\track.mp3",
+                    TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayerProject\\ApplicationResources\\track2.mp3",
                     Duration = TimeSpan.FromSeconds(300)
                 },
                 new Track()
@@ -210,82 +216,94 @@ namespace MusicPlayerProject.Core.Managers.Audio
                     Duration = TimeSpan.FromSeconds(300)
                 }
             };
+
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromMilliseconds(500);
+            _timer.Tick += TimerOnTick;
         }
 
-        public void LoadAudioFile()
+        private void TimerOnTick(object sender, EventArgs e)
         {
-            _audioFileReader = new AudioFileReader(CurrentlySelectedTrack?.TrackSource)
-            {
-                Volume = (float)TrackVolume
-            };
-
-            _outputDevice = new DirectSoundOut(200);
-
-            WaveChannel32 waveChannel = new WaveChannel32(_audioFileReader);
-            waveChannel.PadWithZeroes = false;
-
-            _outputDevice.Init(waveChannel);
-
             StateChanged?.Invoke();
         }
 
-        public void TogglePlayPauseTrack()
+        public void PlayTrack()
         {
-            throw new NotImplementedException();
+            if (CurrentlySelectedTrack != null && CurrentlySelectedTrack != CurrentlyPlayingTrack)
+            {
+                CurrentlyPlayingTrack = CurrentlySelectedTrack;
+            }
+
+            if (_outputDevice is null)
+            {
+                _outputDevice = new WaveOutEvent();
+                _outputDevice.PlaybackStopped += OnPlaybackStopped;
+            }
+
+            if (_audioFileReader is null)
+            {
+                _audioFileReader = new AudioFileReader(CurrentlyPlayingTrack.TrackSource)
+                {
+                    Volume = (float)TrackVolume / 100.0f
+                };
+
+                _outputDevice.Init(_audioFileReader);
+            }
+            
+            _outputDevice?.Play();
+            _timer.Start();
+        }
+
+        private void OnPlaybackStopped(object sender, StoppedEventArgs e)
+        {
+            _outputDevice.Dispose();
+            _outputDevice = null;
+            _audioFileReader.Dispose();
+            _audioFileReader = null;
         }
 
         public void PauseTrack()
         {
-            throw new NotImplementedException();
+            _outputDevice?.Pause();
+            _timer.Stop();
         }
 
         public void StopTrack()
         {
-            throw new NotImplementedException();
+            _outputDevice?.Stop();
+            _timer.Stop();
         }
 
         public void NextTrack()
         {
-            throw new NotImplementedException();
+            if (HasTracksInPlaylist && CurrentlySelectedTrack.GetId() < LoadedPlaylist.Count - 1)
+            {
+                StopTrack();
+                CurrentlySelectedTrack = LoadedPlaylist[CurrentlySelectedTrack.GetId() + 1];
+                PlayTrack();
+            }
+            else
+            {
+                StopTrack();
+                CurrentlySelectedTrack = LoadedPlaylist[0];
+                PlayTrack();
+            }
         }
 
         public void PreviousTrack()
         {
-            throw new NotImplementedException();
+            if (HasTracksInPlaylist && CurrentlySelectedTrack.GetId() > 0)
+            {
+                StopTrack();
+                CurrentlySelectedTrack = LoadedPlaylist[CurrentlySelectedTrack.GetId() - 1];
+                PlayTrack();
+            }
+            else
+            {
+                StopTrack();
+                CurrentlySelectedTrack = LoadedPlaylist[LoadedPlaylist.Count - 1];
+                PlayTrack();
+            }
         }
-
-        
-
-        #region Methods
-
-        //public void NextTrack()
-        //{
-        //    if (HasTracksInPlaylist&& CurrentlySelectedTrack.GetId() < LoadedPlaylist.Count - 1)
-        //    {
-        //        StopTrack();
-        //        CurrentlySelectedTrack = LoadedPlaylist[CurrentlySelectedTrack.GetId() + 1];
-        //    }
-        //    else
-        //    {
-        //        StopTrack();
-        //        CurrentlySelectedTrack = LoadedPlaylist[0];
-        //    }
-        //}
-
-        //public void PreviousTrack()
-        //{
-        //    if (HasTracksInPlaylist&& CurrentlySelectedTrack.GetId() > 0)
-        //    {
-        //        StopTrack();
-        //        CurrentlySelectedTrack = LoadedPlaylist[CurrentlySelectedTrack.GetId() - 1];
-        //    }
-        //    else
-        //    {
-        //        StopTrack();
-        //        CurrentlySelectedTrack = LoadedPlaylist[LoadedPlaylist.Count - 1];
-        //    }
-        //}
-
-        #endregion
     }
 }

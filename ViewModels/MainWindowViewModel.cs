@@ -3,8 +3,6 @@ using MusicPlayerProject.Core.Enums;
 using MusicPlayerProject.Core.Managers.Navigators;
 using MusicPlayerProject.ViewModels.Base;
 using MusicPlayerProject.ViewModels.Factories;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MusicPlayerProject.ViewModels

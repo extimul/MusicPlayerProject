@@ -43,13 +43,17 @@ namespace MusicPlayerProject.ViewModels
             _audioManager.StateChanged += OnStateChanged;
 
             _audioManager.CurrentlySelectedTrack = _audioManager.LoadedPlaylist[0];
-
-            _audioManager.LoadAudioFile();
         }
 
         private void OnStateChanged()
         {
             OnPropertyChanged(nameof(SelectedTrack));
+        }
+
+        public override void Dispose()
+        {
+            _audioManager.StateChanged -= OnStateChanged;
+            base.Dispose();
         }
     }
 }

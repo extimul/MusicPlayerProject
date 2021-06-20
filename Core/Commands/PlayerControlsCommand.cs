@@ -43,13 +43,13 @@ namespace MusicPlayerProject.Core.Commands
                 switch (control)
                 {
                     case AudioPlayerControlTypes.StartPause:
-                        StartPauseTrack();
+                        await StartPauseTrack();
                         break;
                     case AudioPlayerControlTypes.Next:
-                        NextTrack();
+                        _audioManager.NextTrack();
                         break;
                     case AudioPlayerControlTypes.Previous:
-                        PreviousTrack();
+                        _audioManager.PreviousTrack();
                         break;
                     case AudioPlayerControlTypes.Shuffle:
                         ShuffleTracks();
@@ -70,7 +70,7 @@ namespace MusicPlayerProject.Core.Commands
                             _viewModel.PreviousVolumeValue = _viewModel.CurrentVolumeValue;
                             _viewModel.CurrentVolumeValue = 0;
                         }
-                        ChangeVolumeLevel();
+                        await ChangeVolumeLevel();
                         break;
                     case AudioPlayerControlTypes.Favourite:
                         SetInFavouriteTrack();
@@ -79,18 +79,26 @@ namespace MusicPlayerProject.Core.Commands
             }
         }
 
-        #region MainButtons
-        #region StartPauseButton
-        private void StartPauseTrack()
+        private async Task StartPauseTrack()
         {
-            if (_audioManager.CurrentlyPlaybackState is PlaybackState.Playing)
+            await Task.Run(() =>
             {
-                ChangePlayPauseIcon(PlaybackState.Paused, Icons.PlayIcon);
-            }
-            else if(_audioManager.CurrentlyPlaybackState is PlaybackState.Paused)
-            {
-                ChangePlayPauseIcon(PlaybackState.Playing, Icons.PauseIcon);
-            }
+                if (_audioManager.CurrentlyPlaybackState is PlaybackState.Playing)
+                {
+                    _audioManager.PauseTrack();
+                    ChangePlayPauseIcon(PlaybackState.Paused, Icons.PlayIcon);
+                }
+                else if (_audioManager.CurrentlyPlaybackState is PlaybackState.Paused)
+                {
+                    _audioManager.PlayTrack();
+                    ChangePlayPauseIcon(PlaybackState.Playing, Icons.PauseIcon);
+                }
+                else if (_audioManager.CurrentlyPlaybackState is PlaybackState.Stopped)
+                {
+                    _audioManager.PlayTrack();
+                    ChangePlayPauseIcon(PlaybackState.Playing, Icons.PauseIcon);
+                }
+            });
         }
 
         private void ChangePlayPauseIcon(PlaybackState musicState, Icons iconKey)
@@ -98,23 +106,6 @@ namespace MusicPlayerProject.Core.Commands
             _audioManager.CurrentlyPlaybackState = musicState;
             _viewModel.PlayPauseIcon = (DrawingBrush)Application.Current.Resources[iconKey.ToString()];
         }
-
-        #endregion
-
-        #region NextPreviousTrackButtons
-        private void NextTrack()
-        {
-            _audioManager.NextTrack();
-        }
-
-        private void PreviousTrack()
-        {
-            _audioManager.PreviousTrack();
-        }
-        #endregion
-        #endregion
-
-        #region AdditionalButtons
 
         private void ShuffleTracks()
         {
@@ -131,25 +122,27 @@ namespace MusicPlayerProject.Core.Commands
             throw new NotImplementedException();
         }
 
-        #region Volume
-        private void ChangeVolumeLevel()
+        private async Task ChangeVolumeLevel()
         {
-            if (_viewModel.CurrentVolumeValue == 0)
+            await Task.Run(() =>
             {
-                ChangeVolumeIcon(VolumeLevels.Mute);
-            }
-            else if (_viewModel.CurrentVolumeValue is > 0 and <= 30.0)
-            {
-                ChangeVolumeIcon(VolumeLevels.Low);
-            }
-            else if (_viewModel.CurrentVolumeValue is > 30.0 and <= 65.0)
-            {
-                ChangeVolumeIcon(VolumeLevels.Medium);
-            }
-            else if (_viewModel.CurrentVolumeValue is > 65.0 and <= 100.0)
-            {
-                ChangeVolumeIcon(VolumeLevels.High);
-            }
+                if (_viewModel.CurrentVolumeValue == 0)
+                {
+                    ChangeVolumeIcon(VolumeLevels.Mute);
+                }
+                else if (_viewModel.CurrentVolumeValue is > 0 and <= 30.0)
+                {
+                    ChangeVolumeIcon(VolumeLevels.Low);
+                }
+                else if (_viewModel.CurrentVolumeValue is > 30.0 and <= 65.0)
+                {
+                    ChangeVolumeIcon(VolumeLevels.Medium);
+                }
+                else if (_viewModel.CurrentVolumeValue is > 65.0 and <= 100.0)
+                {
+                    ChangeVolumeIcon(VolumeLevels.High);
+                }
+            });
         }
 
         private void ChangeVolumeIcon(VolumeLevels volumeLevel)
@@ -163,10 +156,6 @@ namespace MusicPlayerProject.Core.Commands
                 _ => _viewModel.VolumeIcon
             };
         }
-
-        #endregion
-
-        #endregion
 
         private void AudioPlayerBarViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

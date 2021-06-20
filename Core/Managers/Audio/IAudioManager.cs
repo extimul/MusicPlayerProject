@@ -34,16 +34,11 @@ namespace MusicPlayerProject.Core.Managers.Audio
         #endregion
 
         #region Audio manager control methods
-        void TogglePlayPauseTrack();
+        void PlayTrack();
         void PauseTrack();
         void StopTrack();
         void NextTrack();
         void PreviousTrack();
-
-        #endregion
-
-        #region Work with track
-        void LoadAudioFile();
 
         #endregion
     }

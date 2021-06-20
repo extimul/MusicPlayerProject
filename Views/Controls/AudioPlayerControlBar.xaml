@@ -195,15 +195,17 @@
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-
+                    <!--
                     <Label Grid.Column="0"
-                           Content="{Binding CurrentTrackTimePosition, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                           Content="{Binding CurrentTrackTimePosition, IsAsync=True, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                            ContentStringFormat="{}{0:mm}:{0:ss}"
                            HorizontalAlignment="Center"
                            Style="{StaticResource TimerLableStyle}"/>
+                    -->
+                    <Label Grid.Column="0" Content="{Binding CurrentTrackPosition}"/>
                     <Slider Minimum="0" 
-                            Maximum="{Binding CurrentTrackLenght, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                            Value="{Binding CurrentTrackPosition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Maximum="{Binding CurrentTrackLenght, Mode=OneWay}"
+                            Value="{Binding CurrentTrackPosition, IsAsync=True, Mode=TwoWay}"
                             Grid.Column="1" 
                             HorizontalAlignment="Stretch" 
                             VerticalAlignment="Center"
@@ -212,7 +214,7 @@
                             Style="{StaticResource Horizontal_Slider}" >
                     </Slider>
                     <Label Grid.Column="2"
-                           Content="{Binding CurrentTrackDuration, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                           Content="{Binding CurrentTrackDuration, IsAsync=True, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                            ContentStringFormat="{}{0:mm}:{0:ss}"
                            HorizontalAlignment="Center"
                            Style="{StaticResource TimerLableStyle}"/>

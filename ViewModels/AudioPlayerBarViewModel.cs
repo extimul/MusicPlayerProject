@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using MusicPlayerProject.Core.Commands;
 using MusicPlayerProject.Core.Enums;
 using MusicPlayerProject.Core.Managers.Audio;
@@ -14,6 +15,8 @@ namespace MusicPlayerProject.ViewModels
     public class AudioPlayerBarViewModel : ViewModelBase
     {
         private readonly IAudioManager _audioManager;
+
+        public DispatcherTimer Timer;
 
         private double _previousVolumeValue;
 
@@ -73,7 +76,6 @@ namespace MusicPlayerProject.ViewModels
         private DrawingBrush _playPauseIconSource;
 
         private DrawingBrush _volumeIcon;
-
         public DrawingBrush PlayPauseIcon
         {
             get => _playPauseIconSource;
@@ -116,12 +118,11 @@ namespace MusicPlayerProject.ViewModels
 
         private void OnStateChanged()
         {
-            OnPropertyChanged(nameof(CanPlay));
             OnPropertyChanged(nameof(CurrentTrack));
-            OnPropertyChanged(nameof(CurrentTrackLenght));
             OnPropertyChanged(nameof(CurrentTrackTimePosition));
-            OnPropertyChanged(nameof(CurrentTrackDuration));
             OnPropertyChanged(nameof(CurrentTrackPosition));
+            OnPropertyChanged(nameof(CurrentTrackLenght));
+            OnPropertyChanged(nameof(CurrentTrackDuration));
         }
 
         public static AudioPlayerBarViewModel LoadMusicControlBarViewModel(IAudioManager audioManager)
@@ -134,6 +135,7 @@ namespace MusicPlayerProject.ViewModels
         public override void Dispose()
         {
             _audioManager.StateChanged -= OnStateChanged;
+            Timer.Tick -= TimerOnTick;
             base.Dispose();
         }
     }
