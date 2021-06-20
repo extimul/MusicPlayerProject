@@ -214,7 +214,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
 
         public void LoadAudioFile()
         {
-            _audioFileReader = new AudioFileReader(CurrentlySelectedTrack.TrackSource)
+            _audioFileReader = new AudioFileReader(CurrentlySelectedTrack?.TrackSource)
             {
                 Volume = (float)TrackVolume
             };
@@ -225,6 +225,8 @@ namespace MusicPlayerProject.Core.Managers.Audio
             waveChannel.PadWithZeroes = false;
 
             _outputDevice.Init(waveChannel);
+
+            StateChanged?.Invoke();
         }
 
         public void TogglePlayPauseTrack()

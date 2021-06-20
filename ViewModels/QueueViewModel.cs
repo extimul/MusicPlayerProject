@@ -42,7 +42,7 @@ namespace MusicPlayerProject.ViewModels
 
             _audioManager.StateChanged += OnStateChanged;
 
-            SelectedTrack = _audioManager.LoadedPlaylist[0];
+            _audioManager.CurrentlySelectedTrack = _audioManager.LoadedPlaylist[0];
 
             _audioManager.LoadAudioFile();
         }

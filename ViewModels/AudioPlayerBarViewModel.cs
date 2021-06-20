@@ -60,13 +60,9 @@ namespace MusicPlayerProject.ViewModels
             get { return _audioManager.TrackVolume; }
             set 
             {
-                if (Equals(value, _audioManager.TrackVolume)) return;
-                else
-                {
-                    _audioManager.TrackVolume = value;
-                    AudioPlayerControlCommand?.Execute(AudioPlayerControlTypes.Volume);
-                    OnPropertyChanged(nameof(CurrentVolumeValue));
-                }
+                _audioManager.TrackVolume = value;
+                AudioPlayerControlCommand?.Execute(AudioPlayerControlTypes.Volume);
+                OnPropertyChanged(nameof(CurrentVolumeValue));
             }
         }
 
@@ -107,24 +103,25 @@ namespace MusicPlayerProject.ViewModels
         public AudioPlayerBarViewModel(IAudioManager audioManager)
         {
             _audioManager = audioManager;
-            _audioManager.StateChanged += OnStateChanged;
             AudioPlayerControlCommand = new PlayerControlsCommand(audioManager, this);
 
-            CurrentVolumeValue = 1.0f;
+            CurrentVolumeValue = 50.0f;
 
             _audioManager.CurrentlyPlaybackState = PlaybackState.Stopped;
 
             PlayPauseIcon = (DrawingBrush)Application.Current.Resources[Icons.PlayIcon.ToString()];
+            
+            _audioManager.StateChanged += OnStateChanged;
         }
 
         private void OnStateChanged()
         {
+            OnPropertyChanged(nameof(CanPlay));
             OnPropertyChanged(nameof(CurrentTrack));
             OnPropertyChanged(nameof(CurrentTrackLenght));
             OnPropertyChanged(nameof(CurrentTrackTimePosition));
             OnPropertyChanged(nameof(CurrentTrackDuration));
             OnPropertyChanged(nameof(CurrentTrackPosition));
-            OnPropertyChanged(nameof(CanPlay));
         }
 
         public static AudioPlayerBarViewModel LoadMusicControlBarViewModel(IAudioManager audioManager)

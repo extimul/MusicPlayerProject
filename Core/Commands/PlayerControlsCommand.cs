@@ -83,7 +83,14 @@ namespace MusicPlayerProject.Core.Commands
         #region StartPauseButton
         private void StartPauseTrack()
         {
-            throw new NotImplementedException();
+            if (_audioManager.CurrentlyPlaybackState is PlaybackState.Playing)
+            {
+                ChangePlayPauseIcon(PlaybackState.Paused, Icons.PlayIcon);
+            }
+            else if(_audioManager.CurrentlyPlaybackState is PlaybackState.Paused)
+            {
+                ChangePlayPauseIcon(PlaybackState.Playing, Icons.PauseIcon);
+            }
         }
 
         private void ChangePlayPauseIcon(PlaybackState musicState, Icons iconKey)
