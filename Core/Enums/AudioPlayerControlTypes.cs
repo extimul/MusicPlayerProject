@@ -9,6 +9,6 @@
         Repeat, 
         Volume,
         VolumeOff,
-        Favourite
+        IsLiked
     }
 }

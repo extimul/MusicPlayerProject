@@ -34,8 +34,8 @@
                   BorderThickness="0"
                   BorderBrush="{x:Null}"
                   Background="{x:Null}"
-                  ItemsSource="{Binding QueueCollection, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding SelectedTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                  ItemsSource="{Binding AudioManager.LoadedPlaylist, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding AudioManager.SelectedTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="BorderThickness" Value="1"/>

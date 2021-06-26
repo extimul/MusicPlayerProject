@@ -8,51 +8,27 @@ namespace MusicPlayerProject.ViewModels
 {
     public class QueueViewModel : ViewModelBase
     {
-        #region private fields
-        private readonly IAudioManager _audioManager;
-
-        #endregion
-
         #region Properties
 
-        public ObservableCollection<Track> QueueCollection
-        {
-            get => _audioManager.LoadedPlaylist;
-        }
-
-        public Track SelectedTrack
-        {
-            get => _audioManager.CurrentlySelectedTrack;
-            set 
-            {
-                if (value.Equals(_audioManager.CurrentlySelectedTrack)) return;
-                else
-                {
-                    _audioManager.CurrentlySelectedTrack = value;
-                    OnPropertyChanged(nameof(SelectedTrack));
-                }
-            }
-        }
+        public IAudioManager AudioManager { get; set; }
 
         #endregion
 
         public QueueViewModel(IAudioManager audioManager)
         {
-            _audioManager = audioManager;
-
-            _audioManager.StateChanged += OnStateChanged;
-
-            _audioManager.CurrentlySelectedTrack = _audioManager.LoadedPlaylist[0];
+            AudioManager = audioManager;
+            AudioManager.SelectedTrack = AudioManager.LoadedPlaylist[0];
+            AudioManager.StateChanged += OnStateChanged;
         }
 
         private void OnStateChanged()
         {
-            OnPropertyChanged(nameof(SelectedTrack));
+            OnPropertyChanged(nameof(AudioManager));
         }
 
         public override void Dispose()
         {
-            _audioManager.StateChanged -= OnStateChanged;
+            AudioManager.StateChanged -= OnStateChanged;
             base.Dispose();
         }
     }
