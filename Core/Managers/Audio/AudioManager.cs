@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Threading;
 using MusicPlayerProject.Core.Enums;
 using MusicPlayerProject.Core.Models;
@@ -12,9 +15,9 @@ namespace MusicPlayerProject.Core.Managers.Audio
         #region Fields
         private DispatcherTimer _timer;
 
-        private AudioFileReader _audioFileReader;
+        private WaveStream _audioFileReader;
 
-        private WaveOutEvent _outputDevice;
+        private IWavePlayer _wavePlayer;
 
         private Track _currentlyPlayingTrack;
 
@@ -25,6 +28,10 @@ namespace MusicPlayerProject.Core.Managers.Audio
         private PlaybackStopTypes _playbackStopType;
 
         private ObservableCollection<Track> _loadedPlaylist;
+
+        private double _trackPosition;
+
+        private const double SliderMax = 10.0;
 
         #region Events
 
@@ -113,15 +120,15 @@ namespace MusicPlayerProject.Core.Managers.Audio
 
         public double TrackVolume
         {
-            get { return (_audioFileReader != null) ? _audioFileReader.Volume * 100.0f : 50.0f; }
+            get { return (_wavePlayer != null) ? _wavePlayer.Volume * 100.0f : 50.0f; }
             set
             {
-                if (_audioFileReader != null)
+                if (_wavePlayer != null)
                 {
-                    if (value.Equals(_audioFileReader.Volume)) return;
+                    if (value.Equals(_wavePlayer.Volume)) return;
                     else
                     {
-                        _audioFileReader.Volume = (float)value / 100.0f;
+                        _wavePlayer.Volume = (float)value / 100.0f;
                         StateChanged?.Invoke();
                     }
                 }
@@ -129,19 +136,21 @@ namespace MusicPlayerProject.Core.Managers.Audio
             }
         }
 
-        public double TrackLenght => (_audioFileReader != null) ? _audioFileReader.TotalTime.TotalSeconds : 0;
+        public double TrackLenght => SliderMax;
 
         public double TrackPosition
         {
-            get { return (_audioFileReader != null) ? _audioFileReader.CurrentTime.TotalSeconds : 0; }
+            get => _trackPosition;
             set
             {
                 if (_audioFileReader != null)
                 {
-                    if (value.Equals(_audioFileReader.CurrentTime.TotalSeconds)) return;
+                    if (value.Equals(_trackPosition)) return;
                     else
                     {
-                        _audioFileReader.CurrentTime = TimeSpan.FromSeconds(value);
+                        _trackPosition = value;
+                        long pos = (long)(_audioFileReader.Position * _trackPosition / SliderMax);
+                        _audioFileReader.Position = pos;
                         StateChanged?.Invoke();
                     }
                 }
@@ -219,90 +228,106 @@ namespace MusicPlayerProject.Core.Managers.Audio
 
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromMilliseconds(500);
-            _timer.Tick += TimerOnTick;
+            _timer.Tick += new EventHandler(TimerOnTick);
         }
 
         private void TimerOnTick(object sender, EventArgs e)
         {
-            StateChanged?.Invoke();
+            if (_audioFileReader != null)
+            {
+                _trackPosition = Math.Min(SliderMax, _audioFileReader.Position * SliderMax / _audioFileReader.Length);
+                StateChanged?.Invoke();
+            }
         }
 
-        public void PlayTrack()
+        public async Task PlayTrack()
         {
-            if (CurrentlySelectedTrack != null && CurrentlySelectedTrack != CurrentlyPlayingTrack)
+            await Task.Run(() =>
             {
-                CurrentlyPlayingTrack = CurrentlySelectedTrack;
-            }
-
-            if (_outputDevice is null)
-            {
-                _outputDevice = new WaveOutEvent();
-                _outputDevice.PlaybackStopped += OnPlaybackStopped;
-            }
-
-            if (_audioFileReader is null)
-            {
-                _audioFileReader = new AudioFileReader(CurrentlyPlayingTrack.TrackSource)
+                if (CurrentlySelectedTrack != null && CurrentlySelectedTrack != CurrentlyPlayingTrack)
                 {
-                    Volume = (float)TrackVolume / 100.0f
-                };
+                    CurrentlyPlayingTrack = CurrentlySelectedTrack;
+                }
 
-                _outputDevice.Init(_audioFileReader);
-            }
-            
-            _outputDevice?.Play();
-            _timer.Start();
+                if (_wavePlayer is null)
+                {
+                    _wavePlayer = new WaveOutEvent();
+                    _wavePlayer.PlaybackStopped += OnPlaybackStopped;
+                }
+
+                if (_audioFileReader is null)
+                {
+                    _audioFileReader = new AudioFileReader(CurrentlyPlayingTrack.TrackSource)
+                    {
+                        Volume = (float)TrackVolume / 100.0f
+                    };
+
+                    _wavePlayer.Init(_audioFileReader);
+                }
+
+                _wavePlayer?.Play();
+                _timer.Start();
+            });
         }
 
         private void OnPlaybackStopped(object sender, StoppedEventArgs e)
         {
-            _outputDevice.Dispose();
-            _outputDevice = null;
+            TrackPosition = 0;
+            _wavePlayer.Dispose();
+            _wavePlayer = null;
             _audioFileReader.Dispose();
             _audioFileReader = null;
-        }
-
-        public void PauseTrack()
-        {
-            _outputDevice?.Pause();
             _timer.Stop();
+            StateChanged?.Invoke();
         }
 
-        public void StopTrack()
+        public async Task PauseTrack()
         {
-            _outputDevice?.Stop();
-            _timer.Stop();
+            await Task.Run(() =>
+            {
+                _wavePlayer?.Pause();
+                _timer.Stop();
+            });
         }
 
-        public void NextTrack()
+        public async Task StopTrack()
+        {
+            await Task.Run(() =>
+            {
+                _wavePlayer?.Stop();
+                _timer.Stop();
+            });
+        }
+
+        public async Task NextTrack()
         {
             if (HasTracksInPlaylist && CurrentlySelectedTrack.GetId() < LoadedPlaylist.Count - 1)
             {
-                StopTrack();
+                await StopTrack();
                 CurrentlySelectedTrack = LoadedPlaylist[CurrentlySelectedTrack.GetId() + 1];
-                PlayTrack();
+                await PlayTrack();
             }
             else
             {
-                StopTrack();
+                await StopTrack();
                 CurrentlySelectedTrack = LoadedPlaylist[0];
-                PlayTrack();
+                await PlayTrack();
             }
         }
 
-        public void PreviousTrack()
+        public async Task PreviousTrack()
         {
             if (HasTracksInPlaylist && CurrentlySelectedTrack.GetId() > 0)
             {
-                StopTrack();
+                await StopTrack();
                 CurrentlySelectedTrack = LoadedPlaylist[CurrentlySelectedTrack.GetId() - 1];
-                PlayTrack();
+                await PlayTrack();
             }
             else
             {
-                StopTrack();
+                await StopTrack();
                 CurrentlySelectedTrack = LoadedPlaylist[LoadedPlaylist.Count - 1];
-                PlayTrack();
+                await PlayTrack();
             }
         }
     }

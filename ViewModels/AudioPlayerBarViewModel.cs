@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Timers;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -15,8 +17,6 @@ namespace MusicPlayerProject.ViewModels
     public class AudioPlayerBarViewModel : ViewModelBase
     {
         private readonly IAudioManager _audioManager;
-
-        public DispatcherTimer Timer;
 
         private double _previousVolumeValue;
 
@@ -135,7 +135,6 @@ namespace MusicPlayerProject.ViewModels
         public override void Dispose()
         {
             _audioManager.StateChanged -= OnStateChanged;
-            Timer.Tick -= TimerOnTick;
             base.Dispose();
         }
     }

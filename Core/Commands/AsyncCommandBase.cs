@@ -18,7 +18,6 @@ namespace MusicPlayerProject.Core.Commands
             }
         }
 
-
         public event EventHandler CanExecuteChanged;
 
         public virtual bool CanExecute(object parameter)
@@ -40,6 +39,7 @@ namespace MusicPlayerProject.Core.Commands
         protected void OnCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, new EventArgs());
+            CommandManager.InvalidateRequerySuggested();
         }
     }
 }

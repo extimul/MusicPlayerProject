@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using MusicPlayerProject.Core.Enums;
 using MusicPlayerProject.Core.Models;
 using NAudio.Wave;
@@ -34,11 +35,11 @@ namespace MusicPlayerProject.Core.Managers.Audio
         #endregion
 
         #region Audio manager control methods
-        void PlayTrack();
-        void PauseTrack();
-        void StopTrack();
-        void NextTrack();
-        void PreviousTrack();
+        Task PlayTrack();
+        Task PauseTrack();
+        Task StopTrack();
+        Task NextTrack();
+        Task PreviousTrack();
 
         #endregion
     }

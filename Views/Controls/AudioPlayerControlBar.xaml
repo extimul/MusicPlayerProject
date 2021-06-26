@@ -83,7 +83,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="0"/>
                     </Border.Effect>
-                    <Image Source="{Binding CurrentTrack.TrackImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Stretch="Uniform"/>
+                    <Image Source="{Binding CurrentTrack.TrackImage, Mode=OneWay}" Stretch="Uniform"/>
                 </Border>
                 <Grid Grid.Column="1" Margin="10,20">
                     <Grid.RowDefinitions>
@@ -92,7 +92,7 @@
                     </Grid.RowDefinitions>
                     
                     <!--Track name-->
-                    <Label Content="{Binding CurrentTrack.TrackTitle, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                    <Label Content="{Binding CurrentTrack.TrackTitle, Mode=OneWay}" 
                            Style="{StaticResource MusicInfoLabelStyle}" 
                            Grid.Row="0"
                            FontWeight="Medium"/>
@@ -162,7 +162,7 @@
                                                             Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
                                                             Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
                                                             Fill="{TemplateBinding Foreground}" 
-                                                            Data="{Binding PlayPauseIcon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ContentConverter}}"/>
+                                                            Data="{Binding PlayPauseIcon, Mode=TwoWay, Converter={StaticResource ContentConverter}}"/>
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
@@ -195,14 +195,12 @@
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <!--
+                    
                     <Label Grid.Column="0"
-                           Content="{Binding CurrentTrackTimePosition, IsAsync=True, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                           Content="{Binding CurrentTrackTimePosition, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                            ContentStringFormat="{}{0:mm}:{0:ss}"
                            HorizontalAlignment="Center"
                            Style="{StaticResource TimerLableStyle}"/>
-                    -->
-                    <Label Grid.Column="0" Content="{Binding CurrentTrackPosition}"/>
                     <Slider Minimum="0" 
                             Maximum="{Binding CurrentTrackLenght, Mode=OneWay}"
                             Value="{Binding CurrentTrackPosition, IsAsync=True, Mode=TwoWay}"
@@ -211,10 +209,10 @@
                             VerticalAlignment="Center"
                             MaxWidth="500" 
                             MinWidth="300"
-                            Style="{StaticResource Horizontal_Slider}" >
+                            Style="{StaticResource Horizontal_Slider}">
                     </Slider>
                     <Label Grid.Column="2"
-                           Content="{Binding CurrentTrackDuration, IsAsync=True, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                           Content="{Binding CurrentTrackDuration, IsAsync=True, Mode=OneWay}"
                            ContentStringFormat="{}{0:mm}:{0:ss}"
                            HorizontalAlignment="Center"
                            Style="{StaticResource TimerLableStyle}"/>
@@ -229,7 +227,7 @@
                     <ToggleButton Style="{StaticResource ToggleButtonStyle}"
                                   Content="{StaticResource FavouriteIcon}"
                                   Foreground="{StaticResource AppForegroundBrush}"
-                                  IsChecked="{Binding CurrentTrack.IsLiked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                  IsChecked="{Binding CurrentTrack.IsLiked, Mode=TwoWay}"/>
 
                     <Button Foreground="{StaticResource AppForegroundBrush}"
                             Margin="10,0,5,0"
@@ -259,7 +257,7 @@
                                                         Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
                                                         Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
                                                         Fill="{TemplateBinding Foreground}" 
-                                                        Data="{Binding VolumeIcon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ContentConverter}}"/>
+                                                        Data="{Binding VolumeIcon, Mode=TwoWay, Converter={StaticResource ContentConverter}}"/>
                                             </Grid>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
@@ -277,7 +275,7 @@
                             VerticalAlignment="Center"
                             MaxWidth="90" MinWidth="90"
                             Margin="0,0,0,0"
-                            Value="{Binding CurrentVolumeValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Value="{Binding CurrentVolumeValue, Mode=TwoWay}"
                             Minimum="0" Maximum="100"
                             Style="{StaticResource Horizontal_Slider}" />
                 </StackPanel>

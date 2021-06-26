@@ -46,10 +46,10 @@ namespace MusicPlayerProject.Core.Commands
                         await StartPauseTrack();
                         break;
                     case AudioPlayerControlTypes.Next:
-                        _audioManager.NextTrack();
+                        await _audioManager.NextTrack();
                         break;
                     case AudioPlayerControlTypes.Previous:
-                        _audioManager.PreviousTrack();
+                        await _audioManager.PreviousTrack();
                         break;
                     case AudioPlayerControlTypes.Shuffle:
                         ShuffleTracks();
@@ -58,7 +58,7 @@ namespace MusicPlayerProject.Core.Commands
                         RepeatTrack();
                         break;
                     case AudioPlayerControlTypes.Volume:
-                        ChangeVolumeLevel();
+                        await ChangeVolumeLevel();
                         break;
                     case AudioPlayerControlTypes.VolumeOff:
                         if (_viewModel.CurrentVolumeValue == 0)
