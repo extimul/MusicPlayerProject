@@ -15,7 +15,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
         #endregion
 
         #region Fields
-        private DispatcherTimer _timer;
+        private readonly DispatcherTimer _timer;
         private WaveStream _audioFileReader;
         private IWavePlayer _wavePlayer;
 
@@ -36,11 +36,8 @@ namespace MusicPlayerProject.Core.Managers.Audio
             set
             {
                 if (value.Equals(_currentlyPlayingTrack)) return;
-                else
-                {
-                    _currentlyPlayingTrack = value;
-                    StateChanged?.Invoke();
-                }
+                _currentlyPlayingTrack = value;
+                StateChanged?.Invoke();
             }
         }
         public Track SelectedTrack
@@ -49,11 +46,8 @@ namespace MusicPlayerProject.Core.Managers.Audio
             set
             {
                 if (value.Equals(_currentlySelectedTrack)) return;
-                else
-                {
-                    _currentlySelectedTrack = value;
-                    StateChanged?.Invoke();
-                }
+                _currentlySelectedTrack = value;
+                StateChanged?.Invoke();
             }
         }
         public ObservableCollection<Track> LoadedPlaylist
@@ -62,100 +56,81 @@ namespace MusicPlayerProject.Core.Managers.Audio
             set
             {
                 if (value.Equals(_loadedPlaylist)) return;
-                else
-                {
-                    _loadedPlaylist = value;
-                    StateChanged?.Invoke();
-                }
+                _loadedPlaylist = value;
+                StateChanged?.Invoke();
             }
         }
-        public PlaybackState CurrentPlaybackState
-        {
-            get => (_wavePlayer != null) ? _wavePlayer.PlaybackState : PlaybackState.Stopped;
-        }
+        public PlaybackState CurrentPlaybackState => _wavePlayer?.PlaybackState ?? PlaybackState.Stopped;
+
         public PlaybackStopTypes PlaybackStopType
         {
             get => _playbackStopType;
             set
             {
                 if (value.Equals(_playbackStopType)) return;
-                else
-                {
-                    if (_audioFileReader is null) _playbackStopType = PlaybackStopTypes.StoppedByUser;
-                    else _playbackStopType = value;
-                }
+                _playbackStopType = _audioFileReader is null ? PlaybackStopTypes.StoppedByUser : value;
             }
         }
         public double TrackVolumeValue
         {
-            get { return (_wavePlayer != null) ? _wavePlayer.Volume * 100.0f : 50.0f; }
+            get => _wavePlayer?.Volume * 100.0f ?? 50.0f;
             set
             {
-                if (_wavePlayer != null)
+                if (_wavePlayer == null) return;
+                switch (value)
                 {
-                    if (value == 0 && _wavePlayer.Volume == 0)
-                    {
+                    case 0 when _wavePlayer.Volume == 0:
                         _wavePlayer.Volume = (float)_lastTrackVolumeValue / 100.0f;
-                    }
-                    else if (value == 0 && _wavePlayer.Volume != 0 && _lastTrackVolumeValue != 0)
-                    {
+                        break;
+                    case 0 when _wavePlayer.Volume != 0 && _lastTrackVolumeValue != 0:
                         _wavePlayer.Volume = 0;
-                    }
-                    else
-                    {
+                        break;
+                    default:
                         _lastTrackVolumeValue = TrackVolumeValue;
                         _wavePlayer.Volume = (float)value / 100.0f;
-                    }
-
-                    IconChanged?.Invoke(new ChangeIconEventArgs()
-                    {
-                        SourceState = SourceTypes.VolumeSource,
-                        Value = value
-                    });
-                    StateChanged?.Invoke();
+                        break;
                 }
 
+                IconChanged?.Invoke(new ChangeIconEventArgs()
+                {
+                    SourceState = SourceTypes.VolumeSource,
+                    Value = value
+                });
+                StateChanged?.Invoke();
             }
         }
-        public long TrackLenght => (_audioFileReader != null) ? _audioFileReader.Length : 0;
+
+        public long TrackLenght => _audioFileReader?.Length ?? 0;
+
         public long TrackPosition
         {
             get => _trackPosition;
             set
             {
-                if (_audioFileReader != null)
-                {
-                    if (value.Equals(_trackPosition)) return;
-                    else
-                    {
-                        _trackPosition = value;
-                        _audioFileReader.Position = _trackPosition;
-                        StateChanged?.Invoke();
-                    }
-                }
+                if (_audioFileReader == null) return;
+                if (value.Equals(_trackPosition)) return;
+                _trackPosition = value;
+                _audioFileReader.Position = _trackPosition;
+                StateChanged?.Invoke();
             }
         }
-        public TimeSpan TrackDuration
-        {
-            get => (_audioFileReader != null) ? _audioFileReader.TotalTime : TimeSpan.FromSeconds(0);
-        }
+
+        public TimeSpan TrackDuration => _audioFileReader?.TotalTime ?? TimeSpan.FromSeconds(0);
+
         public TimeSpan TrackTimePosition
         {
-            get => (_audioFileReader != null) ? _audioFileReader.CurrentTime : TimeSpan.FromSeconds(0);
+            get => _audioFileReader?.CurrentTime ?? TimeSpan.FromSeconds(0);
             set
             {
                 if (value.Equals(_trackTimePosition)) return;
-                else
-                {
-                    _trackTimePosition = value;
-                    StateChanged?.Invoke();
-                }
+                _trackTimePosition = value;
+                StateChanged?.Invoke();
             }
         }
+
         public bool HasTracksInPlaylist => LoadedPlaylist.Count > 0;
+
         public bool CanPlay => HasTracksInPlaylist && SelectedTrack != null;
-
-
         #endregion
 
         public AudioManager()
@@ -207,19 +182,19 @@ namespace MusicPlayerProject.Core.Managers.Audio
                     Duration = TimeSpan.FromSeconds(300)
                 }
             };
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromMilliseconds(500);
+            _timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(500)
+            };
             _timer.Tick += new EventHandler(TimerOnTick);
         }
 
         private void TimerOnTick(object sender, EventArgs e)
         {
-            if (_audioFileReader != null)
-            {
-                _trackPosition = _audioFileReader.Position;
-                _trackTimePosition = (_audioFileReader != null) ? _audioFileReader.CurrentTime : TimeSpan.FromSeconds(0);
-                StateChanged?.Invoke();
-            }
+            if (_audioFileReader == null) return;
+            _trackPosition = _audioFileReader.Position;
+            _trackTimePosition = _audioFileReader?.CurrentTime ?? TimeSpan.FromSeconds(0);
+            StateChanged?.Invoke();
         }
 
         public void TogglePlayPause()
@@ -236,8 +211,6 @@ namespace MusicPlayerProject.Core.Managers.Audio
                     PlayTrack();
                     break;
             }
-
-            
         }
 
         public void PlayTrack()
@@ -346,7 +319,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
             else
             {
                 StopTrack();
-                SelectedTrack = LoadedPlaylist[LoadedPlaylist.Count - 1];
+                SelectedTrack = LoadedPlaylist[^1];
                 PlayTrack();
             }
         }

@@ -50,18 +50,13 @@ namespace MusicPlayerProject.ViewModels
             if (sender?.SourceState is SourceTypes.TogglePlaybackSource)
             {
                 var state = (PlaybackState)sender?.Value;
-                switch (state)
+                PlayPauseIcon = state switch
                 {
-                    case PlaybackState.Stopped:
-                        PlayPauseIcon = (DrawingBrush)Application.Current.Resources[Icons.PlayIcon.ToString()];
-                        break;
-                    case PlaybackState.Playing:
-                        PlayPauseIcon = (DrawingBrush)Application.Current.Resources[Icons.PauseIcon.ToString()];
-                        break;
-                    case PlaybackState.Paused:
-                        PlayPauseIcon = (DrawingBrush)Application.Current.Resources[Icons.PlayIcon.ToString()];
-                        break;
-                }
+                    PlaybackState.Stopped => (DrawingBrush) Application.Current.Resources[Icons.PlayIcon.ToString()],
+                    PlaybackState.Playing => (DrawingBrush) Application.Current.Resources[Icons.PauseIcon.ToString()],
+                    PlaybackState.Paused => (DrawingBrush) Application.Current.Resources[Icons.PlayIcon.ToString()],
+                    _ => PlayPauseIcon
+                };
 
                 OnPropertyChanged(nameof(PlayPauseIcon));
             }
@@ -69,21 +64,20 @@ namespace MusicPlayerProject.ViewModels
             {
                 double volumeValue = (double)sender?.Value;
 
-                if (volumeValue == 0)
+                switch (volumeValue)
                 {
-                    ChangeVolumeIcon(VolumeLevels.Mute);
-                }
-                else if (volumeValue is > 0 and <= 30.0)
-                {
-                    ChangeVolumeIcon(VolumeLevels.Low);
-                }
-                else if (volumeValue is > 30.0 and <= 65.0)
-                {
-                    ChangeVolumeIcon(VolumeLevels.Medium);
-                }
-                else if (volumeValue is > 65.0 and <= 100.0)
-                {
-                    ChangeVolumeIcon(VolumeLevels.High);
+                    case 0:
+                        ChangeVolumeIcon(VolumeLevels.Mute);
+                        break;
+                    case > 0 and <= 30.0:
+                        ChangeVolumeIcon(VolumeLevels.Low);
+                        break;
+                    case > 30.0 and <= 65.0:
+                        ChangeVolumeIcon(VolumeLevels.Medium);
+                        break;
+                    case > 65.0 and <= 100.0:
+                        ChangeVolumeIcon(VolumeLevels.High);
+                        break;
                 }
                 
                 OnPropertyChanged(nameof(VolumeIcon));
