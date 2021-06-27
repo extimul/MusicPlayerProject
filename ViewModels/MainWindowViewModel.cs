@@ -3,8 +3,6 @@ using MusicPlayerProject.Core.Enums;
 using MusicPlayerProject.Core.Managers.Navigators;
 using MusicPlayerProject.ViewModels.Base;
 using MusicPlayerProject.ViewModels.Factories;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MusicPlayerProject.ViewModels
@@ -12,7 +10,6 @@ namespace MusicPlayerProject.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         #region private fields
-        private readonly IViewModelFactory _viewModelFactory;
 
         private readonly INavigator _navigator;
 
@@ -34,14 +31,13 @@ namespace MusicPlayerProject.ViewModels
         public MainWindowViewModel(INavigator navigator, IViewModelFactory viewModelFactory, AudioPlayerBarViewModel audioPlayerBarViewModel)
         {
             _navigator = navigator;
-            _viewModelFactory = viewModelFactory;
 
             AudioPlayerBarViewModel = audioPlayerBarViewModel;
 
             _navigator.StateChanged += Navigator_StateChanged;
 
-            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, _viewModelFactory);
-            UpdateCurrentViewModelCommand.Execute(ViewType.Home);
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator, viewModelFactory);
+            UpdateCurrentViewModelCommand.Execute(ViewTypes.Home);
         }
 
         private void Navigator_StateChanged()

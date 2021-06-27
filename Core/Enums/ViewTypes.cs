@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MusicPlayerProject.Core.Enums
 {
-    public enum ViewType
+    public enum ViewTypes
     {
-        Home, Library
+        Home, Library, Queue
     }
 }

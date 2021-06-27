@@ -1,56 +1,53 @@
 ﻿using MusicPlayerProject.Core.Enums;
-using MusicPlayerProject.Core.Managers.Audio;
 using MusicPlayerProject.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
 
 namespace MusicPlayerProject.Core.Commands
 {
     public class PlayerControlsCommand : AsyncCommandBase
     {
-        private readonly AudioPlayerBarViewModel _playerBarViewModel;
+        private AudioPlayerBarViewModel _viewModel;
 
-        public IAudioManager _audioManager; 
-
-        public PlayerControlsCommand(IAudioManager audioManager, AudioPlayerBarViewModel playerBarViewModel)
+        public PlayerControlsCommand(AudioPlayerBarViewModel playerBarViewModel)
         {
-            _audioManager = audioManager;
-            _playerBarViewModel = playerBarViewModel;
+            _viewModel = playerBarViewModel;
+            _viewModel.PropertyChanged += AudioPlayerBarViewModel_PropertyChanged;
+        }
 
-            _playerBarViewModel.PropertyChanged += AudioPlayerBarViewModel_PropertyChanged;
+        public override bool CanExecute(object parameter)
+        {
+            return _viewModel.CanPlay && base.CanExecute(parameter);
         }
 
         public override async Task ExecuteAsync(object parameter)
         {
             if (parameter is not null)
             {
-                AudioPlayerControlType control = (AudioPlayerControlType)parameter;
+                AudioPlayerControlTypes control = (AudioPlayerControlTypes)parameter;
 
                 switch (control)
                 {
-                    case AudioPlayerControlType.StartPause:
-                        if (_playerBarViewModel.IsPlaying is true)
-                        {
-                            _playerBarViewModel.IsPlaying = false;
-                            _playerBarViewModel.PlayPauseIconSource = (System.Windows.Media.DrawingBrush)Application.Current.Resources["PauseIcon"];
-                        }
-                        else
-                        {
-                            _playerBarViewModel.IsPlaying = true;
-                            _playerBarViewModel.PlayPauseIconSource = (System.Windows.Media.DrawingBrush)Application.Current.Resources["PlayIcon"];
-                        }
+                    case AudioPlayerControlTypes.StartPause:
+                        _viewModel.AudioManager.TogglePlayPause();
                         break;
-                    case AudioPlayerControlType.Next:
+                    case AudioPlayerControlTypes.Next:
+                        _viewModel.AudioManager.NextTrack();
                         break;
-                    case AudioPlayerControlType.Previous:
+                    case AudioPlayerControlTypes.Previous:
+                        _viewModel.AudioManager.PreviousTrack();
                         break;
-                    default:
+                    case AudioPlayerControlTypes.Shuffle:
+                        _viewModel.AudioManager.ShuffleTracks();
+                        break;
+                    case AudioPlayerControlTypes.Repeat:
+                        _viewModel.AudioManager.RepeatTrack();
+                        break;
+                    case AudioPlayerControlTypes.VolumeOff:
+                        _viewModel.AudioManager.TrackVolumeValue = 0;
+                        break;
+                    case AudioPlayerControlTypes.IsLiked:
+                        _viewModel.AudioManager.SetAsLikedTrack();
                         break;
                 }
             }
@@ -58,7 +55,10 @@ namespace MusicPlayerProject.Core.Commands
 
         private void AudioPlayerBarViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnCanExecuteChanged();
+            if (e.PropertyName == nameof(_viewModel.CanPlay))
+            {
+                OnCanExecuteChanged();
+            }
         }
     }
 }

@@ -17,11 +17,13 @@ namespace MusicPlayerProject.Core.HostBuilders
             {
                 services.AddTransient<HomeViewModel>();
                 services.AddTransient<LibraryViewModel>();
+                services.AddTransient<QueueViewModel>();
                 services.AddTransient<MainWindowViewModel>();
                 services.AddTransient<AudioPlayerBarViewModel>();
 
                 services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
                 services.AddSingleton<CreateViewModel<LibraryViewModel>>(services => () => services.GetRequiredService<LibraryViewModel>());
+                services.AddSingleton<CreateViewModel<QueueViewModel>>(services => () => services.GetRequiredService<QueueViewModel>());
                 services.AddSingleton<CreateViewModel<MainWindowViewModel>>(services => () => CreateMainViewModel(services));
 
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();

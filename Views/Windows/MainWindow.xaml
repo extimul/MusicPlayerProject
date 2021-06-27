@@ -3,18 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MusicPlayerProject.Views.Windows"
         xmlns:controls="clr-namespace:MusicPlayerProject.Views.Controls"
-        xmlns:ViewModels="clr-namespace:MusicPlayerProject.ViewModels" 
-        mc:Ignorable="d"
+        d:DesignHeight="900" d:DesignWidth="1600"
         Title="Music Player"
         MinHeight="{Binding WindowMinimumHeight}"
         MinWidth="{Binding WindowMinimumWidth}"
         MaxWidth="1600"
         MaxHeight="900"
         WindowStartupLocation="CenterScreen"
-        d:DesignHeight="720" d:DesignWidth="1280">
-
+        mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="239"/>
@@ -30,11 +27,11 @@
         <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
             <ContentControl Content="{Binding CurrentViewModel}"/>
         </ScrollViewer>
-        <controls:BottomMusicControlBar VerticalAlignment="Bottom"
-                                        Grid.ColumnSpan="2"
+        <controls:AudioPlayerControlBar VerticalAlignment="Bottom"
+                                        Grid.ColumnSpan="2" Grid.Column="0"
                                         Height="100"
                                         Panel.ZIndex="2"
                                         DataContext="{Binding AudioPlayerBarViewModel}">
-        </controls:BottomMusicControlBar>
+        </controls:AudioPlayerControlBar>
     </Grid>
 </Window>

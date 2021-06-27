@@ -10,8 +10,15 @@ namespace MusicPlayerProject.Core.Helpers.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double num = (double)value;
-            return (num * (Scale / 100));
+            if (value != null)
+            {
+                double num = (double)value;
+                return (num * (Scale / 100));
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

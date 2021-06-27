@@ -9,13 +9,15 @@ namespace MusicPlayerProject.Core.Helpers.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            DrawingGroup draw = (value as DrawingBrush).Drawing as DrawingGroup;
+            DrawingGroup draw = (value as DrawingBrush)?.Drawing as DrawingGroup;
             PathGeometry path = new PathGeometry();
 
-            foreach (GeometryDrawing item in draw.Children)
-            {
-                path.AddGeometry(item.Geometry);
-            }
+            if (draw != null)
+                foreach (var drawing in draw.Children)
+                {
+                    var item = (GeometryDrawing) drawing;
+                    path.AddGeometry(item.Geometry);
+                }
 
             return path;
         }

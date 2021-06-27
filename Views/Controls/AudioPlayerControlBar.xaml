@@ -1,8 +1,9 @@
-﻿<UserControl x:Class="MusicPlayerProject.Views.Controls.BottomMusicControlBar"
+﻿<UserControl x:Class="MusicPlayerProject.Views.Controls.AudioPlayerControlBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:local="clr-namespace:MusicPlayerProject.Views.Controls"
              xmlns:type="clr-namespace:MusicPlayerProject.Core.Enums"
              mc:Ignorable="d"
@@ -82,7 +83,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="0"/>
                     </Border.Effect>
-                    <Image Source="/ApplicationResources/DefaultSongImg.png" Stretch="Uniform"/>
+                    <Image Source="{Binding AudioManager.SelectedTrack.TrackImage, Mode=OneWay}" Stretch="Uniform"/>
                 </Border>
                 <Grid Grid.Column="1" Margin="10,20">
                     <Grid.RowDefinitions>
@@ -91,12 +92,12 @@
                     </Grid.RowDefinitions>
                     
                     <!--Track name-->
-                    <Label Content="Track" 
+                    <Label Content="{Binding AudioManager.SelectedTrack.TrackTitle, Mode=OneWay}" 
                            Style="{StaticResource MusicInfoLabelStyle}" 
                            Grid.Row="0"
                            FontWeight="Medium"/>
                     <!--Author name-->
-                    <Label Content="Author" 
+                    <Label Content="{Binding AudioManager.SelectedTrack.Author, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                            Style="{StaticResource MusicInfoLabelStyle}" 
                            Grid.Row="1"
                            Foreground="{StaticResource AppForegroundLightGreyBrush}"
@@ -112,7 +113,7 @@
                     <RowDefinition Height="1.5*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                
+
                 <!--Control buttons-->
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -130,11 +131,13 @@
 
                         <Button Style="{StaticResource MusicControlsStyle}"
                                 Content="{StaticResource PreviousIcon}"
-                                Foreground="{StaticResource AppForegroundBrush}"/>
+                                Foreground="{StaticResource AppForegroundBrush}"
+                                Command="{Binding AudioPlayerControlCommand}"
+                                CommandParameter="{x:Static type:AudioPlayerControlTypes.Previous}"/>
 
                         <Button Foreground="{StaticResource AppForegroundBrush}"
-                                Command="{Binding MusicPlayerControlCommand}"
-                                CommandParameter="{x:Static type:AudioPlayerControlType.StartPause}">
+                                Command="{Binding AudioPlayerControlCommand}"
+                                CommandParameter="{x:Static type:AudioPlayerControlTypes.StartPause}">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Height" Value="40"/>
@@ -159,7 +162,7 @@
                                                             Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
                                                             Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
                                                             Fill="{TemplateBinding Foreground}" 
-                                                            Data="{Binding PlayPauseIconSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ContentConverter}}"/>
+                                                            Data="{Binding PlayPauseIcon, Mode=TwoWay, Converter={StaticResource ContentConverter}}"/>
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
@@ -175,14 +178,16 @@
 
                         <Button Style="{StaticResource MusicControlsStyle}"
                                 Content="{StaticResource NextIcon}"
-                                Foreground="{StaticResource AppForegroundBrush}"/>
+                                Foreground="{StaticResource AppForegroundBrush}"
+                                Command="{Binding AudioPlayerControlCommand}"
+                                CommandParameter="{x:Static type:AudioPlayerControlTypes.Next}"/>
 
                         <ToggleButton Style="{StaticResource ToggleButtonStyle}"
                                       Content="{StaticResource RepeatIcon}"
                                       Foreground="{StaticResource AppForegroundBrush}"/>
                     </StackPanel>
                 </Grid>
-                
+
                 <!--Slider-->
                 <Grid Grid.Row="1" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
@@ -190,44 +195,84 @@
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <Label Grid.Column="0"
-                           Content="0:00" 
+                           Content="{Binding AudioManager.TrackTimePosition, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                           ContentStringFormat="{}{0:mm}:{0:ss}"
                            HorizontalAlignment="Center"
                            Style="{StaticResource TimerLableStyle}"/>
-                    <Slider Grid.Column="1" 
+                    <Slider Minimum="0" Maximum="{Binding AudioManager.TrackLenght, Mode=OneWay}"
+                            Value="{Binding AudioManager.TrackPosition, Mode=TwoWay}"
+                            Grid.Column="1" 
                             HorizontalAlignment="Stretch" 
                             VerticalAlignment="Center"
-                            MaxWidth="500" 
-                            MinWidth="300"
-                            Style="{StaticResource Horizontal_Slider}" />
+                            MaxWidth="500"  MinWidth="300"
+                            Style="{StaticResource Horizontal_Slider}">
+                    </Slider>
                     <Label Grid.Column="2"
-                           Content="0:00"
+                           Content="{Binding AudioManager.TrackDuration, Mode=OneWay}"
+                           ContentStringFormat="{}{0:mm}:{0:ss}"
                            HorizontalAlignment="Center"
                            Style="{StaticResource TimerLableStyle}"/>
                 </Grid>
             </Grid>
-
             <!--Over buttons-->
             <Grid Grid.Column="4" Background="{x:Null}">
                 <StackPanel VerticalAlignment="Center"
                             Orientation="Horizontal"
-                            Margin="5,0,0,0">
-                    <Button Style="{StaticResource MusicControlsStyle2}"
-                            Content="{StaticResource QueueIcon}"
-                            Foreground="{StaticResource AppForegroundBrush}"/>
+                            Margin="50,0,0,0">
                     <ToggleButton Style="{StaticResource ToggleButtonStyle}"
                                   Content="{StaticResource FavouriteIcon}"
-                                  Foreground="{StaticResource AppForegroundBrush}"/>
-                    <ToggleButton Style="{StaticResource ToggleButtonStyle}"
-                                  Content="{StaticResource VolumeHighIcon}"
                                   Foreground="{StaticResource AppForegroundBrush}"
-                                  Margin="10,0,5,0"/>
+                                  IsChecked="{Binding AudioManager.SelectedTrack.IsLiked, Mode=TwoWay}"/>
+                    <Button Foreground="{StaticResource AppForegroundBrush}"
+                            Margin="10,0,5,0"
+                            Command="{Binding AudioPlayerControlCommand}"
+                            CommandParameter="{x:Static type:AudioPlayerControlTypes.VolumeOff}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Height" Value="30"/>
+                                <Setter Property="Width" Value="30"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Background" Value="{x:Null}"/>
+                                <Setter Property="Margin" Value="10"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Grid x:Name="grid">
+                                                <Path x:Name="ellipse" Stretch="Uniform"
+                                                            StrokeThickness="0"
+                                                            Stroke="Transparent"
+                                                            Fill="Transparent" >
+                                                    <Path.Data>
+                                                        <EllipseGeometry RadiusX="50" RadiusY="50" />
+                                                    </Path.Data>
+                                                </Path>
+                                                <Path x:Name="shape" 
+                                                        Stretch="Uniform" 
+                                                        Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
+                                                        Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
+                                                        Fill="{TemplateBinding Foreground}" 
+                                                        Data="{Binding VolumeIcon, Mode=TwoWay, Converter={StaticResource ContentConverter}}"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="shape" Property="Fill" Value="{StaticResource AppElementBackgroundBrush}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                     <Slider Grid.Column="1" 
                             HorizontalAlignment="Stretch" 
                             VerticalAlignment="Center"
                             MaxWidth="90" MinWidth="90"
                             Margin="0,0,0,0"
+                            Value="{Binding AudioManager.TrackVolumeValue, Mode=TwoWay}"
+                            Minimum="0" Maximum="100"
                             Style="{StaticResource Horizontal_Slider}" />
                 </StackPanel>
             </Grid>

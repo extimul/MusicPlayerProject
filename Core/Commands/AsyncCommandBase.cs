@@ -10,7 +10,7 @@ namespace MusicPlayerProject.Core.Commands
 
         public bool IsExecuting
         {
-            get { return _isExecuting; }
+            get => _isExecuting;
             set 
             { 
                 _isExecuting = value;
@@ -18,10 +18,9 @@ namespace MusicPlayerProject.Core.Commands
             }
         }
 
-
         public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(object parameter)
+        public virtual bool CanExecute(object parameter)
         {
             return !IsExecuting;
         }
@@ -39,7 +38,11 @@ namespace MusicPlayerProject.Core.Commands
 
         protected void OnCanExecuteChanged()
         {
-            CanExecuteChanged?.Invoke(this, new EventArgs());
+            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                CanExecuteChanged?.Invoke(this, new EventArgs());
+                CommandManager.InvalidateRequerySuggested();
+            }));
         }
     }
 }

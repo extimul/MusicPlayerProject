@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MusicPlayerProject.Views.Controls
+namespace MusicPlayerProject.Views.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для BottomMusicControlBar.xaml
+    /// Логика взаимодействия для QueuePage.xaml
     /// </summary>
-    public partial class BottomMusicControlBar : UserControl
+    public partial class QueuePage : UserControl
     {
-        public BottomMusicControlBar()
+        public QueuePage()
         {
             InitializeComponent();
         }
