@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MusicPlayerProject.ViewModels.Factories;
 
 namespace MusicPlayerProject.Core.HostBuilders
 {
@@ -18,6 +19,8 @@ namespace MusicPlayerProject.Core.HostBuilders
             {
                 services.AddSingleton<INavigator, Navigator>();
                 services.AddSingleton<IAudioManager, AudioManager>();
+                services.AddSingleton<IPlaylistManager, PlaylistManager>();
+                services.AddSingleton<IViewModelFactory, ViewModelFactory>();
             });
 
             return host;

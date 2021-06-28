@@ -140,12 +140,12 @@ namespace MusicPlayerProject.Core.Managers.Audio
                 new Track()
                 {
                     Id = 1,
-                    TrackTitle = "Жизнь поёт",
+                    TrackTitle = "Track",
                     TrackAlbum = "Album",
-                    Author = "Monatik",
+                    Author = "Author",
                     IsLiked = true,
                     TrackImage = "E:\\Projects\\VisualStudioProjects\\MusicPlayerProject\\ApplicationResources\\DefaultSongImg.png",
-                    TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayerProject\\ApplicationResources\\track.mp3",
+                    TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayerProject\\ApplicationResources\\track3.mp3",
                     Duration = TimeSpan.FromSeconds(1000)
                 },
                 new Track()
@@ -167,7 +167,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
                     Author = "Kabes",
                     IsLiked = true,
                     TrackImage = "E:\\Projects\\VisualStudioProjects\\MusicPlayerProject\\ApplicationResources\\DefaultSongImg.png",
-                    TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayerProject\\ApplicationResources\\track.mp3",
+                    TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayerProject\\ApplicationResources\\track3.mp3",
                     Duration = TimeSpan.FromSeconds(300)
                 },
                 new Track()
@@ -178,7 +178,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
                     Author = "Kabes",
                     IsLiked = true,
                     TrackImage = "E:\\Projects\\VisualStudioProjects\\MusicPlayerProject\\ApplicationResources\\DefaultSongImg.png",
-                    TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayerProject\\ApplicationResources\\track.mp3",
+                    TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayerProject\\ApplicationResources\\track3.mp3",
                     Duration = TimeSpan.FromSeconds(300)
                 }
             };

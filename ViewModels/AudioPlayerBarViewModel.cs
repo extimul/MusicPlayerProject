@@ -4,6 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using MusicPlayerProject.Core.Commands;
 using MusicPlayerProject.Core.Enums;
+using MusicPlayerProject.Core.Helpers;
 using MusicPlayerProject.Core.Managers.Audio;
 using MusicPlayerProject.Core.Models;
 using MusicPlayerProject.ViewModels.Base;
@@ -49,51 +50,14 @@ namespace MusicPlayerProject.ViewModels
         {
             if (sender?.SourceState is SourceTypes.TogglePlaybackSource)
             {
-                var state = (PlaybackState)sender?.Value;
-                PlayPauseIcon = state switch
-                {
-                    PlaybackState.Stopped => (DrawingBrush) Application.Current.Resources[Icons.PlayIcon.ToString()],
-                    PlaybackState.Playing => (DrawingBrush) Application.Current.Resources[Icons.PauseIcon.ToString()],
-                    PlaybackState.Paused => (DrawingBrush) Application.Current.Resources[Icons.PlayIcon.ToString()],
-                    _ => PlayPauseIcon
-                };
-
+                PlayPauseIcon = IconChanger.SetPlayPauseIcon(sender.Value);
                 OnPropertyChanged(nameof(PlayPauseIcon));
             }
             else if(sender?.SourceState is SourceTypes.VolumeSource)
             {
-                double volumeValue = (double)sender?.Value;
-
-                switch (volumeValue)
-                {
-                    case 0:
-                        ChangeVolumeIcon(VolumeLevels.Mute);
-                        break;
-                    case > 0 and <= 30.0:
-                        ChangeVolumeIcon(VolumeLevels.Low);
-                        break;
-                    case > 30.0 and <= 65.0:
-                        ChangeVolumeIcon(VolumeLevels.Medium);
-                        break;
-                    case > 65.0 and <= 100.0:
-                        ChangeVolumeIcon(VolumeLevels.High);
-                        break;
-                }
-                
+                VolumeIcon = IconChanger.SetVolumeIcon(sender.Value);
                 OnPropertyChanged(nameof(VolumeIcon));
             }
-        }
-
-        private void ChangeVolumeIcon(VolumeLevels volumeLevel)
-        {
-            VolumeIcon = volumeLevel switch
-            {
-                VolumeLevels.Mute => (DrawingBrush)Application.Current.Resources[Icons.VolumeOffIcon.ToString()],
-                VolumeLevels.Low => (DrawingBrush)Application.Current.Resources[Icons.VolumeLowIcon.ToString()],
-                VolumeLevels.Medium => (DrawingBrush)Application.Current.Resources[Icons.VolumeMediumIcon.ToString()],
-                VolumeLevels.High => (DrawingBrush)Application.Current.Resources[Icons.VolumeHighIcon.ToString()],
-                _ => VolumeIcon
-            };
         }
 
         private void OnStateChanged()

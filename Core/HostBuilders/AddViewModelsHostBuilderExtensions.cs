@@ -25,8 +25,6 @@ namespace MusicPlayerProject.Core.HostBuilders
                 services.AddSingleton<CreateViewModel<LibraryViewModel>>(services => () => services.GetRequiredService<LibraryViewModel>());
                 services.AddSingleton<CreateViewModel<QueueViewModel>>(services => () => services.GetRequiredService<QueueViewModel>());
                 services.AddSingleton<CreateViewModel<MainWindowViewModel>>(services => () => CreateMainViewModel(services));
-
-                services.AddSingleton<IViewModelFactory, ViewModelFactory>();
             });
              
             return host;
