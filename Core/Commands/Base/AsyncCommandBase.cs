@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MusicPlayerProject.Core.Commands
+namespace MusicPlayerProject.Core.Commands.Base
 {
     public abstract class AsyncCommandBase : ICommand
     {

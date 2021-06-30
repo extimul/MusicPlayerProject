@@ -1,4 +1,5 @@
 ﻿using MusicPlayerProject.Core.Commands;
+using MusicPlayerProject.Core.Managers.Dialog;
 using MusicPlayerProject.Core.Models;
 using MusicPlayerProject.ViewModels.Base;
 using System;
@@ -22,9 +23,12 @@ namespace MusicPlayerProject.ViewModels
         }
 
         public ICommand SortCommand { get; }
-        public LibraryViewModel()
+        public ICommand CreatePlaylistCommand { get; }
+
+        public LibraryViewModel(IDialogService dialogService)
         {
             SortCommand = new SortPlaylistsCommand();
+            CreatePlaylistCommand = new CreatePlaylistCommand(this);
             Collection = new ObservableCollection<Playlist>()
             {
                 new Playlist()
@@ -38,6 +42,11 @@ namespace MusicPlayerProject.ViewModels
                     ImageSource = @"E:\Projects\VisualStudioProjects\MusicPlayerProject\ApplicationResources\DefaultSongImg.png"
                 }
             };
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
         }
     }
 }

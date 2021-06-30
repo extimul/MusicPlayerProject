@@ -129,7 +129,23 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    
+
+    <Style x:Key="MusicControlsStyle" TargetType="Button">
+        <Setter Property="Template" Value="{DynamicResource BubbleButtonTemp}"/>
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="10"/>
+    </Style>
+
+    <Style x:Key="ToggleButtonStyle" TargetType="ToggleButton">
+        <Setter Property="Template" Value="{DynamicResource ToggleButtonTemp}"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="Margin" Value="5"/>
+    </Style>
+
     <!--Slider style-->
     <Style x:Key="SliderThumb" TargetType="Thumb">
         <Setter Property="SnapsToDevicePixels" Value="true" />

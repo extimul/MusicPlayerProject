@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MusicPlayerProject.ViewModels.Factories;
+using MusicPlayerProject.Core.Managers.Dialog;
 
 namespace MusicPlayerProject.Core.HostBuilders
 {
@@ -21,6 +22,7 @@ namespace MusicPlayerProject.Core.HostBuilders
                 services.AddSingleton<IAudioManager, AudioManager>();
                 services.AddSingleton<IPlaylistManager, PlaylistManager>();
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
+                services.AddSingleton<IDialogService, DialogService>();
             });
 
             return host;

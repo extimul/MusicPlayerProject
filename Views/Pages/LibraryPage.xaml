@@ -11,10 +11,6 @@
              d:DesignHeight="900" d:DesignWidth="1600"
              Background="{StaticResource AppBackgroundMainBrush}">
 
-    <UserControl.DataContext>
-        <vm:LibraryViewModel/>
-    </UserControl.DataContext>
-    
     <UserControl.Resources>
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}"/>
@@ -101,18 +97,33 @@
             </Grid>
         </Grid>
         
-        <Grid Grid.Row="1">
-            <TextBlock Text="ADD BUTTON HERER"/>
-        </Grid>
+        <StackPanel Grid.Row="1" 
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center">
+            <Button Style="{StaticResource MusicControlsStyle}"
+                    Content="{StaticResource AddSquareIcon}"
+                    Foreground="{StaticResource AppForegroundBrush}"
+                    Command="{Binding CreatePlaylistCommand}"
+                    Width="40"
+                    Height="40"
+                    Margin="0,0,0,0"/>
+            <TextBlock Text="Create playlist"
+                       VerticalAlignment="Center"
+                       Foreground="{StaticResource AppForegroundBrush}"
+                       FontSize="{StaticResource FontSizeLarge}"
+                       FontWeight="Light"/>
+        </StackPanel>
+
 
         <Grid Grid.Row="2">
             <ListView HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
-                      Background="{x:Null}"
+                      Background="Transparent"
                       ItemsSource="{Binding Collection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      BorderThickness="0">
+                      BorderThickness="0"
+                      Padding="0,10,0,0">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
