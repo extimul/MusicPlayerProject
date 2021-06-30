@@ -1,6 +1,7 @@
 ﻿using MusicPlayerProject.Core.Commands.Base;
 using MusicPlayerProject.Core.Helpers;
 using MusicPlayerProject.Core.Managers.Dialog;
+using MusicPlayerProject.Core.Models;
 using MusicPlayerProject.ViewModels;
 using MusicPlayerProject.Views.DialogWindows;
 using System.Diagnostics;
@@ -11,21 +12,20 @@ namespace MusicPlayerProject.Core.Commands
 {
     public class CreatePlaylistCommand : AsyncCommandBase
     {
-        private readonly LibraryViewModel _libraryView;
+        private readonly LibraryViewModel _libraryViewModel;
         private CreatePlaylistViewModel viewModel;
         private CreatePlaylistDialog view;
 
-        public CreatePlaylistCommand(LibraryViewModel libraryView)
+        public CreatePlaylistCommand(LibraryViewModel libraryViewModel)
         {
-            _libraryView = libraryView;
-            
+            _libraryViewModel = libraryViewModel;
         }
 
         private void OnCloseRequested(object sender, DialogCreateRequestArgs e)
         {
             if (e.Result != null)
             {
-                Trace.WriteLine(e.Result);
+                _libraryViewModel.PlaylistManager.AddPlaylist((Playlist)e.Result);
                 view?.Close();
             }
             else
@@ -45,7 +45,7 @@ namespace MusicPlayerProject.Core.Commands
 
             if (viewModel == null)
             {
-                viewModel = new CreatePlaylistViewModel();
+                viewModel = new CreatePlaylistViewModel(_libraryViewModel);
                 viewModel.CloseRequested += OnCloseRequested;
             }
 

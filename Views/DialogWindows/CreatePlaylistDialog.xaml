@@ -17,34 +17,128 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+        <Grid Grid.Row="0">
             <TextBlock Grid.Column="0"
-                       Text="Create playlist"
+                       Text="Edit playlist"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
-                       FontSize="{StaticResource FontSizeXXLarge}"
+                       FontSize="{StaticResource FontSizeXLarge}"
                        Foreground="{StaticResource AppForegroundBrush}"/>
+            <Button Content="{StaticResource CloseIcon}"
+                    Command="{Binding CancelCommand}"
+                    Style="{StaticResource MusicControlsStyle}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Foreground="{StaticResource AppForegroundBrush}"
+                    Height="20"
+                    Width="20"/>
         </Grid>
 
         <Grid Grid.Row="1">
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <Border Grid.Column="0">
-                <Image Height="200"
-                       Width="200"/>
-            </Border>
+            <Grid Grid.Column="0"
+                  Margin="15,15,15,50">
+                <Button Style="{StaticResource ChangeImageButton}" 
+                        Grid.RowSpan="2"
+                        Command="{Binding ChangeImageCommand}"
+                        Panel.ZIndex="1">
+                    <Button.Content>
+                        <Image x:Name="ButtonImage" Source="{Binding PlaylistImageSource, Mode=TwoWay}"/>
+                    </Button.Content>
+                </Button>
+                <Rectangle Fill="{StaticResource AddSquareIcon}" 
+                           Width="100"
+                           Height="100" Grid.Row="1"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center">
+                    <Rectangle.Style>
+                        <Style TargetType="Rectangle">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Source, ElementName=ButtonImage}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Rectangle.Style>
+                </Rectangle>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBox x:Name="NameTextBox"
+                             BorderBrush="{StaticResource AppForegroundBrush}"
+                             Style="{StaticResource TextBoxSingleLineStyle}"
+                             BorderThickness="1"
+                             Margin="15"
+                             Text="{Binding PlaylistName, Mode=TwoWay}"/>
+                    <TextBlock IsHitTestVisible="False"
+                               Text="Name" VerticalAlignment="Center" HorizontalAlignment="Left"
+                               FontSize="{StaticResource FontSizeMedium}"
+                               Margin="30,0,0,0" Foreground="{StaticResource AppForegroundBrush}">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=NameTextBox}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <TextBox x:Name="DescriptionTextBox"
+                             BorderBrush="{StaticResource AppForegroundBrush}"
+                             Style="{StaticResource TextBoxSingleLineStyle}"
+                             Text="{Binding PlaylistDescription, Mode=TwoWay}"
+                             BorderThickness="1"
+                             Margin="15,17,15,0"
+                             MaxLines="5"
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                             Height="150"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Stretch"/>
+                    <TextBlock IsHitTestVisible="False"
+                               Text="Description" VerticalAlignment="Top" HorizontalAlignment="Left"
+                               FontSize="{StaticResource FontSizeMedium}"
+                               Margin="30,23,0,0" Foreground="{StaticResource AppForegroundBrush}">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=DescriptionTextBox}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+
+            </Grid>
         </Grid>
-        
-        
+        <Grid Grid.Row="2"
+              Margin="0,0,15,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Save"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource ButtonStyle}"
+                    BorderBrush="{StaticResource AppForegroundBrush}"
+                    Command="{Binding CreateCommand}"/>
+        </Grid>
     </Grid>
-    
-    
-    <!--<Button Content="OK"
-            Margin="10,0,10,0"
-            Command="{Binding CreateCommand}"/>
-    <Button Content="Cancel"
-            Command="{Binding CancelCommand}"/>-->
 </Window>

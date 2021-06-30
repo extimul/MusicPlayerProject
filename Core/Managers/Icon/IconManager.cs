@@ -9,7 +9,7 @@ namespace MusicPlayerProject.Core.Managers.Icon
     {
         public static DrawingBrush GetIcon(Icons icon)
         {
-            return (DrawingBrush)Application.Current.Resources[icon.ToString()];
+            return (DrawingBrush)Application.Current.FindResource(icon.ToString());
         }
 
         public static DrawingBrush SetPlayPauseIcon(PlaybackState state)

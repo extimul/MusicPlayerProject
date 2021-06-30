@@ -6,7 +6,6 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:local="clr-namespace:MusicPlayerProject.Views.Pages"
              xmlns:types="clr-namespace:MusicPlayerProject.Core.Enums"
-             xmlns:vm="clr-namespace:MusicPlayerProject.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1600"
              Background="{StaticResource AppBackgroundMainBrush}">
@@ -17,152 +16,154 @@
             <Setter Property="Foreground" Value="{StaticResource AppForegroundBrush}"/>
         </Style>
     </UserControl.Resources>
+    <Grid Margin="30,30,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
 
-    <Grid Margin="30">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition Height="9*"/>
-        </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            
-            <Label Content="Playlists" FontSize="{StaticResource FontSizeXXLarge}"
+                <Label Content="Playlists" FontSize="{StaticResource FontSizeXXLarge}"
                    FontWeight="Medium" Foreground="{StaticResource AppForegroundBrush}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Grid.Column="0"/>
 
-            <Grid Grid.Column="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                
-                <!--SearchBox-->
-                <TextBox VerticalAlignment="Center"
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--SearchBox-->
+                    <TextBox VerticalAlignment="Center"
                          HorizontalAlignment="Center"
                          Background="{StaticResource AppElementBackgroundBrush}"
                          Style="{StaticResource SearchTextBoxStyle}"/>
-                <!--Sort playlists-->
-                <ComboBox Grid.Column="1"
+                    <!--Sort playlists-->
+                    <ComboBox Grid.Column="1"
                           VerticalAlignment="Center"
                           Width="150"
                           Style="{StaticResource ComboBoxStyle}"
                           ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
                           FontSize="{StaticResource FontSizeMedium}"
                           SelectedIndex="0">
-                    <ComboBoxItem Padding="10,5,0,5">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Selected">
-                                <i:InvokeCommandAction Command="{Binding SortCommand}"
+                        <ComboBoxItem Padding="10,5,0,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Selected">
+                                    <i:InvokeCommandAction Command="{Binding SortCommand}"
                                                        CommandParameter="{x:Static types:SortTypes.MostRelevant}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        <TextBlock Text="Most Relevant"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem Padding="10,5,0,5">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Selected">
-                                <i:InvokeCommandAction Command="{Binding SortCommand}"
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <TextBlock Text="Most Relevant"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem Padding="10,5,0,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Selected">
+                                    <i:InvokeCommandAction Command="{Binding SortCommand}"
                                                        CommandParameter="{x:Static types:SortTypes.RecentlyPlayed}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        <TextBlock Text="Recently Playeed"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem Padding="10,5,0,5">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Selected">
-                                <i:InvokeCommandAction Command="{Binding SortCommand}"
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <TextBlock Text="Recently Playeed"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem Padding="10,5,0,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Selected">
+                                    <i:InvokeCommandAction Command="{Binding SortCommand}"
                                                        CommandParameter="{x:Static types:SortTypes.RecentlyAdded}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        <TextBlock Text="Recently Added"/>
-                    </ComboBoxItem>
-                    <ComboBoxItem Padding="10,5,0,5">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Selected">
-                                <i:InvokeCommandAction Command="{Binding SortCommand}"
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <TextBlock Text="Recently Added"/>
+                        </ComboBoxItem>
+                        <ComboBoxItem Padding="10,5,0,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Selected">
+                                    <i:InvokeCommandAction Command="{Binding SortCommand}"
                                                        CommandParameter="{x:Static types:SortTypes.Alphabetical}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        <TextBlock Text="Alphabetical"/>
-                    </ComboBoxItem>
-                </ComboBox>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <TextBlock Text="Alphabetical"/>
+                        </ComboBoxItem>
+                    </ComboBox>
+                </Grid>
             </Grid>
-        </Grid>
-        
-        <StackPanel Grid.Row="1" 
+
+            <StackPanel Grid.Row="1" 
                     Orientation="Horizontal"
                     VerticalAlignment="Center">
-            <Button Style="{StaticResource MusicControlsStyle}"
+                <Button Style="{StaticResource MusicControlsStyle}"
                     Content="{StaticResource AddSquareIcon}"
                     Foreground="{StaticResource AppForegroundBrush}"
                     Command="{Binding CreatePlaylistCommand}"
                     Width="40"
                     Height="40"
                     Margin="0,0,0,0"/>
-            <TextBlock Text="Create playlist"
+                <TextBlock Text="Create playlist"
                        VerticalAlignment="Center"
                        Foreground="{StaticResource AppForegroundBrush}"
                        FontSize="{StaticResource FontSizeLarge}"
                        FontWeight="Light"/>
-        </StackPanel>
+            </StackPanel>
 
 
-        <Grid Grid.Row="2">
-            <ListView HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"
-                      Background="Transparent"
-                      ItemsSource="{Binding Collection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      ScrollViewer.VerticalScrollBarVisibility="Auto"
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      BorderThickness="0"
-                      Padding="0,10,0,0">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Background="{StaticResource AppElementBackgroundBrush}"
-                                CornerRadius="5">
-                            <Border.Effect>
-                                <DropShadowEffect BlurRadius="8" ShadowDepth="0"/>
-                            </Border.Effect>
-                            <Grid Background="Transparent">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="5*"/>
-                                    <RowDefinition Height="1*"/>
-                                </Grid.RowDefinitions>
+            <Grid Grid.Row="2">
+                <ListView HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Background="Transparent"
+                          ItemsSource="{Binding Playlist, UpdateSourceTrigger=PropertyChanged}"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          BorderThickness="0"
+                          Padding="0,10,0,0"
+                          MaxHeight="600">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="{StaticResource AppElementBackgroundBrush}"
+                                CornerRadius="5"
+                                Margin="5,15"
+                                MinWidth="235">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="8" ShadowDepth="0"/>
+                                </Border.Effect>
+                                <Grid Background="Transparent">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5*"/>
+                                        <RowDefinition Height="1*"/>
+                                    </Grid.RowDefinitions>
 
-                                <Grid Grid.Row="0"
+                                    <Grid Grid.Row="0"
                                       Margin="25">
-                                    <Image Source="{Binding ImageSource}"
+                                        <Image Source="{Binding ImageSource}"
                                            Stretch="Fill"
                                        Height="140"
                                        Width="140"/>
-                                </Grid>
+                                    </Grid>
 
-                                <Grid Grid.Row="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition Height="70"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0"
+                                    <Grid Grid.Row="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="70"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0"
                                                Padding="5"
                                                Text="{Binding PlaylistName}"
                                                VerticalAlignment="Stretch"
                                                HorizontalAlignment="Center"
                                                FontSize="{StaticResource FontSizeLarge}"
                                                Foreground="{StaticResource AppForegroundBrush}"/>
-                                    <TextBlock Margin="10,5,10,5"
+                                        <TextBlock Margin="10,5,10,5"
                                                Grid.Row="1"
                                                MaxWidth="220"
                                                FontSize="{StaticResource FontSizeMedium}"
@@ -170,12 +171,12 @@
                                                Text="{Binding Description}"
                                                VerticalAlignment="Stretch"
                                                TextWrapping="Wrap"/>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
         </Grid>
-    </Grid>
 </UserControl>

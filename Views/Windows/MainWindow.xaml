@@ -24,9 +24,16 @@
             <controls:NavigationPanel/>
         </Grid>
 
-        <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
-            <ContentControl Content="{Binding CurrentViewModel}"/>
+        <ScrollViewer Grid.Column="1" 
+                      HorizontalScrollBarVisibility="Disabled" 
+                      VerticalScrollBarVisibility="Auto">
+            <ContentControl Content="{Binding CurrentViewModel}"
+                            MaxWidth="1361"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            Margin="0,0,0,100"/>
         </ScrollViewer>
+   
         <controls:AudioPlayerControlBar VerticalAlignment="Bottom"
                                         Grid.ColumnSpan="2" Grid.Column="0"
                                         Height="100"

@@ -8,8 +8,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
 {
     public interface IAudioManager
     {
-        #region events
-
+        #region Events
         event Action StateChanged;
         event EventHandler<ChangeIconEventArgs> IconChanged;
         #endregion
