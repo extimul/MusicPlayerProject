@@ -17,6 +17,7 @@
         VolumeOffIcon,
         RepeatIcon,
         ShuffleIcon,
-        AddSquareIcon
+        AddSquareIcon,
+        CloseIcon
     }
 }

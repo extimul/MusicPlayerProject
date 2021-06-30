@@ -6,6 +6,7 @@ using MusicPlayerProject.Core.Commands;
 using MusicPlayerProject.Core.Enums;
 using MusicPlayerProject.Core.Helpers;
 using MusicPlayerProject.Core.Managers.Audio;
+using MusicPlayerProject.Core.Managers.Icon;
 using MusicPlayerProject.Core.Models;
 using MusicPlayerProject.ViewModels.Base;
 using NAudio.Wave;
@@ -33,29 +34,21 @@ namespace MusicPlayerProject.ViewModels
             AudioManager.StateChanged += OnStateChanged;
             AudioManager.IconChanged += OnIconChanged;
 
-            OnIconChanged(new ChangeIconEventArgs() 
-            {
-                SourceState = SourceTypes.TogglePlaybackSource,
-                Value = AudioManager.CurrentPlaybackState
-            });
+            OnIconChanged(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, AudioManager.CurrentPlaybackState));
 
-            OnIconChanged(new ChangeIconEventArgs()
-            {
-                SourceState = SourceTypes.VolumeSource,
-                Value = AudioManager.TrackVolumeValue
-            });
+            OnIconChanged(this, new ChangeIconEventArgs(SourceTypes.VolumeSource, AudioManager.TrackVolumeValue));
         }
 
-        private void OnIconChanged(ChangeIconEventArgs sender)
+        private void OnIconChanged(object sender, ChangeIconEventArgs e)
         {
-            if (sender?.SourceState is SourceTypes.TogglePlaybackSource)
+            if (e?.SourceState is SourceTypes.TogglePlaybackSource)
             {
-                PlayPauseIcon = IconChanger.SetPlayPauseIcon(sender.Value);
+                PlayPauseIcon = IconManager.SetPlayPauseIcon((PlaybackState)e.Value);
                 OnPropertyChanged(nameof(PlayPauseIcon));
             }
-            else if(sender?.SourceState is SourceTypes.VolumeSource)
+            else if (e?.SourceState is SourceTypes.VolumeSource)
             {
-                VolumeIcon = IconChanger.SetVolumeIcon(sender.Value);
+                VolumeIcon = IconManager.SetVolumeIcon((double)e.Value);
                 OnPropertyChanged(nameof(VolumeIcon));
             }
         }

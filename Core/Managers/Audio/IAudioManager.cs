@@ -9,10 +9,9 @@ namespace MusicPlayerProject.Core.Managers.Audio
     public interface IAudioManager
     {
         #region events
-        delegate void IconChangeHandler(ChangeIconEventArgs sender);
 
         event Action StateChanged;
-        event IconChangeHandler IconChanged;
+        event EventHandler<ChangeIconEventArgs> IconChanged;
         #endregion
 
         #region Properties

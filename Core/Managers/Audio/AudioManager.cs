@@ -11,7 +11,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
     {
         #region Events
         public event Action StateChanged;
-        public event IAudioManager.IconChangeHandler IconChanged;
+        public event EventHandler<ChangeIconEventArgs> IconChanged;
         #endregion
 
         #region Fields
@@ -91,11 +91,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
                         break;
                 }
 
-                IconChanged?.Invoke(new ChangeIconEventArgs()
-                {
-                    SourceState = SourceTypes.VolumeSource,
-                    Value = value
-                });
+                IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.VolumeSource, value));
                 StateChanged?.Invoke();
             }
         }
@@ -248,11 +244,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
             _timer.Start();
 
             StateChanged?.Invoke();
-            IconChanged?.Invoke(new ChangeIconEventArgs()
-            {
-                SourceState = SourceTypes.TogglePlaybackSource,
-                Value = CurrentPlaybackState
-            });
+            IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, CurrentPlaybackState));
         }
 
         private void OnPlaybackStopped(object sender, StoppedEventArgs e)
@@ -269,11 +261,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
         public void PauseTrack()
         {
             _wavePlayer?.Pause();
-            IconChanged?.Invoke(new ChangeIconEventArgs()
-            {
-                SourceState = SourceTypes.TogglePlaybackSource,
-                Value = CurrentPlaybackState
-            });
+            IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, CurrentPlaybackState));
             _timer.Stop();
         }
 
@@ -285,11 +273,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
             _audioFileReader = null;
             _timer?.Stop();
             StateChanged?.Invoke();
-            IconChanged?.Invoke(new ChangeIconEventArgs()
-            {
-                SourceState = SourceTypes.TogglePlaybackSource,
-                Value = CurrentPlaybackState
-            });
+            IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, CurrentPlaybackState));
         }
 
         public void NextTrack()

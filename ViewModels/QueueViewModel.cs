@@ -1,7 +1,9 @@
 ﻿using MusicPlayerProject.Core.Helpers;
 using MusicPlayerProject.Core.Managers.Audio;
+using MusicPlayerProject.Core.Managers.Icon;
 using MusicPlayerProject.Core.Models;
 using MusicPlayerProject.ViewModels.Base;
+using NAudio.Wave;
 using System;
 using System.Windows.Media;
 
@@ -35,14 +37,13 @@ namespace MusicPlayerProject.ViewModels
             }
 
             AudioManager.SelectedTrack = AudioManager.LoadedPlaylist[0];
-
         }
 
-        private void OnIconChanged(ChangeIconEventArgs sender)
+        private void OnIconChanged(object sender, ChangeIconEventArgs e)
         {
-            if (sender.SourceState is Core.Enums.SourceTypes.TogglePlaybackSource)
+            if (e.SourceState is Core.Enums.SourceTypes.TogglePlaybackSource)
             {
-                PlayPauseIcon = IconChanger.SetPlayPauseIcon(sender.Value);
+                PlayPauseIcon = IconManager.SetPlayPauseIcon((PlaybackState)e.Value);
                 OnPropertyChanged(nameof(PlayPauseIcon));
             }
         }
