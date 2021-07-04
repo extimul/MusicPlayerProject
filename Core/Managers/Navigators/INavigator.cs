@@ -5,7 +5,10 @@ namespace MusicPlayerProject.Core.Managers.Navigators
 {
     public interface INavigator
     {
-        ViewModelBase CurrentViewModel { get; set; }
         event Action StateChanged;
+        ViewModelBase PreviousViewModel { get; set; }
+        ViewModelBase CurrentViewModel { get; set; }
+        bool CanGoForward { get; }
+        bool CanGoBack { get; }
     }
 }

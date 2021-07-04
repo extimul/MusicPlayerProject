@@ -22,13 +22,14 @@ namespace MusicPlayerProject.Core.Commands
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return _navigator.CanGoForward;
         }
 
         public void Execute(object parameter)
         {
             if (parameter is ViewTypes viewType)
             {
+                _navigator.PreviousViewModel = _navigator.CurrentViewModel;
                 _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewType);
             }
         }

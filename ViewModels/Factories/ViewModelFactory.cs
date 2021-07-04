@@ -1,4 +1,6 @@
 ﻿using MusicPlayerProject.Core.Enums;
+using MusicPlayerProject.Core.Managers.Navigators;
+using MusicPlayerProject.Core.Models;
 using MusicPlayerProject.ViewModels.Base;
 using System;
 
@@ -31,6 +33,11 @@ namespace MusicPlayerProject.ViewModels.Factories
                 default:
                     throw new ArgumentException("ViewType does not have a ViewModel", "viewType");
             }
+        }
+
+        public ViewModelBase CreatePlaylistViewModel(Playlist playlist, INavigator navigator)
+        {
+            return new PlaylistViewModel(playlist, navigator);
         }
     }
 }

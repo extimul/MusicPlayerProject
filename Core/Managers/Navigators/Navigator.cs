@@ -1,17 +1,11 @@
-﻿using MusicPlayerProject.Core.Commands;
-using MusicPlayerProject.Core.Models;
-using MusicPlayerProject.ViewModels.Base;
+﻿using MusicPlayerProject.ViewModels.Base;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace MusicPlayerProject.Core.Managers.Navigators
 {
     public class Navigator : INavigator
     {
+        private ViewModelBase _previousViewModel;
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
         {
@@ -24,6 +18,20 @@ namespace MusicPlayerProject.Core.Managers.Navigators
                 StateChanged?.Invoke();
             }
         }
+
+        public ViewModelBase PreviousViewModel
+        {
+            get => _previousViewModel;
+            set
+            {
+                _previousViewModel?.Dispose();
+                _previousViewModel = value;
+                StateChanged?.Invoke();
+            }
+        }
+
+        public bool CanGoForward => CurrentViewModel != null ? true : false;
+        public bool CanGoBack => PreviousViewModel != null ? true : false;
 
         public event Action StateChanged;
     }
