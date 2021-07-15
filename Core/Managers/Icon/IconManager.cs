@@ -5,14 +5,37 @@ using System.Windows.Media;
 
 namespace MusicPlayerProject.Core.Managers.Icon
 {
-    public static class IconManager
+    public class IconManager : IIconManager
     {
-        public static DrawingBrush GetIcon(Icons icon)
+        private DrawingBrush _playPauseIcon;
+
+        private DrawingBrush _volumeIcon;
+        public DrawingBrush PlayPauseIcon
+        {
+            get => _playPauseIcon;
+            set
+            {
+                if (value.Equals(_playPauseIcon)) return;
+                _playPauseIcon = value;
+            }
+        }
+
+        public DrawingBrush VolumeIcon
+        {
+            get => _volumeIcon;
+            set
+            {
+                if (value.Equals(_volumeIcon)) return;
+                _volumeIcon = value;
+            }
+        }
+
+        public DrawingBrush GetIcon(Icons icon)
         {
             return (DrawingBrush)Application.Current.FindResource(icon.ToString());
         }
 
-        public static DrawingBrush SetPlayPauseIcon(PlaybackState state)
+        public DrawingBrush SetPlayPauseIcon(PlaybackState state)
         {
             switch (state)
             {
@@ -27,7 +50,7 @@ namespace MusicPlayerProject.Core.Managers.Icon
             }
         }
 
-        public static DrawingBrush SetVolumeIcon(double volumeValue)
+        public DrawingBrush SetVolumeIcon(double volumeValue)
         {
             switch (volumeValue)
             {

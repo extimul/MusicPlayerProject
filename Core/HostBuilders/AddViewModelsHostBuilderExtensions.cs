@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MusicPlayerProject.Core.Managers.Audio;
+using MusicPlayerProject.Core.Managers.Icon;
 using MusicPlayerProject.Core.Managers.Navigators;
 using MusicPlayerProject.ViewModels;
 using MusicPlayerProject.ViewModels.Base;
@@ -35,7 +36,7 @@ namespace MusicPlayerProject.Core.HostBuilders
             return new MainWindowViewModel(
                 services.GetRequiredService<INavigator>(),
                 services.GetRequiredService<IViewModelFactory>(),
-                AudioPlayerBarViewModel.LoadMusicControlBarViewModel(services.GetRequiredService<IAudioManager>()));
+                AudioPlayerBarViewModel.LoadMusicControlBarViewModel(services.GetRequiredService<IAudioManager>(), services.GetRequiredService<IIconManager>()));
         }
     }
 }

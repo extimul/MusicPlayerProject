@@ -1,10 +1,6 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media;
+﻿using System.Windows.Input;
 using MusicPlayerProject.Core.Commands;
 using MusicPlayerProject.Core.Enums;
-using MusicPlayerProject.Core.Helpers;
 using MusicPlayerProject.Core.Managers.Audio;
 using MusicPlayerProject.Core.Managers.Icon;
 using MusicPlayerProject.Core.Models;
@@ -17,25 +13,20 @@ namespace MusicPlayerProject.ViewModels
     {
         #region Properties
         public IAudioManager AudioManager { get; set; }
+        public IIconManager IconManager { get; set; }
         public bool CanPlay => AudioManager.CanPlay;
-
-        public DrawingBrush PlayPauseIcon { get; set; }
-
-        public DrawingBrush VolumeIcon { get; set; }
-
         public ICommand AudioPlayerControlCommand { get; }
-
         #endregion
 
-        public AudioPlayerBarViewModel(IAudioManager audioManager)
+        public AudioPlayerBarViewModel(IAudioManager audioManager, IIconManager iconManager)
         {
             AudioManager = audioManager;
+            IconManager = iconManager;
             AudioPlayerControlCommand = new PlayerControlsCommand(this);
             AudioManager.StateChanged += OnStateChanged;
             AudioManager.IconChanged += OnIconChanged;
 
             OnIconChanged(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, AudioManager.CurrentPlaybackState));
-
             OnIconChanged(this, new ChangeIconEventArgs(SourceTypes.VolumeSource, AudioManager.TrackVolumeValue));
         }
 
@@ -43,14 +34,13 @@ namespace MusicPlayerProject.ViewModels
         {
             if (e?.SourceState is SourceTypes.TogglePlaybackSource)
             {
-                PlayPauseIcon = IconManager.SetPlayPauseIcon((PlaybackState)e.Value);
-                OnPropertyChanged(nameof(PlayPauseIcon));
+                IconManager.PlayPauseIcon = IconManager.SetPlayPauseIcon((PlaybackState)e.Value);
             }
             else if (e?.SourceState is SourceTypes.VolumeSource)
             {
-                VolumeIcon = IconManager.SetVolumeIcon((double)e.Value);
-                OnPropertyChanged(nameof(VolumeIcon));
+                IconManager.VolumeIcon = IconManager.SetVolumeIcon((double)e.Value);
             }
+            OnPropertyChanged(nameof(IconManager));
         }
 
         private void OnStateChanged()
@@ -59,12 +49,7 @@ namespace MusicPlayerProject.ViewModels
             OnPropertyChanged(nameof(CanPlay));
         }
 
-        public static AudioPlayerBarViewModel LoadMusicControlBarViewModel(IAudioManager audioManager)
-        {
-            AudioPlayerBarViewModel audioPlayerBarViewModel = new AudioPlayerBarViewModel(audioManager);
-
-            return audioPlayerBarViewModel;
-        }
+        public static AudioPlayerBarViewModel LoadMusicControlBarViewModel(IAudioManager audioManager, IIconManager iconManager) => new(audioManager, iconManager);
 
         public override void Dispose()
         {

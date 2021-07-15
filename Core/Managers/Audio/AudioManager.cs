@@ -91,7 +91,7 @@ namespace MusicPlayerProject.Core.Managers.Audio
                         break;
                 }
 
-                IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.VolumeSource, value));
+                IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.VolumeSource, (double)_wavePlayer.Volume * 100.0f));
                 StateChanged?.Invoke();
             }
         }

@@ -127,7 +127,7 @@
                                                             Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
                                                             Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
                                                             Fill="{TemplateBinding Foreground}" 
-                                                            Data="{Binding PlayPauseIcon, Mode=TwoWay, Converter={StaticResource ContentConverter}}"/>
+                                                            Data="{Binding IconManager.PlayPauseIcon, Mode=TwoWay, Converter={StaticResource ContentConverter}}"/>
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
@@ -219,7 +219,7 @@
                                                         Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
                                                         Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
                                                         Fill="{TemplateBinding Foreground}" 
-                                                        Data="{Binding VolumeIcon, Mode=TwoWay, Converter={StaticResource ContentConverter}}"/>
+                                                        Data="{Binding IconManager.VolumeIcon, Mode=TwoWay, Converter={StaticResource ContentConverter}}"/>
                                             </Grid>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">

@@ -2,13 +2,10 @@
 using Microsoft.Extensions.Hosting;
 using MusicPlayerProject.Core.Managers.Audio;
 using MusicPlayerProject.Core.Managers.Navigators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MusicPlayerProject.ViewModels.Factories;
 using MusicPlayerProject.Core.Managers.Dialog;
+using MusicPlayerProject.Core.Managers.Icon;
+using MusicPlayerProject.ViewModels.Factories;
+
 
 namespace MusicPlayerProject.Core.HostBuilders
 {
@@ -23,6 +20,7 @@ namespace MusicPlayerProject.Core.HostBuilders
                 services.AddSingleton<IPlaylistManager, PlaylistManager>();
                 services.AddSingleton<IViewModelFactory, ViewModelFactory>();
                 services.AddSingleton<IDialogService, DialogService>();
+                services.AddSingleton<IIconManager, IconManager>();
             });
 
             return host;

@@ -1,11 +1,8 @@
-﻿using MusicPlayerProject.Core.Helpers;
-using MusicPlayerProject.Core.Managers.Audio;
+﻿using MusicPlayerProject.Core.Managers.Audio;
 using MusicPlayerProject.Core.Managers.Icon;
 using MusicPlayerProject.Core.Models;
 using MusicPlayerProject.ViewModels.Base;
 using NAudio.Wave;
-using System;
-using System.Windows.Media;
 
 namespace MusicPlayerProject.ViewModels
 {
@@ -13,16 +10,14 @@ namespace MusicPlayerProject.ViewModels
     {
         private readonly IPlaylistManager _playlistManager;
         #region Properties
-
         public IAudioManager AudioManager { get; set; }
-
-        public DrawingBrush PlayPauseIcon { get; set; }
-
+        public IIconManager IconManager { get; }
         #endregion
 
-        public QueueViewModel(IAudioManager audioManager, IPlaylistManager playlistManager)
+        public QueueViewModel(IAudioManager audioManager, IPlaylistManager playlistManager, IIconManager iconManager)
         {
             _playlistManager = playlistManager;
+            IconManager = iconManager;
             AudioManager = audioManager;
             LoadQueueCollection();
             AudioManager.StateChanged += OnStateChanged;
@@ -43,8 +38,8 @@ namespace MusicPlayerProject.ViewModels
         {
             if (e.SourceState is Core.Enums.SourceTypes.TogglePlaybackSource)
             {
-                PlayPauseIcon = IconManager.SetPlayPauseIcon((PlaybackState)e.Value);
-                OnPropertyChanged(nameof(PlayPauseIcon));
+                IconManager.PlayPauseIcon = IconManager.SetPlayPauseIcon((PlaybackState)e.Value);
+                OnPropertyChanged(nameof(IconManager));
             }
         }
 
@@ -56,6 +51,7 @@ namespace MusicPlayerProject.ViewModels
         public override void Dispose()
         {
             AudioManager.StateChanged -= OnStateChanged;
+            AudioManager.IconChanged -= OnIconChanged;
             base.Dispose();
         }
     }

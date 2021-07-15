@@ -5,6 +5,7 @@ using MusicPlayerProject.Core.Managers.Navigators;
 using MusicPlayerProject.Core.Models;
 using MusicPlayerProject.ViewModels.Base;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace MusicPlayerProject.ViewModels
@@ -39,19 +40,28 @@ namespace MusicPlayerProject.ViewModels
         {
             CurrentPlaylist = playlist;
             GoBackCommand = new RenavigateCommand(navigator);
-        }
-
-        public PlaylistViewModel()
-        {
             CurrentPlaylist = new Playlist()
             {
                 Id = 1,
                 PlaylistName = "Liked songs",
-                Description = "Something text for this playlist and text text text text text",
+                Description = "Something text for this playlist and text text text text text text text text text text text text text text text text text text text text",
                 RecentlyPlay = DateTime.Now,
                 AddedDate = DateTime.Now,
-                Author = "You",
-                ImageSource = @"E:\Projects\VisualStudioProjects\MusicPlayerProject\ApplicationResources\DefaultSongImg.png" ?? PathHelper.GetDefaultImagePath()
+                Author = "Large author name",
+                ImageSource = @"E:\Projects\VisualStudioProjects\MusicPlayerProject\ApplicationResources\DefaultSongImg.png" ?? PathHelper.GetDefaultImagePath(),
+                Tracks = new ObservableCollection<Track>()
+                {
+                    new Track()
+                    {
+                        Id = 1,
+                        TrackTitle = "TrackTitle",
+                        Author = "Author",
+                        IsLiked = true,
+                        TrackAlbum = "Album",
+                        Duration = TimeSpan.FromSeconds(300),
+                        TrackSource = @"E:\Projects\VisualStudioProjects\MusicPlayerProject\ApplicationResources\track.mp3"
+                    }
+                }
             };
         }
 
