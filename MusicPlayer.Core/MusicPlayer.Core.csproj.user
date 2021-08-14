@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Page Update="WindowResources\Resources\iconsData.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WindowResources\Styles\colors.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WindowResources\Styles\elementstyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WindowResources\Styles\fonts.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
