@@ -12,13 +12,13 @@ namespace MusicPlayer.App.WPF.ViewModels
     public class AudioPlayerBarViewModel : ViewModelBase
     {
         #region Properties
-        public IAudioManager AudioManager { get; set; }
+        public IAudioService AudioManager { get; set; }
         public IIconManager IconManager { get; set; }
         public bool CanPlay => AudioManager.CanPlay;
         public ICommand AudioPlayerControlCommand { get; }
         #endregion
 
-        public AudioPlayerBarViewModel(IAudioManager audioManager, IIconManager iconManager)
+        public AudioPlayerBarViewModel(IAudioService audioManager, IIconManager iconManager)
         {
             AudioManager = audioManager;
             IconManager = iconManager;
@@ -49,7 +49,7 @@ namespace MusicPlayer.App.WPF.ViewModels
             OnPropertyChanged(nameof(CanPlay));
         }
 
-        public static AudioPlayerBarViewModel LoadMusicControlBarViewModel(IAudioManager audioManager, IIconManager iconManager) => new(audioManager, iconManager);
+        public static AudioPlayerBarViewModel LoadMusicControlBarViewModel(IAudioService audioManager, IIconManager iconManager) => new(audioManager, iconManager);
 
         public override void Dispose()
         {

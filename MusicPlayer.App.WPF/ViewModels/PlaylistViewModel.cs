@@ -1,6 +1,6 @@
 ﻿using MusicPlayer.App.WPF.Commands;
 using MusicPlayer.App.WPF.Commands.Base;
-using MusicPlayer.App.WPF.Core.Helpers;
+using MusicPlayer.App.WPF.Services.DataPath;
 using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.Core.Models;
@@ -14,6 +14,8 @@ namespace MusicPlayer.App.WPF.ViewModels
     {
         #region Fields
         private Playlist playlist;
+        private readonly INavigatorService navigator;
+        private readonly IDataPathService pathService;
 
         #endregion
 
@@ -36,9 +38,11 @@ namespace MusicPlayer.App.WPF.ViewModels
 
         #endregion
 
-        public PlaylistViewModel(Playlist playlist, INavigatorService navigator)
+        public PlaylistViewModel(Playlist playlist, INavigatorService navigator, IDataPathService pathService)
         {
             CurrentPlaylist = playlist;
+            this.navigator = navigator;
+            this.pathService = pathService;
             GoBackCommand = new RenavigateCommand(navigator);
             CurrentPlaylist = new Playlist()
             {
@@ -48,7 +52,7 @@ namespace MusicPlayer.App.WPF.ViewModels
                 RecentlyPlay = DateTime.Now,
                 AddedDate = DateTime.Now,
                 Author = "Large author name",
-                ImageSource = @"E:\Projects\VisualStudioProjects\MusicPlayer.App.WPF\ApplicationResources\DefaultSongImg.png" ?? PathHelper.GetDefaultImagePath(),
+                ImageSource = @"E:\Projects\VisualStudioProjects\MusicPlayer.App.WPF\ApplicationResources\DefaultSongImg.png" ?? pathService.DefaultTrackImage,
                 Tracks = new ObservableCollection<Track>()
                 {
                     new Track()

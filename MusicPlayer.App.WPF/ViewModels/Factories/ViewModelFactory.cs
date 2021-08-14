@@ -1,4 +1,5 @@
-﻿using MusicPlayer.App.WPF.Services.Navigators;
+﻿using MusicPlayer.App.WPF.Services.DataPath;
+using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.Core.Models;
 using MusicPlayer.Core.Types;
@@ -35,9 +36,9 @@ namespace MusicPlayer.App.WPF.ViewModels.Factories
             }
         }
 
-        public ViewModelBase CreatePlaylistViewModel(Playlist playlist, INavigatorService navigator)
+        public ViewModelBase CreatePlaylistViewModel(Playlist playlist, INavigatorService navigator, IDataPathService pathService)
         {
-            return new PlaylistViewModel(playlist, navigator);
+            return new PlaylistViewModel(playlist, navigator, pathService);
         }
     }
 }

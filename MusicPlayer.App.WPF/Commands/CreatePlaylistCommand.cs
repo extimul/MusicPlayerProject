@@ -1,8 +1,9 @@
 ﻿using MusicPlayer.App.WPF.Commands.Base;
-using MusicPlayer.App.WPF.Core.Helpers;
+using MusicPlayer.App.WPF.Services.DataPath;
 using MusicPlayer.App.WPF.Services.Dialog;
 using MusicPlayer.App.WPF.ViewModels;
 using MusicPlayer.App.WPF.Views.DialogWindows;
+using MusicPlayer.Core.Helpers;
 using MusicPlayer.Core.Models;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -12,20 +13,22 @@ namespace MusicPlayer.App.WPF.Commands
 {
     public class CreatePlaylistCommand : AsyncCommandBase
     {
-        private readonly LibraryViewModel _libraryViewModel;
+        private readonly LibraryViewModel libraryViewModel;
+        private readonly IDataPathService pathService;
         private CreatePlaylistViewModel viewModel;
         private CreatePlaylistDialog view;
 
-        public CreatePlaylistCommand(LibraryViewModel libraryViewModel)
+        public CreatePlaylistCommand(LibraryViewModel libraryViewModel, IDataPathService pathService)
         {
-            _libraryViewModel = libraryViewModel;
+            this.libraryViewModel = libraryViewModel;
+            this.pathService = pathService;
         }
 
         private void OnCloseRequested(object sender, DialogCreateRequestArgs e)
         {
             if (e.Result != null)
             {
-                _libraryViewModel.PlaylistManager.AddPlaylist((Playlist)e.Result);
+                libraryViewModel.PlaylistManager.AddPlaylist((Playlist)e.Result);
                 view?.Close();
             }
             else
@@ -45,7 +48,7 @@ namespace MusicPlayer.App.WPF.Commands
 
             if (viewModel == null)
             {
-                viewModel = new CreatePlaylistViewModel(_libraryViewModel);
+                viewModel = new CreatePlaylistViewModel(libraryViewModel, pathService);
                 viewModel.CloseRequested += OnCloseRequested;
             }
 

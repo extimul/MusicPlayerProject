@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace MusicPlayer.App.WPF.Core.Helpers.Converters
+namespace MusicPlayer.Core.Helpers.Converters
 {
     public class ScaleConverter : IValueConverter
     {

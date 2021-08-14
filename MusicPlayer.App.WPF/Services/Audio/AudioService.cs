@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
+using MusicPlayer.App.WPF.Services.DataPath;
+using MusicPlayer.Core.Exceptions;
 using MusicPlayer.Core.Models;
 using MusicPlayer.Core.Types;
 using NAudio.Wave;
 
 namespace MusicPlayer.App.WPF.Services.Audio
 {
-    public class AudioManager : IAudioManager
+    public class AudioService : IAudioService
     {
         #region Events
         public event Action StateChanged;
@@ -15,6 +19,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
         #endregion
 
         #region Fields
+        private readonly IDataPathService dataPathService;
         private readonly DispatcherTimer _timer;
         private WaveStream _audioFileReader;
         private IWavePlayer _wavePlayer;
@@ -129,8 +134,10 @@ namespace MusicPlayer.App.WPF.Services.Audio
         public bool CanPlay => HasTracksInPlaylist && SelectedTrack != null;
         #endregion
 
-        public AudioManager()
+        public AudioService(IDataPathService dataPathService)
         {
+            this.dataPathService = dataPathService;
+
             LoadedPlaylist = new ObservableCollection<Track>()
             {
                 new Track()
@@ -140,7 +147,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                     TrackAlbum = "Album",
                     Author = "Author",
                     IsLiked = true,
-                    TrackImage = "E:\\Projects\\VisualStudioProjects\\MusicPlayer.App.WPF\\ApplicationResources\\DefaultSongImg.png",
+                    TrackImage = dataPathService.DefaultTrackImage,
                     TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayer.App.WPF\\ApplicationResources\\track3.mp3",
                     Duration = TimeSpan.FromSeconds(1000)
                 },
@@ -151,7 +158,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                     TrackAlbum = "Album",
                     Author = "Kabes",
                     IsLiked = true,
-                    TrackImage = "E:\\Projects\\VisualStudioProjects\\MusicPlayer.App.WPF\\ApplicationResources\\DefaultSongImg.png",
+                    TrackImage = dataPathService.DefaultTrackImage,
                     TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayer.App.WPF\\ApplicationResources\\track2.mp3",
                     Duration = TimeSpan.FromSeconds(300)
                 },
@@ -162,7 +169,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                     TrackAlbum = "Album",
                     Author = "Kabes",
                     IsLiked = true,
-                    TrackImage = "E:\\Projects\\VisualStudioProjects\\MusicPlayer.App.WPF\\ApplicationResources\\DefaultSongImg.png",
+                    TrackImage = dataPathService.DefaultTrackImage,
                     TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayer.App.WPF\\ApplicationResources\\track3.mp3",
                     Duration = TimeSpan.FromSeconds(300)
                 },
@@ -173,7 +180,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                     TrackAlbum = "Album",
                     Author = "Kabes",
                     IsLiked = true,
-                    TrackImage = "E:\\Projects\\VisualStudioProjects\\MusicPlayer.App.WPF\\ApplicationResources\\DefaultSongImg.png",
+                    TrackImage = dataPathService.DefaultTrackImage,
                     TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayer.App.WPF\\ApplicationResources\\track3.mp3",
                     Duration = TimeSpan.FromSeconds(300)
                 }
@@ -193,24 +200,41 @@ namespace MusicPlayer.App.WPF.Services.Audio
             StateChanged?.Invoke();
         }
 
-        public void TogglePlayPause()
+        public Task TogglePlayPause()
         {
-            switch (CurrentPlaybackState)
+            try
             {
-                case PlaybackState.Stopped:
-                    PlayTrack();
-                    break;
-                case PlaybackState.Playing:
-                    PauseTrack();
-                    break;
-                case PlaybackState.Paused:
-                    PlayTrack();
-                    break;
+                switch (CurrentPlaybackState)
+                {
+                    case PlaybackState.Stopped:
+                        PlayTrack();
+                        break;
+                    case PlaybackState.Playing:
+                        PauseTrack();
+                        break;
+                    case PlaybackState.Paused:
+                        PlayTrack();
+                        break;
+                }
             }
+            catch (TrackNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return Task.CompletedTask;
         }
 
-        public void PlayTrack()
+        public Task PlayTrack()
         {
+            if (!SelectedTrack.CheckTrackSource())
+            {
+                throw new TrackNotFoundException(SelectedTrack.TrackTitle);
+            }
+
             if (SelectedTrack != null && SelectedTrack != PlayingTrack)
             {
                 PlayingTrack = SelectedTrack;
@@ -245,6 +269,8 @@ namespace MusicPlayer.App.WPF.Services.Audio
 
             StateChanged?.Invoke();
             IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, CurrentPlaybackState));
+
+            return Task.CompletedTask;
         }
 
         private void OnPlaybackStopped(object sender, StoppedEventArgs e)
@@ -258,14 +284,15 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 StopTrack();
         }
 
-        public void PauseTrack()
+        public Task PauseTrack()
         {
             _wavePlayer?.Pause();
             IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, CurrentPlaybackState));
             _timer.Stop();
+            return Task.CompletedTask;
         }
 
-        public void StopTrack()
+        public Task StopTrack()
         {
             _wavePlayer?.Dispose();
             _wavePlayer = null;
@@ -274,9 +301,10 @@ namespace MusicPlayer.App.WPF.Services.Audio
             _timer?.Stop();
             StateChanged?.Invoke();
             IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, CurrentPlaybackState));
+            return Task.CompletedTask;
         }
 
-        public void NextTrack()
+        public Task NextTrack()
         {
             if (CanPlay && SelectedTrack.GetId() < LoadedPlaylist.Count - 1)
             {
@@ -290,9 +318,10 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 SelectedTrack = LoadedPlaylist[0];
                 PlayTrack();
             }
+            return Task.CompletedTask;
         }
 
-        public void PreviousTrack()
+        public Task PreviousTrack()
         {
             if (CanPlay && SelectedTrack.GetId() > 0)
             {
@@ -306,19 +335,20 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 SelectedTrack = LoadedPlaylist[^1];
                 PlayTrack();
             }
+            return Task.CompletedTask;
         }
 
-        public void ShuffleTracks()
+        public Task ShuffleTracks()
         {
             throw new NotImplementedException();
         }
 
-        public void RepeatTrack()
+        public Task RepeatTrack()
         {
             throw new NotImplementedException();
         }
 
-        public void SetAsLikedTrack()
+        public Task SetAsLikedTrack()
         {
             throw new NotImplementedException();
         }

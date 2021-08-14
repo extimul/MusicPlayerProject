@@ -11,7 +11,7 @@ namespace MusicPlayer.App.WPF.Commands.Base
         public bool IsExecuting
         {
             get => _isExecuting;
-            set 
+            set
             { 
                 _isExecuting = value;
                 OnCanExecuteChanged();
@@ -38,11 +38,7 @@ namespace MusicPlayer.App.WPF.Commands.Base
 
         protected void OnCanExecuteChanged()
         {
-            App.Current.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                CanExecuteChanged?.Invoke(this, new EventArgs());
-                CommandManager.InvalidateRequerySuggested();
-            }));
+            CanExecuteChanged?.Invoke(this, new EventArgs());
         }
     }
 }

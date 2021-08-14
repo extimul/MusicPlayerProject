@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MusicPlayer.App.WPF.Core.Helpers
+namespace MusicPlayer.Core.Helpers
 {
     public static class BlurEffect
     {

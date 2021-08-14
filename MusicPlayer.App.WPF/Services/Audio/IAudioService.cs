@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using MusicPlayer.Core.Models;
 using MusicPlayer.Core.Types;
 using NAudio.Wave;
 
 namespace MusicPlayer.App.WPF.Services.Audio
 {
-    public interface IAudioManager
+    public interface IAudioService
     {
         #region Events
         event Action StateChanged;
@@ -29,15 +30,15 @@ namespace MusicPlayer.App.WPF.Services.Audio
         #endregion
 
         #region Audio manager control methods
-        void TogglePlayPause();
-        void PlayTrack();
-        void PauseTrack();
-        void StopTrack();
-        void NextTrack();
-        void PreviousTrack();
-        void ShuffleTracks();
-        void RepeatTrack();
-        void SetAsLikedTrack();
+        Task TogglePlayPause();
+        Task PlayTrack();
+        Task PauseTrack();
+        Task StopTrack();
+        Task NextTrack();
+        Task PreviousTrack();
+        Task ShuffleTracks();
+        Task RepeatTrack();
+        Task SetAsLikedTrack();
         #endregion
     }
 }

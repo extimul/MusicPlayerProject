@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer.App.WPF.Services.Audio
 {
-    public class PlaylistManager : IPlaylistManager
+    public class PlaylistService : IPlaylistService
     {
         #region Events
         public event Action StateChanged;
@@ -43,7 +43,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
         }
         #endregion
 
-        public PlaylistManager()
+        public PlaylistService()
         {
             QueuePlaylist = new ObservableCollection<Track>();
             Task.Run(async () => await LoadAllPlaylists());

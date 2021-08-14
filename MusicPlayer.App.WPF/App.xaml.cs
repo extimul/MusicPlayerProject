@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MusicPlayer.App.WPF.HostBuilders;
-using MusicPlayer.App.WPF.ViewModels;
 using MusicPlayer.App.WPF.Views.Windows;
 using System.Windows;
 
@@ -9,8 +8,6 @@ namespace MusicPlayer.App.WPF
 {
     public partial class App : Application
     {
-        public static Window AppWindow { get; set; }
-
         private readonly IHost _host;
 
         public App()
@@ -29,11 +26,7 @@ namespace MusicPlayer.App.WPF
         protected override void OnStartup(StartupEventArgs e)
         {
             _host.Start();
-
-            AppWindow = _host.Services.GetRequiredService<MainWindow>();
-           
-            AppWindow.Show();
-
+            _host.Services.GetRequiredService<MainWindow>().Show();
             base.OnStartup(e);
         }
 
@@ -41,9 +34,7 @@ namespace MusicPlayer.App.WPF
         {
             await _host.StopAsync();
             _host.Dispose();
-
             base.OnExit(e);
         }
-
     }
 }

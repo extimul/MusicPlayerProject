@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer.App.WPF.Services.Audio
 {
-    public interface IPlaylistManager
+    public interface IPlaylistService
     {
         public event Action StateChanged;
         public ObservableCollection<Track> QueuePlaylist { get; set; }

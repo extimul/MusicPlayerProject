@@ -5,8 +5,8 @@ using System;
 using System.Windows.Input;
 using System.Diagnostics;
 using Microsoft.Win32;
-using MusicPlayer.App.WPF.Core.Helpers;
 using MusicPlayer.Core.Models;
+using MusicPlayer.App.WPF.Services.DataPath;
 
 namespace MusicPlayer.App.WPF.ViewModels
 {
@@ -21,6 +21,7 @@ namespace MusicPlayer.App.WPF.ViewModels
         private string _playlistName;
         private string _playlistDescription;
         private readonly LibraryViewModel _libraryViewModel;
+        private readonly IDataPathService pathService;
         #endregion
 
         #region Properties
@@ -68,8 +69,9 @@ namespace MusicPlayer.App.WPF.ViewModels
         public ICommand CancelCommand { get; }
         #endregion
 
-        public CreatePlaylistViewModel(LibraryViewModel libraryViewModel)
+        public CreatePlaylistViewModel(LibraryViewModel libraryViewModel, IDataPathService pathService)
         {
+            this.pathService = pathService;
             _libraryViewModel = libraryViewModel;
             CreateCommand = new RelayCommand(() => CreatePlaylist());
             CancelCommand = new RelayCommand(() => Cancel());
@@ -98,7 +100,7 @@ namespace MusicPlayer.App.WPF.ViewModels
             {
                 PlaylistName = PlaylistName ?? $"Playlist #{_libraryViewModel.PlaylistManager.PlaylistsCollection.Count + 1}",
                 Description = PlaylistDescription ?? "Your playlist",
-                ImageSource = PlaylistImageSource ?? PathHelper.GetDefaultImagePath(),
+                ImageSource = PlaylistImageSource ?? pathService.DefaultTrackImage,
                 AddedDate = DateTime.Now
             }));
         }

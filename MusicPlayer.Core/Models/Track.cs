@@ -11,9 +11,10 @@ namespace MusicPlayer.Core.Models
         public TimeSpan Duration { get; set; }
         public string TrackImage { get; set; }
         public string TrackSource { get; set; }
-        public override int GetId()
+
+        public bool CheckTrackSource()
         {
-            return Id - 1;
+            return false;
         }
     }
 }

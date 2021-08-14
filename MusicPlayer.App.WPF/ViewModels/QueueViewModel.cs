@@ -9,13 +9,13 @@ namespace MusicPlayer.App.WPF.ViewModels
 {
     public class QueueViewModel : ViewModelBase
     {
-        private readonly IPlaylistManager _playlistManager;
+        private readonly IPlaylistService _playlistManager;
         #region Properties
-        public IAudioManager AudioManager { get; set; }
+        public IAudioService AudioManager { get; set; }
         public IIconManager IconManager { get; }
         #endregion
 
-        public QueueViewModel(IAudioManager audioManager, IPlaylistManager playlistManager, IIconManager iconManager)
+        public QueueViewModel(IAudioService audioManager, IPlaylistService playlistManager, IIconManager iconManager)
         {
             _playlistManager = playlistManager;
             IconManager = iconManager;

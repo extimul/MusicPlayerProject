@@ -30,25 +30,27 @@ namespace MusicPlayer.App.WPF.Commands
                 switch (control)
                 {
                     case AudioPlayerControlTypes.StartPause:
-                        _viewModel.AudioManager.TogglePlayPause();
+                        await _viewModel.AudioManager.TogglePlayPause();
                         break;
                     case AudioPlayerControlTypes.Next:
-                        _viewModel.AudioManager.NextTrack();
+                        await _viewModel.AudioManager.NextTrack();
                         break;
                     case AudioPlayerControlTypes.Previous:
-                        _viewModel.AudioManager.PreviousTrack();
+                        await _viewModel.AudioManager.PreviousTrack();
                         break;
                     case AudioPlayerControlTypes.Shuffle:
-                        _viewModel.AudioManager.ShuffleTracks();
+                        await _viewModel.AudioManager.ShuffleTracks();
                         break;
                     case AudioPlayerControlTypes.Repeat:
-                        _viewModel.AudioManager.RepeatTrack();
+                        await _viewModel.AudioManager.RepeatTrack();
                         break;
                     case AudioPlayerControlTypes.VolumeOff:
                         _viewModel.AudioManager.TrackVolumeValue = 0;
                         break;
                     case AudioPlayerControlTypes.IsLiked:
-                        _viewModel.AudioManager.SetAsLikedTrack();
+                        await _viewModel.AudioManager.SetAsLikedTrack();
+                        break;
+                    case AudioPlayerControlTypes.Volume:
                         break;
                 }
             }

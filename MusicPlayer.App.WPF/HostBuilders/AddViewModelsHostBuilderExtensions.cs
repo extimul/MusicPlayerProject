@@ -36,7 +36,7 @@ namespace MusicPlayer.App.WPF.HostBuilders
             return new MainWindowViewModel(
                 services.GetRequiredService<INavigatorService>(),
                 services.GetRequiredService<IViewModelFactory>(),
-                AudioPlayerBarViewModel.LoadMusicControlBarViewModel(services.GetRequiredService<IAudioManager>(), services.GetRequiredService<IIconManager>()));
+                AudioPlayerBarViewModel.LoadMusicControlBarViewModel(services.GetRequiredService<IAudioService>(), services.GetRequiredService<IIconManager>()));
         }
     }
 }

@@ -3,7 +3,9 @@
     public abstract class BaseModel
     {
         public int Id { get; set; }
-
-        public abstract int GetId(); 
+        public virtual int GetId()
+        {
+            return Id - 1;
+        }
     }
 }
