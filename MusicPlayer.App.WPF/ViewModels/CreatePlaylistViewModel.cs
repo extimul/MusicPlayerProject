@@ -7,6 +7,7 @@ using System.Diagnostics;
 using Microsoft.Win32;
 using MusicPlayer.Core.Models;
 using MusicPlayer.App.WPF.Services.DataPath;
+using MusicPlayer.App.WPF.Services.Audio;
 
 namespace MusicPlayer.App.WPF.ViewModels
 {
@@ -17,49 +18,33 @@ namespace MusicPlayer.App.WPF.ViewModels
         #endregion
 
         #region Fields
-        private string _playlistImageSource;
-        private string _playlistName;
-        private string _playlistDescription;
-        private readonly LibraryViewModel _libraryViewModel;
+        private string playlistImageSource;
+        private string playlistName;
+        private string playlistDescription;
+        private readonly LibraryViewModel libraryViewModel;
         private readonly IDataPathService pathService;
+        private readonly IPlaylistService playlistService;
         #endregion
 
         #region Properties
 
         public string PlaylistImageSource
         {
-            get => _playlistImageSource;
-            set
-            {
-                if (value.Equals(_playlistImageSource)) return;
-                _playlistImageSource = value;
-                OnPropertyChanged(nameof(PlaylistImageSource));
-            }
+            get => playlistImageSource;
+            set => SetField(ref playlistImageSource, value);
         }
 
         public string PlaylistName
         {
-            get => _playlistName;
-            set
-            {
-                if (value.Equals(_playlistName)) return;
-                _playlistName = value;
-                OnPropertyChanged(nameof(PlaylistName));
-            }
+            get => playlistName;
+            set => SetField(ref playlistName, value);
         }
-
 
         public string PlaylistDescription
         {
-            get => _playlistDescription;
-            set
-            {
-                if (value.Equals(_playlistDescription)) return;
-                _playlistDescription = value;
-                OnPropertyChanged(nameof(PlaylistDescription));
-            }
+            get => playlistDescription;
+            set => SetField(ref playlistDescription, value);
         }
-
 
         #endregion
 
@@ -69,10 +54,11 @@ namespace MusicPlayer.App.WPF.ViewModels
         public ICommand CancelCommand { get; }
         #endregion
 
-        public CreatePlaylistViewModel(LibraryViewModel libraryViewModel, IDataPathService pathService)
+        public CreatePlaylistViewModel(LibraryViewModel libraryViewModel, IDataPathService pathService, IPlaylistService playlistService)
         {
             this.pathService = pathService;
-            _libraryViewModel = libraryViewModel;
+            this.playlistService = playlistService;
+            this.libraryViewModel = libraryViewModel;
             CreateCommand = new RelayCommand(() => CreatePlaylist());
             CancelCommand = new RelayCommand(() => Cancel());
             ChangeImageCommand = new RelayCommand(() => ChangeImageOnClick());
@@ -98,7 +84,7 @@ namespace MusicPlayer.App.WPF.ViewModels
         {
             CloseRequested?.Invoke(this, new DialogCreateRequestArgs(new Playlist()
             {
-                PlaylistName = PlaylistName ?? $"Playlist #{_libraryViewModel.PlaylistManager.PlaylistsCollection.Count + 1}",
+                PlaylistName = PlaylistName ?? $"Playlist #{playlistService.PlaylistsCollection.Count + 1}",
                 Description = PlaylistDescription ?? "Your playlist",
                 ImageSource = PlaylistImageSource ?? pathService.DefaultTrackImage,
                 AddedDate = DateTime.Now

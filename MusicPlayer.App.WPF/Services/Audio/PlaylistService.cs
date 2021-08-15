@@ -1,4 +1,5 @@
-﻿using MusicPlayer.Core.Models;
+﻿using MusicPlayer.App.WPF.Services.DataPath;
+using MusicPlayer.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,10 +12,13 @@ namespace MusicPlayer.App.WPF.Services.Audio
     public class PlaylistService : IPlaylistService
     {
         #region Events
-        public event Action StateChanged;
+        public event Action QueuePlaylistChanged;
+        public event Action PlaylistCollectionChanged;
         #endregion
 
         #region Fields
+        private readonly IDataPathService dataPathService;
+
         private ObservableCollection<Playlist> _playlistCollection;
         private ObservableCollection<Track> _queueplaylist;
         #endregion
@@ -27,7 +31,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
             {
                 if (value.Equals(_playlistCollection)) return;
                 _playlistCollection = value;
-                StateChanged?.Invoke();
+                PlaylistCollectionChanged?.Invoke();
             }
         }
 
@@ -38,20 +42,70 @@ namespace MusicPlayer.App.WPF.Services.Audio
             {
                 if (value.Equals(_queueplaylist)) return;
                 _queueplaylist = value;
-                StateChanged?.Invoke();
+                QueuePlaylistChanged?.Invoke();
             }
         }
         #endregion
 
-        public PlaylistService()
+        public PlaylistService(IDataPathService dataPathService)
         {
-            QueuePlaylist = new ObservableCollection<Track>();
-            Task.Run(async () => await LoadAllPlaylists());
+            this.dataPathService = dataPathService;
+
+            LoadQueue();
+            LoadAllPlaylists();
         }
 
         public Task LoadQueue()
         {
-            throw new NotImplementedException();
+            QueuePlaylist = new ObservableCollection<Track>()
+            {
+                new Track()
+                {
+                    Id = 1,
+                    TrackTitle = "Track",
+                    TrackAlbum = "Album",
+                    Author = "Author",
+                    IsLiked = true,
+                    TrackImage = dataPathService.DefaultTrackImage,
+                    TrackSource = dataPathService.MusicContainerPath + "\\track.mp3",
+                    Duration = TimeSpan.FromSeconds(1000)
+                },
+                new Track()
+                {
+                    Id = 2,
+                    TrackTitle = "Spirits",
+                    TrackAlbum = "Album",
+                    Author = "Kabes",
+                    IsLiked = true,
+                    TrackImage = dataPathService.DefaultTrackImage,
+                    TrackSource = dataPathService.MusicContainerPath + "\\track2.mp3",
+                    Duration = TimeSpan.FromSeconds(300)
+                },
+                new Track()
+                {
+                    Id = 3,
+                    TrackTitle = "Spirits",
+                    TrackAlbum = "Album",
+                    Author = "Kabes",
+                    IsLiked = true,
+                    TrackImage = dataPathService.DefaultTrackImage,
+                    TrackSource = dataPathService.MusicContainerPath + "\\track3.mp3",
+                    Duration = TimeSpan.FromSeconds(300)
+                },
+                new Track()
+                {
+                    Id = 4,
+                    TrackTitle = "Spirits",
+                    TrackAlbum = "Album",
+                    Author = "Kabes",
+                    IsLiked = true,
+                    TrackImage = dataPathService.DefaultTrackImage,
+                    TrackSource = dataPathService.MusicContainerPath + "\\track.mp3",
+                    Duration = TimeSpan.FromSeconds(300)
+                }
+            };
+            QueuePlaylistChanged?.Invoke();
+            return Task.CompletedTask;
         }
 
         public Task LoadAllPlaylists()
@@ -67,6 +121,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 Author = "You",
                 ImageSource = @"E:\Projects\VisualStudioProjects\MusicPlayer.App.WPF\ApplicationResources\DefaultSongImg.png"
             });
+            PlaylistCollectionChanged?.Invoke();
             return Task.CompletedTask;
         }
 
@@ -77,7 +132,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 playlist.Id = PlaylistsCollection[^1].Id + 1;
                 PlaylistsCollection.Add(playlist);
             }
-            StateChanged?.Invoke();
+            PlaylistCollectionChanged?.Invoke();
             return Task.CompletedTask;
         }
 

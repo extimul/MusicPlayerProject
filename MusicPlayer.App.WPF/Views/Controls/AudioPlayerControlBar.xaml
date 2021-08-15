@@ -47,7 +47,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="0"/>
                     </Border.Effect>
-                    <Image Source="{Binding AudioManager.SelectedTrack.TrackImage, Mode=OneWay}" Stretch="Uniform"/>
+                    <Image Source="{Binding CurrentTrack.TrackImage, Mode=OneWay}" Stretch="Uniform"/>
                 </Border>
                 <Grid Grid.Column="1" Margin="10,20">
                     <Grid.RowDefinitions>
@@ -56,12 +56,12 @@
                     </Grid.RowDefinitions>
                     
                     <!--Track name-->
-                    <Label Content="{Binding AudioManager.SelectedTrack.TrackTitle, Mode=OneWay}" 
+                    <Label Content="{Binding CurrentTrack.TrackTitle, Mode=OneWay}" 
                            Style="{StaticResource MusicInfoLabelStyle}" 
                            Grid.Row="0"
                            FontWeight="Medium"/>
                     <!--Author name-->
-                    <Label Content="{Binding AudioManager.SelectedTrack.Author, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                    <Label Content="{Binding CurrentTrack.Author, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                            Style="{StaticResource MusicInfoLabelStyle}" 
                            Grid.Row="1"
                            Foreground="{StaticResource AppForegroundLightGreyBrush}"
@@ -127,7 +127,7 @@
                                                             Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
                                                             Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
                                                             Fill="{TemplateBinding Foreground}" 
-                                                            Data="{Binding IconManager.PlayPauseIcon, Mode=TwoWay, Converter={StaticResource ContentConverter}}"/>
+                                                            Data="{Binding PlayPauseIcon, Converter={StaticResource ContentConverter}}"/>
                                                 </Grid>
                                                 <ControlTemplate.Triggers>
                                                     <Trigger Property="IsMouseOver" Value="True">
@@ -163,12 +163,12 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0"
-                           Content="{Binding AudioManager.TrackTimePosition, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                           Content="{Binding TrackTimeValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                            ContentStringFormat="{}{0:mm}:{0:ss}"
                            HorizontalAlignment="Center"
                            Style="{StaticResource TimerLableStyle}"/>
-                    <Slider Minimum="0" Maximum="{Binding AudioManager.TrackLenght, Mode=OneWay}"
-                            Value="{Binding AudioManager.TrackPosition, Mode=TwoWay}"
+                    <Slider Minimum="0" Maximum="{Binding TrackLenght, Mode=OneWay}"
+                            Value="{Binding TrackPosition, Mode=TwoWay}"
                             Grid.Column="1" 
                             HorizontalAlignment="Stretch" 
                             VerticalAlignment="Center"
@@ -176,7 +176,7 @@
                             Style="{StaticResource Horizontal_Slider}">
                     </Slider>
                     <Label Grid.Column="2"
-                           Content="{Binding AudioManager.TrackDuration, Mode=OneWay}"
+                           Content="{Binding TrackDuration, Mode=OneWay}"
                            ContentStringFormat="{}{0:mm}:{0:ss}"
                            HorizontalAlignment="Center"
                            Style="{StaticResource TimerLableStyle}"/>
@@ -190,7 +190,7 @@
                     <ToggleButton Style="{StaticResource ToggleButtonStyle}"
                                   Content="{StaticResource FavouriteIcon}"
                                   Foreground="{StaticResource AppForegroundBrush}"
-                                  IsChecked="{Binding AudioManager.SelectedTrack.IsLiked, Mode=TwoWay}"/>
+                                  IsChecked="{Binding CurrentTrack.IsLiked, Mode=TwoWay}"/>
                     <Button Foreground="{StaticResource AppForegroundBrush}"
                             Margin="10,0,5,0"
                             Command="{Binding AudioPlayerControlCommand}"
@@ -219,7 +219,7 @@
                                                         Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
                                                         Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
                                                         Fill="{TemplateBinding Foreground}" 
-                                                        Data="{Binding IconManager.VolumeIcon, Mode=TwoWay, Converter={StaticResource ContentConverter}}"/>
+                                                        Data="{Binding TrackVolumeIcon, Converter={StaticResource ContentConverter}}"/>
                                             </Grid>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
@@ -237,7 +237,7 @@
                             VerticalAlignment="Center"
                             MaxWidth="90" MinWidth="90"
                             Margin="0,0,0,0"
-                            Value="{Binding AudioManager.TrackVolumeValue, Mode=TwoWay}"
+                            Value="{Binding TrackVolumeValue, Mode=TwoWay}"
                             Minimum="0" Maximum="100"
                             Style="{StaticResource Horizontal_Slider}" />
                 </StackPanel>

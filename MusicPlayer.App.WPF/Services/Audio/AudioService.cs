@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using MusicPlayer.App.WPF.Services.DataPath;
+using MusicPlayer.App.WPF.Services.Settings;
 using MusicPlayer.Core.Exceptions;
 using MusicPlayer.Core.Models;
 using MusicPlayer.Core.Types;
@@ -14,7 +15,9 @@ namespace MusicPlayer.App.WPF.Services.Audio
     public class AudioService : IAudioService
     {
         #region Events
-        public event Action StateChanged;
+        public event Action TrackChanged;
+        public event Action VolumeChanged;
+        public event Action TrackPositionChanged;
         public event EventHandler<ChangeIconEventArgs> IconChanged;
         #endregion
 
@@ -42,9 +45,9 @@ namespace MusicPlayer.App.WPF.Services.Audio
             {
                 if (value.Equals(_currentlyPlayingTrack)) return;
                 _currentlyPlayingTrack = value;
-                StateChanged?.Invoke();
             }
         }
+
         public Track SelectedTrack
         {
             get => _currentlySelectedTrack;
@@ -52,9 +55,10 @@ namespace MusicPlayer.App.WPF.Services.Audio
             {
                 if (value.Equals(_currentlySelectedTrack)) return;
                 _currentlySelectedTrack = value;
-                StateChanged?.Invoke();
+                TrackChanged.Invoke();
             }
         }
+
         public ObservableCollection<Track> LoadedPlaylist
         {
             get => _loadedPlaylist;
@@ -62,9 +66,9 @@ namespace MusicPlayer.App.WPF.Services.Audio
             {
                 if (value.Equals(_loadedPlaylist)) return;
                 _loadedPlaylist = value;
-                StateChanged?.Invoke();
             }
         }
+
         public PlaybackState CurrentPlaybackState => _wavePlayer?.PlaybackState ?? PlaybackState.Stopped;
 
         public PlaybackStopTypes PlaybackStopType
@@ -96,8 +100,8 @@ namespace MusicPlayer.App.WPF.Services.Audio
                         break;
                 }
 
+                VolumeChanged?.Invoke();
                 IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.VolumeSource, (double)_wavePlayer.Volume * 100.0f));
-                StateChanged?.Invoke();
             }
         }
 
@@ -112,7 +116,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 if (value.Equals(_trackPosition)) return;
                 _trackPosition = value;
                 _audioFileReader.Position = _trackPosition;
-                StateChanged?.Invoke();
+                TrackPositionChanged?.Invoke();
             }
         }
 
@@ -125,66 +129,15 @@ namespace MusicPlayer.App.WPF.Services.Audio
             {
                 if (value.Equals(_trackTimePosition)) return;
                 _trackTimePosition = value;
-                StateChanged?.Invoke();
+                TrackPositionChanged?.Invoke();
             }
         }
 
-        public bool HasTracksInPlaylist => LoadedPlaylist.Count > 0;
-
-        public bool CanPlay => HasTracksInPlaylist && SelectedTrack != null;
+        public bool CanPlay => SelectedTrack != null;
         #endregion
 
-        public AudioService(IDataPathService dataPathService)
+        public AudioService()
         {
-            this.dataPathService = dataPathService;
-
-            LoadedPlaylist = new ObservableCollection<Track>()
-            {
-                new Track()
-                {
-                    Id = 1,
-                    TrackTitle = "Track",
-                    TrackAlbum = "Album",
-                    Author = "Author",
-                    IsLiked = true,
-                    TrackImage = dataPathService.DefaultTrackImage,
-                    TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayer.App.WPF\\ApplicationResources\\track3.mp3",
-                    Duration = TimeSpan.FromSeconds(1000)
-                },
-                new Track()
-                {
-                    Id = 2,
-                    TrackTitle = "Spirits",
-                    TrackAlbum = "Album",
-                    Author = "Kabes",
-                    IsLiked = true,
-                    TrackImage = dataPathService.DefaultTrackImage,
-                    TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayer.App.WPF\\ApplicationResources\\track2.mp3",
-                    Duration = TimeSpan.FromSeconds(300)
-                },
-                new Track()
-                {
-                    Id = 3,
-                    TrackTitle = "Spirits",
-                    TrackAlbum = "Album",
-                    Author = "Kabes",
-                    IsLiked = true,
-                    TrackImage = dataPathService.DefaultTrackImage,
-                    TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayer.App.WPF\\ApplicationResources\\track3.mp3",
-                    Duration = TimeSpan.FromSeconds(300)
-                },
-                new Track()
-                {
-                    Id = 4,
-                    TrackTitle = "Spirits",
-                    TrackAlbum = "Album",
-                    Author = "Kabes",
-                    IsLiked = true,
-                    TrackImage = dataPathService.DefaultTrackImage,
-                    TrackSource = "E:\\Projects\\VisualStudioProjects\\MusicPlayer.App.WPF\\ApplicationResources\\track3.mp3",
-                    Duration = TimeSpan.FromSeconds(300)
-                }
-            };
             _timer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMilliseconds(500)
@@ -197,7 +150,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
             if (_audioFileReader == null) return;
             _trackPosition = _audioFileReader.Position;
             _trackTimePosition = _audioFileReader?.CurrentTime ?? TimeSpan.FromSeconds(0);
-            StateChanged?.Invoke();
+            TrackPositionChanged?.Invoke();
         }
 
         public Task TogglePlayPause()
@@ -230,7 +183,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
 
         public Task PlayTrack()
         {
-            if (!SelectedTrack.CheckTrackSource())
+            if (!SelectedTrack.TrackIsExsist)
             {
                 throw new TrackNotFoundException(SelectedTrack.TrackTitle);
             }
@@ -248,7 +201,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
 
             if (_audioFileReader is null)
             {
-                TrackVolumeValue = 50.0;
+                TrackVolumeValue = 50;
 
                 _audioFileReader = new AudioFileReader(PlayingTrack.TrackSource)
                 {
@@ -267,7 +220,9 @@ namespace MusicPlayer.App.WPF.Services.Audio
             _wavePlayer?.Play();
             _timer.Start();
 
-            StateChanged?.Invoke();
+            TrackChanged?.Invoke();
+            TrackPositionChanged?.Invoke();
+            VolumeChanged?.Invoke();
             IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, CurrentPlaybackState));
 
             return Task.CompletedTask;
@@ -299,7 +254,6 @@ namespace MusicPlayer.App.WPF.Services.Audio
             _audioFileReader?.Dispose();
             _audioFileReader = null;
             _timer?.Stop();
-            StateChanged?.Invoke();
             IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, CurrentPlaybackState));
             return Task.CompletedTask;
         }

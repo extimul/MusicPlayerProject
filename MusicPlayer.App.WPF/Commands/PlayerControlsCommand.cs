@@ -8,7 +8,7 @@ namespace MusicPlayer.App.WPF.Commands
 {
     public class PlayerControlsCommand : AsyncCommandBase
     {
-        private AudioPlayerBarViewModel _viewModel;
+        private readonly AudioPlayerBarViewModel _viewModel;
 
         public PlayerControlsCommand(AudioPlayerBarViewModel playerBarViewModel)
         {
@@ -30,25 +30,25 @@ namespace MusicPlayer.App.WPF.Commands
                 switch (control)
                 {
                     case AudioPlayerControlTypes.StartPause:
-                        await _viewModel.AudioManager.TogglePlayPause();
+                        await _viewModel.TogglePlayPause();
                         break;
                     case AudioPlayerControlTypes.Next:
-                        await _viewModel.AudioManager.NextTrack();
+                        await _viewModel.NextTrack();
                         break;
                     case AudioPlayerControlTypes.Previous:
-                        await _viewModel.AudioManager.PreviousTrack();
+                        await _viewModel.PreviousTrack();
                         break;
                     case AudioPlayerControlTypes.Shuffle:
-                        await _viewModel.AudioManager.ShuffleTracks();
+                        await _viewModel.ShuffleTracks();
                         break;
                     case AudioPlayerControlTypes.Repeat:
-                        await _viewModel.AudioManager.RepeatTrack();
+                        await _viewModel.RepeatTrack();
                         break;
                     case AudioPlayerControlTypes.VolumeOff:
-                        _viewModel.AudioManager.TrackVolumeValue = 0;
+                        _viewModel.TrackVolumeValue = 0;
                         break;
                     case AudioPlayerControlTypes.IsLiked:
-                        await _viewModel.AudioManager.SetAsLikedTrack();
+                        await _viewModel.SetAsLikedTrack();
                         break;
                     case AudioPlayerControlTypes.Volume:
                         break;

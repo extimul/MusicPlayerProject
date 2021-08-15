@@ -117,7 +117,7 @@
                           VerticalAlignment="Stretch"
                           Background="Transparent"
                           SelectedItem="{Binding SelectedPlaylist, Mode=TwoWay}"
-                          ItemsSource="{Binding Playlist, UpdateSourceTrigger=PropertyChanged}"
+                          ItemsSource="{Binding PlaylistCollection, UpdateSourceTrigger=PropertyChanged}"
                           ScrollViewer.VerticalScrollBarVisibility="Auto"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           BorderThickness="0"

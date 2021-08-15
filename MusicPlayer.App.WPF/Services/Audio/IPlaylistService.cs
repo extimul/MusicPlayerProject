@@ -7,7 +7,8 @@ namespace MusicPlayer.App.WPF.Services.Audio
 {
     public interface IPlaylistService
     {
-        public event Action StateChanged;
+        public event Action QueuePlaylistChanged;
+        public event Action PlaylistCollectionChanged;
         public ObservableCollection<Track> QueuePlaylist { get; set; }
         public ObservableCollection<Playlist> PlaylistsCollection { get; set; }
         Task LoadQueue();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace MusicPlayer.Core.Models
 {
@@ -11,10 +12,6 @@ namespace MusicPlayer.Core.Models
         public TimeSpan Duration { get; set; }
         public string TrackImage { get; set; }
         public string TrackSource { get; set; }
-
-        public bool CheckTrackSource()
-        {
-            return false;
-        }
+        public bool TrackIsExsist => File.Exists(TrackSource);
     }
 }

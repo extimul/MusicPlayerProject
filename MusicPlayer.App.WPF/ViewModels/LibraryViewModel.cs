@@ -12,13 +12,13 @@ namespace MusicPlayer.App.WPF.ViewModels
 {
     public class LibraryViewModel : ViewModelBase
     {
-        #region Properties
-        public IPlaylistService PlaylistManager { get; }
-        public ObservableCollection<Playlist> Playlist => PlaylistManager.PlaylistsCollection;
+        #region Fields
         private Playlist _selectedPlaylist;
-        private readonly INavigatorService navigator;
-        private readonly IViewModelFactory viewModelFactory;
-        private readonly IDataPathService pathService;
+        private readonly IPlaylistService playlistManager;
+        #endregion
+
+        #region Properties
+        public ObservableCollection<Playlist> PlaylistCollection => playlistManager.PlaylistsCollection;
 
         public Playlist SelectedPlaylist
         {
@@ -35,7 +35,6 @@ namespace MusicPlayer.App.WPF.ViewModels
                 OnPropertyChanged(nameof(SelectedPlaylist));
             }
         }
-
         #endregion
 
         #region Commands
@@ -49,25 +48,23 @@ namespace MusicPlayer.App.WPF.ViewModels
                                 IViewModelFactory viewModelFactory,
                                 IDataPathService pathService)
         {
-            this.navigator = navigator;
-            this.viewModelFactory = viewModelFactory;
-            this.pathService = pathService;
-            PlaylistManager = playlistManager;
-            PlaylistManager.StateChanged += OnStateChanged;
+            this.playlistManager = playlistManager;
+
+            this.playlistManager.PlaylistCollectionChanged += OnPlaylistCollectionChanged;
 
             SortCommand = new SortPlaylistsCommand();
-            CreatePlaylistCommand = new CreatePlaylistCommand(this, pathService);
+            CreatePlaylistCommand = new CreatePlaylistCommand(this, pathService, playlistManager);
             OpenPlaylistCommand = new OpenPlaylistCommand(this, navigator, viewModelFactory, pathService);
         }
 
-        private void OnStateChanged()
+        private void OnPlaylistCollectionChanged()
         {
-            OnPropertyChanged(nameof(Playlist));
+            OnPropertyChanged(nameof(PlaylistCollection));
         }
 
         public override void Dispose()
         {
-            PlaylistManager.StateChanged -= OnStateChanged;
+            playlistManager.PlaylistCollectionChanged -= OnPlaylistCollectionChanged;
             base.Dispose();
         }
     }

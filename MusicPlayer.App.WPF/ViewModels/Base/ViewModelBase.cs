@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace MusicPlayer.App.WPF.ViewModels.Base
 {
@@ -9,6 +11,14 @@ namespace MusicPlayer.App.WPF.ViewModels.Base
         public virtual void Dispose() { }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
 
         protected void OnPropertyChanged(string property)
         {

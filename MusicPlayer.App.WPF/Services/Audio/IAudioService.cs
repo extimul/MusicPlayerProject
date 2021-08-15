@@ -10,7 +10,9 @@ namespace MusicPlayer.App.WPF.Services.Audio
     public interface IAudioService
     {
         #region Events
-        event Action StateChanged;
+        event Action TrackChanged;
+        event Action VolumeChanged;
+        event Action TrackPositionChanged;
         event EventHandler<ChangeIconEventArgs> IconChanged;
         #endregion
 
@@ -25,7 +27,6 @@ namespace MusicPlayer.App.WPF.Services.Audio
         public Track PlayingTrack { get; set; }
         public Track SelectedTrack { get; set; }
         public ObservableCollection<Track> LoadedPlaylist { get; set; }
-        public bool HasTracksInPlaylist { get; }
         public bool CanPlay { get; }
         #endregion
 
