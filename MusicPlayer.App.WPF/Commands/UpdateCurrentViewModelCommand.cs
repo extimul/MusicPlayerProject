@@ -10,9 +10,9 @@ namespace MusicPlayer.App.WPF.Commands
     {
         public event EventHandler CanExecuteChanged;
 
-        private INavigatorService _navigator;
+        private readonly INavigatorService _navigator;
 
-        private IViewModelFactory _viewModelFactory;
+        private readonly IViewModelFactory _viewModelFactory;
 
         public UpdateCurrentViewModelCommand(INavigatorService navigator, IViewModelFactory viewModelFactory)
         {

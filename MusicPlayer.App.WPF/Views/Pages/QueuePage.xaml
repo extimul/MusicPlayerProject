@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:type="clr-namespace:MusicPlayer.Core.Types;assembly=MusicPlayer.Core"
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1400"
              Background="{StaticResource AppBackgroundMainBrush}">
@@ -27,13 +29,21 @@
                    FontWeight="Normal" Foreground="{StaticResource AppForegroundLightGreyBrush}"/>
         </StackPanel>
 
-        <ListView Grid.Row="1"
+        <ListView x:Name="QueueListView"
+                  Grid.Row="1"
                   Margin="0,20,0,0"
                   BorderThickness="0"
                   BorderBrush="{x:Null}"
-                  Background="{x:Null}"
+                  Background="Transparent"
                   ItemsSource="{Binding QueueCollection, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding SelectedTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                  SelectedItem="{Binding SelectedTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectionMode="Single">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding PlayPauseCommand}"
+                                           CommandParameter="{x:Static type:AudioPlayerControlTypes.DoubleClickSwitch}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="BorderThickness" Value="1"/>
@@ -80,13 +90,80 @@
                             <ColumnDefinition MinWidth="200" Width="2*"/>
                             <ColumnDefinition MinWidth="100" Width="2*"/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <!--Track number-->
-                        <Label  Content="{Binding Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                        <Label x:Name="TackIdLabel"
+                                Content="{Binding Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                 Grid.Column="0"
                                 VerticalAlignment="Center"
-                                HorizontalContentAlignment="Center"/>
-
+                                HorizontalContentAlignment="Center">
+                            <Label.Style>
+                                <Style TargetType="{x:Type Label}">
+                                    <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}"/>
+                                    <Setter Property="Foreground" Value="{StaticResource AppForegroundBrush}"/>
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}, Path=IsSelected}" Value="True">
+                                            <Setter Property="Visibility" Value="Hidden"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                        
+                        <!-- PlayPause button-->
+                        <Button x:Name="PlayPauseButton"
+                                Foreground="{StaticResource AppForegroundBrush}"
+                                Grid.Column="0"
+                                Command="{Binding ElementName=QueueListView, Path=DataContext.PlayPauseCommand}"
+                                CommandParameter="{x:Static type:AudioPlayerControlTypes.StartPause}">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Height" Value="20"/>
+                                    <Setter Property="Width" Value="20"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Background" Value="{x:Null}"/>
+                                    <Setter Property="Margin" Value="10"/>
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Grid x:Name="grid">
+                                                    <Path x:Name="ellipse" Stretch="Uniform"
+                                                             StrokeThickness="0"
+                                                             Stroke="Transparent"
+                                                             Fill="Transparent" >
+                                                        <Path.Data>
+                                                            <EllipseGeometry RadiusX="50" RadiusY="50" />
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <Path x:Name="shape" 
+                                                        Stretch="Uniform" 
+                                                        Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
+                                                        Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
+                                                        Fill="{TemplateBinding Foreground}" 
+                                                        Data="{Binding ElementName=QueueListView, Path=DataContext.PlayPauseIcon, Converter={StaticResource ContentConverter}}"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="shape" Property="Fill" Value="{StaticResource AppForegroundGreyBrush}"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}, Path=IsSelected}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}, Path=IsSelected}" Value="False">
+                                            <Setter Property="Visibility" Value="Hidden"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        
                         <!--Album/Track image-->
                         <Image Grid.Column="1"
                                Width="50"

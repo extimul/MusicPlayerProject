@@ -40,7 +40,7 @@ namespace MusicPlayer.App.WPF.Commands
             }
         }
 
-        public override async Task ExecuteAsync(object parameter)
+        public override Task ExecuteAsync(object parameter)
         {
             Window mainWindow = Application.Current.MainWindow;
             if (viewModel != null)
@@ -64,6 +64,7 @@ namespace MusicPlayer.App.WPF.Commands
             BlurEffect.Apply(mainWindow, 10);
             view.ShowDialog();
             BlurEffect.Clear(mainWindow);
+            return Task.CompletedTask;
         }
     }
 }

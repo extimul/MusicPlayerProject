@@ -26,7 +26,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
         public TimeSpan TrackTimePosition { get; }
         public Track PlayingTrack { get; set; }
         public Track SelectedTrack { get; set; }
-        public ObservableCollection<Track> LoadedPlaylist { get; set; }
+        public ObservableCollection<Track> ActivePlaylist { get; set; }
         public bool CanPlay { get; }
         #endregion
 

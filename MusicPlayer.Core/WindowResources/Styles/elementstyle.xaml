@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:c="clr-namespace:MusicPlayer.Core.Helpers.Converters"
-                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+                    xmlns:c="clr-namespace:MusicPlayer.Core.Helpers.Converters">
 
     <c:ContentConverter x:Key="ContentConverter" />
     <c:ScaleConverter x:Key="ScaleConverter" Scale="65"  />

@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             xmlns:local="clr-namespace:MusicPlayer.App.WPF.Views.Controls"
              xmlns:type="clr-namespace:MusicPlayer.Core.Types;assembly=MusicPlayer.Core"
              mc:Ignorable="d"
              MaxWidth="1600"
@@ -47,7 +45,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="0"/>
                     </Border.Effect>
-                    <Image Source="{Binding CurrentTrack.TrackImage, Mode=OneWay}" Stretch="Uniform"/>
+                    <Image Source="{Binding PlayingTrack.TrackImage, Mode=OneWay}" Stretch="Uniform"/>
                 </Border>
                 <Grid Grid.Column="1" Margin="10,20">
                     <Grid.RowDefinitions>
@@ -56,12 +54,12 @@
                     </Grid.RowDefinitions>
                     
                     <!--Track name-->
-                    <Label Content="{Binding CurrentTrack.TrackTitle, Mode=OneWay}" 
+                    <Label Content="{Binding PlayingTrack.TrackTitle, Mode=OneWay}" 
                            Style="{StaticResource MusicInfoLabelStyle}" 
                            Grid.Row="0"
                            FontWeight="Medium"/>
                     <!--Author name-->
-                    <Label Content="{Binding CurrentTrack.Author, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                    <Label Content="{Binding PlayingTrack.Author, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                            Style="{StaticResource MusicInfoLabelStyle}" 
                            Grid.Row="1"
                            Foreground="{StaticResource AppForegroundLightGreyBrush}"
@@ -190,7 +188,7 @@
                     <ToggleButton Style="{StaticResource ToggleButtonStyle}"
                                   Content="{StaticResource FavouriteIcon}"
                                   Foreground="{StaticResource AppForegroundBrush}"
-                                  IsChecked="{Binding CurrentTrack.IsLiked, Mode=TwoWay}"/>
+                                  IsChecked="{Binding PlayingTrack.IsLiked, Mode=TwoWay}"/>
                     <Button Foreground="{StaticResource AppForegroundBrush}"
                             Margin="10,0,5,0"
                             Command="{Binding AudioPlayerControlCommand}"

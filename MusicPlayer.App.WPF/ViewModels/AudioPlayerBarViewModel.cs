@@ -22,7 +22,7 @@ namespace MusicPlayer.App.WPF.ViewModels
         #endregion
 
         #region Properties
-        public Track CurrentTrack => audioService.SelectedTrack;
+        public Track PlayingTrack => audioService.PlayingTrack;
         public TimeSpan TrackTimeValue => audioService.TrackTimePosition;
         public TimeSpan TrackDuration => audioService.TrackDuration;
         public long TrackPosition
@@ -64,7 +64,7 @@ namespace MusicPlayer.App.WPF.ViewModels
             this.audioService.VolumeChanged += OnVolumeChanged;
             this.audioService.TrackPositionChanged += OnTrackPositionChanged;
 
-            AudioPlayerControlCommand = new PlayerControlsCommand(this);
+            AudioPlayerControlCommand = new PlayerControlsCommand(audioService, this);
 
             OnIconChanged(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, this.audioService.CurrentPlaybackState));
             OnIconChanged(this, new ChangeIconEventArgs(SourceTypes.VolumeSource, this.audioService.TrackVolumeValue));
@@ -84,7 +84,7 @@ namespace MusicPlayer.App.WPF.ViewModels
         private void OnTrackChanged()
         {
             OnPropertyChanged(nameof(CanPlay));
-            OnPropertyChanged(nameof(CurrentTrack));
+            OnPropertyChanged(nameof(PlayingTrack));
             OnPropertyChanged(nameof(TrackLenght));
             OnPropertyChanged(nameof(TrackDuration));
         }
@@ -101,38 +101,6 @@ namespace MusicPlayer.App.WPF.ViewModels
                 iconManager.VolumeIcon = iconManager.SetVolumeIcon((double)e.Value);
                 OnPropertyChanged(nameof(TrackVolumeIcon));
             }
-        }
-
-        public Task TogglePlayPause()
-        {
-            audioService.TogglePlayPause();
-            return Task.CompletedTask;
-        }
-
-        public Task PreviousTrack()
-        {
-            audioService.PreviousTrack();
-            return Task.CompletedTask;
-        }
-
-        public Task NextTrack()
-        {
-            audioService.NextTrack();
-            return Task.CompletedTask;
-        }
-        public Task SetAsLikedTrack()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task ShuffleTracks()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task RepeatTrack()
-        {
-            throw new NotImplementedException();
         }
 
         public static AudioPlayerBarViewModel LoadMusicControlBarViewModel(IAudioService audioManager, IIconManager iconManager) => new(audioManager, iconManager);

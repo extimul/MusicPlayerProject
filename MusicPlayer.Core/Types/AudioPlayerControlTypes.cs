@@ -9,6 +9,7 @@
         Repeat, 
         Volume,
         VolumeOff,
-        IsLiked
+        IsLiked,
+        DoubleClickSwitch
     }
 }

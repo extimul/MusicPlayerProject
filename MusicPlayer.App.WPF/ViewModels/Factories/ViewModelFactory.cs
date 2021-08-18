@@ -1,4 +1,5 @@
-﻿using MusicPlayer.App.WPF.Services.DataPath;
+﻿using MusicPlayer.App.WPF.Services.Audio;
+using MusicPlayer.App.WPF.Services.DataPath;
 using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.Core.Models;
@@ -23,22 +24,18 @@ namespace MusicPlayer.App.WPF.ViewModels.Factories
 
         public ViewModelBase CreateViewModel(ViewTypes viewType)
         {
-            switch (viewType)
+            return viewType switch
             {
-                case ViewTypes.Home:
-                    return _createHomeViewModel();
-                case ViewTypes.Library:
-                    return _createMusicLibraryViewModel();
-                case ViewTypes.Queue:
-                    return _createQueueViewModel();
-                default:
-                    throw new ArgumentException("ViewType does not have a ViewModel", "viewType");
-            }
+                ViewTypes.Home => _createHomeViewModel(),
+                ViewTypes.Library => _createMusicLibraryViewModel(),
+                ViewTypes.Queue => _createQueueViewModel(),
+                _ => throw new ArgumentException("ViewType does not have a ViewModel", nameof(viewType)),
+            };
         }
 
-        public ViewModelBase CreatePlaylistViewModel(Playlist playlist, INavigatorService navigator, IDataPathService pathService)
+        public ViewModelBase CreatePlaylistViewModel(Playlist playlist, IAudioService audioService, INavigatorService navigator, IDataPathService pathService)
         {
-            return new PlaylistViewModel(playlist, navigator, pathService);
+            return new PlaylistViewModel(playlist, audioService, navigator, pathService);
         }
     }
 }

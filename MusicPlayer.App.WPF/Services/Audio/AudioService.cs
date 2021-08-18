@@ -22,12 +22,11 @@ namespace MusicPlayer.App.WPF.Services.Audio
         #endregion
 
         #region Fields
-        private readonly IDataPathService dataPathService;
         private readonly DispatcherTimer _timer;
         private WaveStream _audioFileReader;
         private IWavePlayer _wavePlayer;
 
-        private ObservableCollection<Track> _loadedPlaylist;
+        private ObservableCollection<Track> activePlaylist;
         private Track _currentlyPlayingTrack;
         private Track _currentlySelectedTrack;
         private long _trackPosition;
@@ -55,17 +54,17 @@ namespace MusicPlayer.App.WPF.Services.Audio
             {
                 if (value.Equals(_currentlySelectedTrack)) return;
                 _currentlySelectedTrack = value;
-                TrackChanged.Invoke();
+                TrackChanged?.Invoke();
             }
         }
 
-        public ObservableCollection<Track> LoadedPlaylist
+        public ObservableCollection<Track> ActivePlaylist
         {
-            get => _loadedPlaylist;
+            get => activePlaylist;
             set
             {
-                if (value.Equals(_loadedPlaylist)) return;
-                _loadedPlaylist = value;
+                if (value.Equals(activePlaylist)) return;
+                activePlaylist = value;
             }
         }
 
@@ -191,6 +190,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
             if (SelectedTrack != null && SelectedTrack != PlayingTrack)
             {
                 PlayingTrack = SelectedTrack;
+                StopTrack();
             }
 
             if (_wavePlayer is null)
@@ -202,15 +202,13 @@ namespace MusicPlayer.App.WPF.Services.Audio
             if (_audioFileReader is null)
             {
                 TrackVolumeValue = 50;
-
                 _audioFileReader = new AudioFileReader(PlayingTrack.TrackSource)
                 {
                     Volume = (float)TrackVolumeValue / 100.0f
                 };
 
                 TrackPosition = 0;
-
-                TrackTimePosition = TimeSpan.FromSeconds(0);
+                TrackTimePosition = TimeSpan.Zero;
 
                 PlaybackStopType = PlaybackStopTypes.StoppedByUser;
 
@@ -220,11 +218,10 @@ namespace MusicPlayer.App.WPF.Services.Audio
             _wavePlayer?.Play();
             _timer.Start();
 
+            IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, CurrentPlaybackState));
             TrackChanged?.Invoke();
             TrackPositionChanged?.Invoke();
             VolumeChanged?.Invoke();
-            IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, CurrentPlaybackState));
-
             return Task.CompletedTask;
         }
 
@@ -254,22 +251,27 @@ namespace MusicPlayer.App.WPF.Services.Audio
             _audioFileReader?.Dispose();
             _audioFileReader = null;
             _timer?.Stop();
+
+            TrackPosition = 0;
+            TrackTimePosition = TimeSpan.Zero;
+
             IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, CurrentPlaybackState));
+            TrackPositionChanged?.Invoke();
             return Task.CompletedTask;
         }
 
         public Task NextTrack()
         {
-            if (CanPlay && SelectedTrack.GetId() < LoadedPlaylist.Count - 1)
+            if (CanPlay && SelectedTrack.GetId() < ActivePlaylist.Count - 1)
             {
                 StopTrack();
-                SelectedTrack = LoadedPlaylist[SelectedTrack.GetId() + 1];
+                SelectedTrack = ActivePlaylist[SelectedTrack.GetId() + 1];
                 PlayTrack();
             }
             else
             {
                 StopTrack();
-                SelectedTrack = LoadedPlaylist[0];
+                SelectedTrack = ActivePlaylist[0];
                 PlayTrack();
             }
             return Task.CompletedTask;
@@ -280,13 +282,13 @@ namespace MusicPlayer.App.WPF.Services.Audio
             if (CanPlay && SelectedTrack.GetId() > 0)
             {
                 StopTrack();
-                SelectedTrack = LoadedPlaylist[SelectedTrack.GetId() - 1];
+                SelectedTrack = ActivePlaylist[SelectedTrack.GetId() - 1];
                 PlayTrack();
             }
             else
             {
                 StopTrack();
-                SelectedTrack = LoadedPlaylist[^1];
+                SelectedTrack = ActivePlaylist[^1];
                 PlayTrack();
             }
             return Task.CompletedTask;

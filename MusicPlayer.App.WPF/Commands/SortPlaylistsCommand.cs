@@ -7,12 +7,10 @@ namespace MusicPlayer.App.WPF.Commands
 {
     public class SortPlaylistsCommand : AsyncCommandBase
     {
-        public override async Task ExecuteAsync(object parameter)
+        public override Task ExecuteAsync(object parameter)
         {
-            if (parameter is SortTypes)
+            if (parameter is SortTypes sortType)
             {
-                SortTypes sortType = (SortTypes)parameter;
-
                 switch (sortType)
                 {
                     case SortTypes.MostRelevant:
@@ -29,6 +27,7 @@ namespace MusicPlayer.App.WPF.Commands
                         break;
                 }
             }
+            return Task.CompletedTask;
         }
     }
 }

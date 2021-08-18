@@ -1,5 +1,5 @@
 ﻿using MusicPlayer.App.WPF.Commands;
-using MusicPlayer.App.WPF.Commands.Base;
+using MusicPlayer.App.WPF.Services.Audio;
 using MusicPlayer.App.WPF.Services.DataPath;
 using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels.Base;
@@ -14,20 +14,25 @@ namespace MusicPlayer.App.WPF.ViewModels
     {
         #region Fields
         private Playlist playlist;
+        private readonly IAudioService audioService;
         private readonly INavigatorService navigator;
         private readonly IDataPathService pathService;
-
         #endregion
 
         #region Properties
         public Playlist CurrentPlaylist
         {
             get => playlist;
+            set => SetField(ref playlist, value);
+        }
+
+        public Track SelectedTrack
+        {
+            get => audioService.SelectedTrack;
             set
             {
-                if (value.Equals(playlist)) return;
-                playlist = value;
-                OnPropertyChanged(nameof(CurrentPlaylist));
+                audioService.SelectedTrack = value;
+                OnPropertyChanged(nameof(SelectedTrack));
             }
         }
 
@@ -38,41 +43,29 @@ namespace MusicPlayer.App.WPF.ViewModels
 
         #endregion
 
-        public PlaylistViewModel(Playlist playlist, INavigatorService navigator, IDataPathService pathService)
+        public PlaylistViewModel(Playlist playlist, IAudioService audioService, INavigatorService navigator, IDataPathService pathService)
         {
             CurrentPlaylist = playlist;
+            this.audioService = audioService;
             this.navigator = navigator;
             this.pathService = pathService;
+
+            this.audioService.SelectedTrack = (CurrentPlaylist.Tracks as ObservableCollection<Track>)[0];
+            this.audioService.ActivePlaylist = (ObservableCollection<Track>)CurrentPlaylist.Tracks;
+            this.audioService.TrackChanged += OnTrackChanged;
+
             GoBackCommand = new RenavigateCommand(navigator);
-            CurrentPlaylist = new Playlist()
-            {
-                Id = 1,
-                PlaylistName = "Liked songs",
-                Description = "Something text for this playlist and text text text text text text text text text text text text text text text text text text text text",
-                RecentlyPlay = DateTime.Now,
-                AddedDate = DateTime.Now,
-                Author = "Large author name",
-                ImageSource = @"E:\Projects\VisualStudioProjects\MusicPlayer.App.WPF\ApplicationResources\DefaultSongImg.png" ?? pathService.DefaultTrackImage,
-                Tracks = new ObservableCollection<Track>()
-                {
-                    new Track()
-                    {
-                        Id = 1,
-                        TrackTitle = "TrackTitle",
-                        Author = "Author",
-                        IsLiked = true,
-                        TrackAlbum = "Album",
-                        Duration = TimeSpan.FromSeconds(300),
-                        TrackSource = @"E:\Projects\VisualStudioProjects\MusicPlayer.App.WPF\ApplicationResources\track.mp3"
-                    }
-                }
-            };
+        }
+
+        private void OnTrackChanged()
+        {
+            OnPropertyChanged(nameof(SelectedTrack));
         }
 
         public override void Dispose()
         {
+            this.audioService.TrackChanged -= OnTrackChanged;
             GC.SuppressFinalize(this);
-            base.Dispose();
         }
     }
 }

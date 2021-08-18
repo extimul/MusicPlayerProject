@@ -5,6 +5,9 @@ namespace MusicPlayer.Core.Models
 {
     public class Track : BaseModel
     {
+        #region Properties
+
+        public string FileName { get; set; }
         public string TrackTitle { get; set; }
         public string TrackAlbum { get; set; }
         public string Author { get; set; }
@@ -13,5 +16,11 @@ namespace MusicPlayer.Core.Models
         public string TrackImage { get; set; }
         public string TrackSource { get; set; }
         public bool TrackIsExsist => File.Exists(TrackSource);
+        #endregion
+
+        #region Methods
+        public static string GetFullTrackPath(string directory, string fileName) => Path.Combine(directory, fileName);
+        #endregion
+
     }
 }

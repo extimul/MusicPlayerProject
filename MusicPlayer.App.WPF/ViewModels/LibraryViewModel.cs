@@ -43,10 +43,11 @@ namespace MusicPlayer.App.WPF.ViewModels
         public ICommand OpenPlaylistCommand { get; }
         #endregion
 
-        public LibraryViewModel(IPlaylistService playlistManager, 
+        public LibraryViewModel(IPlaylistService playlistManager,
                                 INavigatorService navigator,
                                 IViewModelFactory viewModelFactory,
-                                IDataPathService pathService)
+                                IDataPathService pathService,
+                                IAudioService audioService)
         {
             this.playlistManager = playlistManager;
 
@@ -54,7 +55,7 @@ namespace MusicPlayer.App.WPF.ViewModels
 
             SortCommand = new SortPlaylistsCommand();
             CreatePlaylistCommand = new CreatePlaylistCommand(this, pathService, playlistManager);
-            OpenPlaylistCommand = new OpenPlaylistCommand(this, navigator, viewModelFactory, pathService);
+            OpenPlaylistCommand = new OpenPlaylistCommand(this, audioService, navigator, viewModelFactory, pathService);
         }
 
         private void OnPlaylistCollectionChanged()

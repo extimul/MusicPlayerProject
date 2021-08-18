@@ -1,4 +1,5 @@
 ﻿using MusicPlayer.App.WPF.Commands.Base;
+using MusicPlayer.App.WPF.Services.Audio;
 using MusicPlayer.App.WPF.Services.DataPath;
 using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels;
@@ -9,26 +10,25 @@ namespace MusicPlayer.App.WPF.Commands
 {
     public class OpenPlaylistCommand : AsyncCommandBase
     {
-        private readonly INavigatorService _navigator;
-        private readonly IViewModelFactory _viewModelFactory;
+        private readonly LibraryViewModel viewModel;
+        private readonly IAudioService audioService;
+        private readonly INavigatorService navigator;
+        private readonly IViewModelFactory viewModelFactory;
         private readonly IDataPathService pathService;
-        private readonly LibraryViewModel _libraryViewModel;
 
-        public OpenPlaylistCommand(LibraryViewModel libraryViewModel, INavigatorService navigator, IViewModelFactory viewModelFactory, IDataPathService pathService)
+        public OpenPlaylistCommand(LibraryViewModel viewModel, IAudioService audioService, INavigatorService navigator, IViewModelFactory viewModelFactory, IDataPathService pathService)
         {
-            _libraryViewModel = libraryViewModel;
-            _navigator = navigator;
-            _viewModelFactory = viewModelFactory;
+            this.viewModel = viewModel;
+            this.audioService = audioService;
+            this.navigator = navigator;
+            this.viewModelFactory = viewModelFactory;
             this.pathService = pathService;
         }
 
         public override Task ExecuteAsync(object parameter)
         {
-            if (_libraryViewModel.SelectedPlaylist != null)
-            {
-                _navigator.PreviousViewModel = _navigator.CurrentViewModel;
-                _navigator.CurrentViewModel = _viewModelFactory.CreatePlaylistViewModel(_libraryViewModel.SelectedPlaylist, _navigator, pathService);
-            }
+            navigator.PreviousViewModel = navigator.CurrentViewModel;
+            navigator.CurrentViewModel = viewModelFactory.CreatePlaylistViewModel(viewModel.SelectedPlaylist, audioService, navigator, pathService);
             return Task.CompletedTask;
         }
     }

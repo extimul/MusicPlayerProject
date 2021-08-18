@@ -110,17 +110,33 @@ namespace MusicPlayer.App.WPF.Services.Audio
 
         public Task LoadAllPlaylists()
         {
-            PlaylistsCollection = new ObservableCollection<Playlist>();
-            PlaylistsCollection.Add(new Playlist()
+            PlaylistsCollection = new ObservableCollection<Playlist>
             {
-                Id = 1,
-                PlaylistName = "Liked songs",
-                Description = "Something text for this playlist and text text text text text",
-                RecentlyPlay = DateTime.Now,
-                AddedDate = DateTime.Now,
-                Author = "You",
-                ImageSource = @"E:\Projects\VisualStudioProjects\MusicPlayer.App.WPF\ApplicationResources\DefaultSongImg.png"
-            });
+                new Playlist()
+                {
+                    Id = 1,
+                    PlaylistName = "Liked songs",
+                    Description = "Something text for this playlist and text text text text text",
+                    RecentlyPlay = DateTime.Now,
+                    AddedDate = DateTime.Now,
+                    Author = "You",
+                    ImageSource = dataPathService.DefaultTrackImage,
+                    Tracks = new ObservableCollection<Track>()
+                {
+                    new Track()
+                    {
+                        Id = 1,
+                        TrackTitle = "TrackTitle",
+                        Author = "Author",
+                        IsLiked = true,
+                        TrackAlbum = "Album",
+                        Duration = TimeSpan.FromSeconds(300),
+                        TrackImage = dataPathService.DefaultTrackImage,
+                        TrackSource = Track.GetFullTrackPath(dataPathService.MusicContainerPath, "track.mp3")
+                    }
+                }
+                }
+            };
             PlaylistCollectionChanged?.Invoke();
             return Task.CompletedTask;
         }
