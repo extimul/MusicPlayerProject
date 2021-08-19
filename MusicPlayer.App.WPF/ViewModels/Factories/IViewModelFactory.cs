@@ -1,5 +1,6 @@
 ﻿using MusicPlayer.App.WPF.Services.Audio;
 using MusicPlayer.App.WPF.Services.DataPath;
+using MusicPlayer.App.WPF.Services.Icon;
 using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.Core.Models;
@@ -10,6 +11,6 @@ namespace MusicPlayer.App.WPF.ViewModels.Factories
     public interface IViewModelFactory
     {
         ViewModelBase CreateViewModel(ViewTypes viewType);
-        ViewModelBase CreatePlaylistViewModel(Playlist playlist, IAudioService audioService, INavigatorService navigator, IDataPathService pathService);
+        ViewModelBase CreatePlaylistViewModel(Playlist playlist, IAudioService audioService, IIconManager iconManager, INavigatorService navigator);
     }
 }

@@ -4,7 +4,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:controls="clr-namespace:MusicPlayer.App.WPF.Views.Controls"
-      xmlns:vm="clr-namespace:MusicPlayer.App.WPF.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="1600"
       Background="{StaticResource AppBackgroundMainBrush}">
@@ -125,113 +124,7 @@
 
         <!--Tracks-->
         <Grid Grid.Row="3">
-            <ListView Margin="0,20,0,0"
-                      BorderThickness="0"
-                      BorderBrush="Transparent"
-                      Background="Transparent"
-                      ItemsSource="{Binding TracksCollection, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding SelectedTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="BorderThickness" Value="1"/>
-                        <Setter Property="BorderBrush" Value="{x:Null}"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                    <Border CornerRadius="10" 
-                                        Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}">
-                                        <ContentPresenter Content="{TemplateBinding Content}" 
-                                                      ContentTemplate="{TemplateBinding ContentTemplate}"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <MultiTrigger>
-                                            <MultiTrigger.Conditions>
-                                                <Condition Property="IsSelected" Value="True"/>
-                                                <Condition Property="Selector.IsSelectionActive" Value="True"/>
-                                            </MultiTrigger.Conditions>
-                                            <Setter Property="Background" Value="{StaticResource AppElementBackgroundBrush}"/>
-                                        </MultiTrigger>
-                                        <MultiTrigger>
-                                            <MultiTrigger.Conditions>
-                                                <Condition Property="IsSelected" Value="True"/>
-                                                <Condition Property="Selector.IsSelectionActive" Value="False"/>
-                                            </MultiTrigger.Conditions>
-                                            <Setter Property="Background" Value="{StaticResource AppElementBackgroundBrush}"/>
-                                        </MultiTrigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Height="60" Margin="5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="30" Width="1*"/>
-                                <ColumnDefinition MinWidth="40" Width="1*"/>
-                                <ColumnDefinition MinWidth="300" Width="5*"/>
-                                <ColumnDefinition Width="5*"/>
-                                <ColumnDefinition MinWidth="200" Width="2*"/>
-                                <ColumnDefinition MinWidth="100" Width="2*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <!--Track number-->
-                            <Label  Content="{Binding Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                    FontSize="{StaticResource FontSizeMedium}"
-                                    Grid.Column="0"
-                                    VerticalAlignment="Center"
-                                    HorizontalContentAlignment="Center"/>
-
-                            <!--Album/Track image-->
-                            <Image Grid.Column="1"
-                                   Width="50" Height="50"
-                                   Source="{Binding TrackImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                   Stretch="Fill" Margin="0"/>
-                            <!--Track name, author-->
-                            <Grid Grid.Column="2" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Label Content="{Binding TrackTitle}"
-                                       Grid.Row="0"
-                                       FontSize="{StaticResource FontSizeLarge}"
-                                       Foreground="{StaticResource AppForegroundBrush}">
-                                </Label>
-                                <Label Content="{Binding Author}"
-                                       Foreground="{StaticResource AppForegroundLightGreyBrush}"
-                                       Grid.Row="1"/>
-                            </Grid>
-                            <!--Album-->
-                            <Grid Grid.Column="4">
-                                <Label Content="{Binding TrackAlbum, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                       FontSize="{StaticResource FontSizeRegular}"
-                                       VerticalAlignment="Center"
-                                       HorizontalContentAlignment="Center"
-                                       Foreground="{StaticResource AppForegroundLightGreyBrush}"/>
-                            </Grid>
-
-                            <!--Additional inforamtion-->
-                            <Grid Grid.Column="5">
-                                <StackPanel Orientation="Horizontal"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Right">
-                                    <CheckBox IsChecked="{Binding IsLiked, Mode=TwoWay}"
-                                              VerticalAlignment="Center"
-                                              Margin="0,0,50,0"/>
-                                    <Label Content="{Binding Duration, Mode=OneWay}"
-                                           Margin="0,0,20,0"
-                                           FontSize="{StaticResource FontSizeRegular}"
-                                           Foreground="{StaticResource AppForegroundLightGreyBrush}"/>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <controls:TracksListViewControl/>
         </Grid>
     </Grid>
 </UserControl>

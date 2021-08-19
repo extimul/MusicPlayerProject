@@ -2,6 +2,7 @@
 using MusicPlayer.App.WPF.Services.Audio;
 using MusicPlayer.App.WPF.Services.Icon;
 using MusicPlayer.App.WPF.ViewModels.Base;
+using MusicPlayer.Core.Interfaces;
 using MusicPlayer.Core.Models;
 using MusicPlayer.Core.Types;
 using NAudio.Wave;
@@ -11,7 +12,7 @@ using System.Windows.Media;
 
 namespace MusicPlayer.App.WPF.ViewModels
 {
-    public class QueueViewModel : ViewModelBase
+    public class QueueViewModel : ViewModelBase, ITracksListView
     {
         #region Fields
         private readonly IAudioService audioService;
@@ -30,7 +31,7 @@ namespace MusicPlayer.App.WPF.ViewModels
             }
         }
 
-        public ObservableCollection<Track> QueueCollection => playlistService.QueuePlaylist;
+        public ObservableCollection<Track> TracksCollection => playlistService.QueuePlaylist;
         public DrawingBrush PlayPauseIcon => iconManager.PlayPauseIcon;
 
         #endregion
@@ -48,16 +49,16 @@ namespace MusicPlayer.App.WPF.ViewModels
             this.audioService.IconChanged += OnIconChanged;
             this.audioService.TrackChanged += OnTrackChanged;
 
-            this.audioService.ActivePlaylist = QueueCollection;
+            this.audioService.ActivePlaylist = TracksCollection;
             this.playlistService.QueuePlaylistChanged += OnQueueCollectionChanged;
-            this.audioService.SelectedTrack = QueueCollection[0];
+            this.audioService.SelectedTrack = (TracksCollection.Count > 0) ? TracksCollection[0] : null;
 
             PlayPauseCommand = new PlayerControlsCommand(audioService, this);
         }
 
         private void OnQueueCollectionChanged()
         {
-            OnPropertyChanged(nameof(QueueCollection));
+            OnPropertyChanged(nameof(TracksCollection));
         }
 
         private void OnTrackChanged()

@@ -1,6 +1,7 @@
 ﻿using MusicPlayer.App.WPF.Commands;
 using MusicPlayer.App.WPF.Services.Audio;
 using MusicPlayer.App.WPF.Services.DataPath;
+using MusicPlayer.App.WPF.Services.Icon;
 using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.App.WPF.ViewModels.Factories;
@@ -47,7 +48,8 @@ namespace MusicPlayer.App.WPF.ViewModels
                                 INavigatorService navigator,
                                 IViewModelFactory viewModelFactory,
                                 IDataPathService pathService,
-                                IAudioService audioService)
+                                IAudioService audioService,
+                                IIconManager iconManager)
         {
             this.playlistManager = playlistManager;
 
@@ -55,7 +57,7 @@ namespace MusicPlayer.App.WPF.ViewModels
 
             SortCommand = new SortPlaylistsCommand();
             CreatePlaylistCommand = new CreatePlaylistCommand(this, pathService, playlistManager);
-            OpenPlaylistCommand = new OpenPlaylistCommand(this, audioService, navigator, viewModelFactory, pathService);
+            OpenPlaylistCommand = new OpenPlaylistCommand(this, audioService, iconManager, navigator, viewModelFactory);
         }
 
         private void OnPlaylistCollectionChanged()

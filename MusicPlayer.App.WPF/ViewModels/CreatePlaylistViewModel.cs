@@ -3,7 +3,6 @@ using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.App.WPF.Services.Dialog;
 using System;
 using System.Windows.Input;
-using System.Diagnostics;
 using Microsoft.Win32;
 using MusicPlayer.Core.Models;
 using MusicPlayer.App.WPF.Services.DataPath;
