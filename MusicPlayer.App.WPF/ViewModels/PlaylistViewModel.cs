@@ -6,6 +6,8 @@ using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.Core.Models;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace MusicPlayer.App.WPF.ViewModels
@@ -26,6 +28,8 @@ namespace MusicPlayer.App.WPF.ViewModels
             set => SetField(ref playlist, value);
         }
 
+        public ObservableCollection<Track> TracksCollection => ControlBarViewModel.FilteredCollection;
+
         public Track SelectedTrack
         {
             get => audioService.SelectedTrack;
@@ -35,6 +39,8 @@ namespace MusicPlayer.App.WPF.ViewModels
                 OnPropertyChanged(nameof(SelectedTrack));
             }
         }
+
+        public PlaylistControlBarViewModel ControlBarViewModel { get; set; }
 
         #endregion
 
@@ -46,15 +52,24 @@ namespace MusicPlayer.App.WPF.ViewModels
         public PlaylistViewModel(Playlist playlist, IAudioService audioService, INavigatorService navigator, IDataPathService pathService)
         {
             CurrentPlaylist = playlist;
+            ControlBarViewModel = new PlaylistControlBarViewModel(this);
+            ControlBarViewModel.PropertyChanged += ControlBarViewModel_PropertyChanged;
+
             this.audioService = audioService;
             this.navigator = navigator;
             this.pathService = pathService;
-
-            this.audioService.SelectedTrack = (CurrentPlaylist.Tracks as ObservableCollection<Track>)[0];
-            this.audioService.ActivePlaylist = (ObservableCollection<Track>)CurrentPlaylist.Tracks;
+            
+            this.audioService.ActivePlaylist = TracksCollection;
+            this.audioService.SelectedTrack = TracksCollection[0];
             this.audioService.TrackChanged += OnTrackChanged;
 
             GoBackCommand = new RenavigateCommand(navigator);
+        }
+
+        private void ControlBarViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(TracksCollection));
+            OnPropertyChanged(nameof(SelectedTrack));
         }
 
         private void OnTrackChanged()
@@ -65,6 +80,8 @@ namespace MusicPlayer.App.WPF.ViewModels
         public override void Dispose()
         {
             this.audioService.TrackChanged -= OnTrackChanged;
+            ControlBarViewModel.PropertyChanged -= ControlBarViewModel_PropertyChanged;
+            ControlBarViewModel.Dispose();
             GC.SuppressFinalize(this);
         }
     }

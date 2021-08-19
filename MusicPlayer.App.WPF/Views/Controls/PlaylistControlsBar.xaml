@@ -22,7 +22,8 @@
                          HorizontalAlignment="Center"
                          Background="{StaticResource AppElementBackgroundBrush}"
                          Style="{StaticResource SearchTextBoxStyle}"
-                     Grid.Column="0"/>
+                     Grid.Column="0"
+                     Text="{Binding SearchingPattern, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <!--Sort playlists-->
             <ComboBox Grid.Column="1"
                           VerticalAlignment="Center"

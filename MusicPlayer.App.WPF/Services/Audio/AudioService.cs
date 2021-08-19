@@ -52,9 +52,12 @@ namespace MusicPlayer.App.WPF.Services.Audio
             get => _currentlySelectedTrack;
             set
             {
-                if (value.Equals(_currentlySelectedTrack)) return;
-                _currentlySelectedTrack = value;
-                TrackChanged?.Invoke();
+                if (value != null)
+                {
+                    if (value.Equals(_currentlySelectedTrack)) return;
+                    _currentlySelectedTrack = value;
+                    TrackChanged?.Invoke();
+                }
             }
         }
 

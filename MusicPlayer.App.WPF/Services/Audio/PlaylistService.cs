@@ -122,19 +122,41 @@ namespace MusicPlayer.App.WPF.Services.Audio
                     Author = "You",
                     ImageSource = dataPathService.DefaultTrackImage,
                     Tracks = new ObservableCollection<Track>()
-                {
-                    new Track()
                     {
-                        Id = 1,
-                        TrackTitle = "TrackTitle",
-                        Author = "Author",
-                        IsLiked = true,
-                        TrackAlbum = "Album",
-                        Duration = TimeSpan.FromSeconds(300),
-                        TrackImage = dataPathService.DefaultTrackImage,
-                        TrackSource = Track.GetFullTrackPath(dataPathService.MusicContainerPath, "track.mp3")
+                        new Track()
+                        {
+                            Id = 1,
+                            TrackTitle = "A",
+                            Author = "Author",
+                            IsLiked = true,
+                            TrackAlbum = "Album",
+                            Duration = TimeSpan.FromSeconds(300),
+                            TrackImage = dataPathService.DefaultTrackImage,
+                            TrackSource = Track.GetFullTrackPath(dataPathService.MusicContainerPath, "track.mp3")
+                        },
+                        new Track()
+                        {
+                            Id = 2,
+                            TrackTitle = "B",
+                            Author = "Author",
+                            IsLiked = true,
+                            TrackAlbum = "Album",
+                            Duration = TimeSpan.FromSeconds(300),
+                            TrackImage = dataPathService.DefaultTrackImage,
+                            TrackSource = Track.GetFullTrackPath(dataPathService.MusicContainerPath, "track2.mp3")
+                        },
+                        new Track()
+                        {
+                            Id = 3,
+                            TrackTitle = "C",
+                            Author = "Author",
+                            IsLiked = true,
+                            TrackAlbum = "Album",
+                            Duration = TimeSpan.FromSeconds(300),
+                            TrackImage = dataPathService.DefaultTrackImage,
+                            TrackSource = Track.GetFullTrackPath(dataPathService.MusicContainerPath, "track3.mp3")
+                        }
                     }
-                }
                 }
             };
             PlaylistCollectionChanged?.Invoke();

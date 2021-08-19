@@ -121,7 +121,7 @@
         </Grid>
         
         <!--Track controls-->
-        <controls:PlaylistControlsBar Grid.Row="2"/>
+        <controls:PlaylistControlsBar Grid.Row="2" DataContext="{Binding ControlBarViewModel}"/>
 
         <!--Tracks-->
         <Grid Grid.Row="3">
@@ -129,7 +129,7 @@
                       BorderThickness="0"
                       BorderBrush="Transparent"
                       Background="Transparent"
-                      ItemsSource="{Binding CurrentPlaylist.Tracks, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding TracksCollection, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
