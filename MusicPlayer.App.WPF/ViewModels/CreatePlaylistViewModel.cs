@@ -83,7 +83,7 @@ namespace MusicPlayer.App.WPF.ViewModels
         {
             CloseRequested?.Invoke(this, new DialogCreateRequestArgs(new Playlist()
             {
-                PlaylistName = PlaylistName ?? $"Playlist #{playlistService.PlaylistsCollection.Count + 1}",
+                Title = PlaylistName ?? $"Playlist #{playlistService.PlaylistsCollection.Count + 1}",
                 Description = PlaylistDescription ?? "Your playlist",
                 ImageSource = PlaylistImageSource ?? pathService.DefaultTrackImage,
                 AddedDate = DateTime.Now

@@ -185,7 +185,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
             {
                 if (!SelectedTrack.TrackIsExsist)
                 {
-                    throw new TrackNotFoundException(SelectedTrack.TrackTitle);
+                    throw new TrackNotFoundException(SelectedTrack.Title);
                 }
 
                 if (SelectedTrack != null && SelectedTrack != PlayingTrack)

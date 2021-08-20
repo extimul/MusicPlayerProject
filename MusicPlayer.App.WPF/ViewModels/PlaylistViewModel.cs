@@ -3,6 +3,7 @@ using MusicPlayer.App.WPF.Services.Audio;
 using MusicPlayer.App.WPF.Services.Icon;
 using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels.Base;
+using MusicPlayer.App.WPF.ViewModels.Controls;
 using MusicPlayer.Core.Interfaces;
 using MusicPlayer.Core.Models;
 using System;
@@ -28,7 +29,7 @@ namespace MusicPlayer.App.WPF.ViewModels
             set => SetField(ref playlist, value);
         }
 
-        public ObservableCollection<Track> TracksCollection => ControlBarViewModel.FilteredCollection;
+        public ObservableCollection<Track> TracksCollection => ControlBarViewModel.FilterPanelViewModel.FilteredCollection;
 
         public Track SelectedTrack
         {
@@ -56,7 +57,7 @@ namespace MusicPlayer.App.WPF.ViewModels
         {
             CurrentPlaylist = playlist;
             ControlBarViewModel = new PlaylistControlBarViewModel(this);
-            ControlBarViewModel.PropertyChanged += ControlBarViewModel_PropertyChanged;
+            ControlBarViewModel.FilterPanelViewModel.PropertyChanged += FilterPanelViewModel_PropertyChanged;
 
             this.audioService = audioService;
             this.iconManager = iconManager;
@@ -70,6 +71,12 @@ namespace MusicPlayer.App.WPF.ViewModels
             PlayPauseCommand = new PlayerControlsCommand(audioService, this);
         }
 
+        private void FilterPanelViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(TracksCollection));
+            OnPropertyChanged(nameof(SelectedTrack));
+        }
+
         private void OnIconChanged(object sender, ChangeIconEventArgs e)
         {
             OnPropertyChanged(nameof(PlayPauseIcon));
@@ -80,17 +87,11 @@ namespace MusicPlayer.App.WPF.ViewModels
             OnPropertyChanged(nameof(SelectedTrack));
         }
 
-        private void ControlBarViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            OnPropertyChanged(nameof(TracksCollection));
-            OnPropertyChanged(nameof(SelectedTrack));
-        }
-
         public override void Dispose()
         {
             audioService.IconChanged -= OnIconChanged;
             audioService.TrackChanged -= OnTrackChanged;
-            ControlBarViewModel.PropertyChanged -= ControlBarViewModel_PropertyChanged;
+            ControlBarViewModel.FilterPanelViewModel.PropertyChanged -= FilterPanelViewModel_PropertyChanged;
             ControlBarViewModel.Dispose();
             GC.SuppressFinalize(this);
         }

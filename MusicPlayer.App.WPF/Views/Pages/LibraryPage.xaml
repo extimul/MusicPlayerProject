@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:types="clr-namespace:MusicPlayer.Core.Types;assembly=MusicPlayer.Core"
+             xmlns:controls="clr-namespace:MusicPlayer.App.WPF.Views.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1600"
              Background="{StaticResource AppBackgroundMainBrush}">
@@ -35,63 +35,8 @@
                    HorizontalAlignment="Left"
                    Grid.Column="0"/>
 
-                <Grid Grid.Column="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <!--SearchBox-->
-                    <TextBox VerticalAlignment="Center"
-                         HorizontalAlignment="Center"
-                         Background="{StaticResource AppElementBackgroundBrush}"
-                         Style="{StaticResource SearchTextBoxStyle}"/>
-                    <!--Sort playlists-->
-                    <ComboBox Grid.Column="1"
-                          VerticalAlignment="Center"
-                          Width="150"
-                          Style="{StaticResource ComboBoxStyle}"
-                          ItemContainerStyle="{DynamicResource ComboBoxItemStyle}"
-                          FontSize="{StaticResource FontSizeMedium}"
-                          SelectedIndex="0">
-                        <ComboBoxItem Padding="10,5,0,5">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Selected">
-                                    <i:InvokeCommandAction Command="{Binding SortCommand}"
-                                                       CommandParameter="{x:Static types:SortTypes.MostRelevant}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <TextBlock Text="Most Relevant"/>
-                        </ComboBoxItem>
-                        <ComboBoxItem Padding="10,5,0,5">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Selected">
-                                    <i:InvokeCommandAction Command="{Binding SortCommand}"
-                                                       CommandParameter="{x:Static types:SortTypes.RecentlyPlayed}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <TextBlock Text="Recently Playeed"/>
-                        </ComboBoxItem>
-                        <ComboBoxItem Padding="10,5,0,5">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Selected">
-                                    <i:InvokeCommandAction Command="{Binding SortCommand}"
-                                                       CommandParameter="{x:Static types:SortTypes.RecentlyAdded}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <TextBlock Text="Recently Added"/>
-                        </ComboBoxItem>
-                        <ComboBoxItem Padding="10,5,0,5">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Selected">
-                                    <i:InvokeCommandAction Command="{Binding SortCommand}"
-                                                       CommandParameter="{x:Static types:SortTypes.Alphabetical}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <TextBlock Text="Alphabetical"/>
-                        </ComboBoxItem>
-                    </ComboBox>
-                </Grid>
+                <controls:FilterHandlerPanel Grid.Column="2"
+                                             DataContext="{Binding FilterPanelViewModel}"/>
             </Grid>
 
             <StackPanel Grid.Row="1" 
@@ -203,8 +148,9 @@
                                       Margin="25">
                                     <Image Source="{Binding ImageSource}"
                                            Stretch="Fill"
-                                       Height="140"
-                                       Width="140"/>
+                                           Height="140"
+                                           Width="140"
+                                           RenderOptions.BitmapScalingMode="HighQuality"/>
                                 </Grid>
                                 <Grid Grid.Row="1">
                                         <Grid.RowDefinitions>
@@ -213,7 +159,7 @@
                                         </Grid.RowDefinitions>
                                         <TextBlock Grid.Row="0"
                                                Padding="5"
-                                               Text="{Binding PlaylistName}"
+                                               Text="{Binding Title}"
                                                VerticalAlignment="Stretch"
                                                HorizontalAlignment="Center"
                                                FontSize="{StaticResource FontSizeLarge}"
