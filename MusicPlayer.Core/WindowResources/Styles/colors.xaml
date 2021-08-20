@@ -10,6 +10,12 @@
     <Color x:Key="BackgroundLightGreen">#34c686</Color>
     <SolidColorBrush x:Key="AppElementBackgroundBrush" Color="{StaticResource BackgroundLightGreen}"/>
 
+    <Color x:Key="BackgroundDarkGreen">#2ba16e</Color>
+    <SolidColorBrush x:Key="AppElementBackgroundBrush2" Color="{StaticResource BackgroundDarkGreen}"/>
+
+    <Color x:Key="BackgroundLightRed">#ff4d4d</Color>
+    <SolidColorBrush x:Key="AppRedBrush" Color="{StaticResource BackgroundLightRed}"/>
+
     <Color x:Key="BackgroundDarBlue2">#166192</Color>
     <SolidColorBrush x:Key="MusicBarBackground" Color="{StaticResource BackgroundDarBlue2}"/>
 

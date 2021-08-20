@@ -6,8 +6,10 @@ namespace MusicPlayer.Core.Helpers
     {
         public static void Apply(Window window, double effectValue = 4)
         {
-            System.Windows.Media.Effects.BlurEffect blur = new System.Windows.Media.Effects.BlurEffect();
-            blur.Radius = effectValue;
+            System.Windows.Media.Effects.BlurEffect blur = new System.Windows.Media.Effects.BlurEffect
+            {
+                Radius = effectValue
+            };
             window.Effect = blur;
         }
         public static void Clear(Window window)

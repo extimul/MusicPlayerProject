@@ -1,6 +1,5 @@
 ﻿using MusicPlayer.App.WPF.Commands.Base;
 using MusicPlayer.App.WPF.Services.Audio;
-using MusicPlayer.App.WPF.ViewModels;
 using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.Core.Types;
 using System.ComponentModel;
@@ -27,35 +26,32 @@ namespace MusicPlayer.App.WPF.Commands
 
         public override async Task ExecuteAsync(object parameter)
         {
-            if (parameter is not null)
-            {
-                AudioPlayerControlTypes control = (AudioPlayerControlTypes)parameter;
+            AudioPlayerControlTypes control = (AudioPlayerControlTypes)parameter;
 
-                switch (control)
-                {
-                    case AudioPlayerControlTypes.StartPause:
-                        await audioService.TogglePlayPause();
-                        break;
-                    case AudioPlayerControlTypes.Next:
-                        await audioService.NextTrack();
-                        break;
-                    case AudioPlayerControlTypes.Previous:
-                        await audioService.PreviousTrack();
-                        break;
-                    case AudioPlayerControlTypes.Shuffle:
-                        await audioService.ShuffleTracks();
-                        break;
-                    case AudioPlayerControlTypes.Repeat:
-                        await audioService.RepeatTrack();
-                        break;
-                    case AudioPlayerControlTypes.VolumeOff:
-                        audioService.TrackVolumeValue = 0;
-                        break;
-                    case AudioPlayerControlTypes.DoubleClickSwitch:
-                        await audioService.StopTrack();
-                        await audioService.PlayTrack();
-                        break;
-                }
+            switch (control)
+            {
+                case AudioPlayerControlTypes.StartPause:
+                    await audioService.TogglePlayPause();
+                    break;
+                case AudioPlayerControlTypes.Next:
+                    await audioService.NextTrack();
+                    break;
+                case AudioPlayerControlTypes.Previous:
+                    await audioService.PreviousTrack();
+                    break;
+                case AudioPlayerControlTypes.Shuffle:
+                    await audioService.ShuffleTracks();
+                    break;
+                case AudioPlayerControlTypes.Repeat:
+                    await audioService.RepeatTrack();
+                    break;
+                case AudioPlayerControlTypes.VolumeOff:
+                    audioService.TrackVolumeValue = 0;
+                    break;
+                case AudioPlayerControlTypes.DoubleClickSwitch:
+                    await audioService.StopTrack();
+                    await audioService.PlayTrack();
+                    break;
             }
         }
 

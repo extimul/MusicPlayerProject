@@ -6,6 +6,7 @@ using MusicPlayer.Core.Interfaces;
 using MusicPlayer.Core.Models;
 using MusicPlayer.Core.Types;
 using NAudio.Wave;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Media;

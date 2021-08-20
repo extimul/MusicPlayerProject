@@ -39,7 +39,6 @@ namespace MusicPlayer.App.WPF.Services.Audio
         Task PreviousTrack();
         Task ShuffleTracks();
         Task RepeatTrack();
-        Task SetAsLikedTrack();
         #endregion
     }
 }

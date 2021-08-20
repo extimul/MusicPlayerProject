@@ -70,6 +70,11 @@ namespace MusicPlayer.App.WPF.ViewModels
             OnIconChanged(this, new ChangeIconEventArgs(SourceTypes.VolumeSource, this.audioService.TrackVolumeValue));
         }
 
+        private void OnFavouriteStatusChanged()
+        {
+            OnPropertyChanged(nameof(PlayingTrack));
+        }
+
         private void OnTrackPositionChanged()
         {
             OnPropertyChanged(nameof(TrackTimeValue));

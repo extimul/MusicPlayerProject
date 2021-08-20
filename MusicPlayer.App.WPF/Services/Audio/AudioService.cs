@@ -172,10 +172,6 @@ namespace MusicPlayer.App.WPF.Services.Audio
                         break;
                 }
             }
-            catch (TrackNotFoundException ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -185,46 +181,57 @@ namespace MusicPlayer.App.WPF.Services.Audio
 
         public Task PlayTrack()
         {
-            if (!SelectedTrack.TrackIsExsist)
+            try
             {
-                throw new TrackNotFoundException(SelectedTrack.TrackTitle);
-            }
-
-            if (SelectedTrack != null && SelectedTrack != PlayingTrack)
-            {
-                PlayingTrack = SelectedTrack;
-                StopTrack();
-            }
-
-            if (_wavePlayer is null)
-            {
-                _wavePlayer = new WaveOutEvent();
-                _wavePlayer.PlaybackStopped += OnPlaybackStopped;
-            }
-
-            if (_audioFileReader is null)
-            {
-                TrackVolumeValue = 50;
-                _audioFileReader = new AudioFileReader(PlayingTrack.TrackSource)
+                if (!SelectedTrack.TrackIsExsist)
                 {
-                    Volume = (float)TrackVolumeValue / 100.0f
-                };
+                    throw new TrackNotFoundException(SelectedTrack.TrackTitle);
+                }
 
-                TrackPosition = 0;
-                TrackTimePosition = TimeSpan.Zero;
+                if (SelectedTrack != null && SelectedTrack != PlayingTrack)
+                {
+                    PlayingTrack = SelectedTrack;
+                    StopTrack();
+                }
 
-                PlaybackStopType = PlaybackStopTypes.StoppedByUser;
+                if (_wavePlayer is null)
+                {
+                    _wavePlayer = new WaveOutEvent();
+                    _wavePlayer.PlaybackStopped += OnPlaybackStopped;
+                }
 
-                _wavePlayer.Init(_audioFileReader);
+                if (_audioFileReader is null)
+                {
+                    TrackVolumeValue = 50;
+                    _audioFileReader = new AudioFileReader(PlayingTrack.TrackSource)
+                    {
+                        Volume = (float)TrackVolumeValue / 100.0f
+                    };
+
+                    TrackPosition = 0;
+                    TrackTimePosition = TimeSpan.Zero;
+
+                    PlaybackStopType = PlaybackStopTypes.StoppedByUser;
+
+                    _wavePlayer.Init(_audioFileReader);
+                }
+
+                _wavePlayer?.Play();
+                _timer.Start();
+
+                IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, CurrentPlaybackState));
+                TrackChanged?.Invoke();
+                TrackPositionChanged?.Invoke();
+                VolumeChanged?.Invoke();
             }
-
-            _wavePlayer?.Play();
-            _timer.Start();
-
-            IconChanged?.Invoke(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, CurrentPlaybackState));
-            TrackChanged?.Invoke();
-            TrackPositionChanged?.Invoke();
-            VolumeChanged?.Invoke();
+            catch (TrackNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             return Task.CompletedTask;
         }
 
@@ -303,11 +310,6 @@ namespace MusicPlayer.App.WPF.Services.Audio
         }
 
         public Task RepeatTrack()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task SetAsLikedTrack()
         {
             throw new NotImplementedException();
         }

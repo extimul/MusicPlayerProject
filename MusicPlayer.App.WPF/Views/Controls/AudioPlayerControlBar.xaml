@@ -187,8 +187,8 @@
                             Margin="50,0,0,0">
                     <ToggleButton Style="{StaticResource ToggleButtonStyle}"
                                   Content="{StaticResource FavouriteIcon}"
-                                  Foreground="{StaticResource AppForegroundBrush}"
-                                  IsChecked="{Binding PlayingTrack.IsLiked, Mode=TwoWay}"/>
+                                  IsChecked="{Binding PlayingTrack.IsLiked, Mode=TwoWay}"
+                                  Foreground="{StaticResource AppForegroundBrush}"/>
                     <Button Foreground="{StaticResource AppForegroundBrush}"
                             Margin="10,0,5,0"
                             Command="{Binding AudioPlayerControlCommand}"

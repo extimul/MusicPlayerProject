@@ -5,56 +5,6 @@
     <c:ContentConverter x:Key="ContentConverter" />
     <c:ScaleConverter x:Key="ScaleConverter" Scale="65"  />
 
-    <Style TargetType="{x:Type Button}" x:Key="Hoverless">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
-                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style TargetType="{x:Type Button}" x:Key="SystemButton" BasedOn="{StaticResource Hoverless}">
-        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
-        <Setter Property="Padding" Value="10"/>
-    </Style>
-
-    <Style TargetType="{x:Type Button}" x:Key="WindowControlButton" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Padding" Value="8" />
-        <Setter Property="VerticalAlignment" Value="Stretch" />
-        <Setter Property="Foreground" Value="{StaticResource AppForegroundBrush}"/>
-
-        <Setter Property="LayoutTransform">
-            <Setter.Value>
-                <ScaleTransform ScaleX="1.5" />
-            </Setter.Value>
-        </Setter>
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{TemplateBinding Content}" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource AppBackgroundMainBrush}" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
     <!--ListView style-->
     <Style x:Key="NavListViewItemStyle" TargetType="{x:Type ListViewItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -102,7 +52,49 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <!--ToggleButton style-->
+    <Style x:Key="ToggleButtonStyle" TargetType="ToggleButton">
+        <Setter Property="Template" Value="{DynamicResource ToggleButtonTemp}"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{x:Null}"/>
+    </Style>
+
+    <!--ToggleButton style-->
+    <ControlTemplate x:Key="ToggleButtonTemp" TargetType="{x:Type ToggleButton}">
+        <ControlTemplate.Resources>
+            <c:ContentConverter x:Key="ContentConverter" />
+            <c:ScaleConverter x:Key="ScaleConverter" Scale="65"  />
+        </ControlTemplate.Resources>
+        <Grid x:Name="grid">
+            <Path x:Name="ellipse"
+                    Stretch="Uniform"
+                    StrokeThickness="0"
+                    Stroke="Transparent"
+                    Fill="Transparent" >
+                <Path.Data>
+                    <EllipseGeometry RadiusX="50" RadiusY="50" />
+                </Path.Data>
+            </Path>
+            <Path x:Name="shape" 
+                    Stretch="Uniform" 
+                    Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
+                    Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
+                    Fill="{TemplateBinding Foreground}" 
+                    Data="{TemplateBinding Content, Converter={StaticResource ContentConverter}}"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="shape" Property="Fill" Value="{StaticResource AppRedBrush}"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="shape" Property="Fill" Value="{StaticResource AppForegroundGreyBrush}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
     <!--Music player button style-->
     <ControlTemplate x:Key="BubbleButtonTemp" TargetType="{x:Type Button}">
         <Grid x:Name="grid">
@@ -128,21 +120,13 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-
+    
+    <!--Music control button style-->
     <Style x:Key="MusicControlsStyle" TargetType="Button">
         <Setter Property="Template" Value="{DynamicResource BubbleButtonTemp}"/>
         <Setter Property="Background" Value="{x:Null}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Margin" Value="10"/>
-    </Style>
-
-    <Style x:Key="ToggleButtonStyle" TargetType="ToggleButton">
-        <Setter Property="Template" Value="{DynamicResource ToggleButtonTemp}"/>
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="Width" Value="30"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Background" Value="{x:Null}"/>
-        <Setter Property="Margin" Value="5"/>
     </Style>
 
     <!--Slider style-->
@@ -223,39 +207,9 @@
         </Style.Triggers>
     </Style>
     
-    <!--ToggleButton style-->
-    <ControlTemplate x:Key="ToggleButtonTemp" TargetType="{x:Type ToggleButton}">
-        <ControlTemplate.Resources>
-            <c:ContentConverter x:Key="ContentConverter" />
-            <c:ScaleConverter x:Key="ScaleConverter" Scale="65"  />
-        </ControlTemplate.Resources>
-        <Grid x:Name="grid">
-            <Path x:Name="ellipse"
-                    Stretch="Uniform"
-                    StrokeThickness="0"
-                    Stroke="Transparent"
-                    Fill="Transparent" >
-                <Path.Data>
-                    <EllipseGeometry RadiusX="50" RadiusY="50" />
-                </Path.Data>
-            </Path>
-            <Path x:Name="shape" 
-                    Stretch="Uniform" 
-                    Height="{Binding ElementName=grid, Path=ActualHeight, Converter={StaticResource ScaleConverter}}" 
-                    Width="{Binding ElementName=grid, Path=ActualWidth, Converter={StaticResource ScaleConverter}}"
-                    Fill="{TemplateBinding Foreground}" 
-                    Data="{TemplateBinding Content, Converter={StaticResource ContentConverter}}"/>
-        </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsChecked" Value="True">
-                <Setter TargetName="shape" Property="Fill" Value="{StaticResource AppElementBackgroundBrush}"/>
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="shape" Property="Fill" Value="{StaticResource AppForegroundGreyBrush}"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
 
+
+    <!--Toggle button template-->
     <ControlTemplate TargetType="ToggleButton" x:Key="ComboBoxToggleButtonTemplate">
         <Grid>
             <Grid.ColumnDefinitions>

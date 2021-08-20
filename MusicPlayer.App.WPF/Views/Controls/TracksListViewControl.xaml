@@ -9,7 +9,6 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <ListView x:Name="TracksListView"
-                Margin="0,20,0,0"
                 BorderThickness="0"
                 BorderBrush="{x:Null}"
                 Background="Transparent"
@@ -65,8 +64,8 @@
                         <ColumnDefinition MinWidth="40" Width="1*"/>
                         <ColumnDefinition MinWidth="300" Width="5*"/>
                         <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition MinWidth="200" Width="2*"/>
-                        <ColumnDefinition MinWidth="100" Width="2*"/>
+                        <ColumnDefinition MinWidth="250" Width="2*"/>
+                        <ColumnDefinition MinWidth="120" Width="2*"/>
                     </Grid.ColumnDefinitions>
 
                     <!--Track number-->
@@ -177,9 +176,11 @@
                         <StackPanel Orientation="Horizontal"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Right">
-                            <CheckBox IsChecked="{Binding IsLiked, Mode=TwoWay}"
-                                          VerticalAlignment="Center"
-                                          Margin="0,0,50,0"/>
+                            <ToggleButton Style="{StaticResource ToggleButtonStyle}"
+                                          Content="{StaticResource FavouriteIcon}"
+                                          IsChecked="{Binding IsLiked, Mode=TwoWay}"
+                                          Foreground="{StaticResource AppForegroundBrush}"
+                                          Margin="0,0,15,0"/>
                             <Label Content="{Binding Duration, Mode=OneWay}"
                                        Margin="0,0,20,0"
                                        Foreground="{StaticResource AppForegroundLightGreyBrush}"/>

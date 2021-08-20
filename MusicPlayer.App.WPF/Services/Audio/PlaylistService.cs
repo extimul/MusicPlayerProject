@@ -62,20 +62,20 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 new Track()
                 {
                     Id = 1,
-                    TrackTitle = "Track",
-                    TrackAlbum = "Album",
-                    Author = "Author",
+                    TrackTitle = "Rain",
+                    TrackAlbum = "Rain",
+                    Author = "grandson",
                     IsLiked = true,
                     TrackImage = dataPathService.DefaultTrackImage,
-                    TrackSource = dataPathService.MusicContainerPath + "\\track.mp3",
+                    TrackSource = dataPathService.MusicContainerPath + "\\track1.mp3",
                     Duration = TimeSpan.FromSeconds(1000)
                 },
                 new Track()
                 {
                     Id = 2,
-                    TrackTitle = "Spirits",
+                    TrackTitle = "Жизнь поёт",
                     TrackAlbum = "Album",
-                    Author = "Kabes",
+                    Author = "Monatik",
                     IsLiked = true,
                     TrackImage = dataPathService.DefaultTrackImage,
                     TrackSource = dataPathService.MusicContainerPath + "\\track2.mp3",
@@ -84,9 +84,9 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 new Track()
                 {
                     Id = 3,
-                    TrackTitle = "Spirits",
-                    TrackAlbum = "Album",
-                    Author = "Kabes",
+                    TrackTitle = "Я в моменте",
+                    TrackAlbum = "Я в моменте",
+                    Author = "Джарахов & Markul",
                     IsLiked = true,
                     TrackImage = dataPathService.DefaultTrackImage,
                     TrackSource = dataPathService.MusicContainerPath + "\\track3.mp3",
@@ -95,12 +95,34 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 new Track()
                 {
                     Id = 4,
+                    TrackTitle = "Arcade",
+                    TrackAlbum = "Arcade",
+                    Author = "Duncan Laurence",
+                    IsLiked = true,
+                    TrackImage = dataPathService.DefaultTrackImage,
+                    TrackSource = dataPathService.MusicContainerPath + "\\track4.mp3",
+                    Duration = TimeSpan.FromSeconds(303)
+                },
+                new Track()
+                {
+                    Id = 5,
+                    TrackTitle = "Люби меня люби",
+                    TrackAlbum = "Звезды только ночью",
+                    Author = "Гречка",
+                    IsLiked = true,
+                    TrackImage = dataPathService.DefaultTrackImage,
+                    TrackSource = dataPathService.MusicContainerPath + "\\track5.mp3",
+                    Duration = TimeSpan.FromSeconds(303)
+                },
+                new Track()
+                {
+                    Id = 6,
                     TrackTitle = "Spirits",
                     TrackAlbum = "Album",
                     Author = "Kabes",
                     IsLiked = true,
                     TrackImage = dataPathService.DefaultTrackImage,
-                    TrackSource = dataPathService.MusicContainerPath + "\\track.mp3",
+                    TrackSource = dataPathService.MusicContainerPath + "\\track6.mp3",
                     Duration = TimeSpan.FromSeconds(300)
                 }
             };
