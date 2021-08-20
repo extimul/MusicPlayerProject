@@ -63,8 +63,6 @@ namespace MusicPlayer.Core.Handlers
                 return;
             }
 
-            T item = e.Item as T;
-            if (item.Title.ToUpper().Contains(SearchingPattern.ToUpper()))
             {
                 e.Accepted = true;
             }
