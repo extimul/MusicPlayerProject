@@ -62,7 +62,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 new Track()
                 {
                     Id = 1,
-                    TrackTitle = "Rain",
+                    Title = "Rain",
                     TrackAlbum = "Rain",
                     Author = "grandson",
                     IsLiked = true,
@@ -73,7 +73,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 new Track()
                 {
                     Id = 2,
-                    TrackTitle = "Жизнь поёт",
+                    Title = "Жизнь поёт",
                     TrackAlbum = "Album",
                     Author = "Monatik",
                     IsLiked = true,
@@ -84,7 +84,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 new Track()
                 {
                     Id = 3,
-                    TrackTitle = "Я в моменте",
+                    Title = "Я в моменте",
                     TrackAlbum = "Я в моменте",
                     Author = "Джарахов & Markul",
                     IsLiked = true,
@@ -95,7 +95,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 new Track()
                 {
                     Id = 4,
-                    TrackTitle = "Arcade",
+                    Title = "Arcade",
                     TrackAlbum = "Arcade",
                     Author = "Duncan Laurence",
                     IsLiked = true,
@@ -106,7 +106,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 new Track()
                 {
                     Id = 5,
-                    TrackTitle = "Люби меня люби",
+                    Title = "Люби меня люби",
                     TrackAlbum = "Звезды только ночью",
                     Author = "Гречка",
                     IsLiked = true,
@@ -117,7 +117,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 new Track()
                 {
                     Id = 6,
-                    TrackTitle = "Spirits",
+                    Title = "Spirits",
                     TrackAlbum = "Album",
                     Author = "Kabes",
                     IsLiked = true,
@@ -137,7 +137,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                 new Playlist()
                 {
                     Id = 1,
-                    PlaylistName = "Liked songs",
+                    Title = "Liked songs",
                     Description = "Something text for this playlist and text text text text text",
                     RecentlyPlay = DateTime.Now,
                     AddedDate = DateTime.Now,
@@ -148,7 +148,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                         new Track()
                         {
                             Id = 1,
-                            TrackTitle = "A",
+                            Title = "A",
                             Author = "Author",
                             IsLiked = true,
                             TrackAlbum = "Album",
@@ -159,7 +159,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                         new Track()
                         {
                             Id = 2,
-                            TrackTitle = "B",
+                            Title = "B",
                             Author = "Author",
                             IsLiked = true,
                             TrackAlbum = "Album",
@@ -170,7 +170,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
                         new Track()
                         {
                             Id = 3,
-                            TrackTitle = "C",
+                            Title = "C",
                             Author = "Author",
                             IsLiked = true,
                             TrackAlbum = "Album",

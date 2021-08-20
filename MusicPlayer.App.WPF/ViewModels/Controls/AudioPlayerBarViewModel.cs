@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
 using MusicPlayer.App.WPF.Commands;
@@ -10,7 +9,7 @@ using MusicPlayer.Core.Models;
 using MusicPlayer.Core.Types;
 using NAudio.Wave;
 
-namespace MusicPlayer.App.WPF.ViewModels
+namespace MusicPlayer.App.WPF.ViewModels.Controls
 {
     public class AudioPlayerBarViewModel : ViewModelBase
     {

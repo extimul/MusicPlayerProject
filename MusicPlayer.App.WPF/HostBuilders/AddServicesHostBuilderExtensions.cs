@@ -7,6 +7,7 @@ using MusicPlayer.App.WPF.Services.Icon;
 using MusicPlayer.App.WPF.ViewModels.Factories;
 using MusicPlayer.App.WPF.Services.DataPath;
 using MusicPlayer.App.WPF.Services.Settings;
+using MusicPlayer.Core.Handlers;
 
 namespace MusicPlayer.App.WPF.HostBuilders
 {
@@ -24,6 +25,7 @@ namespace MusicPlayer.App.WPF.HostBuilders
                 services.AddSingleton<IIconManager, IconManager>();
                 services.AddSingleton<IDataPathService, DataPathService>();
                 services.AddSingleton<IApplicationSettingsService, ApplicationSettingsService>();
+
             });
 
             return host;

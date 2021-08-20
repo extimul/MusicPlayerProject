@@ -3,17 +3,24 @@ using Microsoft.Extensions.Hosting;
 using MusicPlayer.App.WPF.HostBuilders;
 using MusicPlayer.App.WPF.Services.Settings;
 using MusicPlayer.App.WPF.Views.Windows;
+using System.Diagnostics;
 using System.Windows;
 
 namespace MusicPlayer.App.WPF
 {
     public partial class App : Application
     {
+
+
         private readonly IHost _host;
 
         public App()
         {
             _host = CreateHostBuilder().Build();
+
+#if DEBUG
+            PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Error;
+#endif
         }
 
         private static IHostBuilder CreateHostBuilder(string[] args = null)

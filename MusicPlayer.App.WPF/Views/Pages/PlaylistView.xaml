@@ -62,12 +62,12 @@
 
                 <TextBlock Grid.Row="0"
                             Text="Playlist"
-                            FontSize="{StaticResource FontSizeLarge}"
+                            FontSize="{StaticResource FontSizeXLarge}"
                             VerticalAlignment="Bottom"
                            FontWeight="Light"/>
                 <!--Playlist name-->
                 <TextBlock Grid.Row="1"
-                           Text="{Binding CurrentPlaylist.PlaylistName}"
+                           Text="{Binding CurrentPlaylist.Title}"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Stretch"
                            FontSize="{StaticResource FontSizeXXLarge}"
@@ -75,7 +75,7 @@
                 <!--Description-->
                 <TextBlock Grid.Row="2"
                            Text="{Binding CurrentPlaylist.Description}"
-                           FontSize="{StaticResource FontSizeRegular}"
+                           FontSize="{StaticResource FontSizeMedium}"
                            Foreground="{StaticResource AppForegroundLightGreyBrush}"
                            TextWrapping="Wrap"
                            MaxWidth="700"
@@ -94,11 +94,11 @@
                                 VerticalAlignment="Center"
                                 Grid.Column="0">
                         <TextBlock Text="Author:  "
-                                   FontSize="{StaticResource FontSizeRegular}"
+                                   FontSize="{StaticResource FontSizeMedium}"
                                    Foreground="{StaticResource AppForegroundLightGreyBrush}"/>
                         <TextBlock Grid.Column="0"
                                    Text="{Binding CurrentPlaylist.Author}"
-                                   FontSize="{StaticResource FontSizeRegular}"
+                                   FontSize="{StaticResource FontSizeMedium}"
                                    FontWeight="DemiBold"
                                    MaxWidth="140"/>
                     </StackPanel>
@@ -107,11 +107,11 @@
                                 VerticalAlignment="Center"
                                 Grid.Column="1">
                         <TextBlock Text="Songs:  "
-                                   FontSize="{StaticResource FontSizeRegular}"
+                                   FontSize="{StaticResource FontSizeMedium}"
                                    Foreground="{StaticResource AppForegroundLightGreyBrush}"/>
                         <TextBlock Grid.Column="0"
                                    Text="{Binding CurrentPlaylist.Tracks.Count}"
-                                   FontSize="{StaticResource FontSizeRegular}"
+                                   FontSize="{StaticResource FontSizeMedium}"
                                    FontWeight="DemiBold"
                                    MaxWidth="140"/>
                     </StackPanel>
@@ -123,8 +123,7 @@
         <controls:PlaylistControlsBar Grid.Row="2" DataContext="{Binding ControlBarViewModel}"/>
 
         <!--Tracks-->
-        <Grid Grid.Row="3">
-            <controls:TracksListViewControl/>
-        </Grid>
+        <controls:TracksListViewControl Grid.Row="3"/>
+        
     </Grid>
 </UserControl>
