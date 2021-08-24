@@ -19,6 +19,5 @@ namespace MusicPlayer.Core.Models
         #region Methods
         public static string GetFullTrackPath(string directory, string fileName) => Path.Combine(directory, fileName);
         #endregion
-
     }
 }

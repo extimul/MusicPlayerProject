@@ -5,8 +5,8 @@ using System;
 using System.Windows.Input;
 using Microsoft.Win32;
 using MusicPlayer.Core.Models;
-using MusicPlayer.App.WPF.Services.DataPath;
 using MusicPlayer.App.WPF.Services.Audio;
+using MusicPlayer.App.WPF.Services.Content;
 
 namespace MusicPlayer.App.WPF.ViewModels
 {
@@ -22,7 +22,7 @@ namespace MusicPlayer.App.WPF.ViewModels
         private string playlistDescription;
         private readonly LibraryViewModel libraryViewModel;
         private readonly IDataPathService pathService;
-        private readonly IPlaylistService playlistService;
+        private readonly ITracksCollectionService<Playlist> tracksCollectionService;
         #endregion
 
         #region Properties
@@ -53,16 +53,21 @@ namespace MusicPlayer.App.WPF.ViewModels
         public ICommand CancelCommand { get; }
         #endregion
 
-        public CreatePlaylistViewModel(LibraryViewModel libraryViewModel, IDataPathService pathService, IPlaylistService playlistService)
+        #region Consturctor
+        public CreatePlaylistViewModel(LibraryViewModel libraryViewModel, 
+                                       IDataPathService pathService, 
+                                       ITracksCollectionService<Playlist> tracksCollectionService)
         {
             this.pathService = pathService;
-            this.playlistService = playlistService;
+            this.tracksCollectionService = tracksCollectionService;
             this.libraryViewModel = libraryViewModel;
             CreateCommand = new RelayCommand(() => CreatePlaylist());
             CancelCommand = new RelayCommand(() => Cancel());
             ChangeImageCommand = new RelayCommand(() => ChangeImageOnClick());
         }
+        #endregion
 
+        #region Methods
         private void ChangeImageOnClick()
         {
             try
@@ -83,9 +88,9 @@ namespace MusicPlayer.App.WPF.ViewModels
         {
             CloseRequested?.Invoke(this, new DialogCreateRequestArgs(new Playlist()
             {
-                Title = PlaylistName ?? $"Playlist #{playlistService.PlaylistsCollection.Count + 1}",
+                Title = PlaylistName ?? $"Playlist #{tracksCollectionService.TracksCollection.Count + 1}",
                 Description = PlaylistDescription ?? "Your playlist",
-                ImageSource = PlaylistImageSource ?? pathService.DefaultTrackImage,
+                ImageSource = PlaylistImageSource ?? pathService.DefaultTrackImagePath,
                 AddedDate = DateTime.Now
             }));
         }
@@ -100,5 +105,6 @@ namespace MusicPlayer.App.WPF.ViewModels
             CloseRequested = null;
             base.Dispose();
         }
+        #endregion
     }
 }

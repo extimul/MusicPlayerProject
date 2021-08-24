@@ -12,9 +12,5 @@ namespace MusicPlayer.Core.Models
         public string ImageSource { get; set; }
         public DateTime? AddedDate { get; set; }
         public DateTime? RecentlyPlay { get; set; }
-        public override int GetId()
-        {
-            return Id - 1;
-        }
     }
 }

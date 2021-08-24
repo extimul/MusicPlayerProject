@@ -1,5 +1,4 @@
 ﻿using MusicPlayer.App.WPF.Services.Audio;
-using MusicPlayer.App.WPF.Services.DataPath;
 using MusicPlayer.App.WPF.Services.Icon;
 using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels.Base;

@@ -3,8 +3,6 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using MusicPlayer.App.WPF.Services.DataPath;
-using MusicPlayer.App.WPF.Services.Settings;
 using MusicPlayer.Core.Exceptions;
 using MusicPlayer.Core.Models;
 using MusicPlayer.Core.Types;
@@ -66,6 +64,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
             get => activePlaylist;
             set
             {
+                if (value is null) return;
                 if (value.Equals(activePlaylist)) return;
                 activePlaylist = value;
             }

@@ -1,6 +1,6 @@
 ﻿using MusicPlayer.App.WPF.Commands;
 using MusicPlayer.App.WPF.Services.Audio;
-using MusicPlayer.App.WPF.Services.DataPath;
+using MusicPlayer.App.WPF.Services.Content;
 using MusicPlayer.App.WPF.Services.Icon;
 using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels.Base;
@@ -17,7 +17,7 @@ namespace MusicPlayer.App.WPF.ViewModels
     {
         #region Fields
         private Playlist _selectedPlaylist;
-        private readonly IPlaylistService playlistManager;
+        private readonly ITracksCollectionService<Playlist> playlistManager;
         #endregion
 
         #region Properties
@@ -48,21 +48,21 @@ namespace MusicPlayer.App.WPF.ViewModels
         public ICommand OpenPlaylistCommand { get; }
         #endregion
 
-        public LibraryViewModel(IPlaylistService playlistManager,
+        public LibraryViewModel(ITracksCollectionService<Playlist> tracksCollectionService,
                                 INavigatorService navigator,
                                 IViewModelFactory viewModelFactory,
                                 IDataPathService pathService,
                                 IAudioService audioService,
                                 IIconManager iconManager)
         {
-            this.playlistManager = playlistManager;
-            this.playlistManager.PlaylistCollectionChanged += OnPlaylistCollectionChanged;
+            this.playlistManager = tracksCollectionService;
+            this.playlistManager.CollectionChanged += OnPlaylistCollectionChanged;
 
-            FilterPanelViewModel = new FilterHandlerPanelViewModel<Playlist>(this.playlistManager.PlaylistsCollection);
+            FilterPanelViewModel = new FilterHandlerPanelViewModel<Playlist>(this.playlistManager.TracksCollection);
             FilterPanelViewModel.PropertyChanged += FilterPanelViewModel_PropertyChanged;
 
             SortCommand = new SortPlaylistsCommand();
-            CreatePlaylistCommand = new CreatePlaylistCommand(this, pathService, playlistManager);
+            CreatePlaylistCommand = new CreatePlaylistCommand(this, pathService, tracksCollectionService);
             OpenPlaylistCommand = new OpenPlaylistCommand(this, audioService, iconManager, navigator, viewModelFactory);
         }
 
@@ -85,7 +85,7 @@ namespace MusicPlayer.App.WPF.ViewModels
 
         public override void Dispose()
         {
-            playlistManager.PlaylistCollectionChanged -= OnPlaylistCollectionChanged;
+            playlistManager.CollectionChanged -= OnPlaylistCollectionChanged;
             base.Dispose();
         }
     }

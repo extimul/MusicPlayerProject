@@ -27,7 +27,7 @@ namespace MusicPlayer.Core.Handlers
         {
             get
             {
-                var l = itemCollection.View.Cast<T>().ToList();
+                var l = itemCollection.View?.Cast<T>().ToList();
                 return new ObservableCollection<T>(l);
             }
         }
@@ -63,6 +63,8 @@ namespace MusicPlayer.Core.Handlers
                 return;
             }
 
+            T usr = e.Item as T;
+            if (usr.Title.ToUpper().Contains(SearchingPattern.ToUpper()))
             {
                 e.Accepted = true;
             }

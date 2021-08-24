@@ -207,8 +207,6 @@
         </Style.Triggers>
     </Style>
     
-
-
     <!--Toggle button template-->
     <ControlTemplate TargetType="ToggleButton" x:Key="ComboBoxToggleButtonTemplate">
         <Grid>
@@ -353,8 +351,8 @@
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.MouseOver.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.MouseOver.Border}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource AppElementBackgroundBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource AppBackgroundMainBrush}"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -505,4 +503,76 @@
         </Setter>
     </Style>
     
+    <!--Context menu style-->
+    <Style x:Key="TracksListViewContextMenu" TargetType="{x:Type ContextMenu}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Grid.IsSharedSizeScope" Value="True" />
+        <Setter Property="HasDropShadow" Value="True" />
+        <Setter Property="Foreground" Value="{StaticResource AppForegroundBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContextMenu}">
+                    <Border x:Name="bd" Background="{StaticResource AppBackgroundSecondaryBrush}" 
+                            BorderThickness="0">
+                        <StackPanel IsItemsHost="True"
+                                    KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type MenuItem}" x:Key="MenuItemStyle">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{StaticResource AppBackgroundSecondaryBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AppForegroundBrush}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}"/>
+        <Setter Property="Margin" Value="2,1"/>
+        <Setter Property="Padding" Value="5,5,10,5"/>
+        <Setter Property="MinWidth" Value="100"/>
+        <Setter Property="MinHeight" Value="40"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <Border x:Name="bd" BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Background="{TemplateBinding Background}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Path Data="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ContentConverter}}"
+                                  Grid.Column="0"
+                                  Stretch="Uniform"
+                                  Margin="5,0,0,0"
+                                  Height="15" 
+                                  Width="15"
+                                  Fill="{TemplateBinding Foreground}" />
+
+                            <Label Content="{TemplateBinding Header}"
+                                    Margin="{TemplateBinding Padding}"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                    HorizontalAlignment="Left"
+                                   Grid.Column="1"
+                                   Foreground="{TemplateBinding Foreground}"/>
+
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter Property="Background" TargetName="bd"  Value="{StaticResource AppElementBackgroundBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
 </ResourceDictionary>

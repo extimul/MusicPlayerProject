@@ -12,7 +12,7 @@
             <Setter Property="Foreground" Value="{StaticResource AppForegroundBrush}"/>
             <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}"/>
         </Style>
-        <Style x:Key="MusicInfoLabelStyle" TargetType="{x:Type Label}">
+        <Style x:Key="MusicInfoLabelStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="{StaticResource AppForegroundBrush}"/>
             <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -25,7 +25,7 @@
             BorderBrush="Gray">
         <Grid Background="{StaticResource MusicBarBackground}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="239"/>
+                <ColumnDefinition Width="250"/>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="2*"/>
@@ -48,25 +48,28 @@
                     <Image Source="{Binding PlayingTrack.TrackImage, Mode=OneWay}" Stretch="Uniform"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Border>
-                <Grid Grid.Column="1" Margin="10,20">
+                <Grid Grid.Column="1" Margin="10,20,0,20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"/>
                         <RowDefinition Height="1.5*"/>
                     </Grid.RowDefinitions>
                     
                     <!--Track name-->
-                    <Label Content="{Binding PlayingTrack.Title, Mode=OneWay}" 
-                           Style="{StaticResource MusicInfoLabelStyle}" 
-                           Grid.Row="0"
-                           FontWeight="Medium"/>
+                    <TextBlock Text="{Binding PlayingTrack.Title, Mode=OneWay}" 
+                               Style="{StaticResource MusicInfoLabelStyle}" 
+                               Grid.Row="0"
+                               FontWeight="Medium"
+                               ToolTip="{Binding PlayingTrack.Title, Mode=OneWay}"/>
                     <!--Author name-->
-                    <Label Content="{Binding PlayingTrack.Author, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                           Style="{StaticResource MusicInfoLabelStyle}" 
-                           Grid.Row="1"
-                           Foreground="{StaticResource AppForegroundLightGreyBrush}"
-                           FontFamily="{StaticResource LatoRegular}"
-                           FontWeight="Light"
-                           FontSize="{StaticResource FontSizeMedium}"/>
+                    <TextBlock Text="{Binding PlayingTrack.Author, Mode=OneWay}" 
+                               Style="{StaticResource MusicInfoLabelStyle}" 
+                               Grid.Row="1"
+                               Foreground="{StaticResource AppForegroundLightGreyBrush}"
+                               FontFamily="{StaticResource LatoRegular}"
+                               FontWeight="Light"
+                               FontSize="{StaticResource FontSizeMedium}"
+                               TextTrimming="WordEllipsis"
+                               ToolTip="{Binding PlayingTrack.Author, Mode=OneWay}"/>
                 </Grid>
             </Grid>
             

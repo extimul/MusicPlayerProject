@@ -29,7 +29,7 @@
     <SolidColorBrush x:Key="AppForegroundLightGreyBrush" Color="{StaticResource ForegroundLightGray}"/>
 
     <SolidColorBrush x:Key="Item.MouseOver.Background" Color="{StaticResource BackgroundLightGreen}"/>
-    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
+    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#34a8cb"/>
     <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="{StaticResource BackgroundLightBlue}"/>
     <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#abdbe3"/>
     <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="{StaticResource BackgroundLightBlue}"/>

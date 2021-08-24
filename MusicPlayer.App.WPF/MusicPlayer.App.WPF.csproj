@@ -7,15 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ApplicationResources\image.png" />
-    <None Remove="ApplicationResources\track.mp3" />
-    <None Remove="ApplicationResources\track2.mp3" />
+    <None Remove="ApplicationResources\DefaultSongImg.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="NAudio" Version="2.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,15 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="ApplicationResources\image.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="ApplicationResources\DefaultSongImg.png">
+    <Resource Include="ApplicationResources\DefaultSongImg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Resource>
   </ItemGroup>
 
 </Project>

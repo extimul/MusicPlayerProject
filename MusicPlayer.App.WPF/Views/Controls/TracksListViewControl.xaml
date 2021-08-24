@@ -14,6 +14,16 @@
                 ItemsSource="{Binding TracksCollection, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SelectedTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 SelectionMode="Single">
+        <ListView.ContextMenu>
+            <ContextMenu Style="{StaticResource TracksListViewContextMenu}"
+                         ItemContainerStyle="{StaticResource MenuItemStyle}"
+                         Foreground="{StaticResource AppForegroundBrush}">
+                <MenuItem Header="Play" Icon="{StaticResource PlayIcon}"/>
+                <MenuItem Header="Pause" Icon="{StaticResource PauseIcon}"/>
+                <MenuItem Header="Delete" Icon="{StaticResource DeleteIcon}"/>
+                <MenuItem Header="Get information" Icon="{StaticResource InfoIcon}"/>
+            </ContextMenu>
+        </ListView.ContextMenu>
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="MouseDoubleClick">
                 <i:InvokeCommandAction Command="{Binding PlayPauseCommand}"

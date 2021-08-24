@@ -18,7 +18,7 @@ namespace MusicPlayer.App.WPF.ViewModels
         #region Fields
         private readonly IAudioService audioService;
         private readonly IIconManager iconManager;
-        private readonly IPlaylistService playlistService;
+        private readonly ITracksCollectionService<Track> tracksCollectionService;
         #endregion
 
         #region Properties
@@ -32,7 +32,7 @@ namespace MusicPlayer.App.WPF.ViewModels
             }
         }
 
-        public ObservableCollection<Track> TracksCollection => playlistService.QueuePlaylist;
+        public ObservableCollection<Track> TracksCollection => tracksCollectionService.TracksCollection;
         public DrawingBrush PlayPauseIcon => iconManager.PlayPauseIcon;
 
         #endregion
@@ -41,18 +41,20 @@ namespace MusicPlayer.App.WPF.ViewModels
         public ICommand PlayPauseCommand { get; set; }
         #endregion
 
-        public QueueViewModel(IAudioService audioService, IIconManager iconManager, IPlaylistService playlistService)
+        public QueueViewModel(IAudioService audioService,
+                              IIconManager iconManager, 
+                              ITracksCollectionService<Track> playlistService)
         {
             this.audioService = audioService;
             this.iconManager = iconManager;
-            this.playlistService = playlistService;
+            this.tracksCollectionService = playlistService;
 
             this.audioService.IconChanged += OnIconChanged;
             this.audioService.TrackChanged += OnTrackChanged;
 
             this.audioService.ActivePlaylist = TracksCollection;
-            this.playlistService.QueuePlaylistChanged += OnQueueCollectionChanged;
-            this.audioService.SelectedTrack = (TracksCollection.Count > 0) ? TracksCollection[0] : null;
+            this.tracksCollectionService.CollectionChanged += OnQueueCollectionChanged;
+            this.audioService.SelectedTrack = (TracksCollection?.Count > 0) ? TracksCollection[0] : null;
 
             PlayPauseCommand = new PlayerControlsCommand(audioService, this);
         }
@@ -80,7 +82,7 @@ namespace MusicPlayer.App.WPF.ViewModels
         {
             audioService.IconChanged -= OnIconChanged;
             audioService.TrackChanged -= OnTrackChanged;
-            playlistService.QueuePlaylistChanged -= OnQueueCollectionChanged;
+            tracksCollectionService.CollectionChanged -= OnQueueCollectionChanged;
             base.Dispose();
         }
     }

@@ -18,6 +18,8 @@
         RepeatIcon,
         ShuffleIcon,
         AddSquareIcon,
-        CloseIcon
+        CloseIcon,
+        DeleteIcon,
+        InfoIcon
     }
 }
