@@ -10,6 +10,6 @@ namespace MusicPlayer.App.WPF.ViewModels.Factories
     public interface IViewModelFactory
     {
         ViewModelBase CreateViewModel(ViewTypes viewType);
-        ViewModelBase CreatePlaylistViewModel(Playlist playlist, IAudioService audioService, IIconManager iconManager, INavigatorService navigator);
+        ViewModelBase CreatePlaylistViewModel(Playlist playlist, IAudioService audioService, IIconManager iconManager, INavigatorService navigator, ITracksCollectionService<Playlist> tracksCollectionService);
     }
 }

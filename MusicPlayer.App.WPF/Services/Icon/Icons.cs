@@ -20,6 +20,7 @@
         AddSquareIcon,
         CloseIcon,
         DeleteIcon,
-        InfoIcon
+        InfoIcon,
+        SaveIcon
     }
 }

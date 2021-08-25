@@ -61,14 +61,14 @@ namespace MusicPlayer.App.WPF.ViewModels
             this.pathService = pathService;
             this.tracksCollectionService = tracksCollectionService;
             this.libraryViewModel = libraryViewModel;
-            CreateCommand = new RelayCommand(() => CreatePlaylist());
-            CancelCommand = new RelayCommand(() => Cancel());
-            ChangeImageCommand = new RelayCommand(() => ChangeImageOnClick());
+            CreateCommand = new RelayCommand<object>(o => CreatePlaylist());
+            CancelCommand = new RelayCommand<object>(o => Cancel());
+            ChangeImageCommand = new RelayCommand<object>(o => ChangeImageOnClick(o));
         }
         #endregion
 
         #region Methods
-        private void ChangeImageOnClick()
+        private void ChangeImageOnClick(object param)
         {
             try
             {

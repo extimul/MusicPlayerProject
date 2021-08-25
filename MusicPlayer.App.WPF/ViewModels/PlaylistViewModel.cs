@@ -1,11 +1,12 @@
 ﻿using MusicPlayer.App.WPF.Commands;
+using MusicPlayer.App.WPF.Core.Enums;
 using MusicPlayer.App.WPF.Services.Audio;
 using MusicPlayer.App.WPF.Services.Icon;
 using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.App.WPF.ViewModels.Controls;
-using MusicPlayer.Core.Interfaces;
 using MusicPlayer.Core.Models;
+using MusicPlayer.Core.Types;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ using System.Windows.Media;
 
 namespace MusicPlayer.App.WPF.ViewModels
 {
-    public class PlaylistViewModel : ViewModelBase, ITracksListView
+    public class PlaylistViewModel : ListViewModelBase
     {
         #region Fields
         private Playlist playlist;
@@ -28,10 +29,7 @@ namespace MusicPlayer.App.WPF.ViewModels
             get => playlist;
             set => SetField(ref playlist, value);
         }
-
-        public ObservableCollection<Track> TracksCollection => ControlBarViewModel.FilterPanelViewModel.FilteredCollection;
-
-        public Track SelectedTrack
+        public override Track SelectedTrack
         {
             get => audioService.SelectedTrack;
             set
@@ -40,36 +38,85 @@ namespace MusicPlayer.App.WPF.ViewModels
                 OnPropertyChanged(nameof(SelectedTrack));
             }
         }
-
-        public PlaylistControlBarViewModel ControlBarViewModel { get; set; }
-
-        public DrawingBrush PlayPauseIcon => iconManager.PlayPauseIcon;
-
+        public override ObservableCollection<Track> TracksCollection => ControlBarViewModel.FilterPanelViewModel.FilteredCollection;
+        public override ObservableCollection<MenuItemObject> ContextMenuItems { get; set; }
+        public override DrawingBrush PlayPauseIcon => iconManager.PlayPauseIcon;
         #endregion
 
         #region Commands
         public ICommand GoBackCommand { get; set; }
-        public ICommand PlayPauseCommand { get; set; }
-
+        public override ICommand PlayPauseCommand { get; set; }
+        public override ICommand ContextMenuCommand { get; set; }
         #endregion
 
-        public PlaylistViewModel(Playlist playlist, IAudioService audioService, IIconManager iconManager, INavigatorService navigator)
+        public PlaylistViewModel(Playlist playlist,
+                                IAudioService audioService, 
+                                IIconManager iconManager, 
+                                INavigatorService navigator, 
+                                ITracksCollectionService<Playlist> tracksCollectionService)
         {
+            this.audioService = audioService;
+            this.iconManager = iconManager;
+
             CurrentPlaylist = playlist;
             ControlBarViewModel = new PlaylistControlBarViewModel(this);
             ControlBarViewModel.FilterPanelViewModel.PropertyChanged += FilterPanelViewModel_PropertyChanged;
 
-            this.audioService = audioService;
-            this.iconManager = iconManager;
-            
             this.audioService.ActivePlaylist = TracksCollection;
-            this.audioService.SelectedTrack = (TracksCollection.Count > 0) ? TracksCollection[0] : null;
+            this.audioService.SelectedTrack = (TracksCollection?.Count > 0) ? TracksCollection[0] : null;
             this.audioService.TrackChanged += OnTrackChanged;
             this.audioService.IconChanged += OnIconChanged;
 
             GoBackCommand = new RenavigateCommand(navigator);
             PlayPauseCommand = new PlayerControlsCommand(audioService, this);
+            ContextMenuCommand = new ContextMenuCommand<Playlist>(this, audioService, tracksCollectionService);
+
+            LoadContextMenuItems();
         }
+
+        public override void LoadContextMenuItems()
+        {
+            ContextMenuItems = new ObservableCollection<MenuItemObject>()
+            {
+                new MenuItemObject()
+                {
+                    Name = "Play",
+                    Icon = iconManager.GetIcon(Icons.PlayIcon),
+                    MenuCommand = ContextMenuCommand,
+                    CommandType = MenuCommandTypes.Play
+                },
+                new MenuItemObject()
+                {
+                    Name = "Pause",
+                    Icon = iconManager.GetIcon(Icons.PauseIcon),
+                    MenuCommand = ContextMenuCommand,
+                    CommandType = MenuCommandTypes.Pause
+                },
+                new MenuItemObject()
+                {
+                    Name = "Remove form playlist",
+                    Icon = iconManager.GetIcon(Icons.DeleteIcon),
+                    MenuCommand = ContextMenuCommand,
+                    CommandType = MenuCommandTypes.RemoveFromCollection
+                },
+                new MenuItemObject()
+                {
+                    Name = "Save to your Liked Songs",
+                    Icon = iconManager.GetIcon(Icons.SaveIcon),
+                    MenuCommand = ContextMenuCommand,
+                    CommandType = MenuCommandTypes.AddToLiked
+                },
+                new MenuItemObject()
+                {
+                    Name = "Get inforamtion",
+                    Icon = iconManager.GetIcon(Icons.InfoIcon),
+                    MenuCommand = ContextMenuCommand,
+                    CommandType = MenuCommandTypes.GetInformation
+                }
+            };
+        }
+
+        #region Events methods
 
         private void FilterPanelViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -86,6 +133,9 @@ namespace MusicPlayer.App.WPF.ViewModels
         {
             OnPropertyChanged(nameof(SelectedTrack));
         }
+
+
+        #endregion
 
         public override void Dispose()
         {

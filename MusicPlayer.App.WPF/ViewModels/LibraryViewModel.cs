@@ -63,7 +63,7 @@ namespace MusicPlayer.App.WPF.ViewModels
 
             SortCommand = new SortPlaylistsCommand();
             CreatePlaylistCommand = new CreatePlaylistCommand(this, pathService, tracksCollectionService);
-            OpenPlaylistCommand = new OpenPlaylistCommand(this, audioService, iconManager, navigator, viewModelFactory);
+            OpenPlaylistCommand = new OpenPlaylistCommand(this, audioService, iconManager, navigator, viewModelFactory, tracksCollectionService);
         }
 
         private void FilterPanelViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)

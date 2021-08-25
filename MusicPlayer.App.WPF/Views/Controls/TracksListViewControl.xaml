@@ -16,12 +16,60 @@
                 SelectionMode="Single">
         <ListView.ContextMenu>
             <ContextMenu Style="{StaticResource TracksListViewContextMenu}"
-                         ItemContainerStyle="{StaticResource MenuItemStyle}"
-                         Foreground="{StaticResource AppForegroundBrush}">
-                <MenuItem Header="Play" Icon="{StaticResource PlayIcon}"/>
-                <MenuItem Header="Pause" Icon="{StaticResource PauseIcon}"/>
-                <MenuItem Header="Delete" Icon="{StaticResource DeleteIcon}"/>
-                <MenuItem Header="Get information" Icon="{StaticResource InfoIcon}"/>
+                         Foreground="{StaticResource AppForegroundBrush}"
+                         ItemsSource="{Binding ContextMenuItems}">
+                <ContextMenu.ItemContainerStyle>
+                    <Style TargetType="{x:Type MenuItem}">
+                        <Setter Property="Header" Value="{Binding Name}"/>
+                        <Setter Property="Command" Value="{Binding MenuCommand}" />
+                        <Setter Property="CommandParameter" Value="{Binding CommandType}"/>
+                        <Setter Property="Icon" Value="{Binding Icon}"/>
+                        <Setter Property="SnapsToDevicePixels" Value="True" />
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Background" Value="{StaticResource AppBackgroundSecondaryBrush}"/>
+                        <Setter Property="Foreground" Value="{StaticResource AppForegroundBrush}"/>
+                        <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}"/>
+                        <Setter Property="Margin" Value="2,1"/>
+                        <Setter Property="Padding" Value="5,5,10,5"/>
+                        <Setter Property="MinWidth" Value="100"/>
+                        <Setter Property="MinHeight" Value="40"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type MenuItem}">
+                                    <Border x:Name="bd" BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Background="{TemplateBinding Background}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="30"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Path Data="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ContentConverter}}"
+                                                  Grid.Column="0"
+                                                  Stretch="Uniform"
+                                                  Margin="5,0,0,0"
+                                                  Height="15" 
+                                                  Width="15"
+                                                  Fill="{TemplateBinding Foreground}" />
+                                            <Label Content="{TemplateBinding Header}"
+                                                    Margin="{TemplateBinding Padding}"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                    HorizontalAlignment="Left"
+                                                   Grid.Column="1"
+                                                   Foreground="{TemplateBinding Foreground}"/>  
+                                        </Grid>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsHighlighted" Value="True">
+                                            <Setter Property="Background" TargetName="bd"  Value="{StaticResource AppElementBackgroundBrush}" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ContextMenu.ItemContainerStyle>
             </ContextMenu>
         </ListView.ContextMenu>
         <i:Interaction.Triggers>
@@ -45,6 +93,12 @@
                                                       ContentTemplate="{TemplateBinding ContentTemplate}"/>
                             </Border>
                             <ControlTemplate.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Background" Value="{StaticResource AppElementBackgroundBrush}"/>
+                                </MultiTrigger>
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
                                         <Condition Property="IsSelected" Value="True"/>

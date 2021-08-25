@@ -33,9 +33,13 @@ namespace MusicPlayer.App.WPF.ViewModels.Factories
             };
         }
 
-        public ViewModelBase CreatePlaylistViewModel(Playlist playlist, IAudioService audioService, IIconManager iconManager, INavigatorService navigator)
+        public ViewModelBase CreatePlaylistViewModel(Playlist playlist, 
+                                                      IAudioService audioService, 
+                                                      IIconManager iconManager,
+                                                      INavigatorService navigator,
+                                                      ITracksCollectionService<Playlist> tracksCollectionService)
         {
-            return new PlaylistViewModel(playlist, audioService, iconManager, navigator);
+            return new PlaylistViewModel(playlist, audioService, iconManager, navigator, tracksCollectionService);
         }
     }
 }
