@@ -2,7 +2,7 @@
 
 namespace MusicPlayer.Core.Exceptions
 {
-    public class TrackNotFoundException : Exception
+    public sealed class TrackNotFoundException : Exception
     {
         public string TrackName { get; }
         public TrackNotFoundException()

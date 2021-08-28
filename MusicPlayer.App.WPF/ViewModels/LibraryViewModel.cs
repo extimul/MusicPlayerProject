@@ -17,7 +17,7 @@ namespace MusicPlayer.App.WPF.ViewModels
     {
         #region Fields
         private Playlist _selectedPlaylist;
-        private readonly ITracksCollectionService<Playlist> playlistManager;
+        private readonly IContentManager<Playlist> contentManager;
         #endregion
 
         #region Properties
@@ -48,22 +48,22 @@ namespace MusicPlayer.App.WPF.ViewModels
         public ICommand OpenPlaylistCommand { get; }
         #endregion
 
-        public LibraryViewModel(ITracksCollectionService<Playlist> tracksCollectionService,
+        public LibraryViewModel(IContentManager<Playlist> contentManager,
                                 INavigatorService navigator,
                                 IViewModelFactory viewModelFactory,
                                 IDataPathService pathService,
                                 IAudioService audioService,
                                 IIconManager iconManager)
         {
-            this.playlistManager = tracksCollectionService;
-            this.playlistManager.CollectionChanged += OnPlaylistCollectionChanged;
+            this.contentManager = contentManager;
+            this.contentManager.CollectionChanged += OnPlaylistCollectionChanged;
 
-            FilterPanelViewModel = new FilterHandlerPanelViewModel<Playlist>(this.playlistManager.TracksCollection);
+            FilterPanelViewModel = new FilterHandlerPanelViewModel<Playlist>(this.contentManager.MusicModelsCollection);
             FilterPanelViewModel.PropertyChanged += FilterPanelViewModel_PropertyChanged;
 
             SortCommand = new SortPlaylistsCommand();
-            CreatePlaylistCommand = new CreatePlaylistCommand(this, pathService, tracksCollectionService);
-            OpenPlaylistCommand = new OpenPlaylistCommand(this, audioService, iconManager, navigator, viewModelFactory, tracksCollectionService);
+            CreatePlaylistCommand = new CreatePlaylistCommand(this, pathService, contentManager);
+            OpenPlaylistCommand = new OpenPlaylistCommand(this, audioService, iconManager, navigator, viewModelFactory, contentManager);
         }
 
         private void FilterPanelViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -85,7 +85,7 @@ namespace MusicPlayer.App.WPF.ViewModels
 
         public override void Dispose()
         {
-            playlistManager.CollectionChanged -= OnPlaylistCollectionChanged;
+            contentManager.CollectionChanged -= OnPlaylistCollectionChanged;
             base.Dispose();
         }
     }

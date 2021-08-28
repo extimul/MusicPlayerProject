@@ -3,7 +3,7 @@ using System;
 
 namespace MusicPlayer.App.WPF.Services.Navigators
 {
-    public class NavigatorService : INavigatorService
+    public sealed class NavigatorService : INavigatorService
     {
         private ViewModelBase _previousViewModel;
         private ViewModelBase _currentViewModel;
@@ -30,8 +30,8 @@ namespace MusicPlayer.App.WPF.Services.Navigators
             }
         }
 
-        public bool CanGoForward => CurrentViewModel != null ? true : false;
-        public bool CanGoBack => PreviousViewModel != null ? true : false;
+        public bool CanGoForward => CurrentViewModel != null;
+        public bool CanGoBack => PreviousViewModel != null;
 
         public event Action StateChanged;
     }

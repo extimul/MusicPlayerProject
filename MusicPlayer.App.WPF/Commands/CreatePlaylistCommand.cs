@@ -15,24 +15,24 @@ namespace MusicPlayer.App.WPF.Commands
     {
         private readonly LibraryViewModel libraryViewModel;
         private readonly IDataPathService pathService;
-        private readonly ITracksCollectionService<Playlist> tracksCollectionService;
+        private readonly IContentManager<Playlist> contentManager;
         private CreatePlaylistViewModel viewModel;
         private CreatePlaylistDialog view;
 
         public CreatePlaylistCommand(LibraryViewModel libraryViewModel, 
-                                     IDataPathService pathService, 
-                                     ITracksCollectionService<Playlist> tracksCollectionService)
+                                     IDataPathService pathService,
+                                     IContentManager<Playlist> contentManager)
         {
             this.libraryViewModel = libraryViewModel;
             this.pathService = pathService;
-            this.tracksCollectionService = tracksCollectionService;
+            this.contentManager = contentManager;
         }
 
         private void OnCloseRequested(object sender, DialogCreateRequestArgs e)
         {
             if (e.Result != null)
             {
-                tracksCollectionService.AddItem((Playlist)e.Result);
+                contentManager.Add((Playlist)e.Result);
                 view?.Close();
             }
             else
@@ -52,7 +52,7 @@ namespace MusicPlayer.App.WPF.Commands
 
             if (viewModel == null)
             {
-                viewModel = new CreatePlaylistViewModel(libraryViewModel, pathService, tracksCollectionService);
+                viewModel = new CreatePlaylistViewModel(libraryViewModel, pathService, contentManager);
                 viewModel.CloseRequested += OnCloseRequested;
             }
 

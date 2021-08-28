@@ -5,12 +5,11 @@ using System;
 using System.Windows.Input;
 using Microsoft.Win32;
 using MusicPlayer.Core.Models;
-using MusicPlayer.App.WPF.Services.Audio;
 using MusicPlayer.App.WPF.Services.Content;
 
 namespace MusicPlayer.App.WPF.ViewModels
 {
-    public class CreatePlaylistViewModel : ViewModelBase, ICreatorDialog
+    public sealed class CreatePlaylistViewModel : ViewModelBase, ICreatorDialog
     {
         #region Events
         public event EventHandler<DialogCreateRequestArgs> CloseRequested;
@@ -22,29 +21,25 @@ namespace MusicPlayer.App.WPF.ViewModels
         private string playlistDescription;
         private readonly LibraryViewModel libraryViewModel;
         private readonly IDataPathService pathService;
-        private readonly ITracksCollectionService<Playlist> tracksCollectionService;
+        private readonly IContentManager<Playlist> contentManager;
         #endregion
 
         #region Properties
-
         public string PlaylistImageSource
         {
             get => playlistImageSource;
             set => SetField(ref playlistImageSource, value);
         }
-
         public string PlaylistName
         {
             get => playlistName;
             set => SetField(ref playlistName, value);
         }
-
         public string PlaylistDescription
         {
             get => playlistDescription;
             set => SetField(ref playlistDescription, value);
         }
-
         #endregion
 
         #region Commands 
@@ -55,24 +50,24 @@ namespace MusicPlayer.App.WPF.ViewModels
 
         #region Consturctor
         public CreatePlaylistViewModel(LibraryViewModel libraryViewModel, 
-                                       IDataPathService pathService, 
-                                       ITracksCollectionService<Playlist> tracksCollectionService)
+                                       IDataPathService pathService,
+                                       IContentManager<Playlist> contentManager)
         {
             this.pathService = pathService;
-            this.tracksCollectionService = tracksCollectionService;
+            this.contentManager = contentManager;
             this.libraryViewModel = libraryViewModel;
             CreateCommand = new RelayCommand<object>(o => CreatePlaylist());
             CancelCommand = new RelayCommand<object>(o => Cancel());
-            ChangeImageCommand = new RelayCommand<object>(o => ChangeImageOnClick(o));
+            ChangeImageCommand = new RelayCommand<object>(o => ChangeImageOnClick());
         }
         #endregion
 
         #region Methods
-        private void ChangeImageOnClick(object param)
+        private void ChangeImageOnClick()
         {
             try
             {
-                OpenFileDialog fileDialog = new OpenFileDialog();
+                OpenFileDialog fileDialog = new();
                 if (fileDialog.ShowDialog() is true)
                 {
                     PlaylistImageSource = fileDialog.FileName;
@@ -88,7 +83,7 @@ namespace MusicPlayer.App.WPF.ViewModels
         {
             CloseRequested?.Invoke(this, new DialogCreateRequestArgs(new Playlist()
             {
-                Title = PlaylistName ?? $"Playlist #{tracksCollectionService.TracksCollection.Count + 1}",
+                Title = PlaylistName ?? $"Playlist #{contentManager.MusicModelsCollection.Count + 1}",
                 Description = PlaylistDescription ?? "Your playlist",
                 ImageSource = PlaylistImageSource ?? pathService.DefaultTrackImagePath,
                 AddedDate = DateTime.Now

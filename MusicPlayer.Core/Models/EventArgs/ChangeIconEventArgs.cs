@@ -3,7 +3,7 @@ using System;
 
 namespace MusicPlayer.Core.Models
 {
-    public class ChangeIconEventArgs : EventArgs
+    public sealed class ChangeIconEventArgs : EventArgs
     {
         public SourceTypes SourceState { get; set; }
         public object Value { get; set; }

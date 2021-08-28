@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer.App.WPF.Services.Settings
 {
-    public class ApplicationSettingsService : IApplicationSettingsService
+    public sealed class ApplicationSettingsService : IApplicationSettingsService
     {
         public double MusicVolumeValue { get; set; } = 50;
 

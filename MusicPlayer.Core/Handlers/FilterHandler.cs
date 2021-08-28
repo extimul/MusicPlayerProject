@@ -3,13 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace MusicPlayer.Core.Handlers
 {
-    public class FilterHandler<T> : IDisposable where T : BaseModel
+    public sealed class FilterHandler<T> : IDisposable where T : BaseMusicPlayerModel
     {
         #region Events
         public event Action StateChanged;
@@ -18,17 +16,19 @@ namespace MusicPlayer.Core.Handlers
         #region Fields
         private CollectionViewSource itemCollection;
         private string searchingPattern;
-
         #endregion
 
         #region Properties
-
         public ObservableCollection<T> FilteredCollection
         {
             get
             {
-                var l = itemCollection.View?.Cast<T>().ToList();
-                return new ObservableCollection<T>(l);
+                var list = itemCollection.View?.Cast<T>().ToList();
+                if (list is null)
+                {
+                    return new ObservableCollection<T>();
+                }
+                else return new ObservableCollection<T>(list);
             }
         }
 

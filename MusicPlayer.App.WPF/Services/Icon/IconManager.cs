@@ -5,11 +5,13 @@ using System.Windows.Media;
 
 namespace MusicPlayer.App.WPF.Services.Icon
 {
-    public class IconManager : IIconManager
+    public sealed class IconManager : IIconManager
     {
+        #region Field
         private DrawingBrush _playPauseIcon;
-
         private DrawingBrush _volumeIcon;
+        #endregion
+
         public DrawingBrush PlayPauseIcon
         {
             get => _playPauseIcon;
@@ -37,34 +39,25 @@ namespace MusicPlayer.App.WPF.Services.Icon
 
         public DrawingBrush SetPlayPauseIcon(PlaybackState state)
         {
-            switch (state)
+            return state switch
             {
-                case PlaybackState.Stopped:
-                    return GetIcon(Icons.PlayIcon);
-                case PlaybackState.Playing:
-                    return GetIcon(Icons.PauseIcon);
-                case PlaybackState.Paused:
-                    return GetIcon(Icons.PlayIcon);
-                default:
-                    return null;
-            }
+                PlaybackState.Stopped => GetIcon(Icons.PlayIcon),
+                PlaybackState.Playing => GetIcon(Icons.PauseIcon),
+                PlaybackState.Paused => GetIcon(Icons.PlayIcon),
+                _ => null,
+            };
         }
 
         public DrawingBrush SetVolumeIcon(double volumeValue)
         {
-            switch (volumeValue)
+            return volumeValue switch
             {
-                case 0:
-                    return GetIcon(Icons.VolumeOffIcon);
-                case > 0 and <= 30.0:
-                    return GetIcon(Icons.VolumeLowIcon);
-                case > 30.0 and <= 65.0:
-                    return GetIcon(Icons.VolumeMediumIcon);
-                case > 65.0 and <= 100.0:
-                    return GetIcon(Icons.VolumeHighIcon);
-                default:
-                    return null;
-            }
+                0 => GetIcon(Icons.VolumeOffIcon),
+                > 0 and <= 30.0 => GetIcon(Icons.VolumeLowIcon),
+                > 30.0 and <= 65.0 => GetIcon(Icons.VolumeMediumIcon),
+                > 65.0 and <= 100.0 => GetIcon(Icons.VolumeHighIcon),
+                _ => null,
+            };
         }
     }
 }
