@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace MusicPlayer.Core.Models
 {
-    public class MenuItemObject
+    public sealed class MenuItemObject
     {
         public string Name { get; set; }
         public DrawingBrush Icon { get; set; }

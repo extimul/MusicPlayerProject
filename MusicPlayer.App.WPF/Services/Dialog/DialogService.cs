@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace MusicPlayer.App.WPF.Services.Dialog
 {
-    public class DialogService : IDialogService
+    public sealed class DialogService : IDialogService
     {
         public IDictionary<Type, Type> Mappings { get; }
 
@@ -53,7 +53,7 @@ namespace MusicPlayer.App.WPF.Services.Dialog
             viewModel.CloseRequested += handler;
 
             dialog.DataContext = viewModel;
-            dialog.Owner = App.Current.MainWindow;
+            dialog.Owner = Application.Current.MainWindow;
 
             return dialog.ShowDialog();
         }

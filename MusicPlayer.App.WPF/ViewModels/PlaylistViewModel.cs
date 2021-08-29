@@ -1,6 +1,7 @@
 ﻿using MusicPlayer.App.WPF.Commands;
 using MusicPlayer.App.WPF.Core.Enums;
 using MusicPlayer.App.WPF.Services.Audio;
+using MusicPlayer.App.WPF.Services.Content;
 using MusicPlayer.App.WPF.Services.Icon;
 using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels.Base;
@@ -15,7 +16,7 @@ using System.Windows.Media;
 
 namespace MusicPlayer.App.WPF.ViewModels
 {
-    public class PlaylistViewModel : ListViewModelBase
+    public sealed class PlaylistViewModel : ListViewModelBase
     {
         #region Fields
         private Playlist playlist;
@@ -52,8 +53,8 @@ namespace MusicPlayer.App.WPF.ViewModels
         public PlaylistViewModel(Playlist playlist,
                                 IAudioService audioService, 
                                 IIconManager iconManager, 
-                                INavigatorService navigator, 
-                                ITracksCollectionService<Playlist> tracksCollectionService)
+                                INavigatorService navigator,
+                                IContentManager<Playlist> contentManager)
         {
             this.audioService = audioService;
             this.iconManager = iconManager;
@@ -69,7 +70,7 @@ namespace MusicPlayer.App.WPF.ViewModels
 
             GoBackCommand = new RenavigateCommand(navigator);
             PlayPauseCommand = new PlayerControlsCommand(audioService, this);
-            ContextMenuCommand = new ContextMenuCommand<Playlist>(this, audioService, tracksCollectionService);
+            ContextMenuCommand = new ContextMenuCommand<Playlist>(this, audioService, contentManager);
 
             LoadContextMenuItems();
         }

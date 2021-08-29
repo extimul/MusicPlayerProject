@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace MusicPlayer.App.WPF.Services.Dialog
 {
-    public class DialogCreateRequestArgs
+    public sealed class DialogCreateRequestArgs
     {
         public object Result { get; }
         public DialogCreateRequestArgs(object args)

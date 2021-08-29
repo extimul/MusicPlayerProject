@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer.App.WPF.Services.Content
 {
-    public class ContentHandler<T> : IContentHandler<T> where T : BaseModel
+    public sealed class ContentLoader<T> : IContentLoader<T> where T : BaseMusicPlayerModel
     {
         public Task<ObservableCollection<T>> LoadCollection(string path)
         {

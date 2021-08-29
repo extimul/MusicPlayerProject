@@ -1,13 +1,12 @@
 ﻿using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.Core.Handlers;
 using MusicPlayer.Core.Models;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace MusicPlayer.App.WPF.ViewModels.Controls
 {
-    public class FilterHandlerPanelViewModel<T> : ViewModelBase where T : BaseModel
+    public sealed class FilterHandlerPanelViewModel<T> : ViewModelBase where T : BaseMusicPlayerModel
     {
         #region Fields
         private readonly FilterHandler<T> filterHandler;

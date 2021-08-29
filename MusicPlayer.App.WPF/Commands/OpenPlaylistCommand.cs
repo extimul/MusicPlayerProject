@@ -1,5 +1,6 @@
 ﻿using MusicPlayer.App.WPF.Commands.Base;
 using MusicPlayer.App.WPF.Services.Audio;
+using MusicPlayer.App.WPF.Services.Content;
 using MusicPlayer.App.WPF.Services.Icon;
 using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels;
@@ -16,14 +17,14 @@ namespace MusicPlayer.App.WPF.Commands
         private readonly IIconManager iconManager;
         private readonly INavigatorService navigator;
         private readonly IViewModelFactory viewModelFactory;
-        private readonly ITracksCollectionService<Playlist> tracksCollectionService;
+        private readonly IContentManager<Playlist> tracksCollectionService;
 
         public OpenPlaylistCommand(LibraryViewModel viewModel,
                                     IAudioService audioService,
                                     IIconManager iconManager,
                                     INavigatorService navigator,
-                                    IViewModelFactory viewModelFactory, 
-                                    ITracksCollectionService<Playlist> tracksCollectionService)
+                                    IViewModelFactory viewModelFactory,
+                                    IContentManager<Playlist> tracksCollectionService)
         {
             this.viewModel = viewModel;
             this.audioService = audioService;

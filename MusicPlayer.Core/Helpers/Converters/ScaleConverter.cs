@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace MusicPlayer.Core.Helpers.Converters
 {
-    public class ScaleConverter : IValueConverter
+    public sealed class ScaleConverter : IValueConverter
     {
         public double Scale { get; set; }
 

@@ -3,14 +3,16 @@ using System.IO;
 
 namespace MusicPlayer.App.WPF.Services.Content
 {
-    public class DataPathService : IDataPathService
+    public sealed class DataPathService : IDataPathService
     {
+        #region Properties
         public string DefaultTrackImagePath { get; set; }
         public string ApplicationDirectoryPath { get; set; }
         public string MusicDirectoryPath { get; set; }
         public string ApplicationDataDirectoryPath { get; set; }
         public string PlaylistJsonPath { get; set; }
         public string QueueJsonPath { get; set; }
+        #endregion
 
         public DataPathService()
         {

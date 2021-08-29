@@ -5,14 +5,13 @@ using System.Windows.Media;
 
 namespace MusicPlayer.Core.Helpers.Converters
 {
-    public class ContentConverter : IValueConverter
+    public sealed class ContentConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            DrawingGroup draw = (value as DrawingBrush)?.Drawing as DrawingGroup;
-            PathGeometry path = new PathGeometry();
+            PathGeometry path = new();
 
-            if (draw != null)
+            if ((value as DrawingBrush)?.Drawing is DrawingGroup draw)
                 foreach (var drawing in draw.Children)
                 {
                     var item = (GeometryDrawing) drawing;

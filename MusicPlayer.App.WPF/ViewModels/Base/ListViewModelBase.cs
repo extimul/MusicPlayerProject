@@ -14,22 +14,12 @@ namespace MusicPlayer.App.WPF.ViewModels.Base
     public abstract class ListViewModelBase : ViewModelBase
     {
         public PlaylistControlBarViewModel ControlBarViewModel { get; set; }
-
         public abstract Track SelectedTrack { get; set; }
-
         public abstract DrawingBrush PlayPauseIcon { get; }
-
         public abstract ObservableCollection<Track> TracksCollection { get; }
-
         public abstract ObservableCollection<MenuItemObject> ContextMenuItems { get; set; }
-
         public abstract ICommand PlayPauseCommand { get; set; }
         public abstract ICommand ContextMenuCommand { get; set; }
-
-        public ListViewModelBase()
-        {
-        }
-
         public abstract void LoadContextMenuItems();
     }
 }

@@ -11,12 +11,11 @@ using NAudio.Wave;
 
 namespace MusicPlayer.App.WPF.ViewModels.Controls
 {
-    public class AudioPlayerBarViewModel : ViewModelBase
+    public sealed class AudioPlayerBarViewModel : ViewModelBase
     {
         #region Fields
         private readonly IAudioService audioService;
         private readonly IIconManager iconManager;
-
         public double trackVolumeValue;
         #endregion
 
@@ -44,14 +43,12 @@ namespace MusicPlayer.App.WPF.ViewModels.Controls
                 OnPropertyChanged(nameof(TrackVolumeValue));
             }
         }
-
         public DrawingBrush PlayPauseIcon => iconManager.PlayPauseIcon;
         public DrawingBrush TrackVolumeIcon => iconManager.VolumeIcon;
         #endregion
 
         #region Commands
         public ICommand AudioPlayerControlCommand { get; }
-
         #endregion
 
         public AudioPlayerBarViewModel(IAudioService audioService, IIconManager iconManager)
@@ -68,12 +65,6 @@ namespace MusicPlayer.App.WPF.ViewModels.Controls
             OnIconChanged(this, new ChangeIconEventArgs(SourceTypes.TogglePlaybackSource, this.audioService.CurrentPlaybackState));
             OnIconChanged(this, new ChangeIconEventArgs(SourceTypes.VolumeSource, this.audioService.TrackVolumeValue));
         }
-
-        private void OnFavouriteStatusChanged()
-        {
-            OnPropertyChanged(nameof(PlayingTrack));
-        }
-
         private void OnTrackPositionChanged()
         {
             OnPropertyChanged(nameof(TrackTimeValue));

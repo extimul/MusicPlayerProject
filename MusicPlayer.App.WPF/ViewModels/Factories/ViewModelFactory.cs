@@ -1,4 +1,5 @@
 ﻿using MusicPlayer.App.WPF.Services.Audio;
+using MusicPlayer.App.WPF.Services.Content;
 using MusicPlayer.App.WPF.Services.Icon;
 using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels.Base;
@@ -33,13 +34,13 @@ namespace MusicPlayer.App.WPF.ViewModels.Factories
             };
         }
 
-        public ViewModelBase CreatePlaylistViewModel(Playlist playlist, 
-                                                      IAudioService audioService, 
-                                                      IIconManager iconManager,
-                                                      INavigatorService navigator,
-                                                      ITracksCollectionService<Playlist> tracksCollectionService)
+        public ViewModelBase CreatePlaylistViewModel(Playlist playlist,
+                                                     IAudioService audioService,
+                                                     IIconManager iconManager,
+                                                     INavigatorService navigator,
+                                                     IContentManager<Playlist> contentManager)
         {
-            return new PlaylistViewModel(playlist, audioService, iconManager, navigator, tracksCollectionService);
+            return new PlaylistViewModel(playlist, audioService, iconManager, navigator, contentManager);
         }
     }
 }
