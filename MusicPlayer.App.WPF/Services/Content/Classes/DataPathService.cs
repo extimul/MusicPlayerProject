@@ -1,5 +1,7 @@
 ﻿using MusicPlayer.Core.Types;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace MusicPlayer.App.WPF.Services.Content
 {
@@ -10,7 +12,6 @@ namespace MusicPlayer.App.WPF.Services.Content
         public string ApplicationDirectoryPath { get; set; }
         public string MusicDirectoryPath { get; set; }
         public string ApplicationDataDirectoryPath { get; set; }
-        public string PlaylistJsonPath { get; set; }
         public string QueueJsonPath { get; set; }
         #endregion
 
@@ -19,7 +20,6 @@ namespace MusicPlayer.App.WPF.Services.Content
             ApplicationDirectoryPath = Directory.GetCurrentDirectory();
             MusicDirectoryPath = GetContainerPath(DirectoryNames.MUSICS);
             ApplicationDataDirectoryPath = GetContainerPath(DirectoryNames.DATA);
-            PlaylistJsonPath = GetJsonFilePath(FileNames.PLAYLIST);
             QueueJsonPath = GetJsonFilePath(FileNames.QUEUE);
             DefaultTrackImagePath = GetDefaultImagePath();
         }
@@ -55,6 +55,24 @@ namespace MusicPlayer.App.WPF.Services.Content
                 File.Create(playlistJsonFile);
                 return playlistJsonFile;
             }
+        }
+
+        public string GeneratJsonFileName(string fileName)
+        {
+            return Path.Combine(ApplicationDataDirectoryPath, "playlist_" + fileName + ".json");
+        }
+
+        public List<string> GetFileNames(string searchPattern)
+        {
+            List<string> fileNamesCollection = new();
+            string[] files = Directory.GetFiles(ApplicationDataDirectoryPath, "*.json");
+
+            foreach (string file in files)
+            {
+                if (file.Contains("playlist")) fileNamesCollection.Add(file);
+            }
+
+            return fileNamesCollection;
         }
     }
 }

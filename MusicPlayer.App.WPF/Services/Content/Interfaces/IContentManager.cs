@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicPlayer.Core.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -9,8 +10,7 @@ namespace MusicPlayer.App.WPF.Services.Content
         event Action CollectionChanged;
         ObservableCollection<T> MusicModelsCollection { get; }
         Task Add(T item);
-        Task Delete(int id);
-        Task GetModel();
+        Task Delete(T item);
         Task Update(T item);
     }
 }

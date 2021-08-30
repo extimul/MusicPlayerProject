@@ -10,6 +10,7 @@ namespace MusicPlayer.App.WPF.ViewModels.Base
     {
         public PlaylistControlBarViewModel ControlBarViewModel { get; set; }
         public abstract Track SelectedTrack { get; set; }
+        public abstract int SelectedTrackIndex { get; set; }
         public abstract DrawingBrush PlayPauseIcon { get; }
         public abstract ObservableCollection<Track> TracksCollection { get; }
         public abstract ObservableCollection<MenuItemObject> ContextMenuItems { get; set; }

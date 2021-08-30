@@ -5,7 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:type="clr-namespace:MusicPlayer.Core.Types;assembly=MusicPlayer.Core"
+             xmlns:converter="clr-namespace:MusicPlayer.Core.Helpers.Converters;assembly=MusicPlayer.Core"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <converter:ItemPositionToIndexConverter x:Key="IndexConverter"/>
+    </UserControl.Resources>
 
     <ListView x:Name="TracksListView"
                 BorderThickness="0"
@@ -13,6 +17,7 @@
                 Background="Transparent"
                 ItemsSource="{Binding TracksCollection, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SelectedTrack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                SelectedIndex="{Binding SelectedTrackIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 SelectionMode="Single">
         <ListView.ContextMenu>
             <ContextMenu Style="{StaticResource TracksListViewContextMenu}"
@@ -75,7 +80,7 @@
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="MouseDoubleClick">
                 <i:InvokeCommandAction Command="{Binding PlayPauseCommand}"
-                                           CommandParameter="{x:Static type:AudioPlayerControlTypes.DoubleClickSwitch}"/>
+                                       CommandParameter="{x:Static type:AudioPlayerControlTypes.DoubleClickSwitch}"/>
             </i:EventTrigger>
         </i:Interaction.Triggers>
         <ListView.ItemContainerStyle>
@@ -133,7 +138,7 @@
 
                     <!--Track number-->
                     <Label x:Name="TackIdLabel"
-                                Content="{Binding Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                 Grid.Column="0"
                                 VerticalAlignment="Center"
                                 HorizontalContentAlignment="Center">
@@ -208,7 +213,7 @@
                     <Image Grid.Column="1"
                                Width="50"
                                Height="50"
-                               Source="{Binding TrackImage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                               Source="{Binding ImageSource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                Stretch="Fill"
                                Margin="0"
                            RenderOptions.BitmapScalingMode="HighQuality"/>

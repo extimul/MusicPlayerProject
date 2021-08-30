@@ -30,6 +30,15 @@ namespace MusicPlayer.App.WPF.ViewModels
                 OnPropertyChanged(nameof(SelectedTrack));
             }
         }
+        public override int SelectedTrackIndex
+        {
+            get => audioService.SelectedTrackIndex;
+            set
+            {
+                audioService.SelectedTrackIndex = value;
+                OnPropertyChanged(nameof(SelectedTrackIndex));
+            }
+        }
         public override ObservableCollection<Track> TracksCollection => contentManager.MusicModelsCollection;
         public override DrawingBrush PlayPauseIcon => iconManager.PlayPauseIcon;
         public override ObservableCollection<MenuItemObject> ContextMenuItems { get; set; }
@@ -103,6 +112,7 @@ namespace MusicPlayer.App.WPF.ViewModels
         private void OnTrackChanged()
         {
             OnPropertyChanged(nameof(SelectedTrack));
+            OnPropertyChanged(nameof(SelectedTrackIndex));
         }
 
         private void OnIconChanged(object sender, ChangeIconEventArgs e)

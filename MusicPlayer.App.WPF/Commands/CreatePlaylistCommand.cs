@@ -28,11 +28,11 @@ namespace MusicPlayer.App.WPF.Commands
             this.contentManager = contentManager;
         }
 
-        private void OnCloseRequested(object sender, DialogCreateRequestArgs e)
+        private async void OnCloseRequested(object sender, DialogCreateRequestArgs e)
         {
             if (e.Result != null)
             {
-                contentManager.Add((Playlist)e.Result);
+                await contentManager.Add((Playlist)e.Result);
                 view?.Close();
             }
             else

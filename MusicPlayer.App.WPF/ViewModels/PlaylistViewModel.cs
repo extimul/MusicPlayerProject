@@ -39,6 +39,15 @@ namespace MusicPlayer.App.WPF.ViewModels
                 OnPropertyChanged(nameof(SelectedTrack));
             }
         }
+        public override int SelectedTrackIndex
+        {
+            get => audioService.SelectedTrackIndex;
+            set
+            {
+                audioService.SelectedTrackIndex = value;
+                OnPropertyChanged(nameof(SelectedTrackIndex));
+            }
+        }
         public override ObservableCollection<Track> TracksCollection => ControlBarViewModel.FilterPanelViewModel.FilteredCollection;
         public override ObservableCollection<MenuItemObject> ContextMenuItems { get; set; }
         public override DrawingBrush PlayPauseIcon => iconManager.PlayPauseIcon;
@@ -54,8 +63,7 @@ namespace MusicPlayer.App.WPF.ViewModels
                                 IAudioService audioService, 
                                 IIconManager iconManager, 
                                 INavigatorService navigator,
-                                IContentManager<Playlist> contentManager,
-                                IContentManager<Track> queueContentManager)
+                                IContentManager<Playlist> contentManager)
         {
             this.audioService = audioService;
             this.iconManager = iconManager;
@@ -71,7 +79,7 @@ namespace MusicPlayer.App.WPF.ViewModels
 
             GoBackCommand = new RenavigateCommand(navigator);
             PlayPauseCommand = new PlayerControlsCommand(audioService, this);
-            ContextMenuCommand = new ContextMenuCommand<Playlist>(this, audioService, contentManager, queueContentManager);
+            ContextMenuCommand = new ContextMenuCommand<Playlist>(this, audioService, contentManager);
 
             LoadContextMenuItems();
         }
@@ -134,6 +142,7 @@ namespace MusicPlayer.App.WPF.ViewModels
         private void OnTrackChanged()
         {
             OnPropertyChanged(nameof(SelectedTrack));
+            OnPropertyChanged(nameof(SelectedTrackIndex));
         }
 
 

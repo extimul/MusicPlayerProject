@@ -7,6 +7,7 @@ using MusicPlayer.App.WPF.Services.Icon;
 using MusicPlayer.App.WPF.ViewModels.Factories;
 using MusicPlayer.App.WPF.Services.Settings;
 using MusicPlayer.App.WPF.Services.Content;
+using MusicPlayer.Core.Models;
 
 namespace MusicPlayer.App.WPF.HostBuilders
 {
@@ -25,8 +26,9 @@ namespace MusicPlayer.App.WPF.HostBuilders
                 services.AddSingleton<IDataPathService, DataPathService>();
                 services.AddSingleton<IApplicationSettingsService, ApplicationSettingsService>();
 
-                services.AddScoped(typeof(IContentManager<>), typeof(ContentManager<>));
-                services.AddScoped(typeof(IContentLoader<>), typeof(ContentLoader<>));
+                services.AddScoped(typeof(IContentContainer<>), typeof(ContentContainer<>));
+                services.AddScoped(typeof(IContentManager<Playlist>), typeof(PlaylistManager));
+                services.AddScoped(typeof(IContentManager<Track>), typeof(QueueManager));
             });
 
             return host;

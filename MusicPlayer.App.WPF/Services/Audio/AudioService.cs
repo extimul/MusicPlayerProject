@@ -31,6 +31,7 @@ namespace MusicPlayer.App.WPF.Services.Audio
         private double _lastTrackVolumeValue;
         private TimeSpan _trackTimePosition;
         private PlaybackStopTypes _playbackStopType;
+        private int seletctedTrackIndex;
         #endregion
 
         #region Properties
@@ -56,6 +57,17 @@ namespace MusicPlayer.App.WPF.Services.Audio
                     _currentlySelectedTrack = value;
                     TrackChanged?.Invoke();
                 }
+            }
+        }
+
+        public int SelectedTrackIndex
+        {
+            get => seletctedTrackIndex;
+            set
+            {
+                if (value.Equals(seletctedTrackIndex)) return;
+                seletctedTrackIndex = value;
+                TrackChanged?.Invoke();
             }
         }
 
@@ -271,10 +283,10 @@ namespace MusicPlayer.App.WPF.Services.Audio
 
         public Task NextTrack()
         {
-            if (CanPlay && SelectedTrack.GetId() < ActivePlaylist.Count - 1)
+            if (CanPlay && SelectedTrackIndex < ActivePlaylist.Count - 1)
             {
                 StopTrack();
-                SelectedTrack = ActivePlaylist[SelectedTrack.GetId() + 1];
+                SelectedTrack = ActivePlaylist[SelectedTrackIndex + 1];
                 PlayTrack();
             }
             else
@@ -288,10 +300,10 @@ namespace MusicPlayer.App.WPF.Services.Audio
 
         public Task PreviousTrack()
         {
-            if (CanPlay && SelectedTrack.GetId() > 0)
+            if(CanPlay && SelectedTrackIndex > 0)
             {
                 StopTrack();
-                SelectedTrack = ActivePlaylist[SelectedTrack.GetId() - 1];
+                SelectedTrack = ActivePlaylist[SelectedTrackIndex - 1];
                 PlayTrack();
             }
             else

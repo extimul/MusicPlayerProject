@@ -73,19 +73,13 @@ namespace MusicPlayer.App.WPF.ViewModels
 
         private void OnPlaylistCollectionChanged()
         {
-            //if (FilterPanelViewModel != null)
-            //{
-            //    FilterPanelViewModel.PropertyChanged -= FilterPanelViewModel_PropertyChanged;
-            //    FilterPanelViewModel = null;
-            //}
-            //FilterPanelViewModel = new FilterHandlerPanelViewModel<Playlist>(playlistManager.PlaylistsCollection);
-            //FilterPanelViewModel.PropertyChanged += FilterPanelViewModel_PropertyChanged;
             OnPropertyChanged(nameof(PlaylistCollection));
         }
 
         public override void Dispose()
         {
             contentManager.CollectionChanged -= OnPlaylistCollectionChanged;
+            FilterPanelViewModel.PropertyChanged -= FilterPanelViewModel_PropertyChanged;
             base.Dispose();
         }
     }

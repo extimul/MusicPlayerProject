@@ -83,9 +83,11 @@ namespace MusicPlayer.App.WPF.ViewModels
         {
             CloseRequested?.Invoke(this, new DialogCreateRequestArgs(new Playlist()
             {
+                Id = Guid.NewGuid(),
                 Title = PlaylistName ?? $"Playlist #{contentManager.MusicModelsCollection.Count + 1}",
                 Description = PlaylistDescription ?? "Your playlist",
                 ImageSource = PlaylistImageSource ?? pathService.DefaultTrackImagePath,
+                RecentlyPlay = DateTime.Now,
                 AddedDate = DateTime.Now
             }));
         }
