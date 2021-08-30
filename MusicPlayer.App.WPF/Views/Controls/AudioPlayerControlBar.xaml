@@ -45,7 +45,7 @@
                     <Border.Effect>
                         <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="0"/>
                     </Border.Effect>
-                    <Image Source="{Binding PlayingTrack.TrackImage, Mode=OneWay}" Stretch="Uniform"
+                    <Image Source="{Binding PlayingTrack.ImageSource, Mode=OneWay}" Stretch="Uniform"
                            RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Border>
                 <Grid Grid.Column="1" Margin="10,20,0,20">

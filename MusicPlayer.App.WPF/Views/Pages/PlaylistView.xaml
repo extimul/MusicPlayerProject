@@ -110,7 +110,7 @@
                                    FontSize="{StaticResource FontSizeMedium}"
                                    Foreground="{StaticResource AppForegroundLightGreyBrush}"/>
                         <TextBlock Grid.Column="0"
-                                   Text="{Binding CurrentPlaylist.Tracks.Count}"
+                                   Text="{Binding CurrentPlaylist.TracksCollection.Count}"
                                    FontSize="{StaticResource FontSizeMedium}"
                                    FontWeight="DemiBold"
                                    MaxWidth="140"/>

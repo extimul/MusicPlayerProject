@@ -2,12 +2,11 @@
 
 namespace MusicPlayer.Core.Models
 {
-    public class Playlist : BaseMusicPlayerModel
+    public sealed class Queue
     {
         public ObservableCollection<Track> TracksCollection { get; set; }
-        public string Description { get; set; }
 
-        public Playlist()
+        public Queue()
         {
             TracksCollection = new ObservableCollection<Track>();
         }

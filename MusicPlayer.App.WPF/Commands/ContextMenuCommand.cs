@@ -8,27 +8,27 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer.App.WPF.Commands
 {
-    public class ContextMenuCommand<T> : AsyncCommandBase where T : BaseMusicPlayerModel
+    public class ContextMenuCommand<T, U> : AsyncCommandBase where T : BaseMusicPlayerModel
     {
         private readonly ListViewModelBase viewModel;
         private readonly IAudioService audioService;
-        private readonly IContentManager<T> contentManger;
-        private readonly IContentManager<Track> queueContentManager;
+        private readonly IContentManager<T, U> contentManger;
+        //private readonly IContentManager<Track> queueContentManager;
 
-        public ContextMenuCommand(ListViewModelBase viewModel, IAudioService audioService, IContentManager<T> contentManager)
+        public ContextMenuCommand(ListViewModelBase viewModel, IAudioService audioService, IContentManager<T, U> contentManager)
         {
             this.viewModel = viewModel;
             this.audioService = audioService;
             this.contentManger = contentManager;
         }
 
-        public ContextMenuCommand(ListViewModelBase viewModel,
-                                  IAudioService audioService,
-                                  IContentManager<T> contentManager,
-                                  IContentManager<Track> queueContentManager) : this(viewModel, audioService, contentManager)
-        {
-            this.queueContentManager = queueContentManager;
-        }
+        //public ContextMenuCommand(ListViewModelBase viewModel,
+        //                          IAudioService audioService,
+        //                          IContentManager<T, U> contentManager,
+        //                          IContentManager<Track> queueContentManager) : this(viewModel, audioService, contentManager)
+        //{
+        //    this.queueContentManager = queueContentManager;
+        //}
 
         public override async Task ExecuteAsync(object parameter)
         {
@@ -46,7 +46,7 @@ namespace MusicPlayer.App.WPF.Commands
                         //await contentManger.DeleteItem(viewModel.SelectedTrack.Id);
                         break;
                     case MenuCommandTypes.AddToQueue:
-                        await queueContentManager.Add(viewModel.SelectedTrack);
+                        //await queueContentManager.Add(viewModel.SelectedTrack);
                         break;
                     case MenuCommandTypes.AddToLiked:
                         break;

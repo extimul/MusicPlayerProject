@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer.App.WPF.Services.Content
 {
-    public interface IContentManager<T>
+    public interface IContentManager<T, U>
     {
         event Action CollectionChanged;
         ObservableCollection<T> MusicModelsCollection { get; }
         Task Add(T item);
-        Task Delete(int id);
-        Task GetModel();
+        Task Delete(T item);
         Task Update(T item);
+        Task LoadData(object data = null);
     }
 }

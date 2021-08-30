@@ -16,6 +16,5 @@ namespace MusicPlayer.App.WPF.Services.Dialog
     {
         event EventHandler<DialogCreateRequestArgs> CloseRequested;
         ICommand CancelCommand { get; }
-        ICommand CreateCommand { get; }
     }
 }

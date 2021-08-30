@@ -1,5 +1,8 @@
-﻿using MusicPlayer.App.WPF.ViewModels.Base;
+﻿using MusicPlayer.App.WPF.Commands;
+using MusicPlayer.App.WPF.Services.Content;
+using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.Core.Models;
+using System.Windows.Input;
 
 namespace MusicPlayer.App.WPF.ViewModels.Controls
 {
@@ -13,10 +16,18 @@ namespace MusicPlayer.App.WPF.ViewModels.Controls
         public FilterHandlerPanelViewModel<Track> FilterPanelViewModel { get; private set; }
         #endregion
 
-        public PlaylistControlBarViewModel(PlaylistViewModel listViewModel)
+        #region Command
+        public ICommand AddTrackCommand { get; set; }
+        #endregion
+
+        public PlaylistControlBarViewModel(PlaylistViewModel listViewModel,
+                                           IDataPathService pathService,
+                                           IContentManager<Track, Playlist> contentManager)
         {
             this.listViewModel = listViewModel;
-            FilterPanelViewModel = new FilterHandlerPanelViewModel<Track>(listViewModel.CurrentPlaylist.Tracks);
+            FilterPanelViewModel = new FilterHandlerPanelViewModel<Track>(listViewModel.CurrentPlaylist.TracksCollection);
+
+            AddTrackCommand = new AddTrackCommand(pathService, contentManager);
         }
 
         public override void Dispose()
