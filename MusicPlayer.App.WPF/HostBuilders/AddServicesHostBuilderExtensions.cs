@@ -27,8 +27,9 @@ namespace MusicPlayer.App.WPF.HostBuilders
                 services.AddSingleton<IApplicationSettingsService, ApplicationSettingsService>();
 
                 services.AddScoped(typeof(IContentContainer<>), typeof(ContentContainer<>));
-                services.AddScoped(typeof(IContentManager<Playlist>), typeof(PlaylistManager));
-                services.AddScoped(typeof(IContentManager<Track>), typeof(QueueManager));
+                services.AddScoped(typeof(IContentManager<Playlist, Library>), typeof(LibraryManager));
+                services.AddScoped(typeof(IContentManager<Track, Queue>), typeof(QueueManager));
+                services.AddScoped(typeof(IContentManager<Track, Playlist>), typeof(TracksManager));
             });
 
             return host;

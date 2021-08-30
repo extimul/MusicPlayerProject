@@ -57,7 +57,7 @@ namespace MusicPlayer.App.WPF.Services.Content
             }
         }
 
-        public string GeneratJsonFileName(string fileName)
+        public string GenerateJsonFileName(string fileName)
         {
             return Path.Combine(ApplicationDataDirectoryPath, "playlist_" + fileName + ".json");
         }

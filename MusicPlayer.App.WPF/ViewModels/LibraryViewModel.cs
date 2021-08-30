@@ -17,7 +17,7 @@ namespace MusicPlayer.App.WPF.ViewModels
     {
         #region Fields
         private Playlist _selectedPlaylist;
-        private readonly IContentManager<Playlist> contentManager;
+        private readonly IContentManager<Playlist, Library> contentManager;
         #endregion
 
         #region Properties
@@ -48,7 +48,8 @@ namespace MusicPlayer.App.WPF.ViewModels
         public ICommand OpenPlaylistCommand { get; }
         #endregion
 
-        public LibraryViewModel(IContentManager<Playlist> contentManager,
+        public LibraryViewModel(IContentManager<Playlist, Library> contentManager,
+                                IContentManager<Track, Playlist> tracksMangager,
                                 INavigatorService navigator,
                                 IViewModelFactory viewModelFactory,
                                 IDataPathService pathService,
@@ -62,8 +63,8 @@ namespace MusicPlayer.App.WPF.ViewModels
             FilterPanelViewModel.PropertyChanged += FilterPanelViewModel_PropertyChanged;
 
             SortCommand = new SortPlaylistsCommand();
-            CreatePlaylistCommand = new CreatePlaylistCommand(this, pathService, contentManager);
-            OpenPlaylistCommand = new OpenPlaylistCommand(this, audioService, iconManager, navigator, viewModelFactory, contentManager);
+            CreatePlaylistCommand = new CreatePlaylistCommand(pathService, contentManager);
+            OpenPlaylistCommand = new OpenPlaylistCommand(this, audioService, iconManager, navigator, viewModelFactory, contentManager, tracksMangager, pathService);
         }
 
         private void FilterPanelViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)

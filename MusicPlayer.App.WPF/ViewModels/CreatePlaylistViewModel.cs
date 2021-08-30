@@ -19,9 +19,8 @@ namespace MusicPlayer.App.WPF.ViewModels
         private string playlistImageSource;
         private string playlistName;
         private string playlistDescription;
-        private readonly LibraryViewModel libraryViewModel;
         private readonly IDataPathService pathService;
-        private readonly IContentManager<Playlist> contentManager;
+        private readonly IContentManager<Playlist, Library> contentManager;
         #endregion
 
         #region Properties
@@ -49,13 +48,11 @@ namespace MusicPlayer.App.WPF.ViewModels
         #endregion
 
         #region Consturctor
-        public CreatePlaylistViewModel(LibraryViewModel libraryViewModel, 
-                                       IDataPathService pathService,
-                                       IContentManager<Playlist> contentManager)
+        public CreatePlaylistViewModel(IDataPathService pathService,
+                                       IContentManager<Playlist, Library> contentManager)
         {
             this.pathService = pathService;
             this.contentManager = contentManager;
-            this.libraryViewModel = libraryViewModel;
             CreateCommand = new RelayCommand<object>(o => CreatePlaylist());
             CancelCommand = new RelayCommand<object>(o => Cancel());
             ChangeImageCommand = new RelayCommand<object>(o => ChangeImageOnClick());
@@ -94,7 +91,8 @@ namespace MusicPlayer.App.WPF.ViewModels
 
         private void Cancel()
         {
-            CloseRequested?.Invoke(this, new DialogCreateRequestArgs(null));
+            //CloseRequested?.Invoke(this, new DialogCreateRequestArgs(null));
+            CloseRequested?.Invoke(null, new DialogCreateRequestArgs(null));
         }
 
         public override void Dispose()

@@ -17,7 +17,7 @@ namespace MusicPlayer.App.WPF.ViewModels
         #region Fields
         private readonly IAudioService audioService;
         private readonly IIconManager iconManager;
-        private readonly IContentManager<Track> contentManager;
+        private readonly IContentManager<Track, Queue> contentManager;
         #endregion
 
         #region Properties
@@ -51,7 +51,7 @@ namespace MusicPlayer.App.WPF.ViewModels
 
         public QueueViewModel(IAudioService audioService,
                               IIconManager iconManager,
-                              IContentManager<Track> contentManager)
+                              IContentManager<Track, Queue> contentManager)
         {
             this.audioService = audioService;
             this.iconManager = iconManager;
@@ -65,7 +65,7 @@ namespace MusicPlayer.App.WPF.ViewModels
             this.audioService.SelectedTrack = (TracksCollection?.Count > 0) ? TracksCollection[0] : null;
 
             PlayPauseCommand = new PlayerControlsCommand(audioService, this);
-            ContextMenuCommand = new ContextMenuCommand<Track>(this, audioService, contentManager);
+            ContextMenuCommand = new ContextMenuCommand<Track, Queue>(this, audioService, contentManager);
             LoadContextMenuItems();
         }
 

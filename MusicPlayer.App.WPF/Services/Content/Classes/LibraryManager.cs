@@ -2,12 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace MusicPlayer.App.WPF.Services.Content
 {
-    public class PlaylistManager : IContentManager<Playlist>
+    public class LibraryManager : IContentManager<Playlist, Library>
     {
         private readonly IContentContainer<Playlist> contentContainer;
         private readonly IDataPathService pathService;
@@ -17,17 +16,17 @@ namespace MusicPlayer.App.WPF.Services.Content
 
         #region Properties
         public ObservableCollection<Playlist> MusicModelsCollection { get; set; }
-        public Task Load { get; }
+        public Task LoadTask { get; }
         #endregion
 
-        public PlaylistManager(IContentContainer<Playlist> contentContainer, IDataPathService pathService)
+        public LibraryManager(IContentContainer<Playlist> contentContainer, IDataPathService pathService)
         {
             this.contentContainer = contentContainer;
             this.pathService = pathService;
-            Load = LoadPlaylists();
+            LoadTask = LoadData();
         }
 
-        private async Task LoadPlaylists()
+        public async Task LoadData(object data = null)
         {
             List<string> playlists = pathService.GetFileNames("playlist");
 
@@ -50,7 +49,7 @@ namespace MusicPlayer.App.WPF.Services.Content
             {
                 contentContainer.Model = playlist;
                 MusicModelsCollection.Add(playlist);
-                await contentContainer.UpdateContent(pathService.GeneratJsonFileName(playlist.Id.ToString()));
+                await contentContainer.UpdateContent(pathService.GenerateJsonFileName(playlist.Id.ToString()));
 
                 CollectionChanged?.Invoke();
             }

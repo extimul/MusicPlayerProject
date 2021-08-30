@@ -12,6 +12,14 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
+        <Button Content="{StaticResource AddSquareIcon}"
+                Command="{Binding AddTrackCommand}"
+                Style="{StaticResource MusicControlsStyle}"
+                Foreground="{StaticResource AppForegroundBrush}"
+                Width="30"
+                Height="30"/>
+
         <controls:FilterHandlerPanel Grid.Column="2"
                                      DataContext="{Binding FilterPanelViewModel}"/>
     </Grid>

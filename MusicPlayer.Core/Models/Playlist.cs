@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace MusicPlayer.Core.Models
 {
     public class Playlist : BaseMusicPlayerModel
     {
-        public IEnumerable<Track> Tracks { get; set; } = new ObservableCollection<Track>();
+        public ObservableCollection<Track> TracksCollection { get; set; }
         public string Description { get; set; }
+
+        public Playlist()
+        {
+            TracksCollection = new ObservableCollection<Track>();
+        }
     }
 }

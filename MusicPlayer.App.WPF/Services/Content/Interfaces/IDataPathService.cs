@@ -10,7 +10,7 @@ namespace MusicPlayer.App.WPF.Services.Content
         string MusicDirectoryPath { get; set; }
         string ApplicationDataDirectoryPath { get; set; }
         string QueueJsonPath { get; set; }
-        string GeneratJsonFileName(string fileName);
+        string GenerateJsonFileName(string fileName);
         List<string> GetFileNames(string searchPattern);
     }
 }

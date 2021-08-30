@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer.App.WPF.Services.Content
 {
-    public sealed class QueueManager : IContentManager<Track>
+    public sealed class QueueManager : IContentManager<Track, Queue>
     {
         public event Action CollectionChanged;
 
@@ -19,7 +19,7 @@ namespace MusicPlayer.App.WPF.Services.Content
             this.contentContainer = contentContainer;
             this.pathService = pathService;
 
-            this.contentContainer.LoadContent(pathService.QueueJsonPath);
+            LoadData();
         }
 
         //private void Ser()
@@ -77,6 +77,12 @@ namespace MusicPlayer.App.WPF.Services.Content
         public Task Update(Track item)
         {
             throw new NotImplementedException();
+        }
+
+        public Task LoadData(object data = null)
+        {
+            this.contentContainer.LoadContent(pathService.QueueJsonPath);
+            return Task.CompletedTask;
         }
     }
 }

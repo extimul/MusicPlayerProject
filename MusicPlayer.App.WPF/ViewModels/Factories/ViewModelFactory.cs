@@ -38,9 +38,11 @@ namespace MusicPlayer.App.WPF.ViewModels.Factories
                                                      IAudioService audioService,
                                                      IIconManager iconManager,
                                                      INavigatorService navigator,
-                                                     IContentManager<Playlist> contentManager)
+                                                     IContentManager<Playlist, Library> contentManager,
+                                                     IContentManager<Track, Playlist> trackManager,
+                                                     IDataPathService pathService)
         {
-            return new PlaylistViewModel(playlist, audioService, iconManager, navigator, contentManager);
+            return new PlaylistViewModel(playlist, audioService, iconManager, navigator, contentManager, trackManager, pathService);
         }
     }
 }

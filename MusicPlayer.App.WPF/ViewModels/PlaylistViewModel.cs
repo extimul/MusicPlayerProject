@@ -63,13 +63,15 @@ namespace MusicPlayer.App.WPF.ViewModels
                                 IAudioService audioService, 
                                 IIconManager iconManager, 
                                 INavigatorService navigator,
-                                IContentManager<Playlist> contentManager)
+                                IContentManager<Playlist, Library> contentManager,
+                                IContentManager<Track, Playlist> tracksManager,
+                                IDataPathService pathService)
         {
             this.audioService = audioService;
             this.iconManager = iconManager;
 
             CurrentPlaylist = playlist;
-            ControlBarViewModel = new PlaylistControlBarViewModel(this);
+            ControlBarViewModel = new PlaylistControlBarViewModel(this, pathService, tracksManager);
             ControlBarViewModel.FilterPanelViewModel.PropertyChanged += FilterPanelViewModel_PropertyChanged;
 
             this.audioService.ActivePlaylist = TracksCollection;
@@ -79,8 +81,7 @@ namespace MusicPlayer.App.WPF.ViewModels
 
             GoBackCommand = new RenavigateCommand(navigator);
             PlayPauseCommand = new PlayerControlsCommand(audioService, this);
-            ContextMenuCommand = new ContextMenuCommand<Playlist>(this, audioService, contentManager);
-
+            ContextMenuCommand = new ContextMenuCommand<Playlist, Library>(this, audioService, contentManager);
             LoadContextMenuItems();
         }
 

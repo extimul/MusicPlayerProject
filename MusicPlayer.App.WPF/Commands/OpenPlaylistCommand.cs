@@ -17,27 +17,33 @@ namespace MusicPlayer.App.WPF.Commands
         private readonly IIconManager iconManager;
         private readonly INavigatorService navigator;
         private readonly IViewModelFactory viewModelFactory;
-        private readonly IContentManager<Playlist> tracksCollectionService;
+        private readonly IContentManager<Playlist, Library> contentManager;
+        private readonly IContentManager<Track, Playlist> tracksManager;
+        private readonly IDataPathService pathService;
 
         public OpenPlaylistCommand(LibraryViewModel viewModel,
                                     IAudioService audioService,
                                     IIconManager iconManager,
                                     INavigatorService navigator,
                                     IViewModelFactory viewModelFactory,
-                                    IContentManager<Playlist> tracksCollectionService)
+                                    IContentManager<Playlist, Library> contentManager,
+                                    IContentManager<Track, Playlist> tracksManager,
+                                    IDataPathService pathService)
         {
             this.viewModel = viewModel;
             this.audioService = audioService;
             this.iconManager = iconManager;
             this.navigator = navigator;
             this.viewModelFactory = viewModelFactory;
-            this.tracksCollectionService = tracksCollectionService;
+            this.contentManager = contentManager;
+            this.tracksManager = tracksManager;
+            this.pathService = pathService;
         }
 
         public override Task ExecuteAsync(object parameter)
         {
             navigator.PreviousViewModel = navigator.CurrentViewModel;
-            navigator.CurrentViewModel = viewModelFactory.CreatePlaylistViewModel(viewModel.SelectedPlaylist, audioService, iconManager, navigator, tracksCollectionService);
+            navigator.CurrentViewModel = viewModelFactory.CreatePlaylistViewModel(viewModel.SelectedPlaylist, audioService, iconManager, navigator, contentManager, tracksManager, pathService);
             return Task.CompletedTask;
         }
     }
