@@ -118,6 +118,9 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter TargetName="shape" Property="Fill" Value="{StaticResource AppElementBackgroundBrush}"/>
             </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="shape" Property="Fill" Value="{StaticResource AppForegroundLightGreyBrush}"/>
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     

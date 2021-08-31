@@ -50,14 +50,14 @@ namespace MusicPlayer.App.WPF.ViewModels
 
             CancelCommand = new RelayCommand<object>(o => Cancel());
             AddTrackCommand = new RelayCommand<object>(o => AddTrack());
-            DeleteTrackCommand = new RelayCommand<object>(o => DeleteTrack());
+            DeleteTrackCommand = new RelayCommand<object>(o => DeleteTrack(), o => SelectedTrack != null);
 
             TracksCollection = new();
         }
 
         private void DeleteTrack()
         {
-            throw new NotImplementedException();
+            TracksCollection.Remove(SelectedTrack);
         }
 
         private Task AddTrack()
@@ -68,20 +68,20 @@ namespace MusicPlayer.App.WPF.ViewModels
                 Multiselect = true
             };
 
-            Nullable<bool> result = dlg.ShowDialog();
+            bool? result = dlg.ShowDialog();
 
             if (result is true)
             {
                 foreach (string trackPath in dlg.FileNames)
                 {
-                    TracksCollection.Add(CreateTrackModelAsync(trackPath).Result);
+                    TracksCollection.Add(CreateTrackModel(trackPath).Result);
                 }
             }
 
             return Task.CompletedTask;
         }
 
-        private Task<Track> CreateTrackModelAsync(string trackPath)
+        private Task<Track> CreateTrackModel(string trackPath)
         {
             TagLib.File trackFile = TagLib.File.Create(trackPath);
 
