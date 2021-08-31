@@ -1,4 +1,4 @@
-﻿using MusicPlayer.App.WPF.Commands.Base;
+﻿using MusicPlayer.Core.MVVMBase.Commands;
 using MusicPlayer.Core.Types;
 using System.Diagnostics;
 using System.Threading.Tasks;

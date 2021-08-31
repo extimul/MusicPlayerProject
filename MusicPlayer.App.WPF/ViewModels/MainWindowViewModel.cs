@@ -1,8 +1,8 @@
 ﻿using MusicPlayer.App.WPF.Commands;
-using MusicPlayer.App.WPF.Services.Navigators;
-using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.App.WPF.ViewModels.Controls;
 using MusicPlayer.App.WPF.ViewModels.Factories;
+using MusicPlayer.Core.MVVMBase;
+using MusicPlayer.Core.Services.Navigators;
 using MusicPlayer.Core.Types;
 using System.Windows.Input;
 

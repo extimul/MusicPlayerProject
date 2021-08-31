@@ -1,5 +1,4 @@
-﻿using MusicPlayer.App.WPF.Services.Dialog;
-using System.Windows;
+﻿using System.Windows;
 
 namespace MusicPlayer.App.WPF.Views.DialogWindows
 {

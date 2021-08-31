@@ -1,9 +1,9 @@
 ﻿using Microsoft.Win32;
-using MusicPlayer.App.WPF.Commands.Base;
-using MusicPlayer.App.WPF.Services.Content;
-using MusicPlayer.App.WPF.Services.Dialog;
-using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.Core.Models;
+using MusicPlayer.Core.MVVMBase;
+using MusicPlayer.Core.MVVMBase.Commands;
+using MusicPlayer.Core.Services.Content;
+using MusicPlayer.Core.Services.Dialog;
 using System;
 using System.Collections.ObjectModel;
 using System.Drawing;

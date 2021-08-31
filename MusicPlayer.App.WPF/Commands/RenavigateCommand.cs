@@ -1,4 +1,4 @@
-﻿using MusicPlayer.App.WPF.Services.Navigators;
+﻿using MusicPlayer.Core.Services.Navigators;
 using System;
 using System.Windows.Input;
 

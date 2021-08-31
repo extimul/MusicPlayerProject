@@ -1,4 +1,4 @@
-﻿using MusicPlayer.App.WPF.ViewModels.Base;
+﻿using MusicPlayer.Core.MVVMBase;
 
 namespace MusicPlayer.App.WPF.ViewModels
 {

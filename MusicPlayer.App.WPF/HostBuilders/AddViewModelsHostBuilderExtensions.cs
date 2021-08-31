@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MusicPlayer.App.WPF.Services.Audio;
-using MusicPlayer.App.WPF.Services.Icon;
-using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels;
-using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.App.WPF.ViewModels.Controls;
 using MusicPlayer.App.WPF.ViewModels.Factories;
+using MusicPlayer.Core.MVVMBase;
+using MusicPlayer.Core.Services.Audio;
+using MusicPlayer.Core.Services.Icon;
+using MusicPlayer.Core.Services.Navigators;
 using System;
 
 namespace MusicPlayer.App.WPF.HostBuilders

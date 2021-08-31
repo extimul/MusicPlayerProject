@@ -2,10 +2,10 @@
 using System.Windows.Input;
 using System.Windows.Media;
 using MusicPlayer.App.WPF.Commands;
-using MusicPlayer.App.WPF.Services.Audio;
-using MusicPlayer.App.WPF.Services.Icon;
-using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.Core.Models;
+using MusicPlayer.Core.MVVMBase;
+using MusicPlayer.Core.Services.Audio;
+using MusicPlayer.Core.Services.Icon;
 using MusicPlayer.Core.Types;
 using NAudio.Wave;
 

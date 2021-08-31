@@ -1,12 +1,11 @@
 ﻿using MusicPlayer.App.WPF.Commands;
-using MusicPlayer.App.WPF.Core.Enums;
-using MusicPlayer.App.WPF.Services.Audio;
-using MusicPlayer.App.WPF.Services.Content;
-using MusicPlayer.App.WPF.Services.Icon;
-using MusicPlayer.App.WPF.Services.Navigators;
 using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.App.WPF.ViewModels.Controls;
 using MusicPlayer.Core.Models;
+using MusicPlayer.Core.Services.Audio;
+using MusicPlayer.Core.Services.Content;
+using MusicPlayer.Core.Services.Icon;
+using MusicPlayer.Core.Services.Navigators;
 using MusicPlayer.Core.Types;
 using System;
 using System.Collections.ObjectModel;
