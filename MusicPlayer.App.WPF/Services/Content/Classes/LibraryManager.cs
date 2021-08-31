@@ -28,7 +28,7 @@ namespace MusicPlayer.App.WPF.Services.Content
 
         public async Task LoadData(object data = null)
         {
-            List<string> playlists = pathService.GetFileNames("playlist");
+            List<string> playlists = pathService.GetPlaylistFileNames("playlist");
 
             if (MusicModelsCollection is null)
             {
@@ -49,7 +49,7 @@ namespace MusicPlayer.App.WPF.Services.Content
             {
                 contentContainer.Model = playlist;
                 MusicModelsCollection.Add(playlist);
-                await contentContainer.UpdateContent(pathService.GenerateJsonFileName(playlist.Id.ToString()));
+                await contentContainer.UpdateContent(pathService.GeneratePlaylistJsonFileName(playlist.Id.ToString()));
 
                 CollectionChanged?.Invoke();
             }

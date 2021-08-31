@@ -19,7 +19,7 @@ namespace MusicPlayer.App.WPF.Services.Content
             this.contentContainer = contentContainer;
             this.pathService = pathService;
 
-            LoadData();
+            LoadData(); // I don't know how to upload data correctly :(
         }
 
         //private void Ser()

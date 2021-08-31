@@ -33,7 +33,7 @@ namespace MusicPlayer.App.WPF.Services.Content
             {
                 contentContainer.Model.TracksCollection.Add(track);
 
-                await contentContainer.UpdateContent(dataPath.GenerateJsonFileName(contentContainer.Model.Id.ToString()));
+                await contentContainer.UpdateContent(dataPath.GeneratePlaylistJsonFileName(contentContainer.Model.Id.ToString()));
 
                 CollectionChanged?.Invoke();
             }

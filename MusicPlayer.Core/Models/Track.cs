@@ -1,10 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace MusicPlayer.Core.Models
 {
     public sealed class Track : BaseMusicPlayerModel
     {
-        public string FileName { get; set; }
         public string TrackAlbum { get; set; }
         public bool IsLiked { get; set; }
         public string TrackSource { get; set; }

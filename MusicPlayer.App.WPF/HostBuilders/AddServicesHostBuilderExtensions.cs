@@ -26,10 +26,10 @@ namespace MusicPlayer.App.WPF.HostBuilders
                 services.AddSingleton<IDataPathService, DataPathService>();
                 services.AddSingleton<IApplicationSettingsService, ApplicationSettingsService>();
 
-                services.AddScoped(typeof(IContentContainer<>), typeof(ContentContainer<>));
-                services.AddScoped(typeof(IContentManager<Playlist, Library>), typeof(LibraryManager));
-                services.AddScoped(typeof(IContentManager<Track, Queue>), typeof(QueueManager));
-                services.AddScoped(typeof(IContentManager<Track, Playlist>), typeof(TracksManager));
+                services.AddTransient(typeof(IContentContainer<>), typeof(ContentContainer<>));
+                services.AddTransient(typeof(IContentManager<Playlist, Library>), typeof(LibraryManager));
+                services.AddTransient(typeof(IContentManager<Track, Queue>), typeof(QueueManager));
+                services.AddTransient(typeof(IContentManager<Track, Playlist>), typeof(TracksManager));
             });
 
             return host;

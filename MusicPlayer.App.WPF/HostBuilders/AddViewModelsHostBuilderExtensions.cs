@@ -23,9 +23,9 @@ namespace MusicPlayer.App.WPF.HostBuilders
                 services.AddTransient<MainWindowViewModel>();
                 services.AddTransient<AudioPlayerBarViewModel>();
 
-                services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
-                services.AddSingleton<CreateViewModel<LibraryViewModel>>(services => () => services.GetRequiredService<LibraryViewModel>());
-                services.AddSingleton<CreateViewModel<QueueViewModel>>(services => () => services.GetRequiredService<QueueViewModel>());
+                services.AddScoped<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
+                services.AddScoped<CreateViewModel<LibraryViewModel>>(services => () => services.GetRequiredService<LibraryViewModel>());
+                services.AddScoped<CreateViewModel<QueueViewModel>>(services => () => services.GetRequiredService<QueueViewModel>());
                 services.AddSingleton<CreateViewModel<MainWindowViewModel>>(services => () => CreateMainViewModel(services));
             });
              

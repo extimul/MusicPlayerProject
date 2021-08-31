@@ -228,7 +228,7 @@
                                    FontSize="{StaticResource FontSizeLarge}"
                                    Foreground="{StaticResource AppForegroundBrush}">
                         </Label>
-                        <Label Content="{Binding Author}"
+                        <Label Content="{Binding Artists}"
                                Foreground="{StaticResource AppForegroundLightGreyBrush}"
                                FontSize="{StaticResource FontSizeRegular}"
                                Grid.Row="1"/>

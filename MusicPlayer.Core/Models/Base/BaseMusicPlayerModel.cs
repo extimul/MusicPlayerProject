@@ -6,7 +6,7 @@ namespace MusicPlayer.Core.Models
     {
         public virtual Guid Id { get; set; }
         public virtual string Title { get; set; }
-        public virtual string Author { get; set; }
+        public virtual string Artists { get; set; }
         public virtual string ImageSource { get; set; }
         public virtual string FileName { get; set; }
         public virtual DateTime RecentlyPlay { get; set; }
