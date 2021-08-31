@@ -1,9 +1,9 @@
 ﻿using MusicPlayer.App.WPF.Commands;
-using MusicPlayer.App.WPF.Services.Audio;
-using MusicPlayer.App.WPF.Services.Content;
-using MusicPlayer.App.WPF.Services.Icon;
 using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.Core.Models;
+using MusicPlayer.Core.Services.Audio;
+using MusicPlayer.Core.Services.Content;
+using MusicPlayer.Core.Services.Icon;
 using MusicPlayer.Core.Types;
 using NAudio.Wave;
 using System.Collections.ObjectModel;
@@ -76,28 +76,28 @@ namespace MusicPlayer.App.WPF.ViewModels
                 new MenuItemObject()
                 {
                     Name = "Play",
-                    Icon = iconManager.GetIcon(Core.Enums.Icons.PlayIcon),
+                    Icon = iconManager.GetIcon(Icons.PlayIcon),
                     MenuCommand = ContextMenuCommand,
                     CommandType = MenuCommandTypes.Play
                 },
                 new MenuItemObject()
                 {
                     Name = "Pause",
-                    Icon = iconManager.GetIcon(Core.Enums.Icons.PauseIcon),
+                    Icon = iconManager.GetIcon(Icons.PauseIcon),
                     MenuCommand = ContextMenuCommand,
                     CommandType = MenuCommandTypes.Pause
                 },
                 new MenuItemObject()
                 {
                     Name = "Remove form queue",
-                    Icon = iconManager.GetIcon(Core.Enums.Icons.DeleteIcon),
+                    Icon = iconManager.GetIcon(Icons.DeleteIcon),
                     MenuCommand = ContextMenuCommand,
                     CommandType = MenuCommandTypes.RemoveFromCollection
                 },
                 new MenuItemObject()
                 {
                     Name = "Save to your Liked Songs",
-                    Icon = iconManager.GetIcon(Core.Enums.Icons.SaveIcon),
+                    Icon = iconManager.GetIcon(Icons.SaveIcon),
                     MenuCommand = ContextMenuCommand,
                     CommandType = MenuCommandTypes.AddToLiked
                 }

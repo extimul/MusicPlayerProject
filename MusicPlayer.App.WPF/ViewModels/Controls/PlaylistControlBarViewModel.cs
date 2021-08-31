@@ -1,7 +1,7 @@
 ﻿using MusicPlayer.App.WPF.Commands;
-using MusicPlayer.App.WPF.Services.Content;
-using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.Core.Models;
+using MusicPlayer.Core.MVVMBase;
+using MusicPlayer.Core.Services.Content;
 using System.Windows.Input;
 
 namespace MusicPlayer.App.WPF.ViewModels.Controls

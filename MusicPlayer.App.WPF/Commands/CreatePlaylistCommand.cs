@@ -1,11 +1,10 @@
-﻿using MusicPlayer.App.WPF.Commands.Base;
-using MusicPlayer.App.WPF.Services.Audio;
-using MusicPlayer.App.WPF.Services.Content;
-using MusicPlayer.App.WPF.Services.Dialog;
-using MusicPlayer.App.WPF.ViewModels;
+﻿using MusicPlayer.App.WPF.ViewModels;
 using MusicPlayer.App.WPF.Views.DialogWindows;
 using MusicPlayer.Core.Helpers;
 using MusicPlayer.Core.Models;
+using MusicPlayer.Core.MVVMBase.Commands;
+using MusicPlayer.Core.Services.Content;
+using MusicPlayer.Core.Services.Dialog;
 using System.Threading.Tasks;
 using System.Windows;
 

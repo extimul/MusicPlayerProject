@@ -1,9 +1,9 @@
-﻿using MusicPlayer.App.WPF.Services.Audio;
-using MusicPlayer.App.WPF.Services.Content;
-using MusicPlayer.App.WPF.Services.Icon;
-using MusicPlayer.App.WPF.Services.Navigators;
-using MusicPlayer.App.WPF.ViewModels.Base;
-using MusicPlayer.Core.Models;
+﻿using MusicPlayer.Core.Models;
+using MusicPlayer.Core.MVVMBase;
+using MusicPlayer.Core.Services.Audio;
+using MusicPlayer.Core.Services.Content;
+using MusicPlayer.Core.Services.Icon;
+using MusicPlayer.Core.Services.Navigators;
 using MusicPlayer.Core.Types;
 
 namespace MusicPlayer.App.WPF.ViewModels.Factories

@@ -1,5 +1,6 @@
 ﻿using MusicPlayer.App.WPF.ViewModels.Controls;
 using MusicPlayer.Core.Models;
+using MusicPlayer.Core.MVVMBase;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Media;

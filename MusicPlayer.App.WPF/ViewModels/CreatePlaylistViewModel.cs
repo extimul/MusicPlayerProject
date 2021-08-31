@@ -1,11 +1,11 @@
-﻿using MusicPlayer.App.WPF.Commands.Base;
-using MusicPlayer.App.WPF.ViewModels.Base;
-using MusicPlayer.App.WPF.Services.Dialog;
-using System;
+﻿using System;
 using System.Windows.Input;
 using Microsoft.Win32;
 using MusicPlayer.Core.Models;
-using MusicPlayer.App.WPF.Services.Content;
+using MusicPlayer.Core.Services.Content;
+using MusicPlayer.Core.MVVMBase;
+using MusicPlayer.Core.Services.Dialog;
+using MusicPlayer.Core.MVVMBase.Commands;
 
 namespace MusicPlayer.App.WPF.ViewModels
 {

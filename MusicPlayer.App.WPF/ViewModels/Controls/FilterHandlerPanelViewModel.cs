@@ -1,6 +1,7 @@
 ﻿using MusicPlayer.App.WPF.ViewModels.Base;
 using MusicPlayer.Core.Handlers;
 using MusicPlayer.Core.Models;
+using MusicPlayer.Core.MVVMBase;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
