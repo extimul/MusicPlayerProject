@@ -64,5 +64,10 @@ namespace MusicPlayer.Core.Services.Content
         {
             throw new NotImplementedException();
         }
+
+        public Task AddRange(ObservableCollection<Playlist> collection)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

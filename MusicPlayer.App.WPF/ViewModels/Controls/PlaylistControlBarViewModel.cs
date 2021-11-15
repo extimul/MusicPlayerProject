@@ -27,6 +27,7 @@ namespace MusicPlayer.App.WPF.ViewModels.Controls
             this.listViewModel = listViewModel;
             FilterPanelViewModel = new FilterHandlerPanelViewModel<Track>(listViewModel.CurrentPlaylist.TracksCollection);
 
+            contentManager.LoadData(listViewModel.CurrentPlaylist);
             AddTrackCommand = new AddTrackCommand(pathService, contentManager);
         }
 

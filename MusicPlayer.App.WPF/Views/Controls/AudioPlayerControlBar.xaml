@@ -61,7 +61,7 @@
                                FontWeight="Medium"
                                ToolTip="{Binding PlayingTrack.Title, Mode=OneWay}"/>
                     <!--Author name-->
-                    <TextBlock Text="{Binding PlayingTrack.Author, Mode=OneWay}" 
+                    <TextBlock Text="{Binding PlayingTrack.Artists, Mode=OneWay}" 
                                Style="{StaticResource MusicInfoLabelStyle}" 
                                Grid.Row="1"
                                Foreground="{StaticResource AppForegroundLightGreyBrush}"

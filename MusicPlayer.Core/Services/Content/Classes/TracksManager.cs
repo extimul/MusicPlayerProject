@@ -61,5 +61,17 @@ namespace MusicPlayer.Core.Services.Content
             }
             return Task.CompletedTask;
         }
+
+        public async Task AddRange(ObservableCollection<Track> range)
+        {
+            for (int i = 0; i < range.Count; i++)
+            {
+                contentContainer.Model.TracksCollection.Add(range[i]);
+            }
+            
+            await contentContainer.UpdateContent(dataPath.GeneratePlaylistJsonFileName(contentContainer.Model.Id.ToString()));
+
+            CollectionChanged?.Invoke();
+        }
     }
 }

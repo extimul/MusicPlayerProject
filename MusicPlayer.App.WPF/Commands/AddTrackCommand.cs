@@ -5,6 +5,7 @@ using MusicPlayer.Core.Models;
 using MusicPlayer.Core.MVVMBase.Commands;
 using MusicPlayer.Core.Services.Content;
 using MusicPlayer.Core.Services.Dialog;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -12,10 +13,13 @@ namespace MusicPlayer.App.WPF.Commands
 {
     public class AddTrackCommand : AsyncCommandBase
     {
+        #region Fields
         private readonly IDataPathService pathService;
         private readonly IContentManager<Track, Playlist> contentManager;
         private AddTracksViewModel viewModel;
         private AddTracksDialog view;
+        #endregion
+        
 
         public AddTrackCommand(IDataPathService pathService, IContentManager<Track, Playlist> contentManager)
         {
@@ -54,7 +58,16 @@ namespace MusicPlayer.App.WPF.Commands
         {
             if (e.Result != null)
             {
-                await contentManager.Add((Track)e.Result);
+                ObservableCollection<Track> collection = (ObservableCollection<Track>)e.Result;
+
+                if (collection.Count > 1)
+                {
+                   await contentManager.AddRange(collection);
+                }
+                else
+                {
+                   await contentManager.Add(collection[0]);
+                }
                 view?.Close();
             }
             else
@@ -67,6 +80,9 @@ namespace MusicPlayer.App.WPF.Commands
         public void Dispose()
         {
             viewModel.CloseRequested -= OnCloseRequestedAsync;
+            viewModel.Dispose();
+            viewModel = null;
+            view = null;
         }
     }
 }

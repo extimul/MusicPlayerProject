@@ -15,7 +15,7 @@ namespace MusicPlayer.Core.Helpers.Converters
             if (item != null)
             {
                 ListView listView = ItemsControl.ItemsControlFromItemContainer(item) as ListView;
-                index = listView.ItemContainerGenerator.IndexFromContainer(item) + 1;
+                if (listView != null) index = listView.ItemContainerGenerator.IndexFromContainer(item) + 1;
             }
 
             return index;

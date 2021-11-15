@@ -30,6 +30,8 @@ namespace MusicPlayer.App.WPF.ViewModels
         public ICommand CancelCommand { get; }
         public ICommand AddTrackCommand { get; }
         public ICommand DeleteTrackCommand { get; }
+        public ICommand ChangeImageCommand { get; }
+        public ICommand SaveCommand { get; }
         #endregion
 
         #region Properties
@@ -51,8 +53,31 @@ namespace MusicPlayer.App.WPF.ViewModels
             CancelCommand = new RelayCommand<object>(o => Cancel());
             AddTrackCommand = new RelayCommand<object>(o => AddTrack());
             DeleteTrackCommand = new RelayCommand<object>(o => DeleteTrack(), o => SelectedTrack != null);
+            ChangeImageCommand = new RelayCommand<object>(o => ChangeImage(), o => SelectedTrack != null);
+            SaveCommand = new RelayCommand<object>(o => Save(), o => TracksCollection != null && TracksCollection?.Count > 0);
 
             TracksCollection = new();
+        }
+
+        private void Save()
+        {
+            CloseRequested?.Invoke(this, new DialogCreateRequestArgs(TracksCollection));
+        }
+
+        private void ChangeImage()
+        {
+            OpenFileDialog dlg = new()
+            {
+                DefaultExt = ".png",
+                Filter = "PNG Files (*.png)|*.png|JPEG Files (*.jpeg)|*.jpeg|JPG Files (*.jpg)|*.jpg",
+                Multiselect = false
+            };
+
+            bool? result = dlg.ShowDialog();
+
+            if (result is not true) return;
+            SelectedTrack.ImageSource = dlg.FileName;
+            OnPropertyChanged(nameof(SelectedTrack));
         }
 
         private void DeleteTrack()
@@ -145,6 +170,7 @@ namespace MusicPlayer.App.WPF.ViewModels
         public override void Dispose()
         {
             CloseRequested = null;
+            GC.SuppressFinalize(TracksCollection);
             base.Dispose();
         }
     }

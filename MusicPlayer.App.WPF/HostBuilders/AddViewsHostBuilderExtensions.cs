@@ -16,7 +16,5 @@ namespace MusicPlayer.App.WPF.HostBuilders
 
             return host;
         }
-
-        
     }
 }

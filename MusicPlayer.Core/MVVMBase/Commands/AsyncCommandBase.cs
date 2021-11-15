@@ -38,7 +38,7 @@ namespace MusicPlayer.Core.MVVMBase.Commands
 
         protected void OnCanExecuteChanged()
         {
-            CanExecuteChanged?.Invoke(this, new EventArgs());
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

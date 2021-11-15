@@ -27,11 +27,9 @@ namespace MusicPlayer.App.WPF.Commands
 
         public void Execute(object parameter)
         {
-            if (parameter is ViewTypes viewType)
-            {
-                _navigator.PreviousViewModel = _navigator.CurrentViewModel;
-                _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewType);
-            }
+            if (parameter is not ViewTypes viewType) return;
+            _navigator.PreviousViewModel = _navigator.CurrentViewModel;
+            _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewType);
         }
     }
 }

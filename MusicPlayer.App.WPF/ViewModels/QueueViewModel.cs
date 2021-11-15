@@ -73,28 +73,28 @@ namespace MusicPlayer.App.WPF.ViewModels
         {
             ContextMenuItems = new ObservableCollection<MenuItemObject>()
             {
-                new MenuItemObject()
+                new()
                 {
                     Name = "Play",
                     Icon = iconManager.GetIcon(Icons.PlayIcon),
                     MenuCommand = ContextMenuCommand,
                     CommandType = MenuCommandTypes.Play
                 },
-                new MenuItemObject()
+                new()
                 {
                     Name = "Pause",
                     Icon = iconManager.GetIcon(Icons.PauseIcon),
                     MenuCommand = ContextMenuCommand,
                     CommandType = MenuCommandTypes.Pause
                 },
-                new MenuItemObject()
+                new()
                 {
                     Name = "Remove form queue",
                     Icon = iconManager.GetIcon(Icons.DeleteIcon),
                     MenuCommand = ContextMenuCommand,
                     CommandType = MenuCommandTypes.RemoveFromCollection
                 },
-                new MenuItemObject()
+                new()
                 {
                     Name = "Save to your Liked Songs",
                     Icon = iconManager.GetIcon(Icons.SaveIcon),

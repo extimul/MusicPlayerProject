@@ -37,9 +37,9 @@ namespace MusicPlayer.Core.Services.Content
             DefaultTrackImagePath = GetDefaultImagePath(FileNames.DEFAULT_IMG);
         }
 
-        public string GeneratePlaylistJsonFileName(string fileName)
+        public string GeneratePlaylistJsonFileName(string id)
         {
-            return Path.Combine(PlaylistsDirectoryPath, "playlist_" + fileName + ".json");
+            return Path.Combine(PlaylistsDirectoryPath, "playlist_" + id + ".json");
         }
 
         public List<string> GetPlaylistFileNames(string searchPattern)

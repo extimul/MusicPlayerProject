@@ -1,4 +1,5 @@
-﻿using MusicPlayer.Core.MVVMBase;
+﻿using System;
+using MusicPlayer.Core.MVVMBase;
 using MusicPlayer.Core.MVVMBase.Commands;
 using MusicPlayer.Core.Services.Audio;
 using MusicPlayer.Core.Types;
@@ -52,6 +53,8 @@ namespace MusicPlayer.App.WPF.Commands
                     await audioService.StopTrack();
                     await audioService.PlayTrack();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 

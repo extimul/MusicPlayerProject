@@ -14,7 +14,7 @@ namespace MusicPlayer.Core.Handlers
         #endregion
 
         #region Fields
-        private CollectionViewSource itemCollection;
+        private readonly CollectionViewSource itemCollection;
         private string searchingPattern;
         #endregion
 
@@ -63,8 +63,7 @@ namespace MusicPlayer.Core.Handlers
                 return;
             }
 
-            T usr = e.Item as T;
-            if (usr.Title.ToUpper().Contains(SearchingPattern.ToUpper()))
+            if (e.Item is T usr && usr.Title.ToUpper().Contains(SearchingPattern.ToUpper()))
             {
                 e.Accepted = true;
             }

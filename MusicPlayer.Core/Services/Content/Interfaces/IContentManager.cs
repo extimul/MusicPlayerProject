@@ -11,6 +11,7 @@ namespace MusicPlayer.Core.Services.Content
         Task Add(T item);
         Task Delete(T item);
         Task Update(T item);
+        Task AddRange(ObservableCollection<T> collection);
         Task LoadData(object data = null);
     }
 }

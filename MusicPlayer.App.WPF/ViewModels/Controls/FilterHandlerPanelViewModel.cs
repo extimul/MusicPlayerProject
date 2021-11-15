@@ -14,10 +14,7 @@ namespace MusicPlayer.App.WPF.ViewModels.Controls
         #endregion
 
         #region Properties
-        public ObservableCollection<T> FilteredCollection
-        {
-            get => filterHandler.FilteredCollection;
-        }
+        public ObservableCollection<T> FilteredCollection => filterHandler.FilteredCollection;
 
         public string SearchingPattern
         {

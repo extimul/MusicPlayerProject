@@ -84,5 +84,10 @@ namespace MusicPlayer.Core.Services.Content
             this.contentContainer.LoadContent(pathService.QueueJsonPath);
             return Task.CompletedTask;
         }
+
+        public Task AddRange(ObservableCollection<Track> collection)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

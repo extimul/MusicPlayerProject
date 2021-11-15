@@ -52,8 +52,6 @@ namespace MusicPlayer.App.WPF.Commands
                         break;
                     case MenuCommandTypes.GetInformation:
                         break;
-                    default:
-                        break;
                 }
             }
         }

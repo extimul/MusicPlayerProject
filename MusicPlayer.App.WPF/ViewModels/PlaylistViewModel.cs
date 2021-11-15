@@ -70,6 +70,9 @@ namespace MusicPlayer.App.WPF.ViewModels
             this.iconManager = iconManager;
 
             CurrentPlaylist = playlist;
+
+            tracksManager.CollectionChanged += TracksManager_CollectionChanged;
+
             ControlBarViewModel = new PlaylistControlBarViewModel(this, pathService, tracksManager);
             ControlBarViewModel.FilterPanelViewModel.PropertyChanged += FilterPanelViewModel_PropertyChanged;
 
@@ -88,37 +91,37 @@ namespace MusicPlayer.App.WPF.ViewModels
         {
             ContextMenuItems = new ObservableCollection<MenuItemObject>()
             {
-                new MenuItemObject()
+                new()
                 {
                     Name = "Play",
                     Icon = iconManager.GetIcon(Icons.PlayIcon),
                     MenuCommand = ContextMenuCommand,
                     CommandType = MenuCommandTypes.Play
                 },
-                new MenuItemObject()
+                new()
                 {
                     Name = "Pause",
                     Icon = iconManager.GetIcon(Icons.PauseIcon),
                     MenuCommand = ContextMenuCommand,
                     CommandType = MenuCommandTypes.Pause
                 },
-                new MenuItemObject()
+                new()
                 {
                     Name = "Remove form playlist",
                     Icon = iconManager.GetIcon(Icons.DeleteIcon),
                     MenuCommand = ContextMenuCommand,
                     CommandType = MenuCommandTypes.RemoveFromCollection
                 },
-                new MenuItemObject()
+                new()
                 {
                     Name = "Save to your Liked Songs",
                     Icon = iconManager.GetIcon(Icons.SaveIcon),
                     MenuCommand = ContextMenuCommand,
                     CommandType = MenuCommandTypes.AddToLiked
                 },
-                new MenuItemObject()
+                new()
                 {
-                    Name = "Get inforamtion",
+                    Name = "Get information",
                     Icon = iconManager.GetIcon(Icons.InfoIcon),
                     MenuCommand = ContextMenuCommand,
                     CommandType = MenuCommandTypes.GetInformation
@@ -126,12 +129,21 @@ namespace MusicPlayer.App.WPF.ViewModels
             };
         }
 
+
         #region Events methods
+
+        private void TracksManager_CollectionChanged()
+        {
+            OnPropertyChanged(nameof(TracksCollection));
+            OnPropertyChanged(nameof(SelectedTrack));
+            OnPropertyChanged(nameof(SelectedTrackIndex));
+        }
 
         private void FilterPanelViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(nameof(TracksCollection));
             OnPropertyChanged(nameof(SelectedTrack));
+            OnPropertyChanged(nameof(SelectedTrackIndex));
         }
 
         private void OnIconChanged(object sender, ChangeIconEventArgs e)
