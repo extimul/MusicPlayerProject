@@ -9,7 +9,7 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
     {
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
         
-        optionsBuilder.UseNpgsql("", builder =>
+        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=db_mp_identity;Username=postgres;Password=admin1234", builder =>
         {
             builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
         });
