@@ -45,6 +45,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\MusicPlayer.Base\MusicPlayer.Base.csproj" />
       <ProjectReference Include="..\..\Base\MusicPlayer.API.Base\MusicPlayer.API.Base.csproj" />
       <ProjectReference Include="..\MusicPlayer.API.Identity.Persistence\MusicPlayer.API.Identity.Persistence.csproj" />
     </ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace MusicPlayer.API.Base.Utils;
+namespace MusicPlayer.Base;
 
 public static class App
 {

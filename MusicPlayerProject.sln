@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicPlayer.API.Identity.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicPlayer.API.Identity.Persistence", "src\Core\Identity\MusicPlayer.API.Identity.Persistence\MusicPlayer.API.Identity.Persistence.csproj", "{711D8BE1-F6E8-4EBC-886D-364AEAC6E123}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{917F3DDC-D41A-4543-9F68-274961F10089}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicPlayer.Base", "src\Shared\MusicPlayer.Base\MusicPlayer.Base.csproj", "{A509B5A8-D447-4C41-AA52-A142455EF4B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,10 @@ Global
 		{711D8BE1-F6E8-4EBC-886D-364AEAC6E123}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{711D8BE1-F6E8-4EBC-886D-364AEAC6E123}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{711D8BE1-F6E8-4EBC-886D-364AEAC6E123}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A509B5A8-D447-4C41-AA52-A142455EF4B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A509B5A8-D447-4C41-AA52-A142455EF4B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A509B5A8-D447-4C41-AA52-A142455EF4B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A509B5A8-D447-4C41-AA52-A142455EF4B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,5 +79,6 @@ Global
 		{676B3C5D-3DA2-44DC-B278-5CAA7C09A74F} = {91E5AB1C-BA00-442D-A21F-AAAFA4A5A5EA}
 		{E2095D75-91EF-43F9-ADF9-66BE45AD2C72} = {91E5AB1C-BA00-442D-A21F-AAAFA4A5A5EA}
 		{711D8BE1-F6E8-4EBC-886D-364AEAC6E123} = {91E5AB1C-BA00-442D-A21F-AAAFA4A5A5EA}
+		{A509B5A8-D447-4C41-AA52-A142455EF4B4} = {917F3DDC-D41A-4543-9F68-274961F10089}
 	EndGlobalSection
 EndGlobal

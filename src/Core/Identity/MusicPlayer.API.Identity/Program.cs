@@ -1,7 +1,7 @@
 using System.Reflection;
-using MusicPlayer.API.Base.Utils;
 using MusicPlayer.API.Identity.Extensions;
 using MusicPlayer.API.Identity.Persistence;
+using MusicPlayer.Base;
 using Serilog;
 
 var currentEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
@@ -23,17 +23,15 @@ var appName = App.GetName();
 
 try
 {
-    Log.Information("Starting {AppName}", appName);
-    Log.Information("Configuring...");
-    Log.Information("Current platform: {OS}", App.GetCurrentPlatform());
-
     builder.Services.AddServices(builder.Configuration);
     builder.Services.AddControllers()
         .AddNewtonsoftJson();
     builder.Services.AddSwagger();
     
     var app = builder.Build();
-
+    
+    DebugMessages.StartMessage(appName);
+    
     DatabaseMigrator.Migrate(builder.Configuration, app);
     
     if (builder.Environment.IsDevelopment())
@@ -48,17 +46,16 @@ try
     app.UseRouting();
     app.MapControllers();
     
-    Log.Information("{AppName} successfully started!", appName);
+    DebugMessages.SuccessfullyStart(appName);
     app.Run();
 }
 catch (Exception e)
 {
-    Log.Fatal(e, "The {AppName} failed to start correctly", appName);
+    DebugMessages.ErrorMessage(e, appName);
 }
 finally
 {
-    Log.Information("Stopping {AppName}", appName);
-    Log.CloseAndFlush();
+    DebugMessages.StopMessage(appName);
 }
 
 

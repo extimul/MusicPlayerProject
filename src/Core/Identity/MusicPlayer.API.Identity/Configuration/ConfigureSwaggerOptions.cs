@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using MusicPlayer.API.Base.Utils;
+using MusicPlayer.Base;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace MusicPlayer.API.Identity.Configuration;
