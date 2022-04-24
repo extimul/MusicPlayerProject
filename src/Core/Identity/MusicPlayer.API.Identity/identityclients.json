@@ -1,0 +1,21 @@
+﻿{
+  "Clients": [
+    {
+      "ClientId": "client_id",
+      "ClientName": "client_name",
+      "ClientSecrets": [
+        {
+          "Value": "client_secret_key"
+        }
+      ],
+      "AllowedGrantTypes": [
+        "grant_type1"
+      ],
+      "AllowedScopes": [ "openid", "profile", "email", "phone", "offline_access"],
+      "RequirePkce": true,
+      "AllowOfflineAccess": true,
+      "AccessTokenLifetime": 86400,
+      "IdentityTokenLifetime": 86400
+    }
+  ]
+}

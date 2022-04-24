@@ -359,4 +359,7 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-/.idea/.idea.MusicPlayerProject/.idea
+.idea/
+[Ll]og/
+log.*
+tempkey.jwk
