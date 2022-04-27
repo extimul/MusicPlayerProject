@@ -1,0 +1,17 @@
+﻿@page "/register"
+@using MusicPlayer.WebUI.Authorization.Core.ViewModels
+
+<div class="form-page-container">
+    <FormBox Header="Регистрация">
+        <EditForm Model="@RegisterViewModel">
+            
+        </EditForm>
+    </FormBox>
+</div>
+
+@code {
+
+    [Parameter]
+    public RegisterViewModel RegisterViewModel { get; set; } = new();
+
+}

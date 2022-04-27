@@ -1,0 +1,13 @@
+﻿header {
+    /*background-color: #1B263B;*/
+    height: 5.5rem;
+    align-items: center;
+    display: flex;
+}
+
+.header__logo {
+    font-size: 2.8rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+}
