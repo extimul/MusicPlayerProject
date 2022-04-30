@@ -1,0 +1,51 @@
+﻿@page "/login"
+@using MusicPlayer.WebUI.Authorization.Core.ViewModels
+@using Serilog
+
+@inject NavigationManager NavigationManager;
+
+<div class="form-page-container">
+    <div class="login-ef-wrapper">
+        <FormBox Header="Авторизация">
+            <ChildContent>
+                <EditForm Model="@LoginViewModel" OnValidSubmit="@OnLogin">
+                    <FluentValidationValidator/>
+                    <div class="form-group mt-sm-4">
+                        <label for="Login" class="d-flex justify-content-between">
+                            <span>Логин</span>
+                            <span>
+                                <ValidationMessage For="@(() => LoginViewModel.Login)"/>
+                            </span>
+                        </label>
+                        <InputText @bind-Value="LoginViewModel.Login" class="form-control" id="Login"/>
+                        <small id="loginHelp" style="{ color: dimgray; }">Введите вашу почту или имя пользователя</small>
+                    </div>
+                    <div class="form-group mt-sm-4">
+                        <label for="Password" class="d-flex justify-content-between">
+                            <span>Пароль</span>
+                            <span>
+                                <ValidationMessage For="@(() => LoginViewModel.Password)"/>
+                            </span>
+                        </label>
+                        <InputText @bind-Value="LoginViewModel.Password" class="form-control" type="password" id="Password"/>
+                        <small id="passwordHelp" style="{ color: lightgrey; }">Никому не сообщайте ваш пароль</small>
+                    </div>
+                    <div class="btn-container">
+                        <Button ButtonType="ButtonType.Custom" Content="Войти" CustomCssClass="login-btn mt-lg-4"></Button>
+                        <a class="mt-lg-3" onclick="@(() => NavigationManager.NavigateTo("/register"))">Создать аккаунт</a>
+                    </div>
+                </EditForm>
+            </ChildContent>
+        </FormBox>
+    </div>
+</div>
+
+@code {
+    public LoginViewModel LoginViewModel { get; set; } = new();
+
+    public async Task OnLogin()
+    {
+        Log.Information("Successfully. {Login}:{Password}", LoginViewModel.Login, LoginViewModel.Password);
+    }
+    
+}

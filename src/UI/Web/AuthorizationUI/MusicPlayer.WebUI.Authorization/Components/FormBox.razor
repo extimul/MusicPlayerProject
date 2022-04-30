@@ -1,0 +1,16 @@
+﻿<div class="form-box blur">
+    <div class="fb__header mt-sm-4 mb-sm-1 fw-bold">
+        @Header
+    </div>
+    <div class="fb__content-wrapper">
+        @ChildContent
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string? Header { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

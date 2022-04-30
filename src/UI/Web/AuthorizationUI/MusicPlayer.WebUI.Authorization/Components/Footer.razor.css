@@ -1,0 +1,10 @@
+﻿footer {
+    display: flex;
+    justify-content: center;
+    height: 2.5rem;
+    font-weight: lighter;
+}
+
+.footer-content {
+    font-size: 1rem;
+}

@@ -1,0 +1,17 @@
+﻿.login-ef__buttons {
+    padding: 20px 0;
+    display: flex;
+    justify-items: center;
+    justify-content: space-between;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-ef-wrapper {
+    width: 27%;
+}

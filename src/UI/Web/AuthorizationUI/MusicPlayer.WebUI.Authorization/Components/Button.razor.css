@@ -1,0 +1,24 @@
+﻿.app-btn{
+    color: white;
+    background: none;
+    border: 1px solid transparent;
+}
+    .app-btn:hover {
+        cursor: pointer;
+    }
+
+    .app-btn:disabled,
+    .app-btn[disabled]{
+        background-color: gray;
+    }
+    
+.form-btn{
+    background-color: #415A77;
+    border-color: #415A77;
+    padding: 0.5rem 2rem;
+}
+
+    .form-btn:hover{
+        color: lightgray;
+        border: 1px solid lightgray;
+    }

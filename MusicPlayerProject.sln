@@ -31,6 +31,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{917F3D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicPlayer.Base", "src\Shared\MusicPlayer.Base\MusicPlayer.Base.csproj", "{A509B5A8-D447-4C41-AA52-A142455EF4B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicPlayer.WebUI.Authorization", "src\UI\Web\AuthorizationUI\MusicPlayer.WebUI.Authorization\MusicPlayer.WebUI.Authorization.csproj", "{D7891DC6-8007-4E20-A7EE-6274694D739A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthorizationUI", "AuthorizationUI", "{78C8D021-266C-4A9E-8A91-90A5824535A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicPlayer.WebUI.Authorization.Core", "src\UI\Web\AuthorizationUI\MusicPlayer.WebUI.Authorization.Core\MusicPlayer.WebUI.Authorization.Core.csproj", "{51DD1AEF-9F96-4A82-90AD-58D1719411FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +67,14 @@ Global
 		{A509B5A8-D447-4C41-AA52-A142455EF4B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A509B5A8-D447-4C41-AA52-A142455EF4B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A509B5A8-D447-4C41-AA52-A142455EF4B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7891DC6-8007-4E20-A7EE-6274694D739A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7891DC6-8007-4E20-A7EE-6274694D739A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7891DC6-8007-4E20-A7EE-6274694D739A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7891DC6-8007-4E20-A7EE-6274694D739A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51DD1AEF-9F96-4A82-90AD-58D1719411FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51DD1AEF-9F96-4A82-90AD-58D1719411FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51DD1AEF-9F96-4A82-90AD-58D1719411FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51DD1AEF-9F96-4A82-90AD-58D1719411FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,5 +94,8 @@ Global
 		{E2095D75-91EF-43F9-ADF9-66BE45AD2C72} = {91E5AB1C-BA00-442D-A21F-AAAFA4A5A5EA}
 		{711D8BE1-F6E8-4EBC-886D-364AEAC6E123} = {91E5AB1C-BA00-442D-A21F-AAAFA4A5A5EA}
 		{A509B5A8-D447-4C41-AA52-A142455EF4B4} = {917F3DDC-D41A-4543-9F68-274961F10089}
+		{78C8D021-266C-4A9E-8A91-90A5824535A2} = {8AB55EEA-7EE9-4C7D-A2EC-1753D7B006B6}
+		{D7891DC6-8007-4E20-A7EE-6274694D739A} = {78C8D021-266C-4A9E-8A91-90A5824535A2}
+		{51DD1AEF-9F96-4A82-90AD-58D1719411FE} = {78C8D021-266C-4A9E-8A91-90A5824535A2}
 	EndGlobalSection
 EndGlobal

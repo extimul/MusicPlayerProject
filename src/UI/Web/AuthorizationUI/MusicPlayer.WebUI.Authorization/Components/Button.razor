@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Components.Rendering
+<button class="@_className" @onclick="OnClick" disabled="@IsDisabled">
+    @Content
+</button>
+
+@code {
+    private string _className = "";
+
+    [Parameter]
+    public string Content { get; set; } = string.Empty;
+
+    [Parameter]
+    public ButtonType ButtonType { get; set; } = ButtonType.Default;
+
+    [Parameter]
+    public bool IsDisabled { get; set; }
+    
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    [Parameter]
+    public string CustomCssClass { get; set; } = string.Empty; 
+    
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ApplyStyle();
+    }
+
+    private void ApplyStyle()
+    {
+        string defaultStyle = "app-btn";
+
+        _className = ButtonType switch
+        {
+            ButtonType.Default => defaultStyle,
+            ButtonType.FormButton => $"{defaultStyle} form-btn",
+            ButtonType.Custom => !string.IsNullOrEmpty(CustomCssClass) ? CustomCssClass 
+                : throw new ArgumentException($"If {nameof(ButtonType)} is {nameof(ButtonType.Custom)} then the property {nameof(CustomCssClass)} must be non-empty or null"),
+            _ => defaultStyle,
+        };
+    }
+}
