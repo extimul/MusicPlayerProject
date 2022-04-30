@@ -1,12 +1,66 @@
 ﻿@page "/register"
 @using MusicPlayer.WebUI.Authorization.Core.ViewModels
+@using Serilog
+
+@inject NavigationManager NavigationManager;
 
 <div class="form-page-container">
-    <FormBox Header="Регистрация">
-        <EditForm Model="@RegisterViewModel">
-            
-        </EditForm>
-    </FormBox>
+    <div class="register-ef-wrapper">
+       <FormBox Header="Регистрация">
+           <EditForm Model="@RegisterViewModel" class="row g-3" OnValidSubmit="@OnRegister">
+               <FluentValidationValidator/>
+               <div class="col-md-6">
+                   <label for="Email" class="form-label">
+                       <span>Электронная почта</span>
+                   </label>
+                   <InputText @bind-Value="@RegisterViewModel.Email" class="form-control" id="Email" placeholder="mymail@example.com"/>
+                   <ValidationMessage For="@(() => RegisterViewModel.Email)"/>
+               </div>
+               <div class="col-md-6">
+                   <label for="Password" class="form-label">
+                       <span>Пароль</span>
+                   </label>
+                   <InputText @bind-Value="@RegisterViewModel.Password" type="password" class="form-control" id="Password"/>
+                   <ValidationMessage For="@(() => RegisterViewModel.Password)"/>
+               </div>
+               <div class="col-12">
+                   <label for="Username" class="form-label d-flex justify-content-between">
+                       <span>Имя пользователя</span>
+                       <span>
+                           <ValidationMessage For="@(() => RegisterViewModel.UserName)"/>
+                       </span>
+                   </label>
+                   <InputText @bind-Value="@RegisterViewModel.UserName" class="form-control" id="Username"/>
+               </div>
+               <div class="col-12">
+                   <label for="Name" class="form-label d-flex justify-content-between">
+                       <span>Ваше имя</span>
+                       <span>
+                           <ValidationMessage For="@(() => RegisterViewModel.Name)"/>
+                       </span>
+                   </label>
+                   <InputText @bind-Value="@RegisterViewModel.Name" class="form-control" id="Name"/>
+               </div>
+               <div class="col-12">
+                   <div class="form-check">
+                       <label for="AcceptTerms" class="form-check-label">
+                           <span>Я принимаю условия <a class="text-info" href="#">Пользовательского соглашения</a></span>
+                       </label>
+                       <InputCheckbox @bind-Value="@RegisterViewModel.IsAcceptTerms" class="form-check-input" id="AcceptTerms"/>
+                       <span>
+                           <ValidationMessage For="@(() => RegisterViewModel.IsAcceptTerms)"/>
+                       </span>
+                   </div>
+               </div>
+               
+               <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                   <Button ButtonType="ButtonType.Custom" Content="Создать аккаунт" CustomCssClass="login-btn"></Button>
+                   <a class="mt-lg-3" onclick="@(() => NavigationManager.NavigateTo("/login"))">Уже есть аккаунт</a>
+               </div>
+
+           </EditForm>
+       </FormBox> 
+    </div>
 </div>
 
 @code {
@@ -14,4 +68,8 @@
     [Parameter]
     public RegisterViewModel RegisterViewModel { get; set; } = new();
 
+    public async Task OnRegister()
+    {
+        Log.Information($"{RegisterViewModel.Email}:{RegisterViewModel.Name}:{RegisterViewModel.Password}:{RegisterViewModel.UserName}:{RegisterViewModel.IsAcceptTerms}");
+    }
 }

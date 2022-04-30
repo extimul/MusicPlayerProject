@@ -99,11 +99,12 @@ a {
     text-decoration: none !important;
 }
 
-a:hover {
-    color: #2E4059;
-    -webkit-text-decoration: none !important;
-    text-decoration: none !important;
-}
+    a:hover {
+        color: #2E4059;
+        -webkit-text-decoration: none !important;
+        text-decoration: none !important;
+        cursor: pointer;
+    }
 
 .form-page-container {
     display: flex;

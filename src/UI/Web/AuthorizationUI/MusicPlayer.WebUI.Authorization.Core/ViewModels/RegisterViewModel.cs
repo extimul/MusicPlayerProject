@@ -11,6 +11,8 @@ public class RegisterViewModel
     public string Password { get; set; }
     
     public string Email { get; set; }
+    
+    public bool IsAcceptTerms { get; set; }
 }
 
 public class RegisterViewModelValidator : AbstractValidator<RegisterViewModel>
@@ -18,8 +20,7 @@ public class RegisterViewModelValidator : AbstractValidator<RegisterViewModel>
     public RegisterViewModelValidator()
     {
         RuleFor(x => x.Name)
-            .NotEmpty()
-            .WithMessage("Поле \"Имя\" должно быть заполнено");
+            .NotEmpty().WithMessage("Поле \"Имя\" должно быть заполнено");
 
         RuleFor(x => x.UserName)
             .NotEmpty().WithMessage("Поле \"Имя пользователя\" должно быть заполнено")
@@ -30,7 +31,11 @@ public class RegisterViewModelValidator : AbstractValidator<RegisterViewModel>
             .Length(8, 30).WithMessage("Длина поля \"Пароль\" должна быть в промежутке {MinLength} - {MaxLength}");
 
         RuleFor(x => x.Email)
-            .EmailAddress()
-            .WithMessage("Введите корректную электронную почту");
+            .EmailAddress().WithMessage("Введите корректную электронную почту")
+            .NotEmpty().WithMessage("Поле \"Электронная почта\" должно быть заполнено");
+
+        RuleFor(x => x.IsAcceptTerms)
+            .NotEqual(false)
+            .WithMessage("Если вы согласны с условиями Пользовательского соглашения, то поставьте галочку напротив");
     }
 }
