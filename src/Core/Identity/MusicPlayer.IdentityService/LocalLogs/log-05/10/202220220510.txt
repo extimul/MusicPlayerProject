@@ -1,0 +1,56 @@
+2022-05-10T00:14:17.5061345+00:00 [INF] () Starting "MusicPlayer.IdentityService"
+2022-05-10T00:14:17.5662032+00:00 [INF] () Configuring...
+2022-05-10T00:14:17.5675211+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-10T00:14:17.5683368+00:00 [INF] () Current environment: "Development"
+2022-05-10T00:14:17.6161995+00:00 [INF] () Start migration
+2022-05-10T00:14:18.9220920+00:00 [INF] () Not found new Clients
+2022-05-10T00:14:18.9351436+00:00 [INF] () Not found new IdentityResources
+2022-05-10T00:14:18.9394001+00:00 [INF] () Not found new ApiResources
+2022-05-10T00:14:18.9441034+00:00 [INF] () Not found new ApiScopes
+2022-05-10T00:14:18.9445512+00:00 [INF] () Migration finished
+2022-05-10T00:14:18.9501474+00:00 [INF] (IdentityServer4.Startup) Starting IdentityServer4 version "4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e"
+2022-05-10T00:14:18.9577804+00:00 [INF] (IdentityServer4.Startup) Using the default authentication scheme "Identity.Application" for IdentityServer
+2022-05-10T00:14:19.0139116+00:00 [INF] () "MusicPlayer.IdentityService" successfully started!
+2022-05-10T00:14:19.0146322+00:00 [INF] () Application urls:
+2022-05-10T00:14:19.0151213+00:00 [INF] () "https://+:3500"
+2022-05-10T00:14:19.0229011+00:00 [WRN] (Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository) Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+2022-05-10T00:14:36.2458408+00:00 [INF] () Starting "MusicPlayer.IdentityService"
+2022-05-10T00:14:36.3011943+00:00 [INF] () Configuring...
+2022-05-10T00:14:36.3022294+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-10T00:14:36.3026934+00:00 [INF] () Current environment: "Development"
+2022-05-10T00:14:36.3509886+00:00 [INF] () Start migration
+2022-05-10T00:14:37.6078675+00:00 [INF] () Not found new Clients
+2022-05-10T00:14:37.6208577+00:00 [INF] () Not found new IdentityResources
+2022-05-10T00:14:37.6251904+00:00 [INF] () Not found new ApiResources
+2022-05-10T00:14:37.6289796+00:00 [INF] () Not found new ApiScopes
+2022-05-10T00:14:37.6294264+00:00 [INF] () Migration finished
+2022-05-10T00:14:37.6350935+00:00 [INF] (IdentityServer4.Startup) Starting IdentityServer4 version "4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e"
+2022-05-10T00:14:37.6429650+00:00 [INF] (IdentityServer4.Startup) Using the default authentication scheme "Identity.Application" for IdentityServer
+2022-05-10T00:14:37.6983863+00:00 [INF] () "MusicPlayer.IdentityService" successfully started!
+2022-05-10T00:14:37.6990674+00:00 [INF] () Application urls:
+2022-05-10T00:14:37.6995598+00:00 [INF] () "https://+:3500"
+2022-05-10T00:14:37.7075464+00:00 [WRN] (Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository) Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+2022-05-10T00:24:08.1639220+00:00 [INF] () Starting "MusicPlayer.IdentityService"
+2022-05-10T00:24:08.2196393+00:00 [INF] () Configuring...
+2022-05-10T00:24:08.2208795+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-10T00:24:08.2213238+00:00 [INF] () Current environment: "Development"
+2022-05-10T00:24:08.2690204+00:00 [INF] () Start migration
+2022-05-10T00:24:09.5186772+00:00 [INF] () Not found new Clients
+2022-05-10T00:24:09.5320247+00:00 [INF] () Not found new IdentityResources
+2022-05-10T00:24:09.5365128+00:00 [INF] () Not found new ApiResources
+2022-05-10T00:24:09.5405822+00:00 [INF] () Not found new ApiScopes
+2022-05-10T00:24:09.5410339+00:00 [INF] () Migration finished
+2022-05-10T00:24:09.5468024+00:00 [INF] (IdentityServer4.Startup) Starting IdentityServer4 version "4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e"
+2022-05-10T00:24:09.5546094+00:00 [INF] (IdentityServer4.Startup) Using the default authentication scheme "Identity.Application" for IdentityServer
+2022-05-10T00:24:09.6199139+00:00 [INF] () "MusicPlayer.IdentityService" successfully started!
+2022-05-10T00:24:09.6207510+00:00 [INF] () Application urls:
+2022-05-10T00:24:09.6212925+00:00 [INF] () "https://+:3500"
+2022-05-10T00:24:09.6301181+00:00 [WRN] (Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository) Storing keys in a directory '"/root/.aspnet/DataProtection-Keys"' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed.
+2022-05-10T00:32:38.8951488+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/" responded 200 in 96.6076 ms
+2022-05-10T00:32:53.6170738+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/account/signin" responded 200 in 223.2327 ms
+2022-05-10T00:32:56.5127684+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/account/signup" responded 200 in 33.9993 ms
+2022-05-10T00:32:57.4503973+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/account/signin" responded 200 in 13.8384 ms
+2022-05-10T00:32:58.5471939+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/account/signup" responded 200 in 10.2798 ms
+2022-05-10T00:32:59.8417574+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/account/signin" responded 200 in 2.9385 ms
+2022-05-10T00:33:00.5731885+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/account/signup" responded 200 in 2.8332 ms
+2022-05-10T00:33:01.3204555+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/account/signin" responded 200 in 1.9600 ms

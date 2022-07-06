@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  identity-service:
+    image: ${DOCKER_REGISTRY-}identity-service
+    build:
+      context: .
+      dockerfile: src/Core/Identity/MusicPlayer.IdentityService/Dockerfile
+
+  api-library-service:
+    image: ${DOCKER_REGISTRY-}api-library-service
+    build:
+      context: .
+      dockerfile: src/Core/API/LibraryAPI/MusicPlayer.API.Library/Dockerfile
+  
+  proxy:
+    image: ${DOCKER_REGISTRY-}proxy
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    restart: always
+    depends_on:
+      - api-library-service
+      - identity-service
+  
+  database:
+    image: postgres:latest
+    restart: on-failure
+    ports:
+      - "5432:5432"

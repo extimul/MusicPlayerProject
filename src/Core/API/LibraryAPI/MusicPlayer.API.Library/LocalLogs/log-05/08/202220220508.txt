@@ -1,0 +1,240 @@
+2022-05-08T13:14:31.2312830+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T13:14:31.5217854+00:00 [INF] () Configuring...
+2022-05-08T13:14:31.5233228+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T13:14:31.5254185+00:00 [INF] () Current environment: "Development"
+2022-05-08T13:14:32.2785180+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T13:14:32.2793077+00:00 [INF] () Application urls:
+2022-05-08T13:14:32.2798185+00:00 [INF] () "https://+:44393"
+2022-05-08T13:14:32.2803862+00:00 [INF] () "http://+:80"
+2022-05-08T13:39:07.4509915+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T13:39:07.5933890+00:00 [INF] () Configuring...
+2022-05-08T13:39:07.5947211+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T13:39:07.5952982+00:00 [INF] () Current environment: "Development"
+2022-05-08T13:39:07.8163954+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T13:39:07.8171320+00:00 [INF] () Application urls:
+2022-05-08T13:39:07.8177504+00:00 [INF] () "https://+:44393"
+2022-05-08T13:39:07.8182755+00:00 [INF] () "http://+:80"
+2022-05-08T13:43:58.3404028+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T13:43:58.4804501+00:00 [INF] () Configuring...
+2022-05-08T13:43:58.4818536+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T13:43:58.4823707+00:00 [INF] () Current environment: "Development"
+2022-05-08T13:43:58.7116726+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T13:43:58.7124104+00:00 [INF] () Application urls:
+2022-05-08T13:43:58.7128723+00:00 [INF] () "https://+:44393"
+2022-05-08T13:43:58.7135430+00:00 [INF] () "http://+:80"
+2022-05-08T13:49:25.6265348+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T13:49:25.7692496+00:00 [INF] () Configuring...
+2022-05-08T13:49:25.7709293+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T13:49:25.7714778+00:00 [INF] () Current environment: "Development"
+2022-05-08T13:49:25.9935160+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T13:49:25.9943033+00:00 [INF] () Application urls:
+2022-05-08T13:49:25.9947693+00:00 [INF] () "https://+:44393"
+2022-05-08T13:49:25.9952720+00:00 [INF] () "http://+:80"
+2022-05-08T13:49:51.4497814+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T13:49:51.5897215+00:00 [INF] () Configuring...
+2022-05-08T13:49:51.5909416+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T13:49:51.5914082+00:00 [INF] () Current environment: "Development"
+2022-05-08T13:49:51.8315780+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T13:49:51.8323650+00:00 [INF] () Application urls:
+2022-05-08T13:49:51.8328678+00:00 [INF] () "https://+:44393"
+2022-05-08T13:49:51.8333689+00:00 [INF] () "http://+:80"
+2022-05-08T14:11:00.7444535+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T14:11:00.8807494+00:00 [INF] () Configuring...
+2022-05-08T14:11:00.8820914+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T14:11:00.8826611+00:00 [INF] () Current environment: "Development"
+2022-05-08T14:11:01.1073071+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T14:11:01.1080215+00:00 [INF] () Application urls:
+2022-05-08T14:11:01.1085714+00:00 [INF] () "https://+:44393"
+2022-05-08T14:11:01.1090390+00:00 [INF] () "http://+:80"
+2022-05-08T14:13:04.7142825+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T14:13:04.8506321+00:00 [INF] () Configuring...
+2022-05-08T14:13:04.8522158+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T14:13:04.8528066+00:00 [INF] () Current environment: "Development"
+2022-05-08T14:13:05.0906719+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T14:13:05.0914710+00:00 [INF] () Application urls:
+2022-05-08T14:13:05.0919826+00:00 [INF] () "https://+:44393"
+2022-05-08T14:13:05.0924492+00:00 [INF] () "http://+:80"
+2022-05-08T14:31:42.7781429+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T14:31:42.9080326+00:00 [INF] () Configuring...
+2022-05-08T14:31:42.9093246+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T14:31:42.9098136+00:00 [INF] () Current environment: "Development"
+2022-05-08T14:31:43.1429229+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T14:31:43.1438683+00:00 [INF] () Application urls:
+2022-05-08T14:31:43.1444049+00:00 [INF] () "https://+:44393"
+2022-05-08T14:31:43.1450490+00:00 [INF] () "http://+:80"
+2022-05-08T14:32:58.3277663+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T14:32:58.4728639+00:00 [INF] () Configuring...
+2022-05-08T14:32:58.4742415+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T14:32:58.4748401+00:00 [INF] () Current environment: "Development"
+2022-05-08T14:32:58.7081885+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T14:32:58.7089593+00:00 [INF] () Application urls:
+2022-05-08T14:32:58.7094754+00:00 [INF] () "https://+:44393"
+2022-05-08T14:32:58.7099436+00:00 [INF] () "http://+:80"
+2022-05-08T14:36:48.1269607+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T14:36:48.3082574+00:00 [INF] () Configuring...
+2022-05-08T14:36:48.3096747+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T14:36:48.3105482+00:00 [INF] () Current environment: "Development"
+2022-05-08T14:36:48.7144630+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T14:36:48.7152973+00:00 [INF] () Application urls:
+2022-05-08T14:36:48.7157433+00:00 [INF] () "https://+:44393"
+2022-05-08T14:36:48.7162416+00:00 [INF] () "http://+:80"
+2022-05-08T14:40:55.7983977+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T14:40:55.9461257+00:00 [INF] () Configuring...
+2022-05-08T14:40:55.9476296+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T14:40:55.9482413+00:00 [INF] () Current environment: "Development"
+2022-05-08T14:40:56.1818264+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T14:40:56.1826300+00:00 [INF] () Application urls:
+2022-05-08T14:40:56.1830902+00:00 [INF] () "https://+:44393"
+2022-05-08T14:40:56.1836379+00:00 [INF] () "http://+:80"
+2022-05-08T19:20:01.0647645+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T19:20:01.2842404+00:00 [INF] () Configuring...
+2022-05-08T19:20:01.2855486+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T19:20:01.2860601+00:00 [INF] () Current environment: "Staging"
+2022-05-08T19:20:01.6632703+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T19:20:01.6642639+00:00 [INF] () Application urls:
+2022-05-08T19:20:01.6647469+00:00 [INF] () "https://+:44393"
+2022-05-08T19:20:01.6652765+00:00 [INF] () "http://+:443"
+2022-05-08T19:21:41.2726108+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T19:21:41.4242584+00:00 [INF] () Configuring...
+2022-05-08T19:21:41.4258007+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T19:21:41.4263112+00:00 [INF] () Current environment: "Staging"
+2022-05-08T19:21:41.6568078+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T19:21:41.6577345+00:00 [INF] () Application urls:
+2022-05-08T19:21:41.6581898+00:00 [INF] () "https://+:44393"
+2022-05-08T19:21:41.6587242+00:00 [INF] () "http://+:443"
+2022-05-08T19:49:36.3567417+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T19:49:36.4942940+00:00 [INF] () Configuring...
+2022-05-08T19:49:36.4962298+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T19:49:36.4968201+00:00 [INF] () Current environment: "Staging"
+2022-05-08T19:49:36.7356041+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T19:49:36.7368511+00:00 [INF] () Application urls:
+2022-05-08T19:49:36.7374527+00:00 [INF] () "https://+:443"
+2022-05-08T19:49:36.7379748+00:00 [INF] () "http://+80"
+2022-05-08T19:56:04.9075448+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T19:56:05.0619223+00:00 [INF] () Configuring...
+2022-05-08T19:56:05.0632854+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T19:56:05.0639266+00:00 [INF] () Current environment: "Staging"
+2022-05-08T19:56:05.3005272+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T19:56:05.3016181+00:00 [INF] () Application urls:
+2022-05-08T19:56:05.3022109+00:00 [INF] () "https://+:443"
+2022-05-08T19:56:05.3026786+00:00 [INF] () "http://+80"
+2022-05-08T19:57:51.9687830+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T19:57:52.1759501+00:00 [INF] () Configuring...
+2022-05-08T19:57:52.1777937+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T19:57:52.1784307+00:00 [INF] () Current environment: "Staging"
+2022-05-08T19:57:52.4751574+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T19:57:52.4762194+00:00 [INF] () Application urls:
+2022-05-08T19:57:52.4767307+00:00 [INF] () "https://+:443"
+2022-05-08T19:57:52.4773066+00:00 [INF] () "http://+80"
+2022-05-08T19:58:53.9825088+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T19:58:54.1339509+00:00 [INF] () Configuring...
+2022-05-08T19:58:54.1357370+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T19:58:54.1363366+00:00 [INF] () Current environment: "Staging"
+2022-05-08T19:58:54.3641922+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T19:58:54.3651940+00:00 [INF] () Application urls:
+2022-05-08T19:58:54.3657192+00:00 [INF] () "https://+:443"
+2022-05-08T19:58:54.3662296+00:00 [INF] () "http://+80"
+2022-05-08T20:01:30.9607777+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T20:01:31.1261109+00:00 [INF] () Configuring...
+2022-05-08T20:01:31.1276554+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T20:01:31.1283714+00:00 [INF] () Current environment: "Staging"
+2022-05-08T20:01:31.3618381+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T20:01:31.3628152+00:00 [INF] () Application urls:
+2022-05-08T20:01:31.3634098+00:00 [INF] () "https://+:443"
+2022-05-08T20:01:31.3638988+00:00 [INF] () "http://+80"
+2022-05-08T20:02:33.3025553+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T20:02:33.4540000+00:00 [INF] () Configuring...
+2022-05-08T20:02:33.4556736+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T20:02:33.4562058+00:00 [INF] () Current environment: "Staging"
+2022-05-08T20:02:33.6784952+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T20:02:33.6794449+00:00 [INF] () Application urls:
+2022-05-08T20:02:33.6800724+00:00 [INF] () "https://+:443"
+2022-05-08T20:02:33.6805883+00:00 [INF] () "http://+80"
+2022-05-08T20:32:29.5954600+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T20:32:29.8945455+00:00 [INF] () Configuring...
+2022-05-08T20:32:29.8957798+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T20:32:29.8961888+00:00 [INF] () Current environment: "Development"
+2022-05-08T20:32:30.6512876+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T20:32:30.6521393+00:00 [INF] () Application urls:
+2022-05-08T20:32:30.6527610+00:00 [INF] () "https://+:443"
+2022-05-08T20:32:30.6533227+00:00 [INF] () "http://+80"
+2022-05-08T20:33:42.0184706+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T20:33:42.1800591+00:00 [INF] () Configuring...
+2022-05-08T20:33:42.1814943+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T20:33:42.1820469+00:00 [INF] () Current environment: "Development"
+2022-05-08T20:33:42.4506611+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T20:33:42.4516476+00:00 [INF] () Application urls:
+2022-05-08T20:33:42.4521873+00:00 [INF] () "https://+:443"
+2022-05-08T20:33:42.4528401+00:00 [INF] () "http://+80"
+2022-05-08T20:35:39.1409721+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T20:35:39.2816146+00:00 [INF] () Configuring...
+2022-05-08T20:35:39.2831259+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T20:35:39.2836361+00:00 [INF] () Current environment: "Development"
+2022-05-08T20:35:39.5281150+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T20:35:39.5288725+00:00 [INF] () Application urls:
+2022-05-08T20:35:39.5293544+00:00 [INF] () "https://+:443"
+2022-05-08T20:35:39.5298663+00:00 [INF] () "http://+80"
+2022-05-08T20:48:09.1683683+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T20:48:09.3650769+00:00 [INF] () Configuring...
+2022-05-08T20:48:09.3667083+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T20:48:09.3673088+00:00 [INF] () Current environment: "Development"
+2022-05-08T20:48:09.7893459+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T20:48:09.7903042+00:00 [INF] () Application urls:
+2022-05-08T20:48:09.7908392+00:00 [INF] () "https://+:443"
+2022-05-08T20:48:09.7914355+00:00 [INF] () "http://+80"
+2022-05-08T20:58:57.4832533+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T20:58:57.6287530+00:00 [INF] () Configuring...
+2022-05-08T20:58:57.6301984+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T20:58:57.6307421+00:00 [INF] () Current environment: "Development"
+2022-05-08T20:58:57.9067208+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T20:58:57.9076749+00:00 [INF] () Application urls:
+2022-05-08T20:58:57.9081092+00:00 [INF] () "https://+:443"
+2022-05-08T20:58:57.9086973+00:00 [INF] () "http://+80"
+2022-05-08T21:09:13.5776495+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T21:09:13.7313062+00:00 [INF] () Configuring...
+2022-05-08T21:09:13.7326801+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T21:09:13.7332189+00:00 [INF] () Current environment: "Development"
+2022-05-08T21:09:13.9769537+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T21:09:13.9777310+00:00 [INF] () Application urls:
+2022-05-08T21:09:13.9782747+00:00 [INF] () "https://+:443"
+2022-05-08T21:09:13.9786753+00:00 [INF] () "http://+80"
+2022-05-08T21:10:58.2455910+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T21:10:58.3903890+00:00 [INF] () Configuring...
+2022-05-08T21:10:58.3916289+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T21:10:58.3921168+00:00 [INF] () Current environment: "Development"
+2022-05-08T21:10:58.6390354+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T21:10:58.6398746+00:00 [INF] () Application urls:
+2022-05-08T21:10:58.6404770+00:00 [INF] () "https://+:443"
+2022-05-08T21:10:58.6409563+00:00 [INF] () "http://+80"
+2022-05-08T21:15:19.8627429+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/swagger/index.html" responded 404 in 16.3197 ms
+2022-05-08T21:15:20.5877611+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/favicon.ico" responded 404 in 0.2338 ms
+2022-05-08T21:15:24.3593268+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/swagger/index.html" responded 404 in 0.5188 ms
+2022-05-08T21:15:25.8478774+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/swagger/index.html" responded 404 in 0.0377 ms
+2022-05-08T21:15:38.2828675+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/swagger/index.html" responded 404 in 0.0841 ms
+2022-05-08T21:16:07.9581072+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 104.6770 ms
+2022-05-08T21:16:32.8041566+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 4.1389 ms
+2022-05-08T21:16:32.8797784+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/favicon.ico" responded 404 in 0.0675 ms
+2022-05-08T21:16:36.9954910+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/swagger" responded 404 in 0.0627 ms
+2022-05-08T21:16:45.1582941+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/swagger/index.html" responded 404 in 0.0491 ms
+2022-05-08T21:16:47.4324054+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/swagger/index.html" responded 404 in 0.0640 ms
+2022-05-08T21:16:54.2023567+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/v1/swagger/index.html" responded 404 in 0.0598 ms
+2022-05-08T21:18:57.9588740+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 22.7630 ms
+2022-05-08T21:18:58.0713571+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/swagger" responded 404 in 0.0438 ms
+2022-05-08T21:19:08.4580526+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/swagger/index.html" responded 404 in 0.0326 ms
+2022-05-08T21:19:19.6012633+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/swagger/index.html" responded 404 in 0.0424 ms
+2022-05-08T21:21:48.5368585+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T21:21:48.6867987+00:00 [INF] () Configuring...
+2022-05-08T21:21:48.6884071+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T21:21:48.6890849+00:00 [INF] () Current environment: "Development"
+2022-05-08T21:21:48.9460954+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T21:21:48.9469751+00:00 [INF] () Application urls:
+2022-05-08T21:21:48.9474293+00:00 [INF] () "https://+:443"
+2022-05-08T21:21:48.9480137+00:00 [INF] () "http://+80"
+2022-05-08T21:23:12.3089837+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-08T21:23:12.5038470+00:00 [INF] () Configuring...
+2022-05-08T21:23:12.5061944+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-08T21:23:12.5068413+00:00 [INF] () Current environment: "Development"
+2022-05-08T21:23:12.7929680+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-08T21:23:12.7942708+00:00 [INF] () Application urls:
+2022-05-08T21:23:12.7948917+00:00 [INF] () "https://+:443"
+2022-05-08T21:23:12.7954147+00:00 [INF] () "http://+80"

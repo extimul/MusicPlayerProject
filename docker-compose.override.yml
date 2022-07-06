@@ -1,0 +1,59 @@
+version: '3.4'
+
+services:
+  identity-service:
+    ports:
+      - "4500:3500"
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+    - ASPNETCORE_URLS=https://+:3500
+    volumes:
+      - ~/.aspnet/https:/https:ro 
+    depends_on:
+      - database
+    links:
+      - database
+    networks:
+      - default-network
+
+  api-library-service:
+    ports:
+      - "4501:3501"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:3501
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    depends_on:
+      - database
+    links:
+      - database
+    networks:
+      - default-network
+    
+  proxy:
+    volumes:
+      - ./nginx/certs:/etc/nginx/certs
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - "3000:80"
+      - "3001:443"
+    networks:
+      - default-network
+        
+  database:
+    environment:
+      - POSTGRES_DB=db_mp_identity
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin1234
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+    networks:
+      - default-network
+
+networks:
+  default-network:
+    driver: bridge 
+
+volumes:
+  db_volume:

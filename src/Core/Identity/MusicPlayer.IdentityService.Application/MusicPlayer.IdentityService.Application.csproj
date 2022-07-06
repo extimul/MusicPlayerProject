@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.4.0" />
+        <PackageReference Include="IdentityServer4" Version="4.1.2" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+        <PackageReference Include="Serilog" Version="2.11.0" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\MusicPlayer.Base\MusicPlayer.Base.csproj" />
+      <ProjectReference Include="..\MusicPlayer.IdentityService.Domain\MusicPlayer.IdentityService.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

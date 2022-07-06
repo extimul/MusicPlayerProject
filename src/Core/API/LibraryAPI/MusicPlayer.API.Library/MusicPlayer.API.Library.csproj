@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);1591</NoWarn>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerComposeProjectPath>..\..\..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+        <UserSecretsId>11d83ee0-3afd-404e-8e16-b5ffb3802a10</UserSecretsId>
+        <DockerfileContext>..\..\..\..\..</DockerfileContext>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+        <PackageReference Include="GitInfo" Version="2.2.0" />
+        <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+        <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+        <PackageReference Include="Serilog.Enrichers.Context" Version="4.2.0" />
+        <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
+        <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.2" />
+        <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
+        <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Content Update="appsettings.Development.json">
+        <DependentUpon>appsettings.json</DependentUpon>
+      </Content>
+      <Content Update="appsettings.Production.json">
+        <DependentUpon>appsettings.json</DependentUpon>
+      </Content>
+      <Content Update="appsettings.Staging.json">
+        <DependentUpon>appsettings.json</DependentUpon>
+      </Content>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="LocalLogs" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\MusicPlayer.API.Library.Application\MusicPlayer.API.Library.Application.csproj" />
+    </ItemGroup>
+
+</Project>

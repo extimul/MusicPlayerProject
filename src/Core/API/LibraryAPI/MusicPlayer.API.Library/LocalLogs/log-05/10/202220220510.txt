@@ -1,0 +1,42 @@
+2022-05-10T00:14:17.1164525+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-10T00:14:17.2179435+00:00 [INF] () Configuring...
+2022-05-10T00:14:17.2192659+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-10T00:14:17.2201974+00:00 [INF] () Current environment: "Development"
+2022-05-10T00:14:17.3914378+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-10T00:14:17.3926337+00:00 [INF] () Application urls:
+2022-05-10T00:14:17.3931877+00:00 [INF] () "https://+:3501"
+2022-05-10T00:14:35.9347686+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-10T00:14:36.0279229+00:00 [INF] () Configuring...
+2022-05-10T00:14:36.0291594+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-10T00:14:36.0296643+00:00 [INF] () Current environment: "Development"
+2022-05-10T00:14:36.1818461+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-10T00:14:36.1825665+00:00 [INF] () Application urls:
+2022-05-10T00:14:36.1830904+00:00 [INF] () "https://+:3501"
+2022-05-10T00:15:09.0082714+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/swagger/index.html" responded 404 in 14.0672 ms
+2022-05-10T00:15:14.5601019+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/swagger/index.html" responded 404 in 0.1609 ms
+2022-05-10T00:15:16.9799981+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/swagger/index.html" responded 404 in 0.3974 ms
+2022-05-10T00:15:17.4733718+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/swagger/index.html" responded 404 in 0.0281 ms
+2022-05-10T00:17:01.4003803+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/swagger/index.html" responded 404 in 0.0394 ms
+2022-05-10T00:17:10.8382117+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/favicon.ico" responded 404 in 0.0280 ms
+2022-05-10T00:24:07.9241455+00:00 [INF] () Starting "MusicPlayer.API.Library"
+2022-05-10T00:24:08.0176639+00:00 [INF] () Configuring...
+2022-05-10T00:24:08.0186530+00:00 [INF] () Current platform: "Linux 5.10.102.1-microsoft-standard-WSL2 #1 SMP Wed Mar 2 00:30:59 UTC 2022"
+2022-05-10T00:24:08.0190467+00:00 [INF] () Current environment: "Development"
+2022-05-10T00:24:08.1711976+00:00 [INF] () "MusicPlayer.API.Library" successfully started!
+2022-05-10T00:24:08.1719650+00:00 [INF] () Application urls:
+2022-05-10T00:24:08.1723859+00:00 [INF] () "https://+:3501"
+2022-05-10T00:24:18.9006303+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 30.7532 ms
+2022-05-10T00:24:19.8274991+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 1.1443 ms
+2022-05-10T00:24:21.3152490+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 1.0037 ms
+2022-05-10T00:24:21.7265524+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 0.4905 ms
+2022-05-10T00:24:22.0032901+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 0.3221 ms
+2022-05-10T00:24:22.1994783+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 0.3918 ms
+2022-05-10T00:24:22.3930929+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 0.2846 ms
+2022-05-10T00:24:22.5915984+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 0.2809 ms
+2022-05-10T00:24:22.7456980+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 0.3357 ms
+2022-05-10T00:24:22.9134955+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 0.3825 ms
+2022-05-10T00:24:23.0807298+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 0.3634 ms
+2022-05-10T00:24:23.2466172+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 0.3288 ms
+2022-05-10T00:24:23.4205151+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 0.3001 ms
+2022-05-10T00:24:23.5683977+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 0.3312 ms
+2022-05-10T00:24:23.7373532+00:00 [INF] (Serilog.AspNetCore.RequestLoggingMiddleware) HTTP "GET" "/api/v1/index/info" responded 200 in 0.3172 ms

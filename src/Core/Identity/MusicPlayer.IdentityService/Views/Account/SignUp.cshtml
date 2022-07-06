@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model SignUpViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="form-page-container">
+    <div class="register-ef-wrapper">
+        <div class="form-box blur">
+            <div class="fb__header mt-sm-4 mb-sm-1 fw-bold">
+                Регистрация
+            </div>
+            <div class="fb__content-wrapper">
+                <form asp-controller="Account" asp-action="SignUp" class="row g-3" 
+                      asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+                   <div class="col-md-6">
+                       <label asp-for="Email" class="form-label">
+                           <span>Электронная почта</span>
+                       </label>
+                       <input asp-for="Email" class="form-control" id="Email" placeholder="mymail@example.com"/>
+                       <span class="text-danger" asp-validation-for="Email"></span>
+                   </div>
+                   <div class="col-md-6">
+                       <label asp-for="Password" class="form-label">
+                           <span>Пароль</span>
+                       </label>
+                       <input asp-for="Password" type="password" class="form-control" id="Password"/>
+                       <span class="text-danger" asp-validation-for="Password"></span>
+                   </div>
+                   <div class="col-12">
+                       <label asp-for="UserName" class="form-label d-flex justify-content-between">
+                           <span>Имя пользователя</span>
+                           <span class="text-danger" asp-validation-for="UserName"></span>
+                       </label>
+                       <input asp-for="UserName" class="form-control" id="Username"/>
+                   </div>
+                   <div class="col-12">
+                       <label asp-for="Name" class="form-label d-flex justify-content-between">
+                           <span>Ваше имя</span>
+                           <span class="text-danger" asp-validation-for="Name"></span>
+                       </label>
+                       <input asp-for="Name" class="form-control" id="Name"/>
+                   </div>
+                   <div class="col-12">
+                       <div class="form-check">
+                           <label asp-for="IsAcceptTerms" class="form-check-label">
+                               <span>Я принимаю условия <a class="text-info" href="#">Пользовательского соглашения</a></span>
+                           </label>
+                           <input type="checkbox" asp-for="IsAcceptTerms" class="form-check-input" id="AcceptTerms"/>
+                           <span class="text-danger" asp-validation-for="IsAcceptTerms"></span>
+                       </div>
+                   </div>
+                   <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                       <input class="login-btn mt-lg-4" type="submit" value="Создать аккаунт"/>
+                       <a class="mt-lg-3" asp-action="SignIn" asp-route-returnUrl="@ViewData["ReturnUrl"]">Уже есть аккаунт</a>
+                   </div>
+               </form>
+            </div>
+        </div>
+    </div>
+</div>
