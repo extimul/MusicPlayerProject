@@ -14,7 +14,6 @@
     </ItemGroup>
     
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Shared\MusicPlayer.Base\MusicPlayer.Base.csproj" />
       <ProjectReference Include="..\MusicPlayer.IdentityService.Domain\MusicPlayer.IdentityService.Domain.csproj" />
     </ItemGroup>
 

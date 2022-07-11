@@ -1,19 +1,18 @@
 ﻿using System.Reflection;
+using EasyServiceConfigurator;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MusicPlayer.IdentityService.Application;
 using MusicPlayer.IdentityService.Application.Interfaces;
 using MusicPlayer.IdentityService.Domain.Entities;
 using MusicPlayer.IdentityService.Persistence;
-using ServerApp.Base.Extensions;
 using ServerApp.WebApp.Base.Common.Attributes;
-using ServerApp.WebApp.Base.Configuration.Setup;
 using ServerApp.WebApp.Base.Mappings;
 
 namespace MusicPlayer.IdentityService.AppStart.ConfigureServices;
 
 [ConfigurationLoadPriority(1)]
-public class ConfigureServicesBase : IAppSevicesConfigurator
+public class ConfigureServicesBase : IServicesConfigurator
 {
     public void ConfigureServices(IServiceCollection services, params object[]? additionalServices)
     {

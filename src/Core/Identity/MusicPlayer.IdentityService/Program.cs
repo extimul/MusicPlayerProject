@@ -1,8 +1,9 @@
+using EasyServiceConfigurator;
+using EasyServiceConfigurator.AspNet;
 using MusicPlayer.IdentityService.Extensions;
 using Serilog;
 using ServerApp.Base;
 using ServerApp.WebApp.Base.Configuration;
-using ServerApp.WebApp.Base.Configuration.Setup;
 
 try
 {

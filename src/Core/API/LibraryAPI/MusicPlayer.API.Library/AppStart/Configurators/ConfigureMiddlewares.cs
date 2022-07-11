@@ -1,5 +1,5 @@
-﻿using ServerApp.WebApp.Base.Common.Attributes;
-using ServerApp.WebApp.Base.Configuration.Setup;
+﻿using EasyServiceConfigurator.AspNet;
+using ServerApp.WebApp.Base.Common.Attributes;
 using ServerApp.WebApp.Base.Middleware;
 
 namespace MusicPlayer.API.Library.AppStart.Configurators;

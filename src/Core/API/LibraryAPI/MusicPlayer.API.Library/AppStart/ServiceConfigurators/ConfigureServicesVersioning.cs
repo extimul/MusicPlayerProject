@@ -1,11 +1,11 @@
-﻿using ServerApp.Base;
+﻿using EasyServiceConfigurator;
+using ServerApp.Base;
 using ServerApp.WebApp.Base.Common.Attributes;
-using ServerApp.WebApp.Base.Configuration.Setup;
 
 namespace MusicPlayer.API.Library.AppStart.ServiceConfigurators;
 
 [ConfigurationLoadPriority(3)]
-public class ConfigureServicesVersioning : IAppSevicesConfigurator
+public class ConfigureServicesVersioning : IServicesConfigurator
 {
     public void ConfigureServices(IServiceCollection services, params object[]? additionalServices)
     {

@@ -45,5 +45,14 @@
     <ItemGroup>
       <ProjectReference Include="..\MusicPlayer.API.Library.Application\MusicPlayer.API.Library.Application.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <Reference Include="EasyServiceConfigurator">
+        <HintPath>..\..\..\..\..\libs\EasyServiceConfigurator.dll</HintPath>
+      </Reference>
+      <Reference Include="EasyServiceConfigurator.AspNet">
+        <HintPath>..\..\..\..\..\libs\EasyServiceConfigurator.AspNet.dll</HintPath>
+      </Reference>
+    </ItemGroup>
 
 </Project>

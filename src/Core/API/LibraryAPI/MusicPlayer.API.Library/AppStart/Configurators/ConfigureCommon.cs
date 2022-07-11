@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using EasyServiceConfigurator.AspNet;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using MusicPlayer.API.Library.Extensions;
 using Serilog;
 using ServerApp.WebApp.Base.Common.Attributes;
-using ServerApp.WebApp.Base.Configuration.Setup;
 using ServerApp.WebApp.Base.Extensions;
 
 namespace MusicPlayer.API.Library.AppStart.Configurators;

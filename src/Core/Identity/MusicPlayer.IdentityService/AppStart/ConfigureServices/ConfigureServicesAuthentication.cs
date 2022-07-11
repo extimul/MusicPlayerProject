@@ -1,16 +1,15 @@
-﻿using IdentityServer4.AspNetIdentity;
+﻿using EasyServiceConfigurator;
+using IdentityServer4.AspNetIdentity;
 using IdentityServer4.Services;
 using Microsoft.EntityFrameworkCore;
 using MusicPlayer.IdentityService.Domain.Entities;
 using MusicPlayer.IdentityService.Persistence;
-using ServerApp.Base.Extensions;
 using ServerApp.WebApp.Base.Common.Attributes;
-using ServerApp.WebApp.Base.Configuration.Setup;
 
 namespace MusicPlayer.IdentityService.AppStart.ConfigureServices;
 
 [ConfigurationLoadPriority(2)]
-public class ConfigureServicesAuthentication : IAppSevicesConfigurator
+public class ConfigureServicesAuthentication : IServicesConfigurator
 {
     public void ConfigureServices(IServiceCollection services, params object[]? additionalServices)
     {

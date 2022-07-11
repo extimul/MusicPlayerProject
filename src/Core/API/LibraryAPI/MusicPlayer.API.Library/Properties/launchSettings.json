@@ -27,7 +27,7 @@
       "applicationUrl": "https://localhost:7161;http://localhost:5161",
       "dotnetRunMessages": true
     },
-    "MusicPlayer.API.Library": {
+    "[PROD]MusicPlayer.API.Library": {
       "commandName": "Project",
       "launchUrl": "swagger",
       "environmentVariables": {

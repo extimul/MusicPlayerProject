@@ -41,12 +41,20 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Shared\MusicPlayer.Base\MusicPlayer.Base.csproj" />
       <ProjectReference Include="..\MusicPlayer.IdentityService.Persistence\MusicPlayer.IdentityService.Persistence.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="LocalLogs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="EasyServiceConfigurator">
+        <HintPath>..\..\..\..\libs\EasyServiceConfigurator.dll</HintPath>
+      </Reference>
+      <Reference Include="EasyServiceConfigurator.AspNet">
+        <HintPath>..\..\..\..\libs\EasyServiceConfigurator.AspNet.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

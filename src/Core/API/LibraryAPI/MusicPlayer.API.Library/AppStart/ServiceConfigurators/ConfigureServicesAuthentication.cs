@@ -1,13 +1,12 @@
 ﻿using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using ServerApp.Base.Extensions;
 using ServerApp.WebApp.Base.Common.Attributes;
-using ServerApp.WebApp.Base.Configuration.Setup;
+using EasyServiceConfigurator;
 
 namespace MusicPlayer.API.Library.AppStart.ServiceConfigurators;
 
 [ConfigurationLoadPriority(2)]
-public class ConfigureServicesAuthentication : IAppSevicesConfigurator
+public class ConfigureServicesAuthentication : IServicesConfigurator
 {
     public void ConfigureServices(IServiceCollection services, params object[]? additionalServices)
     {

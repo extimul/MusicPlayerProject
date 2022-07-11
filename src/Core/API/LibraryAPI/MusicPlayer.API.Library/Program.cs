@@ -1,7 +1,8 @@
+using EasyServiceConfigurator;
+using EasyServiceConfigurator.AspNet;
 using Serilog;
 using ServerApp.Base;
 using ServerApp.WebApp.Base.Configuration;
-using ServerApp.WebApp.Base.Configuration.Setup;
 
 try
 {

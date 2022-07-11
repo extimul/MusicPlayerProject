@@ -1,14 +1,14 @@
 ﻿using System.Reflection;
+using EasyServiceConfigurator;
 using Microsoft.Extensions.Options;
 using MusicPlayer.API.Library.AppStart.Swagger;
 using ServerApp.WebApp.Base.Common.Attributes;
-using ServerApp.WebApp.Base.Configuration.Setup;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace MusicPlayer.API.Library.AppStart.ServiceConfigurators;
 
 [ConfigurationLoadPriority(4)]
-public class ConfigureServicesSwagger : IAppSevicesConfigurator
+public class ConfigureServicesSwagger : IServicesConfigurator
 {
     public void ConfigureServices(IServiceCollection services, params object[]? additionalServices)
     {

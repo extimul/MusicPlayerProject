@@ -18,7 +18,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Shared\MusicPlayer.Base\MusicPlayer.Base.csproj" />
       <ProjectReference Include="..\MusicPlayer.IdentityService.Application\MusicPlayer.IdentityService.Application.csproj" />
     </ItemGroup>
 

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using EasyServiceConfigurator.AspNet;
 using MusicPlayer.IdentityService.Persistence;
 using Serilog;
 using ServerApp.WebApp.Base.Common.Attributes;
-using ServerApp.WebApp.Base.Configuration.Setup;
 
 namespace MusicPlayer.IdentityService.AppStart.Configurators;
 
